@@ -1,7 +1,7 @@
 import { Box, Container, Grid } from "@mui/material";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-
+import { sendCustomerEmail, sendCompanyEmail } from "../../utils/email";
 import HeaderSection from "./Sections/HeaderSection";
 import ProgressSection from "./Sections/ProgressSection";
 import SummarySection from "./Sections/SummarySection";
@@ -9,7 +9,6 @@ import StepTransferDetails from "./Steps/StepTransferDetails";
 import StepServiceType from "./Steps/StepServiceType";
 import StepVehicle from "./Steps/StepVehicle";
 import StepUserInfo from "./Steps/StepUserInfo";
-// import StepReview from "./Steps/StepReview";
 import LoadingOverlay from "../../components/common/LoadingOverlay";
 import { generateBookingId } from "../../utils/generateId";
 import SuccessSection from "./Sections/SuccessSection";
@@ -41,6 +40,8 @@ const Booking = () => {
       date: "",
       time: "",
 
+      price: 0,
+
       returnDate: "",
       returnTime: "",
 
@@ -53,6 +54,7 @@ const Booking = () => {
       name: "",
       phone: "",
       notes: "",
+      email: "",
     };
 
     if (!initialState) return base;
@@ -99,24 +101,28 @@ const Booking = () => {
     return base;
   });
 
-  const handleConfirm = () => {
+  const handleConfirm = async (price: number | []) => {
     setLoading(true);
 
-    const duration = Math.floor(Math.random() * (3000 - 1500 + 1)) + 1500;
+    const id = generateBookingId();
 
-    setTimeout(() => {
-      setLoading(false);
+    const fullData = {
+      ...bookingData,
+      bookingId: id,
+      price,
+    };
 
-      const id = generateBookingId();
+    try {
+      // 🔥 send both emails
+      await sendCompanyEmail(fullData);
+      await sendCustomerEmail(fullData);
       setBookingId(id);
-
-      setBookingData((prev: any) => ({
-        ...prev,
-        bookingId: id,
-      }));
-
       setSuccess(true);
-    }, duration);
+    } catch (error) {
+      console.error("Email error:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
