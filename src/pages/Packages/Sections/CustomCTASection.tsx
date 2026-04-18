@@ -43,17 +43,12 @@ const CustomCTASection = () => {
           <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
             <Button
               variant="contained"
-              onClick={() =>
-                navigate("/booking", {
-                  state: { type: "CustomTransfer" },
-                })
-              }
+              onClick={() => navigate("/booking")}
               sx={{
                 backgroundColor: "white",
                 borderRadius: "999px",
                 textTransform: "none",
                 px: 3,
-              
               }}
             >
               Request Custom Quote
@@ -66,7 +61,7 @@ const CustomCTASection = () => {
                 borderRadius: "999px",
                 textTransform: "none",
                 px: 3,
-                backgroundColor:"#25D366FF"
+                backgroundColor: "#25D366FF",
               }}
             >
               WhatsApp Us

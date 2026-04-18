@@ -28,7 +28,7 @@ export const sendCustomerEmail = (data: any) => {
       roundTrip: data?.roundTrip,
       notes: data?.notes,
       returnDate: new Date(data?.returnDate).toLocaleDateString(),
-      returnTime: new Date(data?.returnTime).toLocaleDateString(),
+      returnTime: new Date(data?.returnTime).toLocaleTimeString(),
     },
     "wUuDHnAdxnvKRi9Jg",
   );
@@ -51,7 +51,7 @@ export const sendCompanyEmail = (data: any) => {
       dropoffDetails: data?.dropoffDetails,
       flightNumber: data?.flightNumber,
       returnDate: new Date(data?.returnDate).toLocaleDateString(),
-      returnTime: new Date(data?.returnTime).toLocaleDateString(),
+      returnTime: new Date(data?.returnTime).toLocaleTimeString(),
       notes: data?.notes,
       bags: data?.car?.bags,
       carCategory: data?.car?.category,

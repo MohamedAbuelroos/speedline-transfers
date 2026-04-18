@@ -19,7 +19,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import NearMeIcon from "@mui/icons-material/NearMe";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import PeopleIcon from "@mui/icons-material/People";
-
+import CircularProgress from "@mui/material/CircularProgress";
 import { getPrice } from "../../../utils/pricing";
 
 import { allLocations } from "../../../data/locations";
@@ -30,7 +30,9 @@ import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
+
   const [result, setResult] = useState<{
     from: string;
     to: string;
@@ -38,6 +40,7 @@ const HeroSection = () => {
     price: number;
     distance: string;
   } | null>(null);
+
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: "",
@@ -75,6 +78,7 @@ const HeroSection = () => {
       });
       return;
     }
+    setLoading(true);
 
     const car = getCarType();
 
@@ -84,19 +88,47 @@ const HeroSection = () => {
     const distance =
       form.fromCity === form.toCity ? "10 - 25 km" : "400 - 900 km";
 
-    setResult({
-      from: form.from,
-      to: form.to,
-      car,
-      price,
-      distance,
-    });
+    const delay = Math.random() * 1000 + 1000;
+    setTimeout(() => {
+      setResult({
+        from: form.from,
+        to: form.to,
+        car,
+        price,
+        distance,
+      });
 
-    setOpen(true);
+      setLoading(false);
+      setOpen(true);
+    }, delay);
+  };
+
+  // handele booking button
+  const handleContinue = () => {
+    setLoading(true);
+
+    const delay = Math.random() * 1000 + 900;
+
+    setTimeout(() => {
+      navigate("/booking", {
+        state: {
+          type: "home",
+          data: {
+            from: form.from,
+            to: form.to,
+            fromCity: form.fromCity,
+            toCity: form.toCity,
+            adults: form.passengers,
+          },
+        },
+      });
+
+      setLoading(false);
+    }, delay);
   };
 
   return (
-    <Box sx={{ px: { xs: 2, md: 12 }, py: 6, height: "calc(100vh - 60px)" }}>
+    <Box sx={{ px: { xs: 2, md: 12 }, py: 6, minHeight: "calc(100vh - 60px)" }}>
       <Grid container spacing={4} sx={{ alignItems: "center" }}>
         {/* LEFT */}
         <Grid
@@ -155,7 +187,11 @@ const HeroSection = () => {
             sx={{
               width: "100%",
               borderRadius: "20px",
-              height: "420px",
+              height: {
+                xs: "220px",
+                sm: "320px",
+                md: "420px",
+              },
               objectFit: "cover",
             }}
           />
@@ -171,10 +207,7 @@ const HeroSection = () => {
           px: 3,
           py: 4,
           borderRadius: "20px",
-          position: "relative",
-          transform: "translatex(-50%)",
-          left: "50%",
-          zIndex: 2,
+          mx: "auto",
           boxShadow: "2px 2px 5px #1fb0f9b3",
         }}
       >
@@ -247,7 +280,11 @@ const HeroSection = () => {
                 textTransform: "none",
               }}
             >
-              Calculate Price
+              {loading && !open ? (
+                <CircularProgress size={20} sx={{ color: "#fff" }} />
+              ) : (
+                "Calculate Price"
+              )}
             </Button>
           </Grid>
         </Grid>
@@ -396,15 +433,18 @@ const HeroSection = () => {
               <Button
                 fullWidth
                 variant="contained"
+                disabled={loading}
                 sx={{
                   borderRadius: "10px",
                   textTransform: "none",
                 }}
-                onClick={() => {
-                  // 👉 next step
-                }}
+                onClick={handleContinue}
               >
-                Continue
+                {loading ? (
+                  <CircularProgress size={20} sx={{ color: "#fff" }} />
+                ) : (
+                  "Continue To Book"
+                )}
               </Button>
             </Box>
           </DialogContent>
