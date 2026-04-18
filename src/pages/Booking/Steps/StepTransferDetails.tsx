@@ -24,7 +24,6 @@ const StepTransferDetails = ({
   onNext,
   onBack,
 }: any) => {
-  
   const [openOptional, setOpenOptional] = useState(true);
   const [stops, setStops] = useState<string[]>([]);
 
@@ -54,7 +53,9 @@ const StepTransferDetails = ({
     bookingData.from &&
     bookingData.date &&
     bookingData.time &&
-    (bookingData.type === "hourly" ? bookingData.hours : bookingData.to);
+    (bookingData.type === "hourly" ? bookingData.hours : bookingData.to) &&
+    (!bookingData.roundTrip ||
+      (bookingData.returnDate && bookingData.returnTime));
 
   return (
     <Box>

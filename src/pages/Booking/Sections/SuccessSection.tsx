@@ -7,7 +7,6 @@ import { useRef } from "react";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 
 const SuccessSection = ({ data, bookingId }: any) => {
-  console.log(data);
   const voucherRef = useRef<HTMLDivElement>(null);
 
   const handleDownload = async () => {

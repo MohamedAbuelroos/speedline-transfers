@@ -8,6 +8,11 @@ const StepUserInfo = ({ bookingData, setBookingData, onBack }: any) => {
     }));
   };
 
+  const isEmailValid =
+    bookingData.email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(bookingData.email);
+
+  const isValid = bookingData.name && bookingData.phone && isEmailValid;
+
   return (
     <Box>
       <Typography sx={{ fontWeight: 600, mb: 3 }}>
@@ -21,6 +26,22 @@ const StepUserInfo = ({ bookingData, setBookingData, onBack }: any) => {
           label="Full Name"
           value={bookingData.name}
           onChange={(e) => handleChange("name", e.target.value)}
+        />
+      </Box>
+
+      {/* Email */}
+      <Box sx={{ mb: 2 }}>
+        <TextField
+          label="Email Address"
+          fullWidth
+          type="email"
+          value={bookingData.email}
+          onChange={(e) =>
+            setBookingData((prev: any) => ({
+              ...prev,
+              email: e.target.value,
+            }))
+          }
         />
       </Box>
 
@@ -54,7 +75,7 @@ const StepUserInfo = ({ bookingData, setBookingData, onBack }: any) => {
 
         <Button
           variant="contained"
-          disabled={!bookingData.name || !bookingData.phone}
+          disabled={!isValid}
           onClick={() => {
             setTimeout(() => {
               const btn = document.getElementById("confirm-btn");

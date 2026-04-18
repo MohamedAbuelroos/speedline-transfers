@@ -9,7 +9,6 @@ import StepTransferDetails from "./Steps/StepTransferDetails";
 import StepServiceType from "./Steps/StepServiceType";
 import StepVehicle from "./Steps/StepVehicle";
 import StepUserInfo from "./Steps/StepUserInfo";
-// import StepReview from "./Steps/StepReview";
 import LoadingOverlay from "../../components/common/LoadingOverlay";
 import { generateBookingId } from "../../utils/generateId";
 import SuccessSection from "./Sections/SuccessSection";
@@ -41,6 +40,8 @@ const Booking = () => {
       date: "",
       time: "",
 
+      price: 0,
+
       returnDate: "",
       returnTime: "",
 
@@ -53,6 +54,7 @@ const Booking = () => {
       name: "",
       phone: "",
       notes: "",
+      email: "",
     };
 
     if (!initialState) return base;
@@ -99,7 +101,7 @@ const Booking = () => {
     return base;
   });
 
-  const handleConfirm = () => {
+  const handleConfirm = (price: number | []) => {
     setLoading(true);
 
     const duration = Math.floor(Math.random() * (3000 - 1500 + 1)) + 1500;
@@ -113,6 +115,7 @@ const Booking = () => {
       setBookingData((prev: any) => ({
         ...prev,
         bookingId: id,
+        price,
       }));
 
       setSuccess(true);

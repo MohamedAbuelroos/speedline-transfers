@@ -13,24 +13,27 @@ import { useRef } from "react";
 
 const SummarySection = ({ data, onConfirm }: any) => {
   const getValue = (val: any) => val || "Not set";
-  
 
-  const price = getPrice(data.fromCity, data.toCity, data.car?.category);
-  const pricebyhour = data.car?.hourRate * data.hours;
+  const getBookingPrice = (data: any) => {
+    if (data.type === "hourly") {
+      return data.car?.hourRate && data.hours
+        ? data.car.hourRate * data.hours
+        : "--";
+    }
 
-  const categoryKey = data.car?.category;
-  const packagePrice = data.price?.[categoryKey];
+    if (data.type === "city" && data.price) {
+      const categoryKey = data.car?.category;
+      return data.price?.[categoryKey] ?? "--";
+    }
+
+    // Default case: point-to-point
+    return getPrice(data.fromCity, data.toCity, data.car?.category) ?? "--";
+  };
 
   const confirmRef = useRef<HTMLButtonElement | null>(null);
   const summaryRef = useRef<HTMLButtonElement | null>(null);
 
   const totalPassengers = data.adults + data.children + data.infants;
-
-  // const formatDate = (date: string) =>
-  //   date ? new Date(date).toLocaleDateString() : "Not set";
-
-  // const formatTime = (time: string) =>
-  //   time ? new Date(time).toLocaleTimeString() : "Not set";
 
   const isComplete =
     data.type &&
@@ -41,60 +44,6 @@ const SummarySection = ({ data, onConfirm }: any) => {
     data.car &&
     data.name &&
     data.phone;
-
-  // 📲 WhatsApp
-  // const handleWhatsApp = () => {
-  //   //     const message = encodeURIComponent(`
-  //   // Hello, I would like to book a transfer:
-
-  //   // From: ${data.from}
-  //   // To: ${data.to}
-  //   // Date: ${data.date}
-  //   // Time: ${data.time}
-  //   // Passengers: ${data.passengers}
-  //   // Car: ${data.car?.name}
-  //   // FlightNum: ${data.flightNumber || "Not Set"}
-  //   // ${data.pickupDetails || "Not Set"}
-  //   // ${data.dropoffDetails || "Not Set"}
-  //   // ${data.returnDate || "Not Set"}
-  //   // ${data.returnTime || "Not Set"}
-  //   // ${data.notes || "Not Set"}
-
-  //   // Name: ${data.name}
-  //   // Phone: ${data.phone}
-  //   // `);
-
-  //   // window.open(`https://wa.me/+201022225621?text=${message}`, "_blank");
-  //   setLoading(true);
-
-  //   setTimeout(() => {
-  //     setLoading(false);
-  //     // setSuccess(true);
-  //   }, 50); // dynamic
-  // };
-
-  // 📧 Email
-  // const handleEmail = () => {
-  //   const subject = "New Booking Request";
-
-  //   const body = `
-  //       From: ${data.from}
-  //       To: ${data.to}
-  //       Date: ${data.date}
-  //       Time: ${data.time}
-  //       Passengers: ${data.passengers}
-  //       ${data.pickupDetails ? `PickupDetails: ${data.pickupDetails}` : ""}
-  //       ${data.dropoffDetails ? `DropoffDetails: ${data.dropoffDetails}` : ""}
-  //       Car: ${data.car?.name}
-
-  //       Name: ${data.name}
-  //       Phone: ${data.phone}
-  //       `;
-
-  //   window.location.href = `mailto:your@email.com?subject=${subject}&body=${encodeURIComponent(
-  //     body,
-  //   )}`;
-  // };
 
   return (
     <Box
@@ -246,11 +195,7 @@ const SummarySection = ({ data, onConfirm }: any) => {
           <Typography variant="caption">TOTAL ESTIMATED FARE</Typography>
 
           <Typography variant="h5" sx={{ color: "#1FB1F9", fontWeight: 700 }}>
-            {data.type === "hourly"
-              ? `${pricebyhour ? pricebyhour : "--"}`
-              : data.type === "city" && data.price
-                ? `${packagePrice ? packagePrice : "--"}`
-                : `${price ? price : "--"}`}
+            {getBookingPrice(data)}
           </Typography>
 
           <Typography variant="caption" color="text.secondary">
@@ -266,15 +211,14 @@ const SummarySection = ({ data, onConfirm }: any) => {
           ref={confirmRef}
           variant="contained"
           disabled={!isComplete}
-          // onClick={handleWhatsApp}
-          onClick={onConfirm}
+          onClick={() => onConfirm(getBookingPrice(data))}
           sx={{
             backgroundColor: "#1FB1F9",
             borderRadius: "999px",
             mb: 1,
           }}
         >
-          Confirm via WhatsApp
+          Confirm Booking
         </Button>
       </Box>
     </Box>
