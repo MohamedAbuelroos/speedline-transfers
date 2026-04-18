@@ -28,9 +28,9 @@ const ServicesSection = () => {
   return (
     <Box
       sx={{
-        py: 12,
+        py: 8,
         px: { xs: 2, md: 12 },
-        background: "white", // soft different background
+        background: "white",
         textAlign: "center",
       }}
     >
