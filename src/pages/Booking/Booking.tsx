@@ -1,7 +1,7 @@
 import { Box, Container, Grid } from "@mui/material";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-
+import { sendCustomerEmail, sendCompanyEmail } from "../../utils/email";
 import HeaderSection from "./Sections/HeaderSection";
 import ProgressSection from "./Sections/ProgressSection";
 import SummarySection from "./Sections/SummarySection";
@@ -101,25 +101,28 @@ const Booking = () => {
     return base;
   });
 
-  const handleConfirm = (price: number | []) => {
+  const handleConfirm = async (price: number | []) => {
     setLoading(true);
 
-    const duration = Math.floor(Math.random() * (3000 - 1500 + 1)) + 1500;
+    const id = generateBookingId();
 
-    setTimeout(() => {
-      setLoading(false);
+    const fullData = {
+      ...bookingData,
+      bookingId: id,
+      price,
+    };
 
-      const id = generateBookingId();
+    try {
+      // 🔥 send both emails
+      await sendCompanyEmail(fullData);
+      await sendCustomerEmail(fullData);
       setBookingId(id);
-
-      setBookingData((prev: any) => ({
-        ...prev,
-        bookingId: id,
-        price,
-      }));
-
       setSuccess(true);
-    }, duration);
+    } catch (error) {
+      console.error("Email error:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

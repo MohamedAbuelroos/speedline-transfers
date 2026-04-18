@@ -1,10 +1,11 @@
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import { Box, Typography, Divider, Button } from "@mui/material";
+import { Box, Typography, Divider, Link } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import DownloadIcon from "@mui/icons-material/Download";
 import { useRef } from "react";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
+import ScrollToTop from "../../../utils/ScrollToTop";
 
 const SuccessSection = ({ data, bookingId }: any) => {
   const voucherRef = useRef<HTMLDivElement>(null);
@@ -63,8 +64,9 @@ const SuccessSection = ({ data, bookingId }: any) => {
       : "-";
   return (
     <Box sx={{ py: 6, position: "relative" }}>
+      <ScrollToTop />
       {/* ✅ TOP SUCCESS */}
-      <Box sx={{ textAlign: "center", mb: 4 }}>
+      <Box sx={{ textAlign: "center", mb: 1 }}>
         <CheckCircleIcon
           sx={{
             fontSize: 80,
@@ -78,30 +80,35 @@ const SuccessSection = ({ data, bookingId }: any) => {
           Booking Confirmed
         </Typography>
 
-        <Typography color="text.secondary">
+        {/* <Typography color="text.secondary">
           Your transfer voucher is ready
-        </Typography>
+        </Typography> */}
       </Box>
       <Box
         sx={{
           textAlign: "center",
-          mt: 4,
-          position: "absolute",
-          top: { xs: -50, md: 110 },
-          right: { xs: 50, md: 200 },
+          my: 1,
         }}
       >
-        <Button
-          variant="contained"
-          startIcon={<DownloadIcon />}
-          sx={{
-            backgroundColor: "#1FB1F9",
-            borderRadius: "999px",
-          }}
-          onClick={handleDownload}
-        >
-          Download Voucher
-        </Button>
+        <Typography variant="body1">
+          You can download your voucher from{" "}
+          <Link
+            onClick={handleDownload}
+            sx={{
+              display: "inline-flex",
+              alignItems: "center",
+              cursor: "pointer",
+              color: "#1FB1F9",
+              fontWeight: 600,
+              textDecoration: "none",
+              "&:hover": {
+                textDecoration: "underline",
+              },
+            }}
+          >
+            here <DownloadIcon sx={{ ml: 0.5, fontSize: 18 }} />
+          </Link>
+        </Typography>
       </Box>
       {/* 📄 VOUCHER */}
       <Box
@@ -115,13 +122,6 @@ const SuccessSection = ({ data, bookingId }: any) => {
           boxShadow: "0 10px 40px rgba(0,0,0,0.08)",
         }}
       >
-        {/* HEADER */}
-        {/* <Typography sx={{ fontWeight: 700 }}>Transfer Voucher No.</Typography>
-
-        <Typography sx={{ mb: 2, color: "#1FB1F9", fontWeight: 600 }}>
-          {bookingId}
-        </Typography> */}
-
         <Box
           sx={{
             display: "flex",
