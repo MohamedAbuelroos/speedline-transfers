@@ -13,6 +13,7 @@ import StepUserInfo from "./Steps/StepUserInfo";
 import LoadingOverlay from "../../components/common/LoadingOverlay";
 import { generateBookingId } from "../../utils/generateId";
 import SuccessSection from "./Sections/SuccessSection";
+import ScrollToTop from "../../utils/ScrollToTop";
 
 const Booking = () => {
   const location = useLocation();
@@ -134,36 +135,48 @@ const Booking = () => {
 
               <Grid size={{ xs: 12, md: 8 }}>
                 {step === 0 && (
-                  <StepServiceType
-                    bookingData={bookingData}
-                    setBookingData={setBookingData}
-                    onNext={() => setStep(1)}
-                  />
+                  <>
+                    <ScrollToTop />
+                    <StepServiceType
+                      bookingData={bookingData}
+                      setBookingData={setBookingData}
+                      onNext={() => setStep(1)}
+                    />
+                  </>
                 )}
 
                 {step === 1 && (
-                  <StepTransferDetails
-                    bookingData={bookingData}
-                    setBookingData={setBookingData}
-                    onNext={() => setStep(2)}
-                    onBack={() => setStep(0)}
-                  />
+                  <>
+                    <ScrollToTop />
+                    <StepTransferDetails
+                      bookingData={bookingData}
+                      setBookingData={setBookingData}
+                      onNext={() => setStep(2)}
+                      onBack={() => setStep(0)}
+                    />
+                  </>
                 )}
                 {step === 2 && (
-                  <StepVehicle
-                    bookingData={bookingData}
-                    setBookingData={setBookingData}
-                    onNext={() => setStep(3)}
-                    onBack={() => setStep(1)}
-                  />
+                  <>
+                    <ScrollToTop />
+                    <StepVehicle
+                      bookingData={bookingData}
+                      setBookingData={setBookingData}
+                      onNext={() => setStep(3)}
+                      onBack={() => setStep(1)}
+                    />
+                  </>
                 )}
                 {step === 3 && (
-                  <StepUserInfo
-                    bookingData={bookingData}
-                    setBookingData={setBookingData}
-                    onNext={() => setStep(4)}
-                    onBack={() => setStep(2)}
-                  />
+                  <>
+                    <ScrollToTop />
+                    <StepUserInfo
+                      bookingData={bookingData}
+                      setBookingData={setBookingData}
+                      onNext={() => setStep(4)}
+                      onBack={() => setStep(2)}
+                    />
+                  </>
                 )}
               </Grid>
 
