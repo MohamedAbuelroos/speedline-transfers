@@ -9,7 +9,7 @@ const ProgressSection = ({ step }: { step: number }) => {
         display: "flex",
         mb: 4,
         flex: 1,
-        width: { xs: "100%", md: "85%" },
+        width: "100%",
       }}
     >
       {steps.map((label, index) => {
@@ -22,13 +22,13 @@ const ProgressSection = ({ step }: { step: number }) => {
             sx={{
               display: "flex",
               alignItems: "center",
-
-              flex: 1,
+              flex: index === steps.length - 1 ? "initial" : 1,
             }}
           >
             {/* Circle */}
             <Box
               sx={{
+                
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
@@ -49,6 +49,7 @@ const ProgressSection = ({ step }: { step: number }) => {
                   backgroundColor:
                     isActive || isCompleted ? "#1FB1F9" : "#e5e7eb",
                   color: isActive || isCompleted ? "#fff" : "#6b7280",
+                  transition: "background-color 0.6s ease, color 0.6s ease",
                 }}
               >
                 {index + 1}
@@ -73,6 +74,8 @@ const ProgressSection = ({ step }: { step: number }) => {
                   height: 2,
                   mx: 1,
                   backgroundColor: step > index ? "#1FB1F9" : "#e5e7eb",
+                  transition: "background-color .6s ease, width .6s ease",
+                  width: step > index ? "100%" : "0%",
                 }}
               />
             )}

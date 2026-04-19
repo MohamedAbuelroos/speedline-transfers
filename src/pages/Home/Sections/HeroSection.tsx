@@ -79,10 +79,15 @@ const HeroSection = () => {
 
   // Search for city-specific pricing
   const handleSearch = () => {
-    if (!form.fromCity || !form.toCity) {
+    if (
+      !form.fromCity ||
+      !form.toCity ||
+      form.passengers > 20 ||
+      form.passengers < 1
+    ) {
       setSnackbar({
         open: true,
-        message: "Please select both pickup and drop-off locations.",
+        message: "Please fill all fields with valid data.",
         severity: "error",
       });
       return;
@@ -276,7 +281,7 @@ const HeroSection = () => {
                       ...params.slotProps?.input,
                       startAdornment: (
                         <InputAdornment position="start">
-                          <LocationOnIcon color="primary" />
+                          <LocationOnIcon sx={{ color: "secondary.main" }} />
                         </InputAdornment>
                       ),
                     },

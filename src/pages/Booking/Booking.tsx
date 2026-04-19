@@ -137,11 +137,11 @@ const Booking = () => {
         <>
           <Container>
             <HeaderSection />
-            <ProgressSection step={step} />
             <Grid container spacing={4}>
               {/* LEFT */}
 
               <Grid size={{ xs: 12, md: 8 }}>
+                <ProgressSection step={step} />
                 {step === 0 && (
                   <>
                     <ScrollToTop />
