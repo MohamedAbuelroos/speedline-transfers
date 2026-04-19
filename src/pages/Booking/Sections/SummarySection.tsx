@@ -1,18 +1,25 @@
 import { Box, Typography, Divider, Button } from "@mui/material";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import PeopleIcon from "@mui/icons-material/People";
 import paymentimg from "../../../assets/images/Payment.jpg";
 import LuggageIcon from "@mui/icons-material/Luggage";
+import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
+import NearMeOutlinedIcon from "@mui/icons-material/NearMeOutlined";
+import AutorenewIcon from "@mui/icons-material/Autorenew";
 
 import { getPrice } from "../../../utils/pricing";
 import { useRef } from "react";
 
 const SummarySection = ({ data, onConfirm }: any) => {
   const getValue = (val: any) => val || "Not set";
+  const formatReturnTime = (dateStr: string) =>
+    new Date(dateStr).toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    });
 
   const getBookingPrice = (data: any) => {
     if (data.type === "hourly") {
@@ -34,6 +41,8 @@ const SummarySection = ({ data, onConfirm }: any) => {
   const summaryRef = useRef<HTMLButtonElement | null>(null);
 
   const totalPassengers = data.adults + data.children + data.infants;
+  const isEmailValid =
+    data.email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email);
 
   const isComplete =
     data.type &&
@@ -57,6 +66,7 @@ const SummarySection = ({ data, onConfirm }: any) => {
       }}
     >
       {/* IMAGE */}
+
       <Box
         component="img"
         src={paymentimg}
@@ -64,10 +74,21 @@ const SummarySection = ({ data, onConfirm }: any) => {
           width: "100%",
           height: 140,
           objectFit: "cover",
+          position: "relative",
         }}
       />
-
-      <Box sx={{ p: 3 }}>
+      <Box
+        sx={{
+          position: "absolute",
+          width: "100%",
+          height: "21%",
+          zIndex: 5,
+          top: 0,
+          background:
+            "linear-gradient(to top, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.33) 40%, rgba(255,255,255,0) 100%)",
+        }}
+      />
+      <Box sx={{ p: 3, pt: 2 }}>
         <Typography sx={{ fontWeight: 700, mb: 1 }}>Trip Summary</Typography>
 
         <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
@@ -76,8 +97,26 @@ const SummarySection = ({ data, onConfirm }: any) => {
 
         {/* FROM & TO */}
         <Box sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}>
-          <Box sx={{ display: "flex", gap: 1 }}>
-            <LocationOnIcon sx={{ color: "#1FB1F9" }} />
+          <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
+            <Box
+              sx={{
+                color: "#1FB1F9",
+                width: "40px",
+                height: "40px",
+                backgroundColor: "#1fb0f926",
+
+                borderRadius: "10px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <LocationOnOutlinedIcon
+                sx={{
+                  color: "#1FB1F9",
+                }}
+              />
+            </Box>
             <Box>
               <Typography variant="caption">FROM</Typography>
               <Typography style={{ fontWeight: 500 }}>
@@ -89,8 +128,25 @@ const SummarySection = ({ data, onConfirm }: any) => {
           {data.type === "hourly" ? (
             ""
           ) : (
-            <Box sx={{ display: "flex", gap: 1 }}>
-              <FlightTakeoffIcon sx={{ color: "#f59e0b" }} />
+            <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
+              <Box
+                sx={{
+                  color: "#1FB1F9",
+                  width: "40px",
+                  height: "40px",
+                  backgroundColor: "#f59f0b1d",
+                  borderRadius: "10px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <NearMeOutlinedIcon
+                  sx={{
+                    color: "#f59e0b",
+                  }}
+                />
+              </Box>
               <Box>
                 <Typography variant="caption">TO</Typography>
                 <Typography sx={{ fontWeight: 500 }}>
@@ -102,47 +158,57 @@ const SummarySection = ({ data, onConfirm }: any) => {
         </Box>
 
         <Divider />
-        {/* TRIP TYPE */}
-        <Typography variant="body2" sx={{ my: 1 }} color="text.secondary">
-          {data.type === "hourly"
-            ? "Hire By Hour"
-            : `${data.returnDate ? "Round Trip" : "One Way"}`}
-        </Typography>
 
         {/* DATE & TIME */}
-        <Box sx={{ display: "flex", justifyContent: "space-between", my: 2 }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            my: 2,
+            alignItems: "center",
+          }}
+        >
           <Box sx={{ display: "flex", gap: 1 }}>
-            <CalendarTodayIcon />
+            <CalendarTodayIcon fontSize="small" />
             <Typography variant="body2" id="summary-sec" ref={summaryRef}>
               {data.date ? new Date(data.date).toLocaleDateString() : "TBD"}
             </Typography>
           </Box>
-
+          <Typography variant="body2" sx={{ my: 1 }} color="text.secondary">
+            {data.type === "hourly"
+              ? "Hire By Hour"
+              : `${data.returnDate ? "Round Trip" : "One Way"}`}
+          </Typography>
           <Box sx={{ display: "flex", gap: 1 }}>
-            <AccessTimeIcon />
+            <AccessTimeIcon fontSize="small" />
             <Typography variant="body2">
-              {data.time ? new Date(data.time).toLocaleTimeString() : "TBD"}
+              {data.time ? formatReturnTime(data.time) : "TBD"}
             </Typography>
           </Box>
         </Box>
         {/* Return DATE & TIME */}
         {data.returnDate && (
-          <Box sx={{ display: "flex", justifyContent: "space-between", my: 2 }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              my: 2,
+              alignItems: "center",
+            }}
+          >
             <Box sx={{ display: "flex", gap: 1 }}>
-              <CalendarTodayIcon />
+              <CalendarTodayIcon fontSize="small" />
               <Typography variant="body2">
                 {data.returnDate
                   ? new Date(data.returnDate).toLocaleDateString()
                   : "TBD"}
               </Typography>
             </Box>
-
+            <AutorenewIcon sx={{ color: "secondary.main" }} />
             <Box sx={{ display: "flex", gap: 1 }}>
-              <AccessTimeIcon />
+              <AccessTimeIcon fontSize="small" />
               <Typography variant="body2">
-                {data.returnTime
-                  ? new Date(data.returnTime).toLocaleTimeString()
-                  : "TBD"}
+                {data.returnTime ? formatReturnTime(data.returnTime) : "TBD"}
               </Typography>
             </Box>
           </Box>
@@ -159,20 +225,25 @@ const SummarySection = ({ data, onConfirm }: any) => {
             alignItems: "center",
           }}
         >
-          <Box sx={{ display: "flex", gap: 1 }}>
-            <DirectionsCarIcon />
-            <Typography variant="body2">
-              {data.car?.name || "Not set"} ({data.car?.category || "Not set"})
-            </Typography>
+          <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
+            <DirectionsCarIcon sx={{ color: "primary.main" }} />
+            <Box sx={{fontWeight:"700"}}>
+              {data.car?.name || "Not set"}
+              {data.car?.name && (
+                <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                  (Or similar)
+                </Typography>
+              )}
+            </Box>
           </Box>
 
-          <Box sx={{ display: "flex", flexDirection: "column" }}>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}>
             <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
-              <PeopleIcon />
+              <PeopleIcon fontSize="small" />
               <Typography variant="body2">{totalPassengers} Pax</Typography>
             </Box>
             <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
-              <LuggageIcon />
+              <LuggageIcon fontSize="small" />
               <Typography variant="body2">
                 {data?.car?.bags || "0"} Bags
               </Typography>
@@ -194,8 +265,17 @@ const SummarySection = ({ data, onConfirm }: any) => {
         >
           <Typography variant="caption">TOTAL ESTIMATED FARE</Typography>
 
-          <Typography variant="h5" sx={{ color: "#1FB1F9", fontWeight: 700 }}>
+          <Typography
+            variant="h4"
+            sx={{ fontWeight: 700, display: "flex", justifyContent: "center" }}
+          >
             {getBookingPrice(data)}
+            <Typography
+              variant="body1"
+              sx={{ alignSelf: "flex-end", color: "primary.main", ml: 0.5 }}
+            >
+              {getBookingPrice(data) !== "--" ? "SAR" : ""}
+            </Typography>
           </Typography>
 
           <Typography variant="caption" color="text.secondary">
@@ -210,7 +290,7 @@ const SummarySection = ({ data, onConfirm }: any) => {
           id="confirm-btn"
           ref={confirmRef}
           variant="contained"
-          disabled={!isComplete}
+          disabled={!isComplete || !isEmailValid}
           onClick={() => onConfirm(getBookingPrice(data))}
           sx={{
             backgroundColor: "#1FB1F9",
