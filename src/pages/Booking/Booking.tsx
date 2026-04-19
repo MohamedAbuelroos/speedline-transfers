@@ -96,6 +96,7 @@ const Booking = () => {
         fromCity: initialState.data.fromCity,
         toCity: initialState.data.toCity,
         adults: initialState.data.adults || 1,
+        car: initialState.data.car,
       };
     }
 

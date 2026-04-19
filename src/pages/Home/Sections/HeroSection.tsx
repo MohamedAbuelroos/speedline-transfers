@@ -27,6 +27,8 @@ import { allLocations } from "../../../data/locations";
 import { useState } from "react";
 import { theme } from "../../../theme/theme";
 import { useNavigate } from "react-router-dom";
+import { cars } from "../../../data/cars";
+import type { Car } from "../../../utils/types";
 
 const HeroSection = () => {
   const navigate = useNavigate();
@@ -36,7 +38,7 @@ const HeroSection = () => {
   const [result, setResult] = useState<{
     from: string;
     to: string;
-    car: string;
+    car: Car | null;
     price: number;
     distance: string;
   } | null>(null);
@@ -61,11 +63,18 @@ const HeroSection = () => {
     }));
   };
 
-  // 🚗 Smart car suggestion
-  const getCarType = () => {
-    if (form.passengers <= 3) return "Sedan";
-    if (form.passengers <= 6) return "SUV";
-    return "Van";
+  const getSuggestedCar = () => {
+    let category: string;
+
+    if (form.passengers <= 3) {
+      category = "Sedan";
+    } else if (form.passengers <= 6) {
+      category = "SUV";
+    } else {
+      category = "Van";
+    }
+
+    return cars.find((car) => car.category === category) || null;
   };
 
   // Search for city-specific pricing
@@ -80,9 +89,13 @@ const HeroSection = () => {
     }
     setLoading(true);
 
-    const car = getCarType();
+    const car = getSuggestedCar();
 
-    const price = getPrice(form.fromCity, form.toCity, car);
+    const price = getPrice(
+      form.fromCity,
+      form.toCity,
+      car?.category || "Sedan",
+    );
 
     // simple fake distance (optional realistic touch)
     const distance =
@@ -119,6 +132,7 @@ const HeroSection = () => {
             fromCity: form.fromCity,
             toCity: form.toCity,
             adults: form.passengers,
+            car: result?.car,
           },
         },
       });
@@ -222,7 +236,22 @@ const HeroSection = () => {
                 handleChange("fromCity", value?.cityId || "");
               }}
               renderInput={(params) => (
-                <TextField {...params} label="Pickup Location" fullWidth />
+                <TextField
+                  {...params}
+                  label="Pickup Location"
+                  fullWidth
+                  slotProps={{
+                    ...params.slotProps,
+                    input: {
+                      ...params.slotProps?.input,
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <LocationOnIcon color="primary" />
+                        </InputAdornment>
+                      ),
+                    },
+                  }}
+                />
               )}
             />
           </Grid>
@@ -237,7 +266,22 @@ const HeroSection = () => {
                 handleChange("toCity", value?.cityId || "");
               }}
               renderInput={(params) => (
-                <TextField {...params} label="Drop-off Location" fullWidth />
+                <TextField
+                  {...params}
+                  label="Drop-off Location"
+                  fullWidth
+                  slotProps={{
+                    ...params.slotProps,
+                    input: {
+                      ...params.slotProps?.input,
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <LocationOnIcon color="primary" />
+                        </InputAdornment>
+                      ),
+                    },
+                  }}
+                />
               )}
             />
           </Grid>
@@ -274,6 +318,7 @@ const HeroSection = () => {
               fullWidth
               onClick={handleSearch}
               variant="contained"
+              disabled={loading}
               sx={{
                 height: "56px",
                 borderRadius: "12px",
@@ -334,7 +379,7 @@ const HeroSection = () => {
               {
                 icon: <DirectionsCarIcon color="primary" />,
                 label: "Suggested Vehicle",
-                value: result?.car,
+                value: result?.car?.category,
               },
             ].map((item, index) => (
               <Box key={index}>
