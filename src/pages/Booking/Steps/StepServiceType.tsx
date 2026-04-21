@@ -1,6 +1,9 @@
 import { Box, Typography, Button } from "@mui/material";
+import useLanguage from "../../../hooks/useLanguage";
 
 const StepServiceType = ({ bookingData, setBookingData, onNext }: any) => {
+  const lang = useLanguage();
+  const isRTL = lang === "ar";
   const options = [
     { label: "Airport Transfer", value: "airport" },
     { label: "City to City", value: "city" },
@@ -12,7 +15,6 @@ const StepServiceType = ({ bookingData, setBookingData, onNext }: any) => {
       type,
     }));
   };
-
 
   return (
     <Box>
@@ -52,6 +54,7 @@ const StepServiceType = ({ bookingData, setBookingData, onNext }: any) => {
         sx={{
           backgroundColor: "#1FB1F9",
           borderRadius: "999px",
+          float: isRTL ? "right" : "left",
         }}
       >
         Continue

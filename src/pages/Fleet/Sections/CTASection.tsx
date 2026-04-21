@@ -1,14 +1,19 @@
 import { Box, Container, Typography, Button, Divider } from "@mui/material";
 import PhoneIcon from "@mui/icons-material/Phone";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import useLanguage from "../../../hooks/useLanguage";
 
 const CTASection = () => {
+  const lang = useLanguage();
+  const isRTL = lang === "ar";
+
   return (
     <Box sx={{ py: 8 }}>
       <Container>
         <Box
           sx={{
-            backgroundImage: "linear-gradient(135deg, #1FB1F9 0%, #F5993DFF 100%)",
+            backgroundImage:
+              "linear-gradient(135deg, #1FB1F9 0%, #F5993DFF 100%)",
             borderRadius: "20px",
             p: { xs: 3, md: 5 },
             display: "flex",
@@ -59,7 +64,7 @@ const CTASection = () => {
                   py: 1.2,
                   fontWeight: 600,
                   backgroundColor: "transparent",
-                  color:"white"
+                  color: "white",
                 }}
               >
                 Custom Quote
@@ -94,7 +99,14 @@ const CTASection = () => {
                 <Typography sx={{ fontWeight: 600, color: "text.primary" }}>
                   Call Us 24/7
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  sx={{
+                    direction: isRTL ? "rtl" : "ltr",
+                    unicodeBidi: "embed",
+                  }}
+                >
                   +966 50 000 0000
                 </Typography>
               </Box>

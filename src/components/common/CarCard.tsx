@@ -4,6 +4,7 @@ import WorkIcon from "@mui/icons-material/Work";
 import WifiIcon from "@mui/icons-material/Wifi";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useLocation } from "react-router-dom";
+import useLanguage from "../../hooks/useLanguage";
 
 type CarCardProps = {
   id: string;
@@ -26,6 +27,8 @@ const CarCard = ({
   onSelect,
 }: CarCardProps) => {
   const location = useLocation();
+  const lang = useLanguage();
+  const isRTL = lang === "ar";
 
   return (
     <Box
@@ -160,7 +163,9 @@ const CarCard = ({
           }}
         >
           Book This Car
-          <ArrowForwardIcon sx={{ fontSize: 18 }} />
+          <ArrowForwardIcon
+            sx={{ fontSize: 18, transform: isRTL ? "rotate(180deg)" : "none" }}
+          />
         </Button>
       </Box>
     </Box>
