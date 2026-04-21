@@ -146,7 +146,19 @@ const HeroSection = () => {
   };
 
   return (
-    <Box sx={{ px: { xs: 2, md: 12 }, py: 6, minHeight: "calc(100vh - 60px)" }}>
+    <Box
+      sx={{
+        px: { xs: 2, md: 12 },
+        py: 6,
+        minHeight: "calc(100vh - 60px)",
+        backgroundImage: `
+      radial-gradient(circle at top left, rgba(255,255,255,0.95) 0%, transparent 70%),
+      radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.7) 0%, transparent 70%),
+      linear-gradient(135deg, #ef8e26 60%, #ffffff 100%)
+      `,
+      // radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.7) 0%, transparent 70%),
+      }}
+    >
       <Grid container spacing={4} sx={{ alignItems: "center" }}>
         {/* LEFT */}
         <Grid
@@ -167,13 +179,15 @@ const HeroSection = () => {
           </Typography>
 
           <Button
-            variant="outlined"
+            variant="contained"
             onClick={() => navigate("/booking")}
             sx={{
               borderRadius: "25px",
               textTransform: "none",
               px: 4,
               mx: 1,
+              backgroundColor: "white",
+              color: "primary.main",
             }}
           >
             Book Your Ride

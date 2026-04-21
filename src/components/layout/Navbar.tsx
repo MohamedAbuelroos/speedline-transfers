@@ -98,7 +98,6 @@ const Navbar = () => {
               sx={{
                 display: "flex",
                 gap: 3,
-                flexDirection: isRTL ? "row-reverse" : "row",
               }}
             >
               {navLinks.map((link) => {

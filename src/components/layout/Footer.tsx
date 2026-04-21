@@ -5,6 +5,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import logo from "/logo.png";
 import FacebookIcon from "@mui/icons-material/Facebook";
+import useLanguage from "../../hooks/useLanguage";
 
 const socialIcons = [
   {
@@ -12,31 +13,33 @@ const socialIcons = [
     href: "https://wa.me/966500000000",
     color: "#fff",
     bgColor: "#1FB1F9",
-    hoverColor: "#25D366", // WhatsApp green
+    hoverColor: "#25D366",
   },
   {
     icon: <InstagramIcon />,
     href: "https://instagram.com/yourpage",
     color: "#fff",
     bgColor: "#1FB1F9",
-    hoverColor: "#E1306C", // Instagram pink/red
+    hoverColor: "#E1306C",
   },
   {
     icon: <FacebookIcon />,
     href: "https://facebook.com/yourpage",
     color: "#fff",
     bgColor: "#1FB1F9",
-    hoverColor: "#1877F2", // Facebook blue
+    hoverColor: "#1877F2",
   },
   {
     icon: <EmailIcon />,
     href: "mailto:info@speedlinetransfers.com",
     color: "#fff",
     bgColor: "#1FB1F9",
-    hoverColor: "#D44638", // Gmail red
+    hoverColor: "#D44638",
   },
 ];
 const Footer = () => {
+  const lang = useLanguage();
+  const isRTL = lang === "ar";
   return (
     <Box sx={{ backgroundColor: "#0f172a", color: "#fff", pt: 6, pb: 3 }}>
       <Container>
@@ -114,7 +117,12 @@ const Footer = () => {
               }}
             >
               <PhoneIcon sx={{ fontSize: 18, color: "#1FB1F9" }} />
-              <Typography variant="body2">+966 50 000 0000</Typography>
+              <Typography
+                variant="body2"
+                sx={{ direction: isRTL ? "rtl" : "ltr", unicodeBidi: "embed" }}
+              >
+                +966 50 000 0000
+              </Typography>
             </IconButton>
 
             <IconButton
