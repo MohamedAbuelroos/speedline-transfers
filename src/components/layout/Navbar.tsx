@@ -104,7 +104,7 @@ const Navbar = () => {
                         position: "absolute",
                         width: isActive ? "100%" : "0%",
                         height: "2px",
-                        background: theme.palette.primary.main,
+                        backgroundColor: "primary.main",
                         left: 0,
                         bottom: -4,
                         transition: "0.3s",

@@ -25,7 +25,6 @@ import { getPrice } from "../../../utils/pricing";
 import { allLocations } from "../../../data/locations";
 
 import { useState } from "react";
-import { theme } from "../../../theme/theme";
 import { useNavigate } from "react-router-dom";
 import { cars } from "../../../data/cars";
 import type { Car } from "../../../utils/types";
@@ -188,7 +187,7 @@ const HeroSection = () => {
               textTransform: "none",
               px: 4,
               "&:hover": {
-                background: theme.palette.secondary.light,
+                backgroundColor: "secondary.light",
               },
             }}
           >
@@ -352,7 +351,7 @@ const HeroSection = () => {
               sx={{
                 fontWeight: "bold",
                 fontSize: "25px",
-                color: theme.palette.primary.main,
+                color: "primary.main",
               }}
             >
               Estimated Transfer Details
@@ -441,7 +440,7 @@ const HeroSection = () => {
                 sx={{
                   fontWeight: "bold",
                   fontSize: "20px",
-                  color: theme.palette.primary.main,
+                  color: "primary.main",
                 }}
               >
                 {result?.price} SAR
