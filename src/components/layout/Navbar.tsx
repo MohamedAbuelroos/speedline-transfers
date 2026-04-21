@@ -30,6 +30,7 @@ import LanguageSwitcher from "../common/LanguageSwitcher";
 import CurrencySwitcher from "../common/CurrencySwitcher";
 import useLanguage from "../../hooks/useLanguage";
 import { translations } from "../../i18n";
+import { languages } from "../../utils/lang";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -37,6 +38,7 @@ const Navbar = () => {
   const theme = useTheme();
   const lang = useLanguage();
   const translate = translations[lang];
+  const isRTL = lang === "ar";
 
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -65,7 +67,13 @@ const Navbar = () => {
         elevation={0}
         sx={{ background: "#fff", color: "#000" }}
       >
-        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Toolbar
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            flexDirection: isRTL ? "row-reverse" : "row",
+          }}
+        >
           {/* Logo */}
 
           <Box
@@ -79,12 +87,20 @@ const Navbar = () => {
               height: "auto",
               objectFit: "cover",
               cursor: "pointer",
+              marginInlineEnd: isRTL ? 0 : 2,
+              marginInlineStart: isRTL ? 2 : 0,
             }}
           />
 
           {/* DESKTOP */}
           {!isMobile && (
-            <Box sx={{ display: "flex", gap: 3 }}>
+            <Box
+              sx={{
+                display: "flex",
+                gap: 3,
+                flexDirection: isRTL ? "row-reverse" : "row",
+              }}
+            >
               {navLinks.map((link) => {
                 const isActive = location.pathname === link.path;
 
@@ -105,7 +121,8 @@ const Navbar = () => {
                         width: isActive ? "100%" : "0%",
                         height: "2px",
                         backgroundColor: "primary.main",
-                        left: 0,
+                        left: isRTL ? "auto" : 0,
+                        right: isRTL ? 0 : "auto",
                         bottom: -4,
                         transition: "0.3s",
                       },
@@ -123,7 +140,15 @@ const Navbar = () => {
           )}
 
           {/* RIGHT SIDE */}
-          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+              flexDirection: isRTL ? "row-reverse" : "row",
+            }}
+          >
+            {" "}
             {/* Desktop Switchers */}
             {!isMobile && (
               <>
@@ -135,7 +160,6 @@ const Navbar = () => {
                 <CurrencySwitcher />
               </>
             )}
-
             {/* Book Button */}
             <Button
               variant="contained"
@@ -154,7 +178,6 @@ const Navbar = () => {
             >
               Book Now
             </Button>
-
             {/* Mobile Menu Icon */}
             {isMobile && (
               <IconButton onClick={() => setDrawerOpen(true)}>
@@ -167,7 +190,7 @@ const Navbar = () => {
 
       {/* Drawer (Sidebar) */}
       <Drawer
-        anchor="left"
+        anchor={isRTL ? "right" : "left"}
         open={drawerOpen}
         onClose={() => setDrawerOpen(false)}
       >
@@ -214,22 +237,33 @@ const Navbar = () => {
                     gap: 0.5,
                   }}
                 >
-                  <LanguageIcon fontSize="small" sx={{ mr: 1 }} />
-                  Language
+                  <LanguageIcon fontSize="small" sx={{ marginInlineEnd: 1 }} />
+                  {lang === "en"
+                    ? "Language"
+                    : lang === "ar"
+                      ? "اللغات"
+                      : "Язык"}
                 </Typography>
               </AccordionSummary>
 
               <AccordionDetails sx={{ p: 0 }}>
                 <List>
-                  {["English", "Arabic", "Russian"].map((lang) => (
+                  {languages.map((lang) => (
                     <ListItem
-                      key={lang}
-                      onClick={() => setDrawerOpen(false)}
+                      key={lang.code}
+                      onClick={() => {
+                        const selectedLang = lang.code;
+
+                        localStorage.setItem("lang", selectedLang);
+                        window.dispatchEvent(new Event("languageChange"));
+
+                        setDrawerOpen(false);
+                      }}
                       sx={{
                         pl: 2,
                       }}
                     >
-                      <ListItemText primary={lang} />
+                      <ListItemText primary={lang.label} />
                     </ListItem>
                   ))}
                 </List>
@@ -247,7 +281,10 @@ const Navbar = () => {
                     gap: 0.5,
                   }}
                 >
-                  <CurrencyExchangeIcon fontSize="small" sx={{ mr: 1 }} />
+                  <CurrencyExchangeIcon
+                    fontSize="small"
+                    sx={{ marginInlineEnd: 1 }}
+                  />
                   Currency
                 </Typography>
               </AccordionSummary>

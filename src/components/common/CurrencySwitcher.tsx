@@ -8,7 +8,8 @@ import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 
 import { useState } from "react";
 
-const currencies = ["SAR", "USD", "EUR"];
+const currencies = ["SAR"];
+// const currencies = ["SAR", "USD", "EUR"];
 
 const CurrencySwitcher = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
