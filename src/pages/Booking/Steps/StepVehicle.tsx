@@ -1,11 +1,15 @@
 import { Box, Typography, TextField, Button } from "@mui/material";
 import { cars } from "../../../data/cars";
 import { getPrice } from "../../../utils/pricing";
+import useLanguage from "../../../hooks/useLanguage";
 
 const StepVehicle = ({ bookingData, setBookingData, onNext, onBack }: any) => {
   const isValid =
     bookingData.car &&
     (bookingData.type === "hourly" || bookingData.adults > 0);
+
+  const lang = useLanguage();
+  const isRTL = lang === "ar";
 
   const pricebyhour = (car: any) => {
     return car.hourRate * bookingData.hours;
@@ -51,6 +55,12 @@ const StepVehicle = ({ bookingData, setBookingData, onNext, onBack }: any) => {
               label="Adults"
               type="number"
               fullWidth
+              sx={{
+                direction: isRTL ? "rtl" : "ltr",
+                "& input": {
+                  textAlign: isRTL ? "right" : "left",
+                },
+              }}
               value={bookingData.adults}
               slotProps={{
                 htmlInput: {
@@ -74,6 +84,12 @@ const StepVehicle = ({ bookingData, setBookingData, onNext, onBack }: any) => {
               label="Children"
               type="number"
               fullWidth
+              sx={{
+                direction: isRTL ? "rtl" : "ltr",
+                "& input": {
+                  textAlign: isRTL ? "right" : "left",
+                },
+              }}
               slotProps={{
                 htmlInput: {
                   min: 0,
@@ -97,6 +113,12 @@ const StepVehicle = ({ bookingData, setBookingData, onNext, onBack }: any) => {
               label="Infants"
               type="number"
               fullWidth
+              sx={{
+                direction: isRTL ? "rtl" : "ltr",
+                "& input": {
+                  textAlign: isRTL ? "right" : "left",
+                },
+              }}
               slotProps={{
                 htmlInput: {
                   min: 0,

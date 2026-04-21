@@ -10,7 +10,8 @@ const CTASection = () => {
       <Container>
         <Box
           sx={{
-            background: "linear-gradient(135deg, #1FB1F9 0%, #F5993DFF 100%)",
+            backgroundImage:
+              "linear-gradient(135deg, #1FB1F9 0%, #F5993DFF 100%)",
             borderRadius: "20px",
             p: { xs: 3, md: 5 },
             display: "flex",

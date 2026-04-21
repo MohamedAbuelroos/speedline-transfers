@@ -1,3 +1,7 @@
+body {
+  transition: all 0.2s ease;
+}
+
 @keyframes pulse {
   0% {
     transform: scale(1);

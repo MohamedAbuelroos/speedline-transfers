@@ -1,31 +1,18 @@
-import {
-  Button,
-  Menu,
-  MenuItem,
-} from "@mui/material";
+import { Button, Menu, MenuItem } from "@mui/material";
 import LanguageIcon from "@mui/icons-material/Language";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useState } from "react";
 import useLanguage from "../../hooks/useLanguage";
+import { languages } from "../../utils/lang";
 
-const languages = [
-  { code: "en", label: "English" },
-  { code: "ar", label: "Arabic" },
-  { code: "ru", label: "Russian" },
-];
 
 const LanguageSwitcher = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  // const [selected, setSelected] = useState("en");
   const language = useLanguage();
 
   const handleSelect = (lang: string) => {
     localStorage.setItem("lang", lang);
     window.dispatchEvent(new Event("languageChange"));
-    // setSelected(lang);
-
-    // 🔥 later:
-    // i18n.changeLanguage(lang)
 
     setAnchorEl(null);
   };

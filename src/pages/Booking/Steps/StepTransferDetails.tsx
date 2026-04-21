@@ -17,6 +17,7 @@ import dayjs from "dayjs";
 
 import { Autocomplete } from "@mui/material";
 import { allLocations } from "../../../data/locations";
+import useLanguage from "../../../hooks/useLanguage";
 
 const StepTransferDetails = ({
   bookingData,
@@ -26,6 +27,8 @@ const StepTransferDetails = ({
 }: any) => {
   const [openOptional, setOpenOptional] = useState(true);
   const [stops, setStops] = useState<string[]>([]);
+  const lang = useLanguage();
+  const isRTL = lang === "ar";
 
   const addStop = () => {
     if (stops.length < 3) {
@@ -137,6 +140,7 @@ const StepTransferDetails = ({
             />
           </Grid>
           <Grid size={{ xs: 12 }}>
+            
             <FormControlLabel
               control={
                 <Switch
@@ -262,8 +266,9 @@ const StepTransferDetails = ({
               <Box
                 sx={{
                   display: "flex",
-                  gap: 1,
+                  flexDirection: isRTL ? "row-reverse" : "row",
                   alignItems: "center",
+                  gap: 2,
                 }}
               >
                 <TextField
@@ -357,6 +362,7 @@ const StepTransferDetails = ({
           sx={{
             cursor: "pointer",
             display: "flex",
+            flexDirection: isRTL ? "row-reverse" : "row",
             justifyContent: "center",
             alignItems: "center",
           }}
