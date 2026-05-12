@@ -8,6 +8,7 @@ const StepServiceType = ({ bookingData, setBookingData, onNext }: any) => {
     { label: "Airport Transfer", value: "airport" },
     { label: "City to City", value: "city" },
     { label: "Hire by Hour", value: "hourly" },
+    { label: "Package", value: "package" },
   ];
   const selectType = (type: string) => {
     setBookingData((prev: any) => ({

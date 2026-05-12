@@ -28,7 +28,7 @@ const SummarySection = ({ data, onConfirm }: any) => {
         : "--";
     }
 
-    if (data.type === "city" && data.price) {
+    if ((data.type === "city" || data.type === "package") && data.price) {
       const categoryKey = data.car?.category;
       return data.price?.[categoryKey] ?? "--";
     }
@@ -94,7 +94,17 @@ const SummarySection = ({ data, onConfirm }: any) => {
         <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
           Estimated for your selections
         </Typography>
-
+        {data.type === "package" && (
+          <Typography
+            sx={{
+              fontWeight: 700,
+              color: "primary.main",
+              mb: 2,
+            }}
+          >
+            {data.packageData?.title}
+          </Typography>
+        )}
         {/* FROM & TO */}
         <Box sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}>
           <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
@@ -177,7 +187,9 @@ const SummarySection = ({ data, onConfirm }: any) => {
           <Typography variant="body2" sx={{ my: 1 }} color="text.secondary">
             {data.type === "hourly"
               ? "Hire By Hour"
-              : `${data.returnDate ? "Round Trip" : "One Way"}`}
+              : data.type === "package"
+                ? "Package Booking"
+                : `${data.returnDate ? "Round Trip" : "One Way"}`}
           </Typography>
           <Box sx={{ display: "flex", gap: 1 }}>
             <AccessTimeIcon fontSize="small" />
@@ -227,7 +239,7 @@ const SummarySection = ({ data, onConfirm }: any) => {
         >
           <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
             <DirectionsCarIcon sx={{ color: "primary.main" }} />
-            <Box sx={{fontWeight:"700"}}>
+            <Box sx={{ fontWeight: "700" }}>
               {data.car?.name || "Not set"}
               {data.car?.name && (
                 <Typography variant="body2" sx={{ color: "text.secondary" }}>

@@ -7,6 +7,7 @@ import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
 import type { TravelPackage } from "../../../utils/types";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   data: TravelPackage;
@@ -14,6 +15,7 @@ type Props = {
 
 const PackageBookingCard = ({ data }: Props) => {
   const vehicle = data.vehicleTypes[0];
+  const navigate = useNavigate();
 
   return (
     <Box
@@ -266,6 +268,14 @@ const PackageBookingCard = ({ data }: Props) => {
         {/* BUTTONS */}
         <Button
           fullWidth
+          onClick={() => {
+            navigate("/booking", {
+              state: {
+                type: "package",
+                data: { data },
+              },
+            });
+          }}
           variant="contained"
           sx={{
             mb: 2,
