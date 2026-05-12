@@ -37,7 +37,7 @@ const PackageItinerary = ({ data }: Props) => {
         <Typography
           sx={{
             fontSize: {
-              xs: 34,
+              xs: 30,
               md: 44,
             },
 

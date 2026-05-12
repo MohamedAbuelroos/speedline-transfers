@@ -17,24 +17,32 @@ const PackageOverview = ({ data }: Props) => {
       title: "Ideal For",
       value: "Families & VIPs",
       icon: <Groups2OutlinedIcon />,
+      color: "rgba(31, 176, 249, 0.20)",
+      iconColor:"primary.main",
     },
 
     {
       title: "Cities",
       value: data.cities.join(" / "),
       icon: <LocationCityOutlinedIcon />,
+      color: "rgba(245, 153, 61, 0.20)",
+      iconColor:"secondary.main",
     },
 
     {
       title: "Fleet",
       value: data.vehicleTypes[0].name,
       icon: <DirectionsCarFilledOutlinedIcon />,
+      color: "rgba(31, 176, 249, 0.20)",
+      iconColor:"primary.main",
     },
 
     {
       title: "Service",
-      value: "Airport Greeting",
+      value: data.highlights[0],
       icon: <FlightTakeoffOutlinedIcon />,
+      color: "rgba(245, 153, 61, 0.20)",
+      iconColor:"secondary.main",
     },
   ];
 
@@ -64,7 +72,7 @@ const PackageOverview = ({ data }: Props) => {
         <Typography
           sx={{
             fontSize: {
-              xs: 34,
+              xs: 30,
               md: 44,
             },
 
@@ -113,7 +121,7 @@ const PackageOverview = ({ data }: Props) => {
           >
             <Box
               sx={{
-                backgroundColor: "#fff",
+                backgroundColor: item.color,
 
                 borderRadius: "24px",
 
@@ -158,12 +166,12 @@ const PackageOverview = ({ data }: Props) => {
 
                   justifyContent: "center",
 
-                  color: "primary.main",
+                  color: item.iconColor,
 
                   mb: 2,
 
                   "& svg": {
-                    fontSize: 34,
+                    fontSize: 38,
                   },
                 }}
               >
@@ -192,7 +200,7 @@ const PackageOverview = ({ data }: Props) => {
                 sx={{
                   fontWeight: 800,
 
-                  fontSize: 18,
+                  fontSize: {xs: 14, md: 18},
 
                   color: "#111827",
 

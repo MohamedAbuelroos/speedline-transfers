@@ -64,7 +64,7 @@ const PackageTerms = ({ data }: Props) => {
           <Typography
             sx={{
               fontSize: {
-                xs: 34,
+                xs: 30,
                 md: 44,
               },
 
@@ -210,7 +210,7 @@ const PackageTerms = ({ data }: Props) => {
           <Typography
             sx={{
               fontSize: {
-                xs: 34,
+                xs: 30,
                 md: 44,
               },
 
