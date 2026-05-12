@@ -27,7 +27,7 @@ const PackageDetails = () => {
         px: {
           xs: 2,
           md: 4,
-          lg: 15,
+          lg: 8,
         },
 
         py: 4,

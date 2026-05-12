@@ -9,15 +9,6 @@ type Props = {
 const PackageCard = ({ data }: Props) => {
   const navigate = useNavigate();
 
-  // const handleSelect = () => {
-  //   navigate("/booking", {
-  //     state: {
-  //       type: "package",
-  //       data,
-  //     },
-  //   });
-  // };
-
   const handleSelect = () => {
     navigate(`/packages/${data.slug}`);
   };
@@ -175,19 +166,20 @@ const PackageCard = ({ data }: Props) => {
           >
             Starting from
           </Typography>
-
-          <Typography
-            sx={{
-              fontSize: 30,
-              fontWeight: 800,
-              color: "#111",
-              lineHeight: 1,
-              display: "flex",
-              alignItems: "center",
-              gap: 1,
-            }}
-          >
-            SAR {data.startingPrice}
+          <Box sx={{display:"flex", alignItems:"center", gap:1}}>
+            <Typography
+              sx={{
+                fontSize: 30,
+                fontWeight: 800,
+                color: "#111",
+                lineHeight: 1,
+                display: "flex",
+                alignItems: "center",
+                gap: 1,
+              }}
+            >
+              SAR {data.startingPrice}
+            </Typography>
             <Typography
               sx={{
                 color: "text.secondary",
@@ -197,7 +189,7 @@ const PackageCard = ({ data }: Props) => {
             >
               / vehicle
             </Typography>
-          </Typography>
+          </Box>
         </Box>
 
         {/* Button */}

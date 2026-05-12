@@ -53,10 +53,12 @@ const StepTransferDetails = ({
 
   // ✅ VALIDATION
   const isValid =
-    bookingData.from &&
     bookingData.date &&
     bookingData.time &&
-    (bookingData.type === "hourly" ? bookingData.hours : bookingData.to) &&
+    (bookingData.type === "package"
+      ? bookingData.packageData
+      : bookingData.from &&
+        (bookingData.type === "hourly" ? bookingData.hours : bookingData.to)) &&
     (!bookingData.roundTrip ||
       (bookingData.returnDate && bookingData.returnTime));
 
@@ -140,7 +142,6 @@ const StepTransferDetails = ({
             />
           </Grid>
           <Grid size={{ xs: 12 }}>
-            
             <FormControlLabel
               control={
                 <Switch
@@ -300,6 +301,97 @@ const StepTransferDetails = ({
           )}
         </Grid>
       )}
+      {/* ////////////////////////////////////////////////////////////////// */}
+      {bookingData.type === "package" && (
+        <Grid container spacing={2}>
+          {/* PACKAGE NAME */}
+          <Grid size={{ xs: 12 }}>
+            <TextField
+              fullWidth
+              label="Selected Package"
+              value={bookingData.packageData?.title}
+              // disabled
+            />
+          </Grid>
+
+          {/* DATE */}
+          <Grid size={{ xs: 12, md: 6 }}>
+            <DatePicker
+              label="Travel Date"
+              value={bookingData.date ? dayjs(bookingData.date) : null}
+              onChange={(newValue) =>
+                handleChange("date", newValue?.toISOString())
+              }
+              minDate={dayjs()}
+              slotProps={{ textField: { fullWidth: true } }}
+            />
+          </Grid>
+
+          {/* TIME */}
+          <Grid size={{ xs: 12, md: 6 }}>
+            <TimePicker
+              label="Pickup Time"
+              value={bookingData.time ? dayjs(bookingData.time) : null}
+              onChange={(newValue) =>
+                handleChange("time", newValue?.toISOString())
+              }
+              slotProps={{ textField: { fullWidth: true } }}
+            />
+          </Grid>
+
+          {/* FLIGHT */}
+          <Grid size={{ xs: 12 }}>
+            <TextField
+              fullWidth
+              label="Flight Number (Optional)"
+              value={bookingData.flightNumber || ""}
+              onChange={(e) => handleChange("flightNumber", e.target.value)}
+            />
+          </Grid>
+
+          {/* STOPS */}
+          {stops.map((stop, index) => (
+            <Grid key={index} size={{ xs: 12 }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 2,
+                }}
+              >
+                <TextField
+                  fullWidth
+                  label={`Stop Point ${index + 1}`}
+                  value={stop}
+                  onChange={(e) => updateStop(index, e.target.value)}
+                />
+
+                <Button
+                  color="error"
+                  onClick={() => {
+                    const newStops = stops.filter((_, i) => i !== index);
+
+                    setStops(newStops);
+
+                    handleChange("stops", newStops);
+                  }}
+                >
+                  Remove
+                </Button>
+              </Box>
+            </Grid>
+          ))}
+
+          {stops.length < 3 && (
+            <Grid size={{ xs: 12 }}>
+              <Button onClick={addStop}>+ Add Stop Point (+5 SAR)</Button>
+            </Grid>
+          )}
+        </Grid>
+      )}
+
+      {/* ////////////////////////////////////////////////////////////////// */}
+
       {bookingData.type === "hourly" && (
         <Grid container spacing={2}>
           <Grid size={{ xs: 12 }}>

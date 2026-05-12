@@ -1,4 +1,4 @@
-import { Box, Typography, Chip, Stack, Button } from "@mui/material";
+import { Box, Typography, Chip, Stack } from "@mui/material";
 import packageHeroImg from "../../../assets/packages/PackageHero.png";
 
 import type { TravelPackage } from "../../../utils/types";
@@ -15,7 +15,7 @@ const PackageHero = ({ data }: Props) => {
         width: "100%",
         minHeight: {
           xs: 400,
-          md: 500,
+          md: 410,
         },
         borderRadius: "32px",
         overflow: "hidden",
@@ -144,7 +144,7 @@ const PackageHero = ({ data }: Props) => {
           </Typography>
 
           {/* BUTTONS */}
-          <Stack
+          {/* <Stack
             spacing={2}
             sx={{ flexWrap: "wrap" }}
             direction={{ xs: "column", sm: "row" }}
@@ -193,7 +193,7 @@ const PackageHero = ({ data }: Props) => {
             >
               WhatsApp Inquiry
             </Button>
-          </Stack>
+          </Stack> */}
         </Box>
       </Box>
     </Box>

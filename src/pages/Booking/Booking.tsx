@@ -22,6 +22,7 @@ const Booking = () => {
 
   // 🔥 Prefill logic (basic for now)
   const initialState = location.state;
+  console.log("Initial State:", initialState);
 
   // const totalPassengers =
   //   bookingData.adults + bookingData.children + bookingData.infants;
@@ -30,6 +31,12 @@ const Booking = () => {
     const base = {
       bookingId: "",
       type: "",
+
+      packageData: [],
+
+      flightNumber: "",
+
+      stops: [],
 
       from: "",
       fromCity: "",
@@ -63,12 +70,24 @@ const Booking = () => {
     if (initialState?.type === "package") {
       return {
         ...base,
-        type: "city",
-        from: initialState.data.from,
-        to: initialState.data.to,
-        price: initialState.data.price,
-        fromCity: initialState.data.fromCity,
-        toCity: initialState.data.toCity,
+
+        type: "package",
+
+        packageData: initialState.data.data,
+
+        from: initialState.data.cities?.[0] || "",
+
+        to:
+          initialState.data.cities?.[initialState.data.cities.length - 1] || "",
+
+        fromCity: initialState.data.cities?.[0]?.toLowerCase() || "",
+
+        toCity:
+          initialState.data.cities?.[
+            initialState.data.cities.length - 1
+          ]?.toLowerCase() || "",
+
+        price: initialState.data.startingPrice,
       };
     }
 

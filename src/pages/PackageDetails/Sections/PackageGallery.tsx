@@ -23,7 +23,7 @@ const PackageGallery = ({ data }: Props) => {
             onClick={() => setOpen(true)}
             sx={{
               height: {
-                xs: 300,
+                xs: 260,
                 md: 520,
               },
 
@@ -58,10 +58,11 @@ const PackageGallery = ({ data }: Props) => {
             spacing={2}
             sx={{
               height: "100%",
+              flexWrap: { xs: "nowrap", md: "wrap" }
             }}
           >
             {data.gallery.slice(1, 3).map((image, index) => (
-              <Grid key={index} size={12}>
+              <Grid key={index} size={{ xs: 6, md: 12 }}>
                 <Box
                   onClick={() => {
                     setSelectedImage(image);
@@ -130,7 +131,7 @@ const PackageGallery = ({ data }: Props) => {
       </Grid>
 
       {/* IMAGE PREVIEW */}
-      <Dialog open={open} onClose={() => setOpen(false)} maxWidth="lg">
+      <Dialog open={open} onClose={() => setOpen(false)} maxWidth="xl">
         <Box
           sx={{
             backgroundColor: "#000",

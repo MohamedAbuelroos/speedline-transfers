@@ -221,7 +221,9 @@ const StepVehicle = ({ bookingData, setBookingData, onNext, onBack }: any) => {
                 >
                   {bookingData.type === "hourly"
                     ? pricebyhour(car)
-                    : bookingData.type === "city" && bookingData.price
+                    : (bookingData.type === "city" ||
+                          bookingData.type === "package") &&
+                        bookingData.price
                       ? bookingData?.price?.[car.category]
                       : price}
                   SAR
