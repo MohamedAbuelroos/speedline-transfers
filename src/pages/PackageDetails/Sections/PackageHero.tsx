@@ -1,4 +1,4 @@
-import { Box, Typography, Chip, Stack, Button } from "@mui/material";
+import { Box, Typography, Chip, Stack } from "@mui/material";
 import packageHeroImg from "../../../assets/packages/PackageHero.png";
 
 import type { TravelPackage } from "../../../utils/types";
