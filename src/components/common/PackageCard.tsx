@@ -1,23 +1,25 @@
 import { Box, Typography, Button } from "@mui/material";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import RouteIcon from "@mui/icons-material/Route";
 import { useNavigate } from "react-router-dom";
-import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import NearMeOutlinedIcon from "@mui/icons-material/NearMeOutlined";
+import type { TravelPackage } from "../../utils/types";
 type Props = {
-  data: any;
+  data: TravelPackage;
 };
 
 const PackageCard = ({ data }: Props) => {
   const navigate = useNavigate();
 
+  // const handleSelect = () => {
+  //   navigate("/booking", {
+  //     state: {
+  //       type: "package",
+  //       data,
+  //     },
+  //   });
+  // };
+
   const handleSelect = () => {
-    navigate("/booking", {
-      state: {
-        type: "package",
-        data,
-      },
-    });
+    navigate(`/packages/${data.slug}`);
   };
 
   return (
@@ -30,19 +32,32 @@ const PackageCard = ({ data }: Props) => {
       }}
     >
       {/* IMAGE */}
-      <Box sx={{ position: "relative" }}>
+      <Box sx={{ position: "relative", overflow: "hidden", height: 200 }}>
         <Box
           component="img"
-          src={data.image}
-          alt={data.from}
+          onClick={handleSelect}
+          src={data.coverImage}
+          alt={data.title}
           sx={{
             width: "100%",
-            height: 180,
+            height: 200,
             objectFit: "cover",
-            transition: "0.4s",
+            cursor: "pointer",
+
+            transition: "transform 0.5s ease",
+
             "&:hover": {
-              transform: "scale(1.2)",
+              transform: "scale(1.08)",
             },
+          }}
+        />
+        <Box
+          sx={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "linear-gradient(to top, rgba(0,0,0,0.35), rgba(0,0,0,0.15), transparent)",
+            pointerEvents: "none",
           }}
         />
 
@@ -62,7 +77,8 @@ const PackageCard = ({ data }: Props) => {
               sx={{
                 backgroundColor: "#f59e0b",
                 color: "#fff",
-                px: 1,
+                px: 1.5,
+                py: 0.5,
                 borderRadius: "999px",
                 fontSize: "12px",
               }}
@@ -73,114 +89,116 @@ const PackageCard = ({ data }: Props) => {
 
           <Box
             sx={{
-              backgroundColor: "#fff",
-              px: 1,
+              backgroundColor: "rgba(255,255,255,0.95)",
+              color: "#111",
+              px: 1.5,
+              py: 0.5,
               borderRadius: "999px",
               fontSize: "12px",
+              fontWeight: 700,
+              backdropFilter: "blur(6px)",
             }}
           >
             {data.category}
           </Box>
         </Box>
-
-        {/* Route */}
-        <Box
-          sx={{
-            position: "absolute",
-            bottom: 10,
-            left: 10,
-            color: "#fff",
-          }}
-        >
-          <Typography
-            variant="body1"
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              fontWeight: 700,
-              fontSize: 18,
-              mb: 0.5,
-            }}
-          >
-            {data.from}
-            <SwapHorizIcon />
-            {data.to}
-          </Typography>
-        </Box>
       </Box>
 
       {/* CONTENT */}
       <Box sx={{ p: 2 }}>
-        {/* Info */}
+        {/* TITLE */}
+        <Typography
+          sx={{
+            fontSize: 24,
+            fontWeight: 800,
+            lineHeight: 1.2,
+            mb: 1,
+            color: "#111",
+          }}
+        >
+          {data.title}
+        </Typography>
+
+        {/* SUBTITLE */}
+        <Typography
+          sx={{
+            color: "text.secondary",
+            fontSize: 14,
+            lineHeight: 1.7,
+            mb: 1,
+            minHeight: 50,
+          }}
+        >
+          {data.subtitle}
+        </Typography>
+
+        {/* META */}
         <Box
           sx={{
             display: "flex",
-            justifyContent: "space-between",
-            pb: 3,
+            alignItems: "center",
+            gap: 1,
+            flexWrap: "wrap",
+            pb: 2,
             mb: 2,
-            borderBottom: "1px dashed black",
-            borderColor: "#DEE1E6FF",
+            borderBottom: "1px dashed #DEE1E6",
           }}
         >
-          {/* Duration */}
-          <Box
+          <Typography
             sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-              gap: 0.5,
+              fontSize: 13,
+              color: "primary.main",
+              fontWeight: 700,
             }}
           >
-            <Typography
-              variant="caption"
-              sx={{ color: "text.secondary", fontWeight: 600 }}
-            >
-              Duration
-            </Typography>
-            <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
-              <AccessTimeIcon sx={{ fontSize: 16, color: "primary.main" }} />
-              <Typography variant="body2">{data.duration}</Typography>
-            </Box>
-          </Box>
+            {data.cities.join(" • ")}
+          </Typography>
 
-          {/* Distance */}
-          <Box
+          <Typography
             sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: 0.5,
+              fontSize: 13,
+              color: "text.secondary",
             }}
           >
-            <Typography
-              variant="caption"
-              sx={{ color: "text.secondary", fontWeight: 600 }}
-            >
-              Distance
-            </Typography>
-            <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
-              <RouteIcon sx={{ fontSize: 16, color: "primary.main" }} />
-              <Typography variant="body2">{data.distance}</Typography>
-            </Box>
-          </Box>
+            • {data.duration}
+          </Typography>
         </Box>
 
         {/* Price */}
-        <Typography component="span" variant="body2" color="text.secondary">
-          Starting from
-        </Typography>
-        <Typography sx={{ fontWeight: 600, mb: 2, fontSize: 22 }}>
-          SAR {data.price.Sedan}{" "}
+        <Box sx={{ mb: 2 }}>
           <Typography
-            component="span"
-            variant="body2"
-            color="text.secondary"
-            sx={{ fontSize: 13 }}
+            sx={{
+              color: "text.secondary",
+              fontSize: 13,
+              mb: 0.5,
+            }}
           >
-            / vehicle
+            Starting from
           </Typography>
-        </Typography>
+
+          <Typography
+            sx={{
+              fontSize: 30,
+              fontWeight: 800,
+              color: "#111",
+              lineHeight: 1,
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+            }}
+          >
+            SAR {data.startingPrice}
+            <Typography
+              sx={{
+                color: "text.secondary",
+                fontSize: 13,
+                mt: 0.5,
+              }}
+            >
+              / vehicle
+            </Typography>
+          </Typography>
+        </Box>
 
         {/* Button */}
         <Button
@@ -188,19 +206,26 @@ const PackageCard = ({ data }: Props) => {
           variant="contained"
           onClick={handleSelect}
           sx={{
-            backgroundColor: "#1FB1F9",
-            borderRadius: "999px",
+            backgroundImage:
+              "linear-gradient(135deg, #1FB1F9 0%, #1697d2 100%)",
+            borderRadius: "14px",
             textTransform: "none",
+            fontWeight: 700,
+            py: 1.4,
+            fontSize: 15,
             display: "flex",
-            justifyContent: "center",
             alignItems: "center",
+            justifyContent: "center",
             gap: 1,
+            transition: "0.3s",
+
             "&:hover": {
-              backgroundColor: "#199ad8",
+              transform: "translateY(-2px)",
+              boxShadow: "0 10px 20px rgba(31,177,249,0.25)",
             },
           }}
         >
-          Book This Route
+          View Package
           <NearMeOutlinedIcon sx={{ fontSize: 20 }} />
         </Button>
       </Box>

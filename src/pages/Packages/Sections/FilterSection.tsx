@@ -14,7 +14,7 @@ const filters = [
     title: "Airport",
     icon: <FlightIcon fontSize="medium" sx={{ transform: "rotate(35deg)" }} />,
   },
-  { title: "City", icon: <LocationCityIcon fontSize="medium" /> },
+  { title: "Tour", icon: <LocationCityIcon fontSize="medium" /> },
   { title: "Religious", icon: <SwapHorizIcon fontSize="medium" /> },
 ];
 

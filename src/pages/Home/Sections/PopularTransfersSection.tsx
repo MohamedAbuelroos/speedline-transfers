@@ -1,6 +1,6 @@
 import { Box, Container, Typography, Grid, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import packages from "../../../data/packages";
+import { travelPackages } from "../../../data/travelPackages";
 import PackageCard from "../../../components/common/PackageCard";
 
 const PopularTransfersSection = () => {
@@ -50,16 +50,8 @@ const PopularTransfersSection = () => {
           </Button>
         </Box>
 
-        {/* Cards */}
-        {/* <Grid container spacing={3} sx={{ px: 5 }}>
-          {transfers.map((item) => (
-            <Grid size={{ xs: 12, md: 6 }} key={item.id}>
-              <TransferCard {...item} />
-            </Grid>
-          ))}
-        </Grid> */}
         <Grid container spacing={3} sx={{ px: 5 }}>
-          {packages.slice(0, 3).map((item) => (
+          {travelPackages.slice(0, 3).map((item) => (
             <Grid size={{ xs: 12, md: 4 }} key={item.id}>
               <PackageCard data={item} />
             </Grid>

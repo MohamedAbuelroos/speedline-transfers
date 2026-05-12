@@ -1,16 +1,18 @@
 import { Box, Container, Grid } from "@mui/material";
 import { useState } from "react";
-import packagesData from "../../data/packages";
+// import packagesData from "../../data/packages";
 import PackageCard from "../../components/common/PackageCard";
 import TopSection from "./Sections/TopSection";
 import FilterSection from "./Sections/FilterSection";
 import CustomCTASection from "./Sections/CustomCTASection";
 import FeaturesSection from "./Sections/FeaturesSection";
+import {travelPackages} from "../../data/travelPackages";
+
 
 const Packages = () => {
   const [active, setActive] = useState("All Packages");
 
-  const filtered = packagesData.filter((item) => {
+  const filtered = travelPackages.filter((item) => {
     if (active === "All Packages") return true;
     return item.category === active;
   });
