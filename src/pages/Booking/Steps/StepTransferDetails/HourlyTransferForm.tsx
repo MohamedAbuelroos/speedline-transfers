@@ -1,5 +1,4 @@
 import { Autocomplete, Grid, TextField } from "@mui/material";
-import React from "react";
 import { allLocations } from "../../../../data/locations";
 import { DatePicker, TimePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
