@@ -18,7 +18,7 @@ const PackageOverview = ({ data }: Props) => {
       value: "Families & VIPs",
       icon: <Groups2OutlinedIcon />,
       color: "rgba(31, 176, 249, 0.20)",
-      iconColor:"primary.main",
+      iconColor: "primary.main",
     },
 
     {
@@ -26,15 +26,15 @@ const PackageOverview = ({ data }: Props) => {
       value: data.cities.join(" / "),
       icon: <LocationCityOutlinedIcon />,
       color: "rgba(245, 153, 61, 0.20)",
-      iconColor:"secondary.main",
+      iconColor: "secondary.main",
     },
 
     {
       title: "Fleet",
-      value: data.vehicleTypes[0].name,
+      value: "Sedans, SUVs & Vans",
       icon: <DirectionsCarFilledOutlinedIcon />,
       color: "rgba(31, 176, 249, 0.20)",
-      iconColor:"primary.main",
+      iconColor: "primary.main",
     },
 
     {
@@ -42,7 +42,7 @@ const PackageOverview = ({ data }: Props) => {
       value: data.highlights[0],
       icon: <FlightTakeoffOutlinedIcon />,
       color: "rgba(245, 153, 61, 0.20)",
-      iconColor:"secondary.main",
+      iconColor: "secondary.main",
     },
   ];
 
@@ -200,7 +200,7 @@ const PackageOverview = ({ data }: Props) => {
                 sx={{
                   fontWeight: 800,
 
-                  fontSize: {xs: 14, md: 18},
+                  fontSize: { xs: 14, md: 18 },
 
                   color: "#111827",
 

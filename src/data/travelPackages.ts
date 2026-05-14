@@ -2,14 +2,8 @@ import type { TravelPackage } from "../utils/types";
 
 import reverseCircuit from "../assets/packages/reverse-circuit.png";
 import HajPackage from "../assets/packages/HajPackage.png";
-// import umrahExpress from "../assets/packages/umrah-express.png";
-// import vipUmrah from "../assets/packages/vip-umrah.png";
-// import riyadhTour from "../assets/packages/riyadh-tour.png";
-// import alulaTour from "../assets/packages/alula-tour.png";
-import elentra from "../assets/images/elentra.png";
-import suv from "../assets/images/XPANDER.webp";
-import van from "../assets/images/HiAce.png";
 import gmc from "../assets/packages/GMC.png";
+import Chev from "../assets/packages/Chev.jpg";
 
 export const travelPackages: TravelPackage[] = [
   {
@@ -28,30 +22,17 @@ export const travelPackages: TravelPackage[] = [
 
     coverImage: reverseCircuit,
 
-    gallery: [gmc, HajPackage, reverseCircuit, HajPackage],
+    gallery: [gmc, HajPackage, reverseCircuit, Chev],
 
     cities: ["Madinah", "Makkah", "Jeddah"],
 
-    vehicleTypes: [
-      {
-        name: "Standard Sedan",
-        capacity: "3 Pax / 3 Bags",
-        price: 385,
-        image: elentra,
-      },
-      {
-        name: "MPV / SUV",
-        capacity: "5 Pax / 5 Bags",
-        price: 495,
-        image: gmc,
-      },
-      {
-        name: "Luxury Van",
-        capacity: "10 Pax / 10 Bags",
-        price: 699,
-        image: van,
-      },
-    ],
+    vehiclePricing: {
+      Sedan: 385,
+      SUV: 495,
+      Van: 699,
+      Business: 950,
+      Luxury: 1350,
+    },
 
     overview:
       "Experience a premium spiritual transfer package across the holy cities of Saudi Arabia with professional chauffeurs and luxury vehicles.",
@@ -158,26 +139,13 @@ export const travelPackages: TravelPackage[] = [
 
     cities: ["Jeddah", "Makkah", "Madinah"],
 
-    vehicleTypes: [
-      {
-        name: "Standard Sedan",
-        capacity: "3 Pax / 3 Bags",
-        price: 520,
-        image: elentra,
-      },
-      {
-        name: "SUV",
-        capacity: "5 Pax / 5 Bags",
-        price: 650,
-        image: gmc,
-      },
-      {
-        name: "Luxury Van",
-        capacity: "10 Pax / 10 Bags",
-        price: 850,
-        image: van,
-      },
-    ],
+    vehiclePricing: {
+      Sedan: 520,
+      SUV: 650,
+      Van: 850,
+      Business: 1200,
+      Luxury: 1500,
+    },
 
     overview:
       "Enjoy a peaceful and comfortable spiritual package designed for families and pilgrims.",
@@ -278,20 +246,13 @@ export const travelPackages: TravelPackage[] = [
 
     cities: ["Jeddah", "Makkah"],
 
-    vehicleTypes: [
-      {
-        name: "Sedan",
-        capacity: "3 Pax / 3 Bags",
-        price: 290,
-        image: elentra,
-      },
-      {
-        name: "SUV",
-        capacity: "5 Pax / 5 Bags",
-        price: 360,
-        image: gmc,
-      },
-    ],
+    vehiclePricing: {
+      Sedan: 290,
+      SUV: 385,
+      Van: 520,
+      Business: 750,
+      Luxury: 1200,
+    },
 
     overview:
       "Designed for quick Umrah visits with smooth airport-to-hotel transportation.",
@@ -377,20 +338,13 @@ export const travelPackages: TravelPackage[] = [
 
     cities: ["Jeddah", "Makkah", "Madinah"],
 
-    vehicleTypes: [
-      {
-        name: "Business SUV",
-        capacity: "5 Pax / 5 Bags",
-        price: 990,
-        image: gmc,
-      },
-      {
-        name: "Luxury GMC",
-        capacity: "6 Pax / 6 Bags",
-        price: 1350,
-        image: van,
-      },
-    ],
+    vehiclePricing: {
+      Sedan: 990,
+      SUV: 1200,
+      Van: 1500,
+      Business: 2000,
+      Luxury: 3000,
+    },
 
     overview:
       "A premium luxury Umrah package tailored for VIP guests and families.",
@@ -479,20 +433,13 @@ export const travelPackages: TravelPackage[] = [
 
     cities: ["Riyadh"],
 
-    vehicleTypes: [
-      {
-        name: "SUV",
-        capacity: "5 Pax / 5 Bags",
-        price: 740,
-        image: suv,
-      },
-      {
-        name: "Luxury Van",
-        capacity: "10 Pax / 10 Bags",
-        price: 980,
-        image: van,
-      },
-    ],
+    vehiclePricing: {
+      Sedan: 740,
+      SUV: 900,
+      Van: 1200,
+      Business: 1500,
+      Luxury: 2200,
+    },
 
     overview:
       "Explore Riyadh landmarks, culture, and modern attractions with private transportation.",
@@ -579,20 +526,13 @@ export const travelPackages: TravelPackage[] = [
 
     cities: ["AlUla"],
 
-    vehicleTypes: [
-      {
-        name: "Luxury SUV",
-        capacity: "5 Pax / 5 Bags",
-        price: 1450,
-        image: suv,
-      },
-      {
-        name: "Premium Van",
-        capacity: "10 Pax / 10 Bags",
-        price: 1800,
-        image: van,
-      },
-    ],
+    vehiclePricing: {
+      Sedan: 1450,
+      SUV: 1800,
+      Van: 2200,
+      Business: 2800,
+      Luxury: 3500,
+    },
 
     overview:
       "Experience the beauty of AlUla with premium transportation and unforgettable scenery.",

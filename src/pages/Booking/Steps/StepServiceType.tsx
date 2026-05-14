@@ -23,7 +23,14 @@ const StepServiceType = ({ bookingData, setBookingData, onNext }: any) => {
         Select Service Type
       </Typography>
 
-      <Box sx={{ display: "flex", gap: 2, mb: 3 }}>
+      <Box
+        sx={{
+          display: "flex",
+          gap: 2,
+          mb: 3,
+          flexDirection: { xs: "column", sm: "row" },
+        }}
+      >
         {options.map((opt) => {
           const selected = bookingData.type === opt.value;
 

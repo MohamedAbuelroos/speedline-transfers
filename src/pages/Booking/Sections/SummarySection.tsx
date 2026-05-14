@@ -11,8 +11,9 @@ import AutorenewIcon from "@mui/icons-material/Autorenew";
 
 import { getPrice } from "../../../utils/pricing";
 import { useRef } from "react";
+import PriceLoader from "../../../components/common/PriceLoader";
 
-const SummarySection = ({ data, onConfirm }: any) => {
+const SummarySection = ({ data, onConfirm, steps }: any) => {
   const getValue = (val: any) => val || "Not set";
   const formatReturnTime = (dateStr: string) =>
     new Date(dateStr).toLocaleTimeString("en-US", {
@@ -28,9 +29,13 @@ const SummarySection = ({ data, onConfirm }: any) => {
         : "--";
     }
 
-    if ((data.type === "city" || data.type === "package") && data.price) {
+    if (data.type === "city" && data.price) {
       const categoryKey = data.car?.category;
       return data.price?.[categoryKey] ?? "--";
+    }
+
+    if (data.type === "package") {
+      return data.packageData?.vehiclePricing?.[data.car?.category] ?? "--";
     }
 
     // Default case: point-to-point
@@ -97,12 +102,13 @@ const SummarySection = ({ data, onConfirm }: any) => {
         {data.type === "package" && (
           <Typography
             sx={{
+              fontSize: 20,
               fontWeight: 700,
               color: "primary.main",
               mb: 2,
             }}
           >
-            {data.packageData?.title}
+            {data.packageData?.title} Package
           </Typography>
         )}
         {/* FROM & TO */}
@@ -128,7 +134,9 @@ const SummarySection = ({ data, onConfirm }: any) => {
               />
             </Box>
             <Box>
-              <Typography variant="caption">FROM</Typography>
+              <Typography variant="caption">
+                {data.type !== "package" ? "FROM" : "Starting From"}
+              </Typography>
               <Typography style={{ fontWeight: 500 }}>
                 {getValue(data.from)}
               </Typography>
@@ -158,7 +166,9 @@ const SummarySection = ({ data, onConfirm }: any) => {
                 />
               </Box>
               <Box>
-                <Typography variant="caption">TO</Typography>
+                <Typography variant="caption">
+                  {data.type !== "package" ? "TO" : "Ends At"}
+                </Typography>
                 <Typography sx={{ fontWeight: 500 }}>
                   {getValue(data.to)}
                 </Typography>
@@ -188,8 +198,8 @@ const SummarySection = ({ data, onConfirm }: any) => {
             {data.type === "hourly"
               ? "Hire By Hour"
               : data.type === "package"
-                ? "Package Booking"
-                : `${data.returnDate ? "Round Trip" : "One Way"}`}
+                ? "Package"
+                : `${data?.roundTrip ? "Round Trip" : "One Way"}`}
           </Typography>
           <Box sx={{ display: "flex", gap: 1 }}>
             <AccessTimeIcon fontSize="small" />
@@ -276,19 +286,29 @@ const SummarySection = ({ data, onConfirm }: any) => {
           }}
         >
           <Typography variant="caption">TOTAL ESTIMATED FARE</Typography>
-
-          <Typography
-            variant="h4"
-            sx={{ fontWeight: 700, display: "flex", justifyContent: "center" }}
-          >
-            {getBookingPrice(data)}
-            <Typography
-              variant="body1"
-              sx={{ alignSelf: "flex-end", color: "primary.main", ml: 0.5 }}
+          {steps < 3 ? (
+            <PriceLoader step={steps} totalSteps={3} />
+          ) : (
+            <Box
+              sx={{
+                fontWeight: 700,
+                display: "flex",
+                justifyContent: "center",
+              }}
             >
-              {getBookingPrice(data) !== "--" ? "SAR" : ""}
-            </Typography>
-          </Typography>
+              <Typography variant="h4" sx={{ fontWeight: 700 }}>
+                {data?.roundTrip
+                  ? getBookingPrice(data) * 2
+                  : getBookingPrice(data)}
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{ alignSelf: "flex-end", color: "primary.main", ml: 0.5 }}
+              >
+                {getBookingPrice(data) !== "--" ? "SAR" : ""}
+              </Typography>
+            </Box>
+          )}
 
           <Typography variant="caption" color="text.secondary">
             You will receive a confirmation with a payment link to confirm the

@@ -9,13 +9,6 @@ export type Car = {
   hourRate: number;
 };
 
-export interface PackageVehicle {
-  name: string;
-  capacity: string;
-  price: number;
-  image: string;
-}
-
 export interface PackageItinerary {
   day: string;
   title: string;
@@ -43,7 +36,7 @@ export interface TravelPackage {
 
   cities: string[];
 
-  vehicleTypes: PackageVehicle[];
+  vehiclePricing: Record<string, number>;
 
   overview: string;
 

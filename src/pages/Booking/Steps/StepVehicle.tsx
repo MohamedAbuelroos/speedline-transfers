@@ -4,6 +4,7 @@ import { getPrice } from "../../../utils/pricing";
 import useLanguage from "../../../hooks/useLanguage";
 
 const StepVehicle = ({ bookingData, setBookingData, onNext, onBack }: any) => {
+
   const isValid =
     bookingData.car &&
     (bookingData.type === "hourly" || bookingData.adults > 0);
@@ -224,7 +225,7 @@ const StepVehicle = ({ bookingData, setBookingData, onNext, onBack }: any) => {
                     : (bookingData.type === "city" ||
                           bookingData.type === "package") &&
                         bookingData.price
-                      ? bookingData?.price?.[car.category]
+                      ? bookingData.packageData?.vehiclePricing?.[car.category]
                       : price}
                   SAR
                 </Typography>

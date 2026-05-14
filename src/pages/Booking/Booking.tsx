@@ -22,11 +22,12 @@ const Booking = () => {
 
   // 🔥 Prefill logic (basic for now)
   const initialState = location.state;
-  console.log("Initial State:", initialState);
 
   // const totalPassengers =
   //   bookingData.adults + bookingData.children + bookingData.infants;
-  const [step, setStep] = useState(initialState?.type ? 1 : 0);
+  const [step, setStep] = useState(
+    initialState?.type && initialState?.type !== "car" ? 1 : 0,
+  );
   const [bookingData, setBookingData] = useState(() => {
     const base = {
       bookingId: "",
@@ -73,7 +74,7 @@ const Booking = () => {
 
         type: "package",
 
-        packageData: initialState.data.data,
+        packageData: initialState.data,
 
         from: initialState.data.cities?.[0] || "",
 
@@ -88,13 +89,13 @@ const Booking = () => {
           ]?.toLowerCase() || "",
 
         price: initialState.data.startingPrice,
+        car: initialState.selectedVehicle || null,
       };
     }
 
     if (initialState?.type === "car") {
       return {
         ...base,
-        type: "city",
         car: initialState.data,
       };
     }
@@ -213,6 +214,7 @@ const Booking = () => {
                   data={bookingData}
                   onConfirm={handleConfirm}
                   id={bookingId}
+                  steps={step}
                 />
               </Grid>
             </Grid>

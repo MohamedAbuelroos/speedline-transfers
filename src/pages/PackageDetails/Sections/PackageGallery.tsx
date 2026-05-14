@@ -1,193 +1,128 @@
-import { Box, Dialog, Grid } from "@mui/material";
-
+import { Box, Grid, Typography } from "@mui/material";
 import { useState } from "react";
-
 import type { TravelPackage } from "../../../utils/types";
+import FullscreenGallery from "./FullscreenGallery ";
 
 type Props = {
   data: TravelPackage;
 };
 
 const PackageGallery = ({ data }: Props) => {
-  const [selectedImage, setSelectedImage] = useState(data.gallery[0]);
-
   const [open, setOpen] = useState(false);
-
+  const [selectedIndex, setSelectedIndex] = useState(0);
   return (
     <>
       {/* GALLERY */}
-      <Grid container spacing={2}>
+      <Box>
         {/* BIG IMAGE */}
-        <Grid size={{ xs: 12, md: 8 }}>
-          <Box
-            onClick={() => setOpen(true)}
-            sx={{
-              height: {
-                xs: 260,
-                md: 520,
-              },
-
-              borderRadius: "28px",
-              overflow: "hidden",
-              cursor: "pointer",
-            }}
-          >
-            <Box
-              component="img"
-              src={selectedImage}
-              alt=""
-              sx={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-
-                transition: "0.5s",
-
-                "&:hover": {
-                  transform: "scale(1.05)",
-                },
-              }}
-            />
-          </Box>
-        </Grid>
-
-        {/* SIDE IMAGES */}
-        <Grid size={{ xs: 12, md: 4 }}>
-          <Grid
-            container
-            spacing={2}
-            sx={{
-              height: "100%",
-              flexWrap: { xs: "nowrap", md: "wrap" }
-            }}
-          >
-            {data.gallery.slice(1, 3).map((image, index) => (
-              <Grid key={index} size={{ xs: 6, md: 12 }}>
-                <Box
-                  onClick={() => {
-                    setSelectedImage(image);
-                    setOpen(true);
-                  }}
-                  sx={{
-                    position: "relative",
-
-                    height: {
-                      xs: 180,
-                      md: 250,
-                    },
-
-                    borderRadius: "24px",
-                    overflow: "hidden",
-                    cursor: "pointer",
-                  }}
-                >
-                  <Box
-                    component="img"
-                    src={image}
-                    alt=""
-                    sx={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-
-                      transition: "0.5s",
-
-                      "&:hover": {
-                        transform: "scale(1.05)",
-                      },
-                    }}
-                  />
-
-                  {/* LAST IMAGE OVERLAY */}
-                  {index === 1 && data.gallery.length > 3 && (
-                    <Box
-                      sx={{
-                        position: "absolute",
-                        inset: 0,
-
-                        background: "rgba(0,0,0,0.45)",
-
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <Box
-                        sx={{
-                          color: "#fff",
-                          fontWeight: 800,
-                          fontSize: 28,
-                        }}
-                      >
-                        +{data.gallery.length - 3}
-                      </Box>
-                    </Box>
-                  )}
-                </Box>
-              </Grid>
-            ))}
-          </Grid>
-        </Grid>
-      </Grid>
-
-      {/* IMAGE PREVIEW */}
-      <Dialog open={open} onClose={() => setOpen(false)} maxWidth="xl">
         <Box
+          onClick={() => {
+            setSelectedIndex(0);
+            setOpen(true);
+          }}
           sx={{
-            backgroundColor: "#000",
-            p: 2,
+            height: { xs: 260, md: 520 },
+            borderRadius: "28px",
+            overflow: "hidden",
+            cursor: "pointer",
+            mb: 2,
           }}
         >
-          {/* BIG PREVIEW */}
           <Box
             component="img"
-            src={selectedImage}
-            alt=""
+            src={data.gallery[0]}
+            alt="reverse-circuit-madinah-jeddah-gallery"
             sx={{
               width: "100%",
-              maxHeight: "75vh",
-              objectFit: "contain",
-              borderRadius: "12px",
+              height: "100%",
+              objectFit: "cover",
+              transition: "0.5s",
+              "&:hover": { transform: "scale(1.05)" },
             }}
           />
-
-          {/* THUMBNAILS */}
-          <Box
-            sx={{
-              display: "flex",
-              gap: 1,
-              mt: 2,
-              overflowX: "auto",
-            }}
-          >
-            {data.gallery.map((image) => (
-              <Box
-                key={image}
-                onClick={() => setSelectedImage(image)}
-                component="img"
-                src={image}
-                alt=""
-                sx={{
-                  width: 90,
-                  height: 70,
-                  objectFit: "cover",
-
-                  borderRadius: "12px",
-
-                  cursor: "pointer",
-
-                  border:
-                    selectedImage === image
-                      ? "3px solid #1FB1F9"
-                      : "2px solid transparent",
-
-                  opacity: selectedImage === image ? 1 : 0.7,
-                }}
-              />
-            ))}
-          </Box>
         </Box>
-      </Dialog>
+
+        {/* THUMBNAILS BELOW */}
+        <Grid
+          container
+          spacing={2}
+          sx={{
+            justifyContent: "center",
+          }}
+        >
+          {data.gallery.slice(1, 4).map((image, index) => (
+            <Grid key={index} size={{ xs: 4, md: 4 }}>
+              <Box
+                onClick={() => {
+                  setOpen(true);
+                  setSelectedIndex(index + 1);
+                }}
+                sx={{
+                  position: "relative",
+                  height: { xs: 100, md: 160 },
+                  borderRadius: "20px",
+                  overflow: "hidden",
+                  cursor: "pointer",
+                }}
+              >
+                <Box
+                  component="img"
+                  src={image}
+                  alt=""
+                  sx={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    transition: "0.5s",
+                    "&:hover": { transform: "scale(1.05)" },
+                  }}
+                />
+
+                {/* LAST IMAGE OVERLAY */}
+                {index === 2 && data.gallery.length > 3 && (
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      inset: 0,
+                      background: "rgba(0,0,0,0.45)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        color: "#fff",
+                        fontWeight: 800,
+                        fontSize: { xs: 20, md: 28 },
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                      }}
+                    >
+                      +{data.gallery.length - 3}
+                      <Typography
+                        variant="body1"
+                        sx={{ fontSize: { xs: 14, md: 18 } }}
+                      >
+                        Click to view all
+                      </Typography>
+                    </Box>
+                  </Box>
+                )}
+              </Box>
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
+      {/* IMAGE PREVIEW */}
+      <FullscreenGallery
+        data={data}
+        open={open}
+        setOpen={setOpen}
+        selectedIndex={selectedIndex}
+        setSelectedIndex={setSelectedIndex}
+      />
     </>
   );
 };

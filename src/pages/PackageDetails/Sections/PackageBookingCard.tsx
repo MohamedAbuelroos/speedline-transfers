@@ -1,20 +1,31 @@
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography, Button, TextField, MenuItem } from "@mui/material";
 
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
 import DirectionsCarOutlinedIcon from "@mui/icons-material/DirectionsCarOutlined";
 import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
-
+import { cars } from "../../../data/cars";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
 import type { TravelPackage } from "../../../utils/types";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 type Props = {
   data: TravelPackage;
 };
 
 const PackageBookingCard = ({ data }: Props) => {
-  const vehicle = data.vehicleTypes[0];
+  const availableVehicles = cars.filter(
+    (car) => data.vehiclePricing?.[car.category],
+  );
+
+  const [selectedVehicleId, setSelectedVehicleId] = useState(
+    availableVehicles[0]?.id,
+  );
+
+  const vehicle =
+    availableVehicles.find((car) => car.id === selectedVehicleId) ||
+    availableVehicles[0];
   const navigate = useNavigate();
 
   return (
@@ -44,8 +55,8 @@ const PackageBookingCard = ({ data }: Props) => {
       >
         <Box
           component="img"
-          src={vehicle.image}
-          alt={vehicle.name}
+          src={vehicle?.image}
+          alt={vehicle?.name}
           sx={{
             width: "100%",
             height: "100%",
@@ -78,7 +89,7 @@ const PackageBookingCard = ({ data }: Props) => {
             fontSize: 24,
           }}
         >
-          {vehicle.name}
+          {vehicle?.name}
         </Typography>
       </Box>
 
@@ -114,10 +125,33 @@ const PackageBookingCard = ({ data }: Props) => {
               color: "#111827",
             }}
           >
-            SAR {data.startingPrice}
+            SAR {vehicle ? data.vehiclePricing?.[vehicle.category] : "--"}
           </Typography>
         </Box>
 
+        <Box sx={{ mb: 4 }}>
+          <Typography
+            sx={{
+              mb: 1,
+              fontWeight: 600,
+            }}
+          >
+            Select Vehicle
+          </Typography>
+
+          <TextField
+            select
+            fullWidth
+            value={selectedVehicleId}
+            onChange={(e) => setSelectedVehicleId(e.target.value)}
+          >
+            {availableVehicles.map((car) => (
+              <MenuItem key={car.id} value={car.id}>
+                {car.name}
+              </MenuItem>
+            ))}
+          </TextField>
+        </Box>
         {/* DETAILS */}
         <Box
           sx={{
@@ -223,7 +257,7 @@ const PackageBookingCard = ({ data }: Props) => {
                 fontWeight: 700,
               }}
             >
-              {vehicle.capacity}
+              {vehicle.passengers} Pax • {vehicle.bags} Bags
             </Typography>
           </Box>
         </Box>
@@ -249,17 +283,6 @@ const PackageBookingCard = ({ data }: Props) => {
               fontSize: 14,
             }}
           >
-            - Vehicle selection can be updated during booking.
-          </Typography>
-          <Typography
-            sx={{
-              color: "#0369a1",
-
-              lineHeight: 1.8,
-
-              fontSize: 14,
-            }}
-          >
             - Price includes all tolls, fuel, airport greeting, and hotel
             parking fees.
           </Typography>
@@ -272,7 +295,8 @@ const PackageBookingCard = ({ data }: Props) => {
             navigate("/booking", {
               state: {
                 type: "package",
-                data: { data },
+                data: data,
+                selectedVehicle: vehicle,
               },
             });
           }}
