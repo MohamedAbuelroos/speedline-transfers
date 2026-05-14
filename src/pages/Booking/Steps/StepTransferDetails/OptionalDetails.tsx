@@ -27,7 +27,7 @@ const OptionalDetails = ({
           justifyContent: "center",
           alignItems: "center",
         }}
-        onClick={() => setOpenOptional((prev) => !prev)}
+        onClick={() => setOpenOptional((prev:any) => !prev)}
       >
         <Typography sx={{ fontWeight: 600 }}>Optional Details</Typography>
 

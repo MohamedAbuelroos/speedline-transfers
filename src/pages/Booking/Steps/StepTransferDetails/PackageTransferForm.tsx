@@ -11,8 +11,6 @@ const PackageTransferForm = ({
   updateStop,
   removeStop,
 }: any) => {
-  
-  
   return (
     <Grid container spacing={2}>
       {/* PACKAGE NAME */}
@@ -84,7 +82,7 @@ const PackageTransferForm = ({
       </Grid>
 
       {/* STOPS */}
-      {stops.map((stop, index) => (
+      {stops.map((stop: string, index: number) => (
         <Grid key={index} size={{ xs: 12 }}>
           <Box
             sx={{

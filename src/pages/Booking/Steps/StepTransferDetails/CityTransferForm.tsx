@@ -74,7 +74,7 @@ const CityTransferForm = ({
       </Grid>
 
       {/* STOP POINTS */}
-      {stops.map((stop, index) => (
+      {stops.map((stop: string, index: number) => (
         <Grid key={index} size={{ xs: 12 }}>
           <Box
             sx={{
