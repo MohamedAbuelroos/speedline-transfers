@@ -7,11 +7,7 @@ import CityTransferForm from "./CityTransferForm";
 import HourlyTransferForm from "./HourlyTransferForm";
 import PackageTransferForm from "./PackageTransferForm";
 import OptionalDetails from "./OptionalDetails";
-import type {
-  BookingData,
-  BookingStepProps,
-  HandleBookingChange,
-} from "../../../../utils/bookingTypes";
+import type { BookingStepProps } from "../../../../utils/bookingTypes";
 
 const StepTransferDetails = ({
   bookingData,
