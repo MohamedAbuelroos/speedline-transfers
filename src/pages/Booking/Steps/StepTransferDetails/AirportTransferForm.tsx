@@ -27,8 +27,8 @@ const AirportTransferForm = ({
               allLocations.find((loc) => loc.label === bookingData.from) || null
             }
             onChange={(_e, value) => {
-              handleChange("from", value?.label || "");
-              handleChange("fromCity", value?.cityId || "");
+              handleChange("from", value?.label);
+              handleChange("fromCity", value?.cityId);
             }}
             renderInput={(params) => (
               <TextField {...params} label="Pickup Location" fullWidth />
@@ -45,8 +45,8 @@ const AirportTransferForm = ({
               allLocations.find((loc) => loc.label === bookingData.to) || null
             }
             onChange={(_e, value) => {
-              handleChange("to", value?.label || "");
-              handleChange("toCity", value?.cityId || "");
+              handleChange("to", value?.label);
+              handleChange("toCity", value?.cityId);
             }}
             renderInput={(params) => (
               <TextField {...params} label="Dropoff Location" fullWidth />

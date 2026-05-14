@@ -23,16 +23,11 @@ const StepTransferDetails = ({
 
   const [stops, setStops] = useState<string[]>(bookingData.stops || []);
 
-  const handleChange = (
-    field: keyof BookingData,
-    value: BookingData[keyof BookingData],
-  ): HandleBookingChange => {
-    return () => {
-      setBookingData((prev) => ({
-        ...prev,
-        [field]: value,
-      }));
-    };
+  const handleChange = (field: string, value: any) => {
+    setBookingData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
   };
 
   const addStop = () => {

@@ -38,10 +38,7 @@ export type BookingData = {
 
   car: Car | null;
 
-  price:
-  | number
-  | Record<string, number>
-  | null;
+  price: number | Record<string, number> | null;
 
   name: string;
   phone: string;
@@ -61,7 +58,7 @@ export type BookingStepProps = {
 
 export type HandleBookingChange = (
   field: keyof BookingData,
-  value: BookingData[keyof BookingData],
+  value: any,
 ) => void;
 
 export type StopFunctions = {
