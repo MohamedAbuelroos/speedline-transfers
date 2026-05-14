@@ -1,10 +1,8 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/" }],
-  "redirects": [
+  "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "https://www.speedlinetransfers.com/$1",
-      "permanent": true
+      "destination": "/"
     }
   ]
 }

@@ -1,6 +1,12 @@
 import { Box, CircularProgress, Typography } from "@mui/material";
 
-const LoadingOverlay = ({ open, text = "Processing..." }: any) => {
+const LoadingOverlay = ({
+  open,
+  text = "Processing...",
+}: {
+  open: boolean;
+  text?: string;
+}) => {
   if (!open) return null;
 
   return (
