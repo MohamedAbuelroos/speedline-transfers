@@ -2,11 +2,12 @@ import { Box, Container, Typography, Grid, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import CarCard from "../../../components/common/CarCard";
 import { cars } from "../../../data/cars";
+import type { Car } from "../../../utils/types";
 
 const FleetPreviewSection = () => {
   const navigate = useNavigate();
 
-  const handleSelectCar = (car: object) => {
+  const handleSelectCar = (car: Car) => {
     navigate("/booking", {
       state: {
         type: "car",

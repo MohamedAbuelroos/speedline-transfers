@@ -3,6 +3,7 @@ import { allLocations } from "../../../../data/locations";
 import { DatePicker, TimePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
 import useLanguage from "../../../../hooks/useLanguage";
+import type { TransferFormWithStopsProps } from "../../../../utils/bookingTypes";
 
 const CityTransferForm = ({
   bookingData,
@@ -11,7 +12,7 @@ const CityTransferForm = ({
   addStop,
   updateStop,
   removeStop,
-}: any) => {
+}: TransferFormWithStopsProps) => {
   const lang = useLanguage();
   const isRTL = lang === "ar";
   return (

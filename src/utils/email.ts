@@ -1,6 +1,8 @@
 import emailjs from "@emailjs/browser";
+import type { BookingData } from "./bookingTypes";
 
-export const sendCustomerEmail = (data: any) => {
+export const sendCustomerEmail = (data: BookingData) => {
+  const finalPrice = typeof data.price === "number" ? data.price : 0;
   return emailjs.send(
     "service_8f6zrib",
     "template_t2kj2xw",
@@ -15,9 +17,9 @@ export const sendCustomerEmail = (data: any) => {
       carCategory: data?.car?.category,
       Luggages: data?.car?.bags,
       booking_id: data.bookingId,
-      Taxes: data.price * 0.03,
-      price: data.price,
-      totalprice: data.price * 0.03 + data.price,
+      Taxes: finalPrice * 0.03,
+      price: finalPrice,
+      totalprice: finalPrice * 0.03 + finalPrice,
       type:
         data.type === "airport"
           ? "Airport Transfer"
@@ -34,7 +36,7 @@ export const sendCustomerEmail = (data: any) => {
   );
 };
 
-export const sendCompanyEmail = (data: any) => {
+export const sendCompanyEmail = (data: BookingData) => {
   return emailjs.send(
     "service_8f6zrib",
     "template_vsoymlr",

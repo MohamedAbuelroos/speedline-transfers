@@ -6,8 +6,14 @@ import DownloadIcon from "@mui/icons-material/Download";
 import { useRef } from "react";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import ScrollToTop from "../../../utils/ScrollToTop";
+import type { BookingData } from "../../../utils/bookingTypes";
 
-const SuccessSection = ({ data, bookingId }: any) => {
+interface SuccessSectionProps {
+  data: BookingData;
+  bookingId: string;
+}
+
+const SuccessSection = ({ data, bookingId }: SuccessSectionProps) => {
   const voucherRef = useRef<HTMLDivElement>(null);
 
   const handleDownload = async () => {
@@ -79,10 +85,6 @@ const SuccessSection = ({ data, bookingId }: any) => {
         <Typography variant="h4" sx={{ fontWeight: 700 }}>
           Booking Confirmed
         </Typography>
-
-        {/* <Typography color="text.secondary">
-          Your transfer voucher is ready
-        </Typography> */}
       </Box>
       <Box
         sx={{
@@ -221,7 +223,7 @@ const SuccessSection = ({ data, bookingId }: any) => {
             <Typography sx={{ mt: 1 }}>Vehicle: {data.car?.name}</Typography>
 
             <Typography>Passengers: {totalPassengers}</Typography>
-            <Typography>Luggage: {data.car.bags} PCS</Typography>
+            <Typography>Luggage: {data?.car?.bags} PCS</Typography>
 
             <Typography sx={{ mt: 1 }}>Pickup: {data.from}</Typography>
 

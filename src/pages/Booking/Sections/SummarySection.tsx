@@ -12,9 +12,18 @@ import AutorenewIcon from "@mui/icons-material/Autorenew";
 import { getPrice } from "../../../utils/pricing";
 import { useRef } from "react";
 import PriceLoader from "../../../components/common/PriceLoader";
+import type { BookingData } from "../../../utils/bookingTypes";
 
-const SummarySection = ({ data, onConfirm, steps }: any) => {
-  const getValue = (val: any) => val || "Not set";
+type SummarySectionProps = {
+  data: BookingData;
+
+  onConfirm: (price: number | string) => void;
+
+  steps: number;
+};
+
+const SummarySection = ({ data, onConfirm, steps }: SummarySectionProps) => {
+  const getValue = (val: string) => val || "Not set";
   const formatReturnTime = (dateStr: string) =>
     new Date(dateStr).toLocaleTimeString("en-US", {
       hour: "numeric",
@@ -22,25 +31,29 @@ const SummarySection = ({ data, onConfirm, steps }: any) => {
       hour12: true,
     });
 
-  const getBookingPrice = (data: any) => {
+  const getBookingPrice = (data: BookingData) => {
+    const categoryKey = data.car?.category;
+
+    if (!categoryKey) return "--";
+
     if (data.type === "hourly") {
       return data.car?.hourRate && data.hours
         ? data.car.hourRate * data.hours
         : "--";
     }
 
-    if (data.type === "city" && data.price) {
-      const categoryKey = data.car?.category;
+    if (data.type === "city" && data.price && typeof data.price === "object") {
       return data.price?.[categoryKey] ?? "--";
     }
 
     if (data.type === "package") {
-      return data.packageData?.vehiclePricing?.[data.car?.category] ?? "--";
+      return data.packageData?.vehiclePricing?.[categoryKey] ?? "--";
     }
 
-    // Default case: point-to-point
-    return getPrice(data.fromCity, data.toCity, data.car?.category) ?? "--";
+    return getPrice(data.fromCity, data.toCity, categoryKey) ?? "--";
   };
+
+  const bookingPrice = getBookingPrice(data);
 
   const confirmRef = useRef<HTMLButtonElement | null>(null);
   const summaryRef = useRef<HTMLButtonElement | null>(null);
@@ -298,8 +311,10 @@ const SummarySection = ({ data, onConfirm, steps }: any) => {
             >
               <Typography variant="h4" sx={{ fontWeight: 700 }}>
                 {data?.roundTrip
-                  ? getBookingPrice(data) * 2
-                  : getBookingPrice(data)}
+                  ? typeof bookingPrice === "number"
+                    ? bookingPrice * 2
+                    : "--"
+                  : bookingPrice}
               </Typography>
               <Typography
                 variant="body1"

@@ -10,8 +10,8 @@ const TopSection = () => {
         mb: 2,
         py: 10,
         backgroundColor: "#f3f7fb",
-        borderRadius: 2, // optional rounded corners
-        boxShadow: "0px 1px 2px rgba(0,0,0,0.1)", // 👈
+        borderRadius: 2,
+        boxShadow: "0px 1px 2px rgba(0,0,0,0.1)",
       }}
     >
       <Container

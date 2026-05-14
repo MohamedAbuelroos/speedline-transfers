@@ -1,8 +1,13 @@
 import { Box, Typography, TextField, Button } from "@mui/material";
+import type { BookingStepProps } from "../../../utils/bookingTypes";
 
-const StepUserInfo = ({ bookingData, setBookingData, onBack }: any) => {
+const StepUserInfo = ({
+  bookingData,
+  setBookingData,
+  onBack,
+}: BookingStepProps) => {
   const handleChange = (field: string, value: string) => {
-    setBookingData((prev: any) => ({
+    setBookingData((prev) => ({
       ...prev,
       [field]: value,
     }));
@@ -37,7 +42,7 @@ const StepUserInfo = ({ bookingData, setBookingData, onBack }: any) => {
           type="email"
           value={bookingData.email}
           onChange={(e) =>
-            setBookingData((prev: any) => ({
+            setBookingData((prev) => ({
               ...prev,
               email: e.target.value,
             }))

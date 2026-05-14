@@ -1,17 +1,25 @@
 import { Box, Typography, Button } from "@mui/material";
 import useLanguage from "../../../hooks/useLanguage";
+import type {
+  BookingStepProps,
+  ServiceType,
+} from "../../../utils/bookingTypes";
 
-const StepServiceType = ({ bookingData, setBookingData, onNext }: any) => {
+const StepServiceType = ({
+  bookingData,
+  setBookingData,
+  onNext,
+}: BookingStepProps) => {
   const lang = useLanguage();
   const isRTL = lang === "ar";
-  const options = [
+  const options: { label: string; value: ServiceType }[] = [
     { label: "Airport Transfer", value: "airport" },
     { label: "City to City", value: "city" },
     { label: "Hire by Hour", value: "hourly" },
     { label: "Package", value: "package" },
   ];
-  const selectType = (type: string) => {
-    setBookingData((prev: any) => ({
+  const selectType = (type: ServiceType) => {
+    setBookingData((prev) => ({
       ...prev,
       type,
     }));

@@ -1,9 +1,20 @@
-import { Autocomplete, Collapse, FormControlLabel, Grid, Switch, TextField } from "@mui/material";
+import {
+  Autocomplete,
+  Collapse,
+  FormControlLabel,
+  Grid,
+  Switch,
+  TextField,
+} from "@mui/material";
 import { allLocations } from "../../../../data/locations";
 import { DatePicker, TimePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
+import type { TransferFormProps } from "../../../../utils/bookingTypes";
 
-const AirportTransferForm = ({bookingData, handleChange}:any) => {
+const AirportTransferForm = ({
+  bookingData,
+  handleChange,
+}: TransferFormProps) => {
   return (
     <Grid container spacing={2}>
       {/* FROM */}

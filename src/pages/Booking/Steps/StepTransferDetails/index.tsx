@@ -1,8 +1,4 @@
-import {
-  Box,
-  Typography,
-  Button,
-} from "@mui/material";
+import { Box, Typography, Button } from "@mui/material";
 
 import { useState } from "react";
 
@@ -11,28 +7,32 @@ import CityTransferForm from "./CityTransferForm";
 import HourlyTransferForm from "./HourlyTransferForm";
 import PackageTransferForm from "./PackageTransferForm";
 import OptionalDetails from "./OptionalDetails";
+import type {
+  BookingData,
+  BookingStepProps,
+  HandleBookingChange,
+} from "../../../../utils/bookingTypes";
 
 const StepTransferDetails = ({
   bookingData,
   setBookingData,
   onNext,
   onBack,
-}: any) => {
-  const [openOptional, setOpenOptional] =
-    useState(true);
+}: BookingStepProps) => {
+  const [openOptional, setOpenOptional] = useState(true);
 
-  const [stops, setStops] = useState<string[]>(
-    bookingData.stops || [],
-  );
+  const [stops, setStops] = useState<string[]>(bookingData.stops || []);
 
   const handleChange = (
-    field: string,
-    value: any,
-  ) => {
-    setBookingData((prev: any) => ({
-      ...prev,
-      [field]: value,
-    }));
+    field: keyof BookingData,
+    value: BookingData[keyof BookingData],
+  ): HandleBookingChange => {
+    return () => {
+      setBookingData((prev) => ({
+        ...prev,
+        [field]: value,
+      }));
+    };
   };
 
   const addStop = () => {
@@ -41,10 +41,7 @@ const StepTransferDetails = ({
     }
   };
 
-  const updateStop = (
-    index: number,
-    value: string,
-  ) => {
+  const updateStop = (index: number, value: string) => {
     const newStops = [...stops];
 
     newStops[index] = value;
@@ -55,9 +52,7 @@ const StepTransferDetails = ({
   };
 
   const removeStop = (index: number) => {
-    const newStops = stops.filter(
-      (_, i) => i !== index,
-    );
+    const newStops = stops.filter((_, i) => i !== index);
 
     setStops(newStops);
 
@@ -70,12 +65,9 @@ const StepTransferDetails = ({
     (bookingData.type === "package"
       ? bookingData.packageData
       : bookingData.from &&
-        (bookingData.type === "hourly"
-          ? bookingData.hours
-          : bookingData.to)) &&
+        (bookingData.type === "hourly" ? bookingData.hours : bookingData.to)) &&
     (!bookingData.roundTrip ||
-      (bookingData.returnDate &&
-        bookingData.returnTime));
+      (bookingData.returnDate && bookingData.returnTime));
 
   return (
     <Box>
@@ -141,9 +133,7 @@ const StepTransferDetails = ({
           mt: 4,
         }}
       >
-        <Button onClick={onBack}>
-          Back
-        </Button>
+        <Button onClick={onBack}>Back</Button>
 
         <Button
           variant="contained"

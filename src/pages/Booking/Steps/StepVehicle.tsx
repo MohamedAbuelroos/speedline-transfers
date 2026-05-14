@@ -2,8 +2,19 @@ import { Box, Typography, TextField, Button } from "@mui/material";
 import { cars } from "../../../data/cars";
 import { getPrice } from "../../../utils/pricing";
 import useLanguage from "../../../hooks/useLanguage";
+import type {
+  BookingData,
+  BookingStepProps,
+} from "../../../utils/bookingTypes";
+import type { Car } from "../../../utils/types";
 
-const StepVehicle = ({ bookingData, setBookingData, onNext, onBack }: any) => {
+const StepVehicle = ({
+  bookingData,
+  setBookingData,
+  onNext,
+  onBack,
+}: BookingStepProps) => {
+  console.log(bookingData);
 
   const isValid =
     bookingData.car &&
@@ -12,8 +23,8 @@ const StepVehicle = ({ bookingData, setBookingData, onNext, onBack }: any) => {
   const lang = useLanguage();
   const isRTL = lang === "ar";
 
-  const pricebyhour = (car: any) => {
-    return car.hourRate * bookingData.hours;
+  const pricebyhour = (car: Car) => {
+    return car.hourRate * (bookingData?.hours ?? 0);
   };
 
   const handlePassengersChange = (total: number) => {
@@ -27,14 +38,14 @@ const StepVehicle = ({ bookingData, setBookingData, onNext, onBack }: any) => {
 
     const suggestedCar = cars.find((car) => car.category === suggestedType);
 
-    setBookingData((prev: any) => ({
+    setBookingData((prev: BookingData) => ({
       ...prev,
-      car: suggestedCar,
+      car: suggestedCar || null,
     }));
   };
 
-  const selectCar = (car: any) => {
-    setBookingData((prev: any) => ({
+  const selectCar = (car: Car) => {
+    setBookingData((prev) => ({
       ...prev,
       car,
     }));
@@ -71,7 +82,7 @@ const StepVehicle = ({ bookingData, setBookingData, onNext, onBack }: any) => {
               }}
               onChange={(e) => {
                 const val = Number(e.target.value);
-                setBookingData((prev: any) => ({
+                setBookingData((prev) => ({
                   ...prev,
                   adults: val,
                 }));
@@ -100,7 +111,7 @@ const StepVehicle = ({ bookingData, setBookingData, onNext, onBack }: any) => {
               value={bookingData.children}
               onChange={(e) => {
                 const val = Number(e.target.value);
-                setBookingData((prev: any) => ({
+                setBookingData((prev) => ({
                   ...prev,
                   children: val,
                 }));
@@ -129,7 +140,7 @@ const StepVehicle = ({ bookingData, setBookingData, onNext, onBack }: any) => {
               value={bookingData.infants}
               onChange={(e) => {
                 const val = Number(e.target.value);
-                setBookingData((prev: any) => ({
+                setBookingData((prev) => ({
                   ...prev,
                   infants: val,
                 }));

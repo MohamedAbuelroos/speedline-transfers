@@ -13,6 +13,7 @@ import LoadingOverlay from "../../components/common/LoadingOverlay";
 import { generateBookingId } from "../../utils/generateId";
 import SuccessSection from "./Sections/SuccessSection";
 import ScrollToTop from "../../utils/ScrollToTop";
+import type { BookingData } from "../../utils/bookingTypes";
 
 const Booking = () => {
   const location = useLocation();
@@ -28,12 +29,12 @@ const Booking = () => {
   const [step, setStep] = useState(
     initialState?.type && initialState?.type !== "car" ? 1 : 0,
   );
-  const [bookingData, setBookingData] = useState(() => {
-    const base = {
+  const [bookingData, setBookingData] = useState<BookingData>(() => {
+    const base: BookingData = {
       bookingId: "",
       type: "",
 
-      packageData: [],
+      packageData: null,
 
       flightNumber: "",
 
@@ -72,7 +73,7 @@ const Booking = () => {
       return {
         ...base,
 
-        type: "package",
+        type: "package" as BookingData["type"],
 
         packageData: initialState.data,
 
@@ -103,7 +104,7 @@ const Booking = () => {
     if (initialState?.type === "service") {
       return {
         ...base,
-        type: initialState.data.serviceType, // "airport" | "city" | "hourly"
+        type: initialState.data.serviceType as BookingData["type"], // "airport" | "city" | "hourly"
       };
     }
 
@@ -123,15 +124,16 @@ const Booking = () => {
     return base;
   });
 
-  const handleConfirm = async (price: number | []) => {
+  const handleConfirm = async (price: string | number) => {
     setLoading(true);
 
     const id = generateBookingId();
+    const confirmedPrice = typeof price === "string" ? Number(price) : price;
 
-    const fullData = {
+    const fullData: BookingData = {
       ...bookingData,
       bookingId: id,
-      price,
+      price: confirmedPrice as BookingData["price"],
     };
 
     try {
@@ -213,7 +215,6 @@ const Booking = () => {
                 <SummarySection
                   data={bookingData}
                   onConfirm={handleConfirm}
-                  id={bookingId}
                   steps={step}
                 />
               </Grid>

@@ -2,8 +2,12 @@ import { Autocomplete, Grid, TextField } from "@mui/material";
 import { allLocations } from "../../../../data/locations";
 import { DatePicker, TimePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
+import type { TransferFormProps } from "../../../../utils/bookingTypes";
 
-const HourlyTransferForm = ({ bookingData, handleChange }: any) => {
+const HourlyTransferForm = ({
+  bookingData,
+  handleChange,
+}: TransferFormProps) => {
   return (
     <Grid container spacing={2}>
       <Grid size={{ xs: 12 }}>

@@ -2,6 +2,7 @@ import { Box, Button, Grid, TextField, Autocomplete } from "@mui/material";
 import { DatePicker, TimePicker } from "@mui/x-date-pickers";
 import { travelPackages } from "../../../../data/travelPackages";
 import dayjs from "dayjs";
+import type { TransferFormWithStopsProps } from "../../../../utils/bookingTypes";
 
 const PackageTransferForm = ({
   bookingData,
@@ -10,7 +11,7 @@ const PackageTransferForm = ({
   addStop,
   updateStop,
   removeStop,
-}: any) => {
+}: TransferFormWithStopsProps) => {
   return (
     <Grid container spacing={2}>
       {/* PACKAGE NAME */}

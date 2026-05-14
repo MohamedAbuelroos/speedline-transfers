@@ -8,13 +8,14 @@ import {
 } from "@mui/material";
 import useLanguage from "../../../../hooks/useLanguage";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import type { OptionalDetailsProps } from "../../../../utils/bookingTypes";
 
 const OptionalDetails = ({
   bookingData,
   openOptional,
   setOpenOptional,
   handleChange,
-}: any) => {
+}: OptionalDetailsProps) => {
   const lang = useLanguage();
   const isRTL = lang === "ar";
   return (
@@ -27,7 +28,7 @@ const OptionalDetails = ({
           justifyContent: "center",
           alignItems: "center",
         }}
-        onClick={() => setOpenOptional((prev:any) => !prev)}
+        onClick={() => setOpenOptional((prev) => !prev)}
       >
         <Typography sx={{ fontWeight: 600 }}>Optional Details</Typography>
 
