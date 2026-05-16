@@ -57,6 +57,7 @@ const PackageBookingCard = ({ data }: Props) => {
           component="img"
           src={vehicle?.image}
           alt={vehicle?.name}
+          loading="lazy"
           sx={{
             width: "100%",
             height: "100%",

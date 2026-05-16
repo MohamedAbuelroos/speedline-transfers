@@ -191,6 +191,7 @@ const StepVehicle = ({
                 component="img"
                 src={car.image}
                 alt={car.name}
+                loading="lazy"
                 sx={{
                   width: 100,
                   height: 70,

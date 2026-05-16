@@ -52,6 +52,7 @@ const HeroSection = () => {
         component="img"
         src={heroImage}
         alt="SpeedLine Transfers"
+        loading="lazy"
         sx={{
           position: "absolute",
           top: 0,

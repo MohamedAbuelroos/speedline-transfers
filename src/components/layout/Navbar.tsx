@@ -65,13 +65,31 @@ const Navbar = () => {
       <AppBar
         position="sticky"
         elevation={0}
-        sx={{ background: "#fff", color: "#000" }}
+        sx={{
+          background: "rgba(255,255,255,0.78)",
+          backdropFilter: "blur(18px)",
+          borderBottom: "1px solid rgba(226,232,240,0.7)",
+          color: "#111827",
+          boxShadow: "0 8px 30px rgba(15,23,42,0.04)",
+        }}
       >
         <Toolbar
           sx={{
             display: "flex",
+
             justifyContent: "space-between",
+
             flexDirection: isRTL ? "row-reverse" : "row",
+
+            minHeight: {
+              xs: 72,
+              md: 84,
+            },
+
+            px: {
+              xs: 1,
+              md: 2,
+            },
           }}
         >
           {/* Logo */}
@@ -83,11 +101,25 @@ const Navbar = () => {
             alt={logo}
             loading="lazy"
             sx={{
-              width: "150px",
+              width: {
+                xs: 130,
+                md: 155,
+              },
+
               height: "auto",
-              objectFit: "cover",
+
+              objectFit: "contain",
+
               cursor: "pointer",
+
+              transition: "0.3s ease",
+
+              "&:hover": {
+                transform: "scale(1.03)",
+              },
+
               marginInlineEnd: isRTL ? 0 : 2,
+
               marginInlineStart: isRTL ? 2 : 0,
             }}
           />
@@ -97,7 +129,7 @@ const Navbar = () => {
             <Box
               sx={{
                 display: "flex",
-                gap: 3,
+                gap: 1.2,
               }}
             >
               {navLinks.map((link) => {
@@ -109,25 +141,30 @@ const Navbar = () => {
                     onClick={() => navigate(link.path)}
                     sx={{
                       cursor: "pointer",
+
                       position: "relative",
-                      color: isActive ? "primary.main" : "#000",
 
-                      "&:hover": { color: "primary.main" },
+                      px: 2.2,
+                      py: 1.1,
 
-                      "&::after": {
-                        content: '""',
-                        position: "absolute",
-                        width: isActive ? "100%" : "0%",
-                        height: "2px",
-                        backgroundColor: "primary.main",
-                        left: isRTL ? "auto" : 0,
-                        right: isRTL ? 0 : "auto",
-                        bottom: -4,
-                        transition: "0.3s",
-                      },
+                      borderRadius: "999px",
 
-                      "&:hover::after": {
-                        width: "100%",
+                      fontWeight: 600,
+
+                      fontSize: 15,
+
+                      transition: "0.3s ease",
+
+                      color: isActive ? "#1FB1F9" : "#374151",
+
+                      backgroundColor: isActive
+                        ? "rgba(31,177,249,0.10)"
+                        : "transparent",
+
+                      "&:hover": {
+                        color: "#1FB1F9",
+
+                        backgroundColor: "rgba(31,177,249,0.06)",
                       },
                     }}
                   >
@@ -143,7 +180,7 @@ const Navbar = () => {
             sx={{
               display: "flex",
               alignItems: "center",
-              gap: 1,
+              gap: 1.5,
               flexDirection: isRTL ? "row-reverse" : "row",
             }}
           >
@@ -164,14 +201,27 @@ const Navbar = () => {
               variant="contained"
               onClick={() => navigate("/booking")}
               sx={{
-                borderRadius: "5px",
+                borderRadius: "999px",
+
                 textTransform: "none",
-                background: "primary.main",
-                boxShadow: "none",
-                backgroundColor: "primary.main",
+
+                px: 3,
+                py: 1.1,
+
+                fontWeight: 700,
+
+                fontSize: 14,
+
+                background: "linear-gradient(135deg, #1FB1F9 0%, #1697d2 100%)",
+
+                boxShadow: "0 10px 25px rgba(31,177,249,0.22)",
+
+                transition: "0.3s ease",
+
                 "&:hover": {
-                  // background: "#0ea5e9",
-                  boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
+                  transform: "translateY(-2px)",
+
+                  boxShadow: "0 16px 35px rgba(31,177,249,0.30)",
                 },
               }}
             >
@@ -179,7 +229,20 @@ const Navbar = () => {
             </Button>
             {/* Mobile Menu Icon */}
             {isMobile && (
-              <IconButton onClick={() => setDrawerOpen(true)}>
+              <IconButton
+                onClick={() => setDrawerOpen(true)}
+                sx={{
+                  borderRadius: "14px",
+
+                  backgroundColor: "rgba(31,177,249,0.08)",
+
+                  color: "#1FB1F9",
+
+                  "&:hover": {
+                    backgroundColor: "rgba(31,177,249,0.14)",
+                  },
+                }}
+              >
                 <MenuIcon />
               </IconButton>
             )}
@@ -193,8 +256,27 @@ const Navbar = () => {
         open={drawerOpen}
         onClose={() => setDrawerOpen(false)}
       >
-        <Box sx={{ width: 250, p: 2 }}>
-          <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+        <Box
+          sx={{
+            width: 280,
+
+            p: 3,
+
+            background: "linear-gradient(180deg, #ffffff 0%, #f8fbff 100%)",
+
+            height: "100%",
+          }}
+        >
+          <Typography
+            variant="h6"
+            sx={{
+              fontWeight: 800,
+
+              fontSize: 24,
+
+              color: "#111827",
+            }}
+          >
             Menu
           </Typography>
 
@@ -260,6 +342,14 @@ const Navbar = () => {
                       }}
                       sx={{
                         pl: 2,
+                        color:
+                          localStorage.getItem("lang") === lang.code
+                            ? "primary.main"
+                            : "#000",
+                        fontWeight:
+                          localStorage.getItem("lang") === lang.code
+                            ? "bold"
+                            : "normal",
                       }}
                     >
                       <ListItemText primary={lang.label} />
@@ -270,7 +360,7 @@ const Navbar = () => {
             </Accordion>
 
             {/* Currency Accordion */}
-            <Accordion elevation={0} disableGutters>
+            <Accordion elevation={0} disableGutters disabled>
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography
                   sx={{

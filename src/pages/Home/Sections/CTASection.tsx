@@ -1,147 +1,269 @@
-import { Box, Container, Typography, Button, Divider } from "@mui/material";
-import PhoneIcon from "@mui/icons-material/Phone";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
+
+import { Box, Button, Container, Typography } from "@mui/material";
+
+import CheckCircleOutlineRoundedIcon from "@mui/icons-material/CheckCircleOutlineRounded";
 import { useNavigate } from "react-router-dom";
-import useLanguage from "../../../hooks/useLanguage";
 
 const CTASection = () => {
   const navigate = useNavigate();
-  const lang = useLanguage();
-  const isRTL = lang === "ar";
-
   return (
-    <Box sx={{ py: 8, backgroundColor: "#e6f6fd" }}>
-      <Container>
+    <Box
+      sx={{
+        py: {
+          xs: 10,
+          md: 14,
+        },
+
+        background: "linear-gradient(to bottom, #ffffff 0%, #f8fbff 100%)",
+      }}
+    >
+      <Container maxWidth="lg">
         <Box
           sx={{
-            backgroundImage:
-              "linear-gradient(135deg, #1FB1F9 0%, #F5993DFF 100%)",
-            borderRadius: "20px",
-            p: { xs: 3, md: 5 },
-            display: "flex",
-            flexDirection: { xs: "column", md: "row" },
-            justifyContent: "space-between",
-            alignItems: "center",
-            gap: 4,
-            boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
-            color: "#fff",
+            position: "relative",
+
+            overflow: "hidden",
+
+            borderRadius: "40px",
+
+            px: {
+              xs: 3,
+              md: 8,
+            },
+
+            py: {
+              xs: 7,
+              md: 9,
+            },
+
+            textAlign: "center",
+
+            background:
+              "linear-gradient(135deg, rgba(3,27,45,0.97) 0%, rgba(11,52,80,0.96) 100%)",
+
+            boxShadow: "0 30px 80px rgba(3,27,45,0.12)",
           }}
         >
-          {/* LEFT */}
-          <Box sx={{ textAlign: { xs: "center", md: "left", maxWidth: 500 } }}>
-            <Typography variant="h3" sx={{ fontWeight: 700, mb: 1 }}>
-              Ready to Book Your Ride?
-            </Typography>
+          {/* BACKGROUND GLOW */}
+          <Box
+            sx={{
+              position: "absolute",
 
-            <Typography sx={{ color: "text.secondary", mb: 3 }}>
-              Book your transfer in seconds. Professional drivers, fixed
-              pricing, and premium comfort — all in one place.
-            </Typography>
+              top: -120,
+              right: -120,
 
-            <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-              <Button
-                onClick={() => navigate("/booking")}
-                variant="contained"
+              width: 350,
+              height: 350,
+
+              borderRadius: "50%",
+
+              background:
+                "radial-gradient(circle, rgba(31,177,249,0.14) 0%, transparent 70%)",
+            }}
+          />
+
+          <Box
+            sx={{
+              position: "absolute",
+
+              bottom: -140,
+              left: -120,
+
+              width: 350,
+              height: 350,
+
+              borderRadius: "50%",
+
+              background:
+                "radial-gradient(circle, rgba(245,153,61,0.10) 0%, transparent 70%)",
+            }}
+          />
+
+          {/* CONTENT */}
+          <Box
+            sx={{
+              position: "relative",
+              zIndex: 2,
+            }}
+          >
+            {/* TITLE */}
+            <Typography
+              sx={{
+                color: "#fff",
+
+                fontWeight: 900,
+
+                lineHeight: 1.15,
+
+                mb: 3,
+
+                fontSize: {
+                  xs: 36,
+                  md: 56,
+                },
+              }}
+            >
+              Travel Saudi Arabia
+              <br />
+              <Box
+                component="span"
                 sx={{
-                  backgroundColor: "primary.main",
-                  borderRadius: "999px",
-                  textTransform: "none",
+                  color: "#1FB1F9",
+                }}
+              >
+                With Comfort & Confidence
+              </Box>
+            </Typography>
+
+            {/* DESCRIPTION */}
+            <Typography
+              sx={{
+                color: "rgba(255,255,255,0.72)",
+
+                maxWidth: 700,
+
+                mx: "auto",
+
+                lineHeight: 1.9,
+
+                fontSize: {
+                  xs: 15,
+                  md: 17,
+                },
+
+                mb: 5,
+              }}
+            >
+              Join thousands of travelers who trust SpeedLine Transfers for
+              transportation across Saudi Arabia.
+            </Typography>
+
+            {/* BUTTONS */}
+            <Box
+              sx={{
+                display: "flex",
+
+                justifyContent: "center",
+
+                alignItems: "center",
+
+                flexWrap: "wrap",
+
+                gap: 2,
+
+                mb: 5,
+              }}
+            >
+              {/* PRIMARY */}
+              <Button
+                variant="contained"
+                onClick={() => navigate("/booking")}
+                sx={{
+                  background:
+                    "linear-gradient(135deg, #1FB1F9 0%, #1697d2 100%)",
+
+                  color: "#fff",
+
                   px: 4,
-                  py: 1.2,
-                  fontWeight: 600,
+                  py: 1.5,
+
+                  borderRadius: "999px",
+
+                  textTransform: "none",
+
+                  fontWeight: 800,
+
+                  fontSize: 15,
+
+                  boxShadow: "0 15px 40px rgba(31,177,249,0.25)",
+
                   "&:hover": {
-                    backgroundColor: "#199ad8",
+                    background:
+                      "linear-gradient(135deg, #1aa3e8 0%, #1488c0 100%)",
                   },
                 }}
               >
-                Book Now
+                Book Your Transfer
               </Button>
 
+              {/* SECONDARY */}
               <Button
-                variant="contained"
-                target="_blank"
-                href="https://wa.me/966500000000"
+                variant="outlined"
+                onClick={() => navigate("/contact")}
                 sx={{
-                  borderRadius: "999px",
-                  textTransform: "none",
+                  borderColor: "rgba(255,255,255,0.2)",
+
+                  color: "#fff",
+
                   px: 4,
-                  py: 1.2,
-                  fontWeight: 600,
-                  backgroundColor: "secondary.light",
+                  py: 1.5,
+
+                  borderRadius: "999px",
+
+                  textTransform: "none",
+
+                  fontWeight: 700,
+
+                  fontSize: 15,
+
+                  "&:hover": {
+                    borderColor: "#fff",
+
+                    backgroundColor: "rgba(255,255,255,0.05)",
+                  },
                 }}
               >
-                Chat on WhatsApp
+                Contact Us
               </Button>
             </Box>
-          </Box>
 
-          {/* RIGHT BOX */}
-          <Box
-            sx={{
-              borderRadius: "16px",
-              backdropFilter: "blur(10px)",
-              backgroundColor: "rgba(255, 255, 255, 0.15)",
-              boxShadow: "2px 2px 2px rgba(201, 201, 201, 0.05)",
-              p: 3,
-              minWidth: 350,
-            }}
-          >
-            {/* Phone */}
-            <Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 2 }}>
-              <PhoneIcon
-                sx={{
-                  color: "white",
-                  width: "50px",
-                  height: "50px",
-                  background: "#1FB1F9",
-                  borderRadius: "50%",
-                  p: 1,
-                }}
-              />
-              <Box>
-                <Typography
-                  sx={{
-                    fontWeight: 600,
-                    color: "text.primary",
-                  }}
-                >
-                  Call Us 24/7
-                </Typography>
-                <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  sx={{
-                    direction: isRTL ? "rtl" : "ltr",
-                    unicodeBidi: "embed",
-                  }}
-                >
-                  +966 50 000 0000
-                </Typography>
-              </Box>
-            </Box>
+            {/* FEATURES */}
+            <Box
+              sx={{
+                display: "flex",
 
-            <Divider sx={{ my: 2 }} />
+                justifyContent: "center",
 
-            {/* Response Time */}
-            <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-              <AccessTimeIcon
-                sx={{
-                  color: "white",
-                  width: "50px",
-                  height: "50px",
-                  background: "#1fb0f9e1",
-                  borderRadius: "50%",
-                  p: 1,
-                }}
-              />
-              <Box>
-                <Typography sx={{ fontWeight: 600, color: "text.primary" }}>
-                  Avg Response Time
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  2 Minutes
-                </Typography>
-              </Box>
+                flexWrap: "wrap",
+
+                gap: {
+                  xs: 2,
+                  md: 4,
+                },
+              }}
+            >
+              {["Instant Confirmation", "Secure Booking", "24/7 Support"].map(
+                (item, index) => (
+                  <Box
+                    key={index}
+                    sx={{
+                      display: "flex",
+
+                      alignItems: "center",
+
+                      gap: 1,
+                    }}
+                  >
+                    <CheckCircleOutlineRoundedIcon
+                      sx={{
+                        color: "#1FB1F9",
+
+                        fontSize: 18,
+                      }}
+                    />
+
+                    <Typography
+                      sx={{
+                        color: "rgba(255,255,255,0.72)",
+
+                        fontSize: 14,
+                      }}
+                    >
+                      {item}
+                    </Typography>
+                  </Box>
+                ),
+              )}
             </Box>
           </Box>
         </Box>

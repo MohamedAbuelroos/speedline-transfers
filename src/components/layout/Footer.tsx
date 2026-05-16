@@ -6,6 +6,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import logo from "/logo.png";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import useLanguage from "../../hooks/useLanguage";
+import { useNavigate } from "react-router-dom";
 
 const socialIcons = [
   {
@@ -40,8 +41,45 @@ const socialIcons = [
 const Footer = () => {
   const lang = useLanguage();
   const isRTL = lang === "ar";
+  const navigate = useNavigate();
+
   return (
-    <Box sx={{ backgroundColor: "#0f172a", color: "#fff", pt: 6, pb: 3 }}>
+    <Box
+      sx={{
+        position: "relative",
+
+        overflow: "hidden",
+
+        background: "linear-gradient(135deg, #0B1220 0%, #111827 100%)",
+
+        color: "#fff",
+
+        pt: {
+          xs: 7,
+          md: 9,
+        },
+
+        pb: 3,
+      }}
+    >
+      {/* BACKGROUND GLOW */}
+      <Box
+        sx={{
+          position: "absolute",
+
+          top: -120,
+          right: -120,
+
+          width: 320,
+          height: 320,
+
+          borderRadius: "50%",
+
+          background: "rgba(31,177,249,0.12)",
+
+          filter: "blur(90px)",
+        }}
+      />
       <Container>
         <Grid container spacing={6} sx={{ justifyContent: "space-between" }}>
           {/* Brand */}
@@ -60,10 +98,21 @@ const Footer = () => {
               src={logo}
               loading="lazy"
               alt="SpeedLine Logo"
-              sx={{ width: 300 }}
+              sx={{
+                width: 240,
+                filter: "brightness(1.1)",
+              }}
             />
 
-            <Typography variant="body2" sx={{ opacity: 0.7, maxWidth: 400 }}>
+            <Typography
+              variant="body2"
+              sx={{
+                color: "rgba(255,255,255,0.68)",
+                lineHeight: 1.9,
+                maxWidth: 380,
+                fontSize: 15,
+              }}
+            >
               transfer services from Egypt to Saudi Arabia. We provide safe,
               reliable, and comfortable rides for all your journeys.
             </Typography>
@@ -71,52 +120,251 @@ const Footer = () => {
 
           {/* Links */}
           <Grid sx={{ xs: 6, md: 2 }}>
-            <Typography sx={{ fontWeight: 600, mb: 2 }}>Company</Typography>
+            <Typography
+              sx={{
+                fontWeight: 700,
+                fontSize: 18,
+                mb: 2.5,
+                color: "#fff",
+              }}
+            >
+              Company
+            </Typography>
 
-            <Typography variant="body2" sx={{ opacity: 0.7, mb: 1 }}>
+            <Typography
+              variant="body2"
+              onClick={() => navigate("/about")}
+              sx={{
+                color: "rgba(255,255,255,0.68)",
+                textDecoration: "none",
+                mb: 1.5,
+
+                cursor: "pointer",
+
+                transition: "0.3s ease",
+
+                width: "fit-content",
+
+                "&:hover": {
+                  color: "#1FB1F9",
+
+                  transform: "translateX(4px)",
+                },
+              }}
+            >
               About
             </Typography>
-            <Typography variant="body2" sx={{ opacity: 0.7, mb: 1 }}>
+            <Typography
+              variant="body2"
+              onClick={() => navigate("/fleet")}
+              sx={{
+                color: "rgba(255,255,255,0.68)",
+                textDecoration: "none",
+                mb: 1.5,
+
+                cursor: "pointer",
+
+                transition: "0.3s ease",
+
+                width: "fit-content",
+
+                "&:hover": {
+                  color: "#1FB1F9",
+
+                  transform: "translateX(4px)",
+                },
+              }}
+            >
               Fleet
             </Typography>
-            <Typography variant="body2" sx={{ opacity: 0.7, mb: 1 }}>
+            <Typography
+              variant="body2"
+              onClick={() => navigate("/services")}
+              sx={{
+                color: "rgba(255,255,255,0.68)",
+                textDecoration: "none",
+                mb: 1.5,
+
+                cursor: "pointer",
+
+                transition: "0.3s ease",
+
+                width: "fit-content",
+
+                "&:hover": {
+                  color: "#1FB1F9",
+
+                  transform: "translateX(4px)",
+                },
+              }}
+            >
               Services
             </Typography>
-            <Typography variant="body2" sx={{ opacity: 0.7 }}>
+            <Typography
+              variant="body2"
+              onClick={() => navigate("/packages")}
+              sx={{
+                color: "rgba(255,255,255,0.68)",
+                textDecoration: "none",
+                mb: 1.5,
+
+                cursor: "pointer",
+
+                transition: "0.3s ease",
+
+                width: "fit-content",
+
+                "&:hover": {
+                  color: "#1FB1F9",
+
+                  transform: "translateX(4px)",
+                },
+              }}
+            >
               Packages
             </Typography>
           </Grid>
 
           {/* Support */}
           <Grid sx={{ xs: 6, md: 3 }}>
-            <Typography sx={{ fontWeight: 600, mb: 2 }}>Support</Typography>
+            <Typography
+              sx={{
+                fontWeight: 700,
 
-            <Typography variant="body2" sx={{ opacity: 0.7, mb: 1 }}>
+                fontSize: 18,
+
+                mb: 2.5,
+
+                color: "#fff",
+              }}
+            >
+              Support
+            </Typography>
+
+            <Typography
+              variant="body2"
+              onClick={() => navigate("/booking")}
+              sx={{
+                color: "rgba(255,255,255,0.68)",
+                textDecoration: "none",
+
+                mb: 1.5,
+
+                cursor: "pointer",
+
+                transition: "0.3s ease",
+
+                width: "fit-content",
+
+                "&:hover": {
+                  color: "#1FB1F9",
+
+                  transform: "translateX(4px)",
+                },
+              }}
+            >
               Booking
             </Typography>
-            <Typography variant="body2" sx={{ opacity: 0.7, mb: 1 }}>
+            <Typography
+              variant="body2"
+              onClick={() => navigate("/services")}
+              sx={{
+                color: "rgba(255,255,255,0.68)",
+                textDecoration: "none",
+                mb: 1.5,
+
+                cursor: "pointer",
+
+                transition: "0.3s ease",
+
+                width: "fit-content",
+
+                "&:hover": {
+                  color: "#1FB1F9",
+
+                  transform: "translateX(4px)",
+                },
+              }}
+            >
               FAQ
             </Typography>
-            <Typography variant="body2" sx={{ opacity: 0.7, mb: 1 }}>
+            <Typography
+              variant="body2"
+              onClick={() => navigate("/contact")}
+              sx={{
+                color: "rgba(255,255,255,0.68)",
+                textDecoration: "none",
+                mb: 1.5,
+
+                cursor: "pointer",
+
+                transition: "0.3s ease",
+
+                width: "fit-content",
+
+                "&:hover": {
+                  color: "#1FB1F9",
+
+                  transform: "translateX(4px)",
+                },
+              }}
+            >
               Contact Us
             </Typography>
           </Grid>
 
           {/* Contact */}
           <Grid sx={{ xs: 12, md: 3 }}>
-            <Typography sx={{ fontWeight: 600, mb: 2 }}>Contact</Typography>
+            <Typography
+              sx={{
+                fontWeight: 700,
+                fontSize: 18,
+                mb: 2.5,
+                color: "#fff",
+              }}
+            >
+              Contact
+            </Typography>
             <IconButton
               href="tel:+966500000000"
               sx={{
                 display: "flex",
+
                 alignItems: "center",
+
                 justifyContent: "flex-start",
-                gap: 1,
-                mb: 1,
+
+                gap: 1.2,
+
+                mb: 1.5,
+
                 color: "inherit",
+
+                borderRadius: "14px",
+
+                px: 1.5,
+                py: 1,
+
+                transition: "0.3s ease",
+
+                "&:hover": {
+                  backgroundColor: "rgba(255,255,255,0.05)",
+                },
               }}
             >
-              <PhoneIcon sx={{ fontSize: 18, color: "#1FB1F9" }} />
+              <PhoneIcon
+                sx={{
+                  color: "#1FB1F9",
+
+                  background: "rgba(31,177,249,0.12)",
+
+                  padding: "8px",
+
+                  borderRadius: "12px",
+
+                  fontSize: 36,
+                }}
+              />
               <Typography
                 variant="body2"
                 sx={{ direction: isRTL ? "rtl" : "ltr", unicodeBidi: "embed" }}
@@ -129,14 +377,42 @@ const Footer = () => {
               href="mailto:mohamedabuelroos31@gmail.com"
               sx={{
                 display: "flex",
+
                 alignItems: "center",
+
                 justifyContent: "flex-start",
-                gap: 1,
-                mb: 2,
+
+                gap: 1.2,
+
+                mb: 1.5,
+
                 color: "inherit",
+
+                borderRadius: "14px",
+
+                px: 1.5,
+                py: 1,
+
+                transition: "0.3s ease",
+
+                "&:hover": {
+                  backgroundColor: "rgba(255,255,255,0.05)",
+                },
               }}
             >
-              <EmailIcon sx={{ fontSize: 18, color: "#1FB1F9" }} />
+              <EmailIcon
+                sx={{
+                  color: "#1FB1F9",
+
+                  background: "rgba(31,177,249,0.12)",
+
+                  padding: "8px",
+
+                  borderRadius: "12px",
+
+                  fontSize: 36,
+                }}
+              />
               <Typography variant="body2">info@speedline.com</Typography>
             </IconButton>
 
@@ -150,11 +426,20 @@ const Footer = () => {
                   href={item.href}
                   target="_blank"
                   sx={{
-                    backgroundColor: item.bgColor,
-                    color: item.color,
-                    mr: 1,
+                    backgroundColor: "rgba(255,255,255,0.06)",
+
+                    color: "#fff",
+
+                    mr: 1.2,
+
+                    border: "1px solid rgba(255,255,255,0.08)",
+
+                    transition: "0.3s ease",
+
                     "&:hover": {
                       backgroundColor: item.hoverColor,
+
+                      transform: "translateY(-4px)",
                     },
                   }}
                 >
@@ -168,13 +453,20 @@ const Footer = () => {
         {/* Bottom */}
         <Box
           sx={{
-            borderTop: "1px solid rgba(255,255,255,0.1)",
+            borderTop: "1px solid rgba(255,255,255,0.08)",
             textAlign: "center",
             mt: 5,
             pt: 3,
           }}
         >
-          <Typography variant="body2" sx={{ opacity: 0.6 }}>
+          <Typography
+            variant="body2"
+            sx={{
+              color: "rgba(255,255,255,0.5)",
+
+              fontSize: 14,
+            }}
+          >
             © {new Date().getFullYear()} SpeedLine Transfers. All rights
             reserved.
           </Typography>

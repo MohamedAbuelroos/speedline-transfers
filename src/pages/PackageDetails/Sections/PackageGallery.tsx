@@ -32,6 +32,7 @@ const PackageGallery = ({ data }: Props) => {
             component="img"
             src={data.gallery[0]}
             alt="reverse-circuit-madinah-jeddah-gallery"
+            loading="lazy"
             sx={{
               width: "100%",
               height: "100%",
@@ -68,7 +69,8 @@ const PackageGallery = ({ data }: Props) => {
                 <Box
                   component="img"
                   src={image}
-                  alt=""
+                  loading="lazy"
+                  alt={`Thumbnail ${index + 1}`}
                   sx={{
                     width: "100%",
                     height: "100%",

@@ -151,7 +151,8 @@ const SuccessSection = ({ data, bookingId }: SuccessSectionProps) => {
           {/* RIGHT LOGO */}
           <Box
             component="img"
-            src="/logo.png" // 🔥 adjust path if needed
+            src="/logo.png"
+            loading="lazy"
             alt="SpeedLine Logo"
             sx={{
               height: 50,

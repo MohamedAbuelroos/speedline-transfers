@@ -88,7 +88,8 @@ const FullscreenGallery = ({
           <Box
             component="img"
             src={data.gallery[selectedIndex]}
-            alt=""
+            alt={`Gallery Image ${selectedIndex + 1}`}
+            loading="lazy"
             sx={{
               width: "100%",
               maxHeight: "80vh",
@@ -116,7 +117,8 @@ const FullscreenGallery = ({
                 onClick={() => setSelectedIndex(index)}
                 component="img"
                 src={image}
-                alt=""
+                loading="lazy"
+                alt={`Thumbnail ${index + 1}`}
                 sx={{
                   width: 90,
                   height: 70,

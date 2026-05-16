@@ -1,47 +1,52 @@
 import hiace from "../assets/images/HiAce.png";
 import xpander from "../assets/images/XPANDER.webp";
 import elentra from "../assets/images/elentra.png";
+import toyota from "../assets/images/Toyota.png";
+import Staria from "../assets/images/Staria.png";
+import benz from "../assets/images/BenzEclass.png";
+import GMC from "../assets/images/GMCFleet.avif";
 
 export const cars = [
   {
-    id: "Elantra AD",
-    name: "Elantra AD",
-    category: "Sedan",
-    image: elentra,
-    passengers: 3,
+    id: "mercedes benz e-class",
+    name: "Mercedes E-Class",
+    category: "Business",
+    image: benz,
+    passengers: 4,
     bags: 2,
-    price: 120,
-    hourRate: 50,
+    price: 320,
+    hourRate: 190,
   },
   {
-    id: "Mitsubishi Xpander",
-    name: "Mitsubishi Xpander",
+    id: "GMC Yukon",
+    name: "GMC Yukon",
     category: "SUV",
-    image: xpander,
+    image: GMC,
     passengers: 6,
     bags: 4,
     price: 220,
     hourRate: 100,
   },
   {
-    id: "Toyota Hiace",
-    name: "Toyota Hiace",
+    id: "Hyundai Staria",
+    name: "Hyundai Staria",
     category: "Van",
-    image: hiace,
+    image: Staria,
     passengers: 10,
     bags: 8,
     price: 350,
     hourRate: 150,
   },
+
   {
-    id: "Toyota Camry",
-    name: "Toyota Camry",
-    category: "SUV",
-    image: elentra,
-    passengers: 4,
+    id: "Toyota Corolla",
+    name: "Toyota Corolla",
+    category: "Sedan",
+    image: toyota,
+    passengers: 3,
     bags: 2,
     price: 120,
-    hourRate: 190,
+    hourRate: 50,
   },
   {
     id: "Lexus LS 500",
@@ -64,10 +69,10 @@ export const cars = [
     hourRate: 300,
   },
   {
-    id: "Mercedes V-Class",
-    name: "Mercedes V-Class",
+    id: "toyota hiace",
+    name: "Toyota Hiace",
     category: "Van",
-    image: xpander,
+    image: hiace,
     passengers: 8,
     bags: 6,
     price: 320,
