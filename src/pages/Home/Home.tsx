@@ -5,6 +5,7 @@ import PopularTransfersSection from "./Sections/PopularTransfersSection";
 import FeaturesSection from "./Sections/FeaturesSection";
 import CTASection from "./Sections/CTASection";
 import StatsBanner from "./Sections/StatsBanner";
+import PartnersSection from "./Sections/PartnersSection";
 const Home = () => {
   return (
     <>
@@ -14,6 +15,7 @@ const Home = () => {
       <FleetPreviewSection />
       <PopularTransfersSection />
       <FeaturesSection />
+      <PartnersSection />
       <CTASection />
     </>
   );
