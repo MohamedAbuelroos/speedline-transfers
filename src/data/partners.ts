@@ -1,9 +1,3 @@
-// import partner1 from "../assets/partners/partner1.png";
-// import partner2 from "../assets/partners/partner2.png";
-// import partner3 from "../assets/partners/partner3.png";
-// import partner4 from "../assets/partners/partner4.png";
-// import partner5 from "../assets/partners/partner5.png";
-
 export const partners = [
   {
     id: 1,
