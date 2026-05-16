@@ -26,6 +26,7 @@ const PackageCard = ({ data }: Props) => {
       <Box sx={{ position: "relative", overflow: "hidden", height: 200 }}>
         <Box
           component="img"
+          loading="lazy"
           onClick={handleSelect}
           src={data.coverImage}
           alt={data.title}

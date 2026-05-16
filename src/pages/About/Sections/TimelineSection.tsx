@@ -55,7 +55,7 @@ const TimelineSection = () => {
     <Box
       id="timeline-section"
       sx={{
-        pb: 8,
+        py: 8,
         px: {
           xs: 2,
           md: 10,

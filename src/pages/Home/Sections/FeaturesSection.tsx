@@ -30,7 +30,7 @@ const features = [
 const FeaturesSection = () => {
   return (
     <Box sx={{ py: 8,backgroundColor: "#f3f7fb" }}>
-      <Container>
+      <Container maxWidth="lg">
         {/* Header */}
         <Box sx={{ textAlign: "center", mb: 6 }}>
           <Typography variant="h4" sx={{ fontWeight: 700 }}>

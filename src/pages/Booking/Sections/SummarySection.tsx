@@ -88,6 +88,7 @@ const SummarySection = ({ data, onConfirm, steps }: SummarySectionProps) => {
       <Box
         component="img"
         src={paymentimg}
+        loading="lazy"
         sx={{
           width: "100%",
           height: 140,

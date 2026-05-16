@@ -107,6 +107,7 @@ const ServiceSection = ({
               component="img"
               src={image}
               alt={title}
+              loading="lazy"
               sx={{
                 width: "100%",
                 borderRadius: "16px",

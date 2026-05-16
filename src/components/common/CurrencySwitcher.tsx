@@ -28,6 +28,7 @@ const CurrencySwitcher = () => {
     <>
       <Button
         onClick={(e) => setAnchorEl(e.currentTarget)}
+        disabled
         sx={{
           color: "#000",
           textTransform: "none",

@@ -1,106 +1,339 @@
-import { Box, Typography, Grid, Paper } from "@mui/material";
-import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
-import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
+
+import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
+
+import airportImg from "../../../assets/about/AirportTransfer.png";
+import religiousImg from "../../../assets/about/Umrah.png";
+import cityImg from "../../../assets/about/CityToCity.jpg";
+import vipImg from "../../../assets/about/VIPService.png";
+import hourlyImg from "../../../assets/about/Hourly.png";
+import groupImg from "../../../assets/about/Group.png";
+import { useNavigate } from "react-router-dom";
 
 const services = [
   {
     title: "Airport Transfers",
+
     description:
-      "Professional meet-and-greet at all major KSA airports. We track flight to ensure punctual pickup, every time,60minutes complimentary waiting time",
-    icon: <FlightTakeoffIcon fontSize="large" color="primary" />,
+      "Professional airport arrivals and departures across all major Saudi airports with real-time flight monitoring.",
+
+    image: airportImg,
   },
+
   {
-    title: "City-to-City",
+    title: "Umrah & Religious Packages",
+
     description:
-      "Comfortable long-distance travel between Riyadh, Jeddah, Dammam, and more. Skip the domestic flight stress.",
-    icon: <SwapHorizIcon fontSize="large" color="primary" />,
+      "Luxury transportation experiences for pilgrims between Makkah, Madinah, and Jeddah.",
+
+    image: religiousImg,
   },
+
   {
-    title: "Hourly Chauffeur",
+    title: "City-to-City Transfers",
+
     description:
-      "A private driver at your disposal. Perfect for executive meetings, shopping trips, or specialized city tours.",
-    icon: <AccessTimeIcon fontSize="large" color="primary" />,
+      "Comfortable intercity rides between Riyadh, Jeddah, Madinah, Makkah, and beyond.",
+
+    image: cityImg,
+  },
+
+  {
+    title: "VIP Executive Travel",
+
+    description:
+      "Private chauffeur solutions tailored for executives, diplomats, and premium guests.",
+
+    image: vipImg,
+  },
+
+  {
+    title: "Hourly Chauffeur Service",
+
+    description:
+      "Flexible chauffeur bookings for meetings, shopping, tours, and business travel.",
+
+    image: hourlyImg,
+  },
+
+  {
+    title: "Group Transportation",
+
+    description:
+      "Spacious luxury vans and group transportation solutions for families and events.",
+
+    image: groupImg,
   },
 ];
 
 const ServicesSection = () => {
+  const navigate = useNavigate();
   return (
     <Box
       sx={{
-        py: 8,
-        px: { xs: 2, md: 12 },
+        py: {
+          xs: 10,
+          md: 8,
+        },
+
+        px: {
+          xs: 2,
+          md: 12,
+        },
+
         background: "white",
-        textAlign: "center",
       }}
     >
-      {/* HEADER */}
-      <Typography variant="h4" sx={{ fontWeight: "bold" }} gutterBottom>
-        First-Class Service Suite
-      </Typography>
+      <Container maxWidth="xl">
+        {/* HEADER */}
+        <Box
+          sx={{
+            display: "flex",
 
-      <Typography
-        sx={{
-          maxWidth: "600px",
-          mx: "auto",
-          color: "gray",
-          mb: 5,
-        }}
-      >
-        Whether you're arriving at King Khalid International or need a chauffeur
-        for your Riyadh business meetings, we have the perfect solution.
-      </Typography>
+            justifyContent: "space-between",
 
-      {/* CARDS */}
-      <Grid container spacing={4}>
-        {services.map((service, index) => (
-          <Grid size={{ xs: 12, md: 4 }} key={index}>
-            <Paper
-              elevation={0}
+            alignItems: {
+              xs: "flex-start",
+              md: "flex-end",
+            },
+
+            flexDirection: {
+              xs: "column",
+              md: "row",
+            },
+
+            gap: 3,
+
+            mb: 6,
+          }}
+        >
+          {/* LEFT */}
+          <Box>
+            {/* BADGE */}
+            <Box
               sx={{
-                p: 4,
-                borderRadius: "16px",
-                height: "100%",
-                transition: "0.3s",
-                border: "1px solid #eee",
+                display: "inline-flex",
 
-                "&:hover": {
-                  transform: "translateY(-5px)",
-                  boxShadow: "0 10px 25px rgba(0,0,0,0.05)",
-                },
+                px: 2,
+                py: 0.7,
+
+                borderRadius: "999px",
+
+                backgroundColor: "rgba(245,153,61,0.12)",
+
+                border: "1px solid rgba(245,153,61,0.2)",
+
+                color: "#F5993D",
+
+                fontWeight: 700,
+
+                fontSize: 13,
+
+                mb: 2,
               }}
             >
-              {/* ICON */}
+              OUR SERVICES
+            </Box>
+
+            {/* TITLE */}
+            <Typography
+              sx={{
+                fontSize: {
+                  xs: 36,
+                  md: 48,
+                },
+
+                lineHeight: 1.1,
+
+                fontWeight: 900,
+
+                mb: 2,
+              }}
+            >
+              Seamless Travel Solutions
+              <br />
+              for Every Journey
+            </Typography>
+
+            {/* DESCRIPTION */}
+            <Typography
+              sx={{
+                maxWidth: 650,
+
+                lineHeight: 1.9,
+
+                fontSize: 17,
+              }}
+            >
+              Professional transportation designed to meet the needs of all
+              travelers in Saudi Arabia.
+            </Typography>
+          </Box>
+
+          {/* BUTTON */}
+          <Button
+            variant="contained"
+            onClick={() => navigate("/services")}
+            sx={{
+              px: 4,
+              py: 1.2,
+              color: "white",
+              borderRadius: "999px",
+              textTransform: "none",
+              fontWeight: 600,
+              fontSize: 15,
+              backgroundColor: "#1FB1F9",
+              "&:hover": {
+                backgroundColor: "#1697d2",
+              },
+            }}
+          >
+            View All Services
+          </Button>
+        </Box>
+
+        {/* GRID */}
+        <Grid container spacing={3}>
+          {services.map((service, index) => (
+            <Grid
+              key={index}
+              size={{
+                xs: 12,
+                sm: 6,
+                lg: 4,
+              }}
+            >
               <Box
                 sx={{
-                  background: "#e6f6fd",
-                  borderRadius: "50%",
-                  p: 1,
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  width: "50px",
-                  height: "50px",
-                  mb: 2,
-                  mx: "auto",
+                  borderRadius: "30px",
+
+                  overflow: "hidden",
+
+                  backgroundColor: "rgba(255,255,255,0.03)",
+
+                  border: "1px solid rgba(255,255,255,0.06)",
+
+                  transition: "0.4s",
+
+                  height: "100%",
+
+                  backdropFilter: "blur(10px)",
+
+                  "&:hover": {
+                    transform: "translateY(-10px)",
+
+                    borderColor: "rgba(31,177,249,0.25)",
+
+                    boxShadow: "0 25px 60px rgba(0,0,0,0.25)",
+                  },
                 }}
               >
-                {service.icon}
+                {/* IMAGE */}
+                <Box
+                  sx={{
+                    position: "relative",
+
+                    overflow: "hidden",
+
+                    height: 280,
+                  }}
+                >
+                  <Box
+                    component="img"
+                    src={service.image}
+                    alt={service.title}
+                    loading="lazy"
+                    sx={{
+                      width: "100%",
+                      height: "100%",
+
+                      objectFit: "cover",
+
+                      transition: "0.6s",
+
+                      "&:hover": {
+                        transform: "scale(1.08)",
+                      },
+                    }}
+                  />
+
+                  {/* OVERLAY */}
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      inset: 0,
+
+                      background:
+                        "linear-gradient(to top, rgba(0,0,0,0.8), transparent 60%)",
+                    }}
+                  />
+                </Box>
+
+                {/* CONTENT */}
+                <Box
+                  sx={{
+                    p: 4,
+                  }}
+                >
+                  {/* TITLE */}
+                  <Typography
+                    sx={{
+                      fontWeight: 800,
+
+                      fontSize: 24,
+
+                      mb: 2,
+                    }}
+                  >
+                    {service.title}
+                  </Typography>
+
+                  {/* DESCRIPTION */}
+                  <Typography
+                    sx={{
+                      color: "rgba(0,0,0,0.72)",
+
+                      lineHeight: 1.9,
+
+                      mb: 3,
+
+                      fontSize: 14,
+                    }}
+                  >
+                    {service.description}
+                  </Typography>
+
+                  {/* LINK */}
+                  <Box
+                    sx={{
+                      display: "inline-flex",
+
+                      alignItems: "center",
+
+                      gap: 1,
+
+                      color: "#1FB1F9",
+
+                      fontWeight: 700,
+
+                      cursor: "pointer",
+
+                      transition: "0.3s",
+
+                      "&:hover": {
+                        gap: 1.5,
+                      },
+                    }}
+                  >
+                    Learn More
+                    <ArrowOutwardRoundedIcon fontSize="small" />
+                  </Box>
+                </Box>
               </Box>
-
-              {/* TITLE */}
-              <Typography sx={{ fontWeight: "bold", mb: 1, lineHeight: 2 }}>
-                {service.title}
-              </Typography>
-
-              {/* DESCRIPTION */}
-              <Typography sx={{ fontSize: "14px", color: "gray" }}>
-                {service.description}
-              </Typography>
-            </Paper>
-          </Grid>
-        ))}
-      </Grid>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
     </Box>
   );
 };

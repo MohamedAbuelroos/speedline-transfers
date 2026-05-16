@@ -18,10 +18,10 @@ const stats = [
   },
 
   {
-    number: 15,
-    suffix: "+",
+    number: 24,
+    suffix: " / 7",
 
-    label: "Cities Covered",
+    label: "Support Availability",
   },
 
   {
@@ -50,7 +50,7 @@ const StatsBanner = () => {
 
         px: {
           xs: 2,
-          md: 10,
+          md: 12,
         },
         background: "linear-gradient(135deg, #f8fbff 0%, #edf6fc 100%)",
 

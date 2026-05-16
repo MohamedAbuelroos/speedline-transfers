@@ -55,6 +55,7 @@ const CompanySection = () => {
                 <Grid size={{ xs: 6 }}>
                   <Box
                     component="img"
+                    loading="lazy"
                     src={about2}
                     alt="Saudi Skyline"
                     sx={{
@@ -78,6 +79,7 @@ const CompanySection = () => {
                     component="img"
                     src={about1}
                     alt="Kaaba"
+                    loading="lazy"
                     sx={{
                       width: "100%",
                       height: 240,
@@ -97,6 +99,7 @@ const CompanySection = () => {
                     component="img"
                     src={about3}
                     alt="Luxury Interior"
+                    loading="lazy"
                     sx={{
                       width: "100%",
                       height: 240,
@@ -116,6 +119,7 @@ const CompanySection = () => {
                 <Grid size={{ xs: 6 }}>
                   <Box
                     component="img"
+                    loading="lazy"
                     src={about4}
                     alt="Professional Chauffeur"
                     sx={{
