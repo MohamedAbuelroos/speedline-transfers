@@ -6,6 +6,7 @@ import CarCard from "../../components/common/CarCard";
 import { useState } from "react";
 import CTASection from "./Sections/CTASection";
 import useDelayedNavigate from "../../hooks/useDelayedNavigate";
+import Seo from "../../components/common/Seo";
 
 const Fleet = () => {
   const navigate = useDelayedNavigate();
@@ -38,6 +39,11 @@ const Fleet = () => {
   });
   return (
     <Box sx={{ pb: 6, background: "white" }}>
+      <Seo
+        title="Our Fleet | Sedans, SUVs & Vans for Transfers in Saudi Arabia | SpeedLine Transfers"
+        description="Browse SpeedLine Transfers’ modern fleet — from comfortable sedans and spacious SUVs to premium vans. Choose the right vehicle for airport transfers, city rides, or chauffeur services across Saudi Arabia."
+        keywords="Saudi fleet vehicles, sedan transfer Saudi Arabia, SUV chauffeur Riyadh, Jeddah van airport transfer, premium transport fleet KSA"
+      />
       {/* TOP HEADER */}
       <TopSection />
       <Container>
