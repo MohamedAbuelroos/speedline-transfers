@@ -57,7 +57,7 @@ const CTASection = () => {
               borderRadius: "50%",
 
               background:
-                "radial-gradient(circle, rgba(31,177,249,0.14) 0%, transparent 70%)",
+                "radial-gradient(circle, rgba(31,177,249,0.25) 0%, transparent 70%)",
             }}
           />
 
@@ -74,7 +74,7 @@ const CTASection = () => {
               borderRadius: "50%",
 
               background:
-                "radial-gradient(circle, rgba(245,153,61,0.10) 0%, transparent 70%)",
+                "radial-gradient(circle, rgba(245,153,61,0.20) 0%, transparent 70%)",
             }}
           />
 

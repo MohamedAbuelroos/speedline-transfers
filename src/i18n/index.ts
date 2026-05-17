@@ -8,6 +8,7 @@ export const translations = {
     Services: "Services",
     Packages: "Packages",
     About: "About",
+    Contact: "Contact US",
   },
   ar: {
     Home: "الرئيسية",
@@ -15,6 +16,7 @@ export const translations = {
     Services: "الخدمات",
     Packages: "الباقات",
     About: "حول",
+    Contact: "تواصل معنا",
   },
   ru: {
     Home: "Главная",
@@ -22,6 +24,7 @@ export const translations = {
     Services: "Услуги",
     Packages: "Пакеты",
     About: "О нас",
+    Contact: "Свяжитесь с нами",
   },
 };
 

@@ -24,6 +24,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useNavigationLoader } from "../../context/NavigationLoaderContext";
 
 import MenuIcon from "@mui/icons-material/Menu";
+import ContactSupportIcon from "@mui/icons-material/ContactSupport";
 import { useTheme } from "@mui/material/styles";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -44,7 +45,7 @@ const Navbar = () => {
 
   const { startLoading } = useNavigationLoader();
 
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
 
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -62,6 +63,11 @@ const Navbar = () => {
       icon: <CardGiftcardIcon />,
     },
     { label: translate.About, path: "/about", icon: <InfoIcon /> },
+    {
+      label: translate.Contact,
+      path: "/contact",
+      icon: <ContactSupportIcon />,
+    },
   ];
 
   return (
