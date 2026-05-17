@@ -1,5 +1,5 @@
 import { Box, Typography, Chip, Stack } from "@mui/material";
-import packageHeroImg from "../../../assets/packages/PackageHero.png";
+import packageHeroImg from "../../../assets/packages/PackageHero.webp";
 
 import type { TravelPackage } from "../../../utils/types";
 

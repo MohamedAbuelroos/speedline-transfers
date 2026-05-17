@@ -2,10 +2,10 @@ import { Box, Button, Container, Grid, Typography } from "@mui/material";
 
 import CheckCircleOutlineRoundedIcon from "@mui/icons-material/CheckCircleOutlineRounded";
 
-import about1 from "../../../assets/about/about-1.png";
-import about2 from "../../../assets/about/about-2.png";
-import about3 from "../../../assets/about/about-3.png";
-import about4 from "../../../assets/about/about-4.png";
+import about1 from "../../../assets/about/about-1.webp";
+import about2 from "../../../assets/about/about-2.webp";
+import about3 from "../../../assets/about/about-3.webp";
+import about4 from "../../../assets/about/about-4.webp";
 
 const features = [
   "Specialized Umrah & Hajj transfer logistics",

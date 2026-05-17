@@ -1,5 +1,5 @@
 import { Box, Grid, Snackbar, Alert } from "@mui/material";
-import heroImg from "/HeroHome.png";
+import heroImg from "/HeroHome.webp";
 import { getPrice } from "../../../utils/pricing";
 import HeroContent from "./HeroSection/HeroContent";
 import HeroBookingCard from "./HeroSection/HeroBookingCard";

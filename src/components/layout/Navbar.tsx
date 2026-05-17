@@ -18,7 +18,7 @@ import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import MiscellaneousServicesIcon from "@mui/icons-material/MiscellaneousServices";
 import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
 import InfoIcon from "@mui/icons-material/Info";
-import logo from "/logo.png";
+import logo from "/logo.webp";
 import { Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useNavigationLoader } from "../../context/NavigationLoaderContext";

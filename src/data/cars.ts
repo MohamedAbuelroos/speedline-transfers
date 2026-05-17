@@ -1,10 +1,10 @@
-import hiace from "../assets/images/HiAce.png";
+import hiace from "../assets/images/HiAce.webp";
 import xpander from "../assets/images/XPANDER.webp";
-import elentra from "../assets/images/elentra.png";
-import toyota from "../assets/images/Toyota.png";
-import Staria from "../assets/images/Staria.png";
-import benz from "../assets/images/BenzEclass.png";
-import GMC from "../assets/images/GMCFleet.avif";
+import elentra from "../assets/images/elentra.webp";
+import toyota from "../assets/images/Toyota.webp";
+import Staria from "../assets/images/Staria.webp";
+import benz from "../assets/images/BenzEclass.webp";
+import GMC from "../assets/images/GMCFleet.webp";
 
 export const cars = [
   {

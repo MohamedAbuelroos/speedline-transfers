@@ -3,7 +3,7 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import logo from "/logo.png";
+import logo from "/logo.webp";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import useLanguage from "../../hooks/useLanguage";
 import useDelayedNavigate from "../../hooks/useDelayedNavigate";
