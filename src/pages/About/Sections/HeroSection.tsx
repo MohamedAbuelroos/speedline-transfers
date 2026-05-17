@@ -6,7 +6,7 @@ import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFi
 import PublicOutlinedIcon from "@mui/icons-material/PublicOutlined";
 
 import heroImage from "../../../assets/about/about-hero.png";
-import { useNavigate } from "react-router-dom";
+import useDelayedNavigate from "../../../hooks/useDelayedNavigate";
 
 const stats = [
   {
@@ -35,7 +35,7 @@ const stats = [
 ];
 
 const HeroSection = () => {
-  const navigate = useNavigate();
+  const navigate = useDelayedNavigate();
   return (
     <Box
       sx={{

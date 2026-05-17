@@ -1,13 +1,13 @@
 import { Box, Typography, Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import NearMeOutlinedIcon from "@mui/icons-material/NearMeOutlined";
 import type { TravelPackage } from "../../utils/types";
+import useDelayedNavigate from "../../hooks/useDelayedNavigate";
 type Props = {
   data: TravelPackage;
 };
 
 const PackageCard = ({ data }: Props) => {
-  const navigate = useNavigate();
+  const navigate = useDelayedNavigate();
 
   const handleSelect = () => {
     navigate(`/packages/${data.slug}`);
@@ -167,7 +167,7 @@ const PackageCard = ({ data }: Props) => {
           >
             Starting from
           </Typography>
-          <Box sx={{display:"flex", alignItems:"center", gap:1}}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <Typography
               sx={{
                 fontSize: 30,

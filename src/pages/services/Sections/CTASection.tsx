@@ -1,9 +1,8 @@
 import { Box, Container, Typography, Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import useDelayedNavigate from "../../../hooks/useDelayedNavigate";
 
 const CTASection = () => {
-  const navigate = useNavigate();
-
+const navigate = useDelayedNavigate();
   return (
     <Box sx={{ py: 8 }}>
       <Container>

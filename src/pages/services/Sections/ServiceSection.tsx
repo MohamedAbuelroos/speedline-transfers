@@ -1,6 +1,6 @@
 import { Box, Container, Typography, Button, Grid } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import { useNavigate } from "react-router-dom";
+import useDelayedNavigate from "../../../hooks/useDelayedNavigate";
 type Props = {
   serviceType: string;
   title: string;
@@ -20,7 +20,7 @@ const ServiceSection = ({
   features,
   icon,
 }: Props) => {
-  const navigate = useNavigate();
+  const navigate = useDelayedNavigate();
 
   return (
     <Box sx={{ py: 6 }}>

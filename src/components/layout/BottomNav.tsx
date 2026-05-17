@@ -1,18 +1,15 @@
-import {
-  BottomNavigation,
-  BottomNavigationAction,
-  Paper,
-} from "@mui/material";
+import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
 
 import HomeIcon from "@mui/icons-material/Home";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import BookOnlineIcon from "@mui/icons-material/BookOnline";
 
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import useDelayedNavigate from "../../hooks/useDelayedNavigate";
 
 const BottomNav = () => {
-  const navigate = useNavigate();
   const location = useLocation();
+  const navigate = useDelayedNavigate();
 
   return (
     <Paper

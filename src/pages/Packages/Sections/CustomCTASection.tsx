@@ -1,8 +1,8 @@
 import { Box, Container, Typography, Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import useDelayedNavigate from "../../../hooks/useDelayedNavigate";
 
 const CustomCTASection = () => {
-  const navigate = useNavigate();
+  const navigate = useDelayedNavigate();
 
   const handleWhatsApp = () => {
     const message = encodeURIComponent(

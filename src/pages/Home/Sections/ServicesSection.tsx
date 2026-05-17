@@ -8,7 +8,7 @@ import cityImg from "../../../assets/about/CityToCity.jpg";
 import vipImg from "../../../assets/about/VIPService.png";
 import hourlyImg from "../../../assets/about/Hourly.png";
 import groupImg from "../../../assets/about/Group.png";
-import { useNavigate } from "react-router-dom";
+import useDelayedNavigate from "../../../hooks/useDelayedNavigate";
 
 const services = [
   {
@@ -67,7 +67,7 @@ const services = [
 ];
 
 const ServicesSection = () => {
-  const navigate = useNavigate();
+  const navigate = useDelayedNavigate();
   return (
     <Box
       sx={{

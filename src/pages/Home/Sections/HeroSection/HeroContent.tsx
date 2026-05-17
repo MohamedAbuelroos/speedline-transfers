@@ -1,8 +1,8 @@
 import { Box, Button, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import useDelayedNavigate from "../../../../hooks/useDelayedNavigate";
 
 const HeroContent = () => {
-  const navigate = useNavigate();
+  const navigate = useDelayedNavigate();
 
   return (
     <Box>

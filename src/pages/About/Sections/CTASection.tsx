@@ -1,11 +1,11 @@
 import { Box, Container, Typography, Button, Divider } from "@mui/material";
 import PhoneIcon from "@mui/icons-material/Phone";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import { useNavigate } from "react-router-dom";
 import useLanguage from "../../../hooks/useLanguage";
+import useDelayedNavigate from "../../../hooks/useDelayedNavigate";
 
 const CTASection = () => {
-  const navigate = useNavigate();
+  const navigate = useDelayedNavigate();
   const lang = useLanguage();
   const isRTL = lang === "ar";
 

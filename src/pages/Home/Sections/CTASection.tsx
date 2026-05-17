@@ -1,11 +1,10 @@
-
 import { Box, Button, Container, Typography } from "@mui/material";
 
 import CheckCircleOutlineRoundedIcon from "@mui/icons-material/CheckCircleOutlineRounded";
-import { useNavigate } from "react-router-dom";
+import useDelayedNavigate from "../../../hooks/useDelayedNavigate";
 
 const CTASection = () => {
-  const navigate = useNavigate();
+  const navigate = useDelayedNavigate();
   return (
     <Box
       sx={{

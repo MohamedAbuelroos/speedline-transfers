@@ -5,13 +5,13 @@ import HeroContent from "./HeroSection/HeroContent";
 import HeroBookingCard from "./HeroSection/HeroBookingCard";
 
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { cars } from "../../../data/cars";
 import type { Car } from "../../../utils/types";
 import TransferEstimateDialog from "./HeroSection/TransferEstimateDialog";
+import useDelayedNavigate from "../../../hooks/useDelayedNavigate";
 
 const HeroSection = () => {
-  const navigate = useNavigate();
+  const navigate = useDelayedNavigate();
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
 

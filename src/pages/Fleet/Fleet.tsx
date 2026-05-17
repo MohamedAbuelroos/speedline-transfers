@@ -5,10 +5,11 @@ import { cars } from "../../data/cars";
 import CarCard from "../../components/common/CarCard";
 import { useState } from "react";
 import CTASection from "./Sections/CTASection";
-import { useNavigate } from "react-router-dom";
+import useDelayedNavigate from "../../hooks/useDelayedNavigate";
 
 const Fleet = () => {
-  const navigate = useNavigate();
+  const navigate = useDelayedNavigate();
+
   const handleSelectCar = (car: unknown) => {
     navigate("/booking", {
       state: {

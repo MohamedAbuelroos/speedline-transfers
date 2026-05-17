@@ -1,10 +1,10 @@
 import { Box, Container, Typography, Grid, Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import { travelPackages } from "../../../data/travelPackages";
 import PackageCard from "../../../components/common/PackageCard";
+import useDelayedNavigate from "../../../hooks/useDelayedNavigate";
 
 const PopularTransfersSection = () => {
-  const navigate = useNavigate();
+  const navigate = useDelayedNavigate();
 
   return (
     <Box sx={{ py: 8, px: { xs: 2, md: 12 }, background: "#fff" }}>
@@ -47,7 +47,7 @@ const PopularTransfersSection = () => {
 
                 borderRadius: "999px",
 
-                  backgroundColor: "rgba(245,153,61,0.12)",
+                backgroundColor: "rgba(245,153,61,0.12)",
 
                 border: "1px solid rgba(245,153,61,0.2)",
 

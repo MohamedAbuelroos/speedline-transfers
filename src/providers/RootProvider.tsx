@@ -11,6 +11,7 @@ import { getTheme } from "../theme/theme";
 import useLanguage from "../hooks/useLanguage";
 
 import App from "../App";
+import { NavigationLoaderProvider } from "../context/NavigationLoaderContext";
 
 const ltrCache = createCache({
   key: "mui",
@@ -34,7 +35,9 @@ const RootProvider = () => {
         <CssBaseline />
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <div dir={direction}>
-            <App />
+            <NavigationLoaderProvider>
+              <App />
+            </NavigationLoaderProvider>
           </div>
         </LocalizationProvider>
       </ThemeProvider>

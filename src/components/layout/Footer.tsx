@@ -6,7 +6,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import logo from "/logo.png";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import useLanguage from "../../hooks/useLanguage";
-import { useNavigate } from "react-router-dom";
+import useDelayedNavigate from "../../hooks/useDelayedNavigate";
 
 const socialIcons = [
   {
@@ -41,8 +41,7 @@ const socialIcons = [
 const Footer = () => {
   const lang = useLanguage();
   const isRTL = lang === "ar";
-  const navigate = useNavigate();
-
+  const navigate = useDelayedNavigate();
   return (
     <Box
       sx={{

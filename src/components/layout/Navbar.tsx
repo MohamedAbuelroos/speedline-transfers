@@ -21,24 +21,28 @@ import InfoIcon from "@mui/icons-material/Info";
 import logo from "/logo.png";
 import { Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useNavigationLoader } from "../../context/NavigationLoaderContext";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import { useTheme } from "@mui/material/styles";
 import { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import LanguageSwitcher from "../common/LanguageSwitcher";
 import CurrencySwitcher from "../common/CurrencySwitcher";
 import useLanguage from "../../hooks/useLanguage";
 import { translations } from "../../i18n";
 import { languages } from "../../utils/lang";
+import useDelayedNavigate from "../../hooks/useDelayedNavigate";
 
 const Navbar = () => {
-  const navigate = useNavigate();
+  const navigate = useDelayedNavigate();
   const location = useLocation();
   const theme = useTheme();
   const lang = useLanguage();
   const translate = translations[lang];
   const isRTL = lang === "ar";
+
+  const { startLoading } = useNavigationLoader();
 
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -285,7 +289,9 @@ const Navbar = () => {
               <ListItem
                 key={link.label}
                 onClick={() => {
-                  navigate(link.path);
+                  startLoading(() => {
+                    navigate(link.path);
+                  });
                   setDrawerOpen(false);
                 }}
                 sx={{

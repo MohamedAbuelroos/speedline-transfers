@@ -7,8 +7,8 @@ import { cars } from "../../../data/cars";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
 import type { TravelPackage } from "../../../utils/types";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import useDelayedNavigate from "../../../hooks/useDelayedNavigate";
 
 type Props = {
   data: TravelPackage;
@@ -26,7 +26,8 @@ const PackageBookingCard = ({ data }: Props) => {
   const vehicle =
     availableVehicles.find((car) => car.id === selectedVehicleId) ||
     availableVehicles[0];
-  const navigate = useNavigate();
+
+  const navigate = useDelayedNavigate();
 
   return (
     <Box
