@@ -134,18 +134,19 @@ const ServicesQuickNav = () => {
             <Typography
               sx={{
                 fontWeight: 800,
-
-                color: "#111827",
-
                 mb: 1,
-
                 fontSize: {
-                  xs: 28,
-                  md: 38,
+                  xs: 40,
+                  md: 48,
                 },
               }}
             >
-              Explore Our Services
+              <Box component="span" sx={{ color: "#111827" }}>
+                Explore Our{" "}
+              </Box>
+              <Box component="span" sx={{ color: "#1FB1F9" }}>
+                Services
+              </Box>
             </Typography>
 
             <Typography
