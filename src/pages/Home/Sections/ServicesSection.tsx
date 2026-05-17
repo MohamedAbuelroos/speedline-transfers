@@ -13,7 +13,7 @@ import CorporateImg from "../../../assets/about/Corporate .png";
 const services = [
   {
     title: "Airport Transfers",
-
+    serviceType: "airport",
     description:
       "Professional airport arrivals and departures across all major Saudi airports with real-time flight monitoring.",
 
@@ -22,7 +22,7 @@ const services = [
 
   {
     title: "Event Transportation",
-
+    serviceType: "events",
     description:
       "Reliable group and individual transportation for weddings, conferences, exhibitions, sporting events.",
 
@@ -31,7 +31,7 @@ const services = [
 
   {
     title: "City-to-City Transfers",
-
+    serviceType: "city",
     description:
       "Comfortable intercity rides between Riyadh, Jeddah, Madinah, Makkah, and beyond.",
 
@@ -40,7 +40,7 @@ const services = [
 
   {
     title: "VIP Executive Travel",
-
+    serviceType: "vip",
     description:
       "Private chauffeur solutions tailored for executives, diplomats, and premium guests.",
 
@@ -49,7 +49,7 @@ const services = [
 
   {
     title: "Hourly Chauffeur Service",
-
+    serviceType: "hourly",
     description:
       "Flexible chauffeur bookings for meetings, shopping, tours, and business travel.",
 
@@ -58,7 +58,7 @@ const services = [
 
   {
     title: "Corporate Travel",
-
+    serviceType: "corporate",
     description:
       "Professional transportation solutions tailored for executives, business meetings, conferences, and corporate clients.",
 
@@ -305,6 +305,9 @@ const ServicesSection = () => {
 
                   {/* LINK */}
                   <Box
+                    onClick={() =>
+                      navigate("/services", undefined, service.serviceType)
+                    }
                     sx={{
                       display: "inline-flex",
 

@@ -102,10 +102,11 @@ const ServicesQuickNav = () => {
   return (
     <Box
       sx={{
-        py: {
+        pt: {
           xs: 7,
           md: 10,
         },
+        pb: 5,
 
         background: "linear-gradient(180deg, #ffffff 0%, #f8fbff 100%)",
       }}

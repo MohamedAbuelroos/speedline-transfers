@@ -20,13 +20,32 @@ import eventsImage from "../../assets/about/Umrah.png";
 import StarIcon from "@mui/icons-material/Star";
 
 import EventSeatIcon from "@mui/icons-material/EventSeat";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const Services = () => {
+  const location = useLocation();
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace("#", "");
+
+      setTimeout(() => {
+        const element = document.getElementById(id);
+
+        if (element) {
+          element.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+      }, 200);
+    }
+  }, [location]);
   return (
     <>
       <ServicesQuickNav />
 
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" sx={{ background: "white" }}>
         <ServiceSection
           serviceType="airport"
           title="Airport Transfers"

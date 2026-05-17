@@ -7,9 +7,13 @@ const useDelayedNavigate = () => {
 
   const { startLoading } = useNavigationLoader();
 
-  const delayedNavigate = (path: string, options?: NavigateOptions) => {
+  const delayedNavigate = (
+    path: string,
+    options?: NavigateOptions,
+    hash?: string,
+  ) => {
     startLoading(() => {
-      navigate(path, options);
+      navigate(hash ? `${path}#${hash}` : path, options);
     });
   };
 
