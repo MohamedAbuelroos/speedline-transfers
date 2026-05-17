@@ -6,6 +6,7 @@ import Packages from "../pages/Packages/Packages";
 import Booking from "../pages/Booking/Booking";
 import About from "../pages/About/About";
 import PackageDetails from "../pages/PackageDetails/PackageDetails";
+import ContactPage from "../pages/Contact/ContactPage";
 
 const AppRoutes = () => {
   return (
@@ -17,6 +18,7 @@ const AppRoutes = () => {
       <Route path="/packages/:slug" element={<PackageDetails />} />
       <Route path="/booking" element={<Booking />} />
       <Route path="/about" element={<About />} />
+      <Route path="/contact" element={<ContactPage />} />
     </Routes>
   );
 };
