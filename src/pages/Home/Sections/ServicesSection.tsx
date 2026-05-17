@@ -5,7 +5,7 @@ import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
 import airportImg from "../../../assets/images/AirService.webp";
 import religiousImg from "../../../assets/about/Umrah.webp";
 import cityImg from "../../../assets/about/CityToCity.webp";
-import vipImg from "../../../assets/about/VIPService.png";
+import vipImg from "../../../assets/about/VIPService.webp";
 import hourlyImg from "../../../assets/about/Hourly.webp";
 import useDelayedNavigate from "../../../hooks/useDelayedNavigate";
 import CorporateImg from "../../../assets/about/Corporate.webp";
