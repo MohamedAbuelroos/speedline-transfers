@@ -40,6 +40,7 @@ const HeroContent = () => {
 
       {/* TITLE */}
       <Typography
+        component={"h1"}
         sx={{
           color: "#fff",
 
