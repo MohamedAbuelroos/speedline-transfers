@@ -27,6 +27,7 @@ const HeroSection = () => {
         component="img"
         src={heroImage}
         alt="Contact Us"
+        loading="lazy"
         sx={{
           position: "absolute",
           inset: 0,
