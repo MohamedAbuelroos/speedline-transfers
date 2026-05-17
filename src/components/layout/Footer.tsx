@@ -18,14 +18,14 @@ const socialIcons = [
   },
   {
     icon: <InstagramIcon />,
-    href: "https://instagram.com/yourpage",
+    href: "https://www.instagram.com/speedlinetransfers/",
     color: "#fff",
     bgColor: "#1FB1F9",
     hoverColor: "#E1306C",
   },
   {
     icon: <FacebookIcon />,
-    href: "https://facebook.com/yourpage",
+    href: "https://www.facebook.com/speedlinetransfers",
     color: "#fff",
     bgColor: "#1FB1F9",
     hoverColor: "#1877F2",
