@@ -1,9 +1,9 @@
 import type { TravelPackage } from "../utils/types";
 
-import reverseCircuit from "../assets/packages/reverse-circuit.png";
-import HajPackage from "../assets/packages/HajPackage.png";
-import gmc from "../assets/packages/GMC.png";
-import Chev from "../assets/packages/Chev.jpg";
+import reverseCircuit from "../assets/packages/reverse-circuit.webp";
+import HajPackage from "../assets/packages/HajPackage.webp";
+import gmc from "../assets/packages/GMC.webp";
+import Chev from "../assets/packages/Chev.webp";
 
 export const travelPackages: TravelPackage[] = [
   {

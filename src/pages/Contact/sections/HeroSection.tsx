@@ -1,6 +1,6 @@
 import { Box, Container, Typography } from "@mui/material";
 
-import heroImage from "../../../assets/images/ContactHero.png";
+import heroImage from "../../../assets/images/ContactHero.webp";
 
 const HeroSection = () => {
   return (

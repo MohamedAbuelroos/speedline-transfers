@@ -5,17 +5,17 @@ import LocationPinIcon from "@mui/icons-material/LocationPin";
 import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
 import StandardsSection from "./Sections/StandardsSection";
 import CTASection from "./Sections/CTASection";
-import airportservice from "../../assets/images/AirService.jpg";
-import cityTocity from "../../assets/about/CityToCity.jpg";
-import hourly from "../../assets/images/Hourlly.jpg";
+import airportservice from "../../assets/images/AirService.webp";
+import cityTocity from "../../assets/about/CityToCity.webp";
+import hourly from "../../assets/images/Hourlly.webp";
 import ServicesQuickNav from "./Sections/ServicesQuickNav";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 
-import corporateImage from "../../assets/about/Corporate .png";
+import corporateImage from "../../assets/about/Corporate.webp";
 
 import vipImage from "../../assets/about/VIPService.png";
 
-import eventsImage from "../../assets/about/Umrah.png";
+import eventsImage from "../../assets/about/Umrah.webp";
 
 import StarIcon from "@mui/icons-material/Star";
 

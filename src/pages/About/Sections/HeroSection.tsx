@@ -5,7 +5,7 @@ import VerifiedUserOutlinedIcon from "@mui/icons-material/VerifiedUserOutlined";
 import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFilledOutlined";
 import PublicOutlinedIcon from "@mui/icons-material/PublicOutlined";
 
-import heroImage from "../../../assets/about/about-hero.png";
+import heroImage from "../../../assets/about/about-hero.webp";
 import useDelayedNavigate from "../../../hooks/useDelayedNavigate";
 
 const stats = [
@@ -52,7 +52,6 @@ const HeroSection = () => {
         component="img"
         src={heroImage}
         alt="SpeedLine Transfers"
-        loading="lazy"
         sx={{
           position: "absolute",
           top: 0,

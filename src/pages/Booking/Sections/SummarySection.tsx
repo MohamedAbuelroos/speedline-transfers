@@ -3,7 +3,7 @@ import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import PeopleIcon from "@mui/icons-material/People";
-import paymentimg from "../../../assets/images/Payment.jpg";
+import paymentimg from "../../../assets/images/Payment.webp";
 import LuggageIcon from "@mui/icons-material/Luggage";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import NearMeOutlinedIcon from "@mui/icons-material/NearMeOutlined";
