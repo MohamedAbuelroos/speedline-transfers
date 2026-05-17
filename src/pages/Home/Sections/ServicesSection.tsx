@@ -2,13 +2,13 @@ import { Box, Button, Container, Grid, Typography } from "@mui/material";
 
 import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
 
-import airportImg from "../../../assets/about/AirportTransfer.png";
+import airportImg from "../../../assets/images/AirService.jpg";
 import religiousImg from "../../../assets/about/Umrah.png";
 import cityImg from "../../../assets/about/CityToCity.jpg";
 import vipImg from "../../../assets/about/VIPService.png";
 import hourlyImg from "../../../assets/about/Hourly.png";
-import groupImg from "../../../assets/about/Group.png";
 import useDelayedNavigate from "../../../hooks/useDelayedNavigate";
+import CorporateImg from "../../../assets/about/Corporate .png";
 
 const services = [
   {
@@ -21,10 +21,10 @@ const services = [
   },
 
   {
-    title: "Umrah & Religious Packages",
+    title: "Event Transportation",
 
     description:
-      "Luxury transportation experiences for pilgrims between Makkah, Madinah, and Jeddah.",
+      "Reliable group and individual transportation for weddings, conferences, exhibitions, sporting events.",
 
     image: religiousImg,
   },
@@ -57,12 +57,12 @@ const services = [
   },
 
   {
-    title: "Group Transportation",
+    title: "Corporate Travel",
 
     description:
-      "Spacious luxury vans and group transportation solutions for families and events.",
+      "Professional transportation solutions tailored for executives, business meetings, conferences, and corporate clients.",
 
-    image: groupImg,
+    image: CorporateImg,
   },
 ];
 

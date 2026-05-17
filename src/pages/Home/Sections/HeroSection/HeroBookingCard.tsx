@@ -45,7 +45,7 @@ const HeroBookingCard = ({
         ml: "auto",
         borderRadius: "26px",
 
-        backgroundColor: "rgba(255,255,255,0.92)",
+        backgroundColor: "rgba(255,255,255,0.9)",
 
         backdropFilter: "blur(14px)",
 

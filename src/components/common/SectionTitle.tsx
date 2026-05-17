@@ -22,7 +22,7 @@ const SectionTitle = ({ title }: props) => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          mx: `${location.pathname === "/fleet" ? "0" : "auto"}`,
+          mx: `${location.pathname === "/packages" ? "auto" : "0"}`,
         }}
       >
         {title}
