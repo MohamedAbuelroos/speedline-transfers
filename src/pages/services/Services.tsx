@@ -13,7 +13,7 @@ import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 
 import corporateImage from "../../assets/about/Corporate.webp";
 
-import vipImage from "../../assets/about/VIPService.png";
+import vipImage from "../../assets/about/VIPService.webp";
 
 import eventsImage from "../../assets/about/Umrah.webp";
 
