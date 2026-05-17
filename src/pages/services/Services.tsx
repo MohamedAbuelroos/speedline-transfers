@@ -22,6 +22,7 @@ import StarIcon from "@mui/icons-material/Star";
 import EventSeatIcon from "@mui/icons-material/EventSeat";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import Seo from "../../components/common/Seo";
 
 const Services = () => {
   const location = useLocation();
@@ -43,6 +44,12 @@ const Services = () => {
   }, [location]);
   return (
     <>
+      <Seo
+        title="Our Services | Professional Chauffeur & Airport Transfers Across Saudi Arabia"
+        description="Explore SpeedLine Transfers’ range of services — from reliable airport pickups and city-to-city rides to hourly chauffeur bookings. Experience comfort, safety, and professionalism with our premium transportation solutions across Saudi Arabia."
+        keywords="Saudi chauffeur services, airport transfers Saudi Arabia, city rides Riyadh, Jeddah transportation, premium travel Saudi Arabia"
+      />
+
       <ServicesQuickNav />
 
       <Container maxWidth="xl" sx={{ background: "white" }}>

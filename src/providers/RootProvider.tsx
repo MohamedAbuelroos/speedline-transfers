@@ -1,7 +1,7 @@
 import { ThemeProvider, CssBaseline } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-
+import { HelmetProvider } from "react-helmet-async";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 import rtlPlugin from "@mui/stylis-plugin-rtl";
@@ -36,7 +36,9 @@ const RootProvider = () => {
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <div dir={direction}>
             <NavigationLoaderProvider>
-              <App />
+              <HelmetProvider>
+                <App />
+              </HelmetProvider>
             </NavigationLoaderProvider>
           </div>
         </LocalizationProvider>

@@ -6,8 +6,8 @@ import TopSection from "./Sections/TopSection";
 import FilterSection from "./Sections/FilterSection";
 import CustomCTASection from "./Sections/CustomCTASection";
 import FeaturesSection from "./Sections/FeaturesSection";
-import {travelPackages} from "../../data/travelPackages";
-
+import { travelPackages } from "../../data/travelPackages";
+import Seo from "../../components/common/Seo";
 
 const Packages = () => {
   const [active, setActive] = useState("All Packages");
@@ -19,6 +19,12 @@ const Packages = () => {
 
   return (
     <Box sx={{ background: "white" }}>
+      <Seo
+        title="Travel Packages | Airport & Chauffeur Services in Saudi Arabia | SpeedLine Transfers"
+        description="Discover SpeedLine Transfers’ curated travel packages — from airport transfers and city-to-city rides to hourly chauffeur services. Choose the package that fits your journey and enjoy safe, reliable, and comfortable transportation across Saudi Arabia."
+        keywords="Saudi travel packages, airport transfer packages, chauffeur packages Saudi Arabia, Riyadh transfer deals, Jeddah airport rides"
+      />
+
       {/* HEADER */}
       <TopSection />
       <Container>

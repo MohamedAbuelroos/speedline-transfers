@@ -108,7 +108,7 @@ const Navbar = () => {
             component="img"
             onClick={() => navigate("/")}
             src={logo}
-            alt={logo}
+            alt={"SpeedLineTransfers Logo"}
             loading="lazy"
             sx={{
               width: {
