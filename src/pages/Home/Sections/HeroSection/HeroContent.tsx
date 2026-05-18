@@ -1,7 +1,13 @@
 import { Box, Button, Typography } from "@mui/material";
 import useDelayedNavigate from "../../../../hooks/useDelayedNavigate";
+import useLanguage from "../../../../hooks/useLanguage";
+import { translations } from "../../../../i18n";
 
 const HeroContent = () => {
+  const lang = useLanguage();
+  const translate = translations[lang];
+  const isRtl = lang === "ar";
+
   const navigate = useDelayedNavigate();
 
   return (
@@ -28,14 +34,14 @@ const HeroContent = () => {
 
           color: "#fff",
 
-          fontSize: 13,
+          fontSize: isRtl ? 20 : 13,
 
           fontWeight: 700,
 
           mb: 3,
         }}
       >
-        Trusted Transportation Across Saudi Arabia
+        {translate.home.hero.badge}
       </Box>
 
       {/* TITLE */}
@@ -54,14 +60,16 @@ const HeroContent = () => {
 
           mb: 3,
 
-          fontSize: {
-            xs: 44,
-            sm: 58,
-            md: 68,
-          },
+          fontSize: isRtl
+            ? { xs: 54, sm: 70, md: 80 }
+            : {
+                xs: 44,
+                sm: 58,
+                md: 68,
+              },
         }}
       >
-        Travel Saudi Arabia
+        {translate.home.hero.title1}
         <br />
         <Box
           component="span"
@@ -69,9 +77,9 @@ const HeroContent = () => {
             color: "#1FB1F9",
           }}
         >
-          In Comfort &
+          {translate.home.hero.title2}
         </Box>{" "}
-        Confidence
+        {translate.home.hero.title3}
       </Typography>
 
       {/* SUBTITLE */}
@@ -79,10 +87,12 @@ const HeroContent = () => {
         sx={{
           color: "rgba(255,255,255,0.78)",
 
-          fontSize: {
-            xs: 16,
-            md: 18,
-          },
+          fontSize: isRtl
+            ? { xs: 26, md: 28 }
+            : {
+                xs: 16,
+                md: 18,
+              },
 
           lineHeight: 1.9,
 
@@ -91,8 +101,7 @@ const HeroContent = () => {
           mb: 5,
         }}
       >
-        Seamless airport transfers, intercity transportation, and professional
-        chauffeur services across the Kingdom.
+        {translate.home.hero.subtitle}
       </Typography>
 
       {/* BUTTONS */}
@@ -118,7 +127,7 @@ const HeroContent = () => {
 
             textTransform: "none",
 
-            fontSize: 15,
+            fontSize: isRtl ? 18 : 15,
 
             fontWeight: 700,
 
@@ -127,7 +136,7 @@ const HeroContent = () => {
             boxShadow: "0 5px 20px rgba(31,177,249,0.3)",
           }}
         >
-          Book Your Ride
+          {translate.home.hero.bookBtn}
         </Button>
 
         <Button
@@ -142,7 +151,7 @@ const HeroContent = () => {
 
             textTransform: "none",
 
-            fontSize: 15,
+            fontSize: isRtl ? 18 : 15,
 
             fontWeight: 700,
 
@@ -161,7 +170,7 @@ const HeroContent = () => {
             },
           }}
         >
-          Chat with Us
+          {translate.home.hero.chatBtn}
         </Button>
       </Box>
 

@@ -5,6 +5,7 @@ import WifiIcon from "@mui/icons-material/Wifi";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useLocation } from "react-router-dom";
 import useLanguage from "../../hooks/useLanguage";
+import { translations } from "../../i18n";
 
 type CarCardProps = {
   id: string;
@@ -28,6 +29,7 @@ const CarCard = ({
 }: CarCardProps) => {
   const location = useLocation();
   const lang = useLanguage();
+  const translate = translations[lang];
   const isRTL = lang === "ar";
 
   return (
@@ -140,24 +142,24 @@ const CarCard = ({
 
               flexDirection: "column",
 
-              fontSize: 22,
+              fontSize: 21,
             }}
           >
             {name}
             {location.pathname === "/" ? (
-              <Typography
+              <Box
                 component="span"
-                sx={{ color: "text.secondary", fontSize: 13 }}
+                sx={{ color: "text.secondary", fontSize: 14 }}
               >
-                (Or similar)
-              </Typography>
+                {translate.carCard.orSimilar}
+              </Box>
             ) : (
               ""
             )}
           </Typography>
           <Box
             sx={{
-              textAlign: "right",
+              textAlign: "left",
 
               backgroundColor: "#f8fbff",
 
@@ -167,8 +169,11 @@ const CarCard = ({
               py: 1,
             }}
           >
-            <Typography variant="caption" sx={{ color: "#6b7280" }}>
-              STARTING AT
+            <Typography
+              variant="caption"
+              sx={{ color: "#6b7280", fontSize: isRTL ? 16 : 14 }}
+            >
+              {translate.carCard.startingAt}
             </Typography>
             <Typography
               variant="h5"
@@ -247,7 +252,7 @@ const CarCard = ({
             },
           }}
         >
-          Book This Car
+          {translate.carCard.bookBtn}
           <ArrowForwardIcon
             sx={{ fontSize: 18, transform: isRTL ? "rotate(180deg)" : "none" }}
           />

@@ -1,38 +1,43 @@
 import { Box, Container, Grid, Typography } from "@mui/material";
 import { useInView } from "react-intersection-observer";
 import AnimatedCounter from "./AnimatedCounter";
-
-const stats = [
-  {
-    number: 10000,
-    suffix: "+",
-
-    label: "Total Transfers",
-  },
-
-  {
-    number: 5000,
-    suffix: "+",
-
-    label: "Active Travelers",
-  },
-
-  {
-    number: 24,
-    suffix: " / 7",
-
-    label: "Support Availability",
-  },
-
-  {
-    number: 100,
-    suffix: "+",
-
-    label: "Corporate Clients",
-  },
-];
+import useLanguage from "../../../hooks/useLanguage";
+import { translations } from "../../../i18n";
 
 const StatsBanner = () => {
+  const lang = useLanguage();
+  const translate = translations[lang];
+  const isRtl = lang === "ar";
+  const stats = [
+    {
+      number: 10000,
+      suffix: "+",
+
+      label: translate.home.statsBanner.totalTransfers,
+    },
+
+    {
+      number: 5000,
+      suffix: "+",
+
+      label: translate.home.statsBanner.activeTravelers,
+    },
+
+    {
+      number: 24,
+      suffix: " / 7",
+
+      label: translate.home.statsBanner.supportAvailability,
+    },
+
+    {
+      number: 100,
+      suffix: "+",
+
+      label: translate.home.statsBanner.corporateClients,
+    },
+  ];
+
   const { ref, inView } = useInView({
     triggerOnce: true,
 
@@ -179,7 +184,7 @@ const StatsBanner = () => {
 
                       textTransform: "uppercase",
 
-                      fontSize: 12,
+                      fontSize: isRtl ? { xs: 14, md: 16 } : { xs: 10, md: 14 },
                     }}
                   >
                     {item.label}

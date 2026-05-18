@@ -3,9 +3,14 @@ import CarCard from "../../../components/common/CarCard";
 import { cars } from "../../../data/cars";
 import type { Car } from "../../../utils/types";
 import useDelayedNavigate from "../../../hooks/useDelayedNavigate";
+import useLanguage from "../../../hooks/useLanguage";
+import { translations } from "../../../i18n";
 
 const FleetPreviewSection = () => {
   const navigate = useDelayedNavigate();
+  const lang = useLanguage();
+  const translate = translations[lang];
+  const isRtl = lang === "ar";
 
   const handleSelectCar = (car: Car) => {
     navigate("/booking", {
@@ -72,14 +77,14 @@ const FleetPreviewSection = () => {
 
                 color: "#1FB1F9",
 
-                fontSize: 13,
+                fontSize: isRtl ? 16 : 13,
 
                 fontWeight: 700,
 
                 mb: 2.5,
               }}
             >
-              Premium Vehicle Collection
+              {translate.home.fleetSection.badge}
             </Box>
 
             {/* TITLE */}
@@ -93,13 +98,18 @@ const FleetPreviewSection = () => {
 
                 mb: 2,
 
-                fontSize: {
-                  xs: 34,
-                  md: 48,
-                },
+                fontSize: isRtl
+                  ? {
+                      xs: 48,
+                      md: 58,
+                    }
+                  : {
+                      xs: 34,
+                      md: 48,
+                    },
               }}
             >
-              The SpeedLine Fleet
+              {translate.home.fleetSection.title}
             </Typography>
 
             {/* SUBTITLE */}
@@ -111,15 +121,18 @@ const FleetPreviewSection = () => {
 
                 lineHeight: 1.9,
 
-                fontSize: {
-                  xs: 15,
-                  md: 17,
-                },
+                fontSize: isRtl
+                  ? {
+                      xs: 17,
+                      md: 22,
+                    }
+                  : {
+                      xs: 15,
+                      md: 17,
+                    },
               }}
             >
-              From comfortable sedans to spacious luxury vans, our
-              professionally maintained fleet is designed to provide safe,
-              reliable, and comfortable transportation across Saudi Arabia.
+              {translate.home.fleetSection.subTitle}
             </Typography>
           </Box>
 
@@ -141,7 +154,7 @@ const FleetPreviewSection = () => {
               },
             }}
           >
-            Explore Full Fleet
+            {translate.home.fleetSection.btn}
           </Button>
         </Box>
         {/* Cards */}

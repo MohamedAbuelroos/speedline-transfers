@@ -12,6 +12,7 @@ import useDelayedNavigate from "../../../hooks/useDelayedNavigate";
 
 const HeroSection = () => {
   const navigate = useDelayedNavigate();
+
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
 

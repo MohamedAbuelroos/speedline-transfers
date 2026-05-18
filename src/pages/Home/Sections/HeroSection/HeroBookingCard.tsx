@@ -13,6 +13,8 @@ import {
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PeopleIcon from "@mui/icons-material/People";
 import { allLocations } from "../../../../data/locations";
+import useLanguage from "../../../../hooks/useLanguage";
+import { translations } from "../../../../i18n";
 
 type Props = {
   form: any;
@@ -32,6 +34,9 @@ const HeroBookingCard = ({
   handleSearch,
   handleChange,
 }: Props) => {
+  const lang = useLanguage();
+  const translate = translations[lang];
+  const isRtl = lang === "ar";
   return (
     <Paper
       elevation={0}
@@ -59,17 +64,22 @@ const HeroBookingCard = ({
         sx={{
           fontWeight: 800,
 
-          fontSize: {
-            xs: 24,
-            md: 28,
-          },
+          fontSize: isRtl
+            ? {
+                xs: 24,
+                md: 38,
+              }
+            : {
+                xs: 30,
+                md: 35,
+              },
 
           color: "#111827",
 
           mb: 1,
         }}
       >
-        Quick Transfer Quote
+        {translate.home.bookingCard.title}
       </Typography>
 
       <Typography
@@ -77,11 +87,11 @@ const HeroBookingCard = ({
           color: "#6b7280",
 
           lineHeight: 1.8,
-
+          fontSize: isRtl ? 20 : 18,
           mb: 3,
         }}
       >
-        Get instant estimated pricing across Saudi Arabia.
+        {translate.home.bookingCard.subtitle}
       </Typography>
 
       <Grid container spacing={2.5}>
@@ -97,7 +107,7 @@ const HeroBookingCard = ({
             renderInput={(params) => (
               <TextField
                 {...params}
-                label="Pickup Location"
+                label={translate.home.bookingCard.pickupLabel}
                 fullWidth
                 slotProps={{
                   ...params.slotProps,
@@ -127,7 +137,7 @@ const HeroBookingCard = ({
             renderInput={(params) => (
               <TextField
                 {...params}
-                label="Drop-off Location"
+                label={translate.home.bookingCard.dropoffLabel}
                 fullWidth
                 slotProps={{
                   ...params.slotProps,
@@ -150,7 +160,7 @@ const HeroBookingCard = ({
           <TextField
             fullWidth
             type="number"
-            label="Passengers"
+            label={translate.home.bookingCard.passengersLabel}
             value={form.passengers}
             onChange={(e) => handleChange("passengers", Number(e.target.value))}
             slotProps={{
@@ -201,7 +211,7 @@ const HeroBookingCard = ({
                 }}
               />
             ) : (
-              "Calculate Transfer"
+              translate.home.bookingCard.btn
             )}
           </Button>
         </Grid>
@@ -221,20 +231,22 @@ const HeroBookingCard = ({
           mt: 3,
         }}
       >
-        {["Instant Confirmation", "24/7 Support", "Licensed Drivers"].map(
-          (item, index) => (
-            <Typography
-              key={index}
-              sx={{
-                color: "#6b7280",
+        {[
+          translate.home.bookingCard.feature1,
+          translate.home.bookingCard.feature2,
+          translate.home.bookingCard.feature3,
+        ].map((item, index) => (
+          <Typography
+            key={index}
+            sx={{
+              color: "#6b7280",
 
-                fontSize: 13,
-              }}
-            >
-              ✓ {item}
-            </Typography>
-          ),
-        )}
+              fontSize: isRtl ? 15 : 13,
+            }}
+          >
+            ✓ {item}
+          </Typography>
+        ))}
       </Box>
     </Paper>
   );

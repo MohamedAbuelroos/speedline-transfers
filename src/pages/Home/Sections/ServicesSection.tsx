@@ -9,65 +9,58 @@ import vipImg from "../../../assets/about/VIPService.webp";
 import hourlyImg from "../../../assets/about/Hourly.webp";
 import useDelayedNavigate from "../../../hooks/useDelayedNavigate";
 import CorporateImg from "../../../assets/about/Corporate.webp";
-
-const services = [
-  {
-    title: "Airport Transfers",
-    serviceType: "airport",
-    description:
-      "Professional airport arrivals and departures across all major Saudi airports with real-time flight monitoring.",
-
-    image: airportImg,
-  },
-
-  {
-    title: "Event Transportation",
-    serviceType: "events",
-    description:
-      "Reliable group and individual transportation for weddings, conferences, exhibitions, sporting events.",
-
-    image: religiousImg,
-  },
-
-  {
-    title: "City-to-City Transfers",
-    serviceType: "city",
-    description:
-      "Comfortable intercity rides between Riyadh, Jeddah, Madinah, Makkah, and beyond.",
-
-    image: cityImg,
-  },
-
-  {
-    title: "VIP Executive Travel",
-    serviceType: "vip",
-    description:
-      "Private chauffeur solutions tailored for executives, diplomats, and premium guests.",
-
-    image: vipImg,
-  },
-
-  {
-    title: "Hourly Chauffeur Service",
-    serviceType: "hourly",
-    description:
-      "Flexible chauffeur bookings for meetings, shopping, tours, and business travel.",
-
-    image: hourlyImg,
-  },
-
-  {
-    title: "Corporate Travel",
-    serviceType: "corporate",
-    description:
-      "Professional transportation solutions tailored for executives, business meetings, conferences, and corporate clients.",
-
-    image: CorporateImg,
-  },
-];
+import useLanguage from "../../../hooks/useLanguage";
+import { translations } from "../../../i18n";
 
 const ServicesSection = () => {
+  const lang = useLanguage();
+  const translate = translations[lang];
+  const isRtl = lang === "ar";
   const navigate = useDelayedNavigate();
+
+  const services = [
+    {
+      title: translate.home.servicesSection.airport.title,
+      serviceType: "airport",
+      description: translate.home.servicesSection.airport.description,
+      image: airportImg,
+    },
+
+    {
+      title: translate.home.servicesSection.events.title,
+      serviceType: "events",
+      description: translate.home.servicesSection.events.description,
+      image: religiousImg,
+    },
+
+    {
+      title: translate.home.servicesSection.city.title,
+      serviceType: "city",
+      description: translate.home.servicesSection.city.description,
+      image: cityImg,
+    },
+
+    {
+      title: translate.home.servicesSection.vip.title,
+      serviceType: "vip",
+      description: translate.home.servicesSection.vip.description,
+      image: vipImg,
+    },
+
+    {
+      title: translate.home.servicesSection.hourly.title,
+      serviceType: "hourly",
+      description: translate.home.servicesSection.hourly.description,
+      image: hourlyImg,
+    },
+
+    {
+      title: translate.home.servicesSection.corporate.title,
+      serviceType: "corporate",
+      description: translate.home.servicesSection.corporate.description,
+      image: CorporateImg,
+    },
+  ];
   return (
     <Box
       sx={{
@@ -127,21 +120,26 @@ const ServicesSection = () => {
 
                 fontWeight: 700,
 
-                fontSize: 13,
+                fontSize: isRtl ? 16 : 14,
 
                 mb: 2,
               }}
             >
-              OUR SERVICES
+              {translate.home.servicesSection.badge}
             </Box>
 
             {/* TITLE */}
             <Typography
               sx={{
-                fontSize: {
-                  xs: 36,
-                  md: 48,
-                },
+                fontSize: isRtl
+                  ? {
+                      xs: 46,
+                      md: 58,
+                    }
+                  : {
+                      xs: 36,
+                      md: 48,
+                    },
 
                 lineHeight: 1.1,
 
@@ -150,9 +148,9 @@ const ServicesSection = () => {
                 mb: 2,
               }}
             >
-              Seamless Travel Solutions
-              <br />
-              for Every Journey
+              {translate.home.servicesSection.title1}
+              {isRtl ? " " : <br />}
+              {translate.home.servicesSection.title2}
             </Typography>
 
             {/* DESCRIPTION */}
@@ -162,11 +160,10 @@ const ServicesSection = () => {
 
                 lineHeight: 1.9,
 
-                fontSize: 17,
+                fontSize: isRtl ? 25 : 20,
               }}
             >
-              Professional transportation designed to meet the needs of all
-              travelers in Saudi Arabia.
+              {translate.home.servicesSection.desc}
             </Typography>
           </Box>
 
@@ -188,7 +185,7 @@ const ServicesSection = () => {
               },
             }}
           >
-            View All Services
+            {translate.home.servicesSection.btn}
           </Button>
         </Box>
 
@@ -280,7 +277,7 @@ const ServicesSection = () => {
                     sx={{
                       fontWeight: 800,
 
-                      fontSize: 24,
+                      fontSize: isRtl ? 34 : 24,
 
                       mb: 2,
                     }}
@@ -297,7 +294,7 @@ const ServicesSection = () => {
 
                       mb: 3,
 
-                      fontSize: 14,
+                      fontSize: isRtl ? 18 : 14,
                     }}
                   >
                     {service.description}
@@ -328,7 +325,7 @@ const ServicesSection = () => {
                       },
                     }}
                   >
-                    Learn More
+                    {translate.home.servicesSection.learnMore}
                     <ArrowOutwardRoundedIcon fontSize="small" />
                   </Box>
                 </Box>

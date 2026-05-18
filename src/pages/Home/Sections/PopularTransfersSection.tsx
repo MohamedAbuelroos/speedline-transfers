@@ -2,9 +2,14 @@ import { Box, Container, Typography, Grid, Button } from "@mui/material";
 import { travelPackages } from "../../../data/travelPackages";
 import PackageCard from "../../../components/common/PackageCard";
 import useDelayedNavigate from "../../../hooks/useDelayedNavigate";
+import useLanguage from "../../../hooks/useLanguage";
+import { translations } from "../../../i18n";
 
 const PopularTransfersSection = () => {
   const navigate = useDelayedNavigate();
+  const lang = useLanguage();
+  const translate = translations[lang];
+  const isRtl = lang === "ar";
 
   return (
     <Box sx={{ py: 8, px: { xs: 2, md: 12 }, background: "#fff" }}>
@@ -53,14 +58,14 @@ const PopularTransfersSection = () => {
 
                 color: "#F5993D",
 
-                fontSize: 13,
+                fontSize: isRtl ? 16 : 13,
 
                 fontWeight: 700,
 
                 mb: 2,
               }}
             >
-              Popular Travel Packages
+              {translate.home.popularPackages.badge}
             </Box>
 
             {/* TITLE */}
@@ -74,13 +79,18 @@ const PopularTransfersSection = () => {
 
                 mb: 1.5,
 
-                fontSize: {
-                  xs: 32,
-                  md: 44,
-                },
+                fontSize: isRtl
+                  ? {
+                      xs: 48,
+                      md: 58,
+                    }
+                  : {
+                      xs: 34,
+                      md: 48,
+                    },
               }}
             >
-              Most Popular Transfers
+              {translate.home.popularPackages.title}
             </Typography>
 
             {/* SUBTITLE */}
@@ -92,15 +102,18 @@ const PopularTransfersSection = () => {
 
                 lineHeight: 1.9,
 
-                fontSize: {
-                  xs: 15,
-                  md: 16,
-                },
+                fontSize: isRtl
+                  ? {
+                      xs: 17,
+                      md: 22,
+                    }
+                  : {
+                      xs: 15,
+                      md: 17,
+                    },
               }}
             >
-              Fixed transparent pricing with professional chauffeurs, premium
-              vehicles, airport meet & greet, and seamless transportation across
-              Saudi Arabia.
+              {translate.home.popularPackages.subTitle}
             </Typography>
           </Box>
 
@@ -122,7 +135,7 @@ const PopularTransfersSection = () => {
               },
             }}
           >
-            Explore All Packages
+            {translate.home.popularPackages.btn}
           </Button>
         </Box>
 
