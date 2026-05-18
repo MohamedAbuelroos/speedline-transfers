@@ -16,7 +16,7 @@ export const travelPackages: TravelPackage[] = [
 
     category: "Religious",
 
-    duration: "3 Days / 2 Nights",
+    duration: "3 Routes",
 
     startingPrice: 385,
 
@@ -597,6 +597,5 @@ export const travelPackages: TravelPackage[] = [
     ],
 
     featured: true,
-    popular: true,
   },
 ];

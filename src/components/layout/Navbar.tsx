@@ -50,21 +50,25 @@ const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const navLinks = [
-    { label: translate.Home, path: "/", icon: <HomeIcon /> },
-    { label: translate.Fleet, path: "/fleet", icon: <DirectionsCarIcon /> },
+    { label: translate.navbar.home, path: "/", icon: <HomeIcon /> },
     {
-      label: translate.Services,
+      label: translate.navbar.fleet,
+      path: "/fleet",
+      icon: <DirectionsCarIcon />,
+    },
+    {
+      label: translate.navbar.services,
       path: "/services",
       icon: <MiscellaneousServicesIcon />,
     },
     {
-      label: translate.Packages,
+      label: translate.navbar.packages,
       path: "/packages",
       icon: <CardGiftcardIcon />,
     },
-    { label: translate.About, path: "/about", icon: <InfoIcon /> },
+    { label: translate.navbar.about, path: "/about", icon: <InfoIcon /> },
     {
-      label: translate.Contact,
+      label: translate.navbar.contact,
       path: "/contact",
       icon: <ContactSupportIcon />,
     },
@@ -235,7 +239,7 @@ const Navbar = () => {
                 },
               }}
             >
-              Book Now
+              {translate.navbar.book}
             </Button>
             {/* Mobile Menu Icon */}
             {isMobile && (
@@ -281,13 +285,14 @@ const Navbar = () => {
             variant="h6"
             sx={{
               fontWeight: 800,
+              textAlign: "center",
 
-              fontSize: 24,
+              fontSize: isRTL ? 30 : 24,
 
               color: "#111827",
             }}
           >
-            Menu
+            {translate.navbar.droweTitle}
           </Typography>
 
           <List>

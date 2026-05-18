@@ -12,6 +12,8 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import NearMeIcon from "@mui/icons-material/NearMe";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
+import useLanguage from "../../../../hooks/useLanguage";
+import { translations } from "../../../../i18n";
 
 type Props = {
   open: boolean;
@@ -32,6 +34,10 @@ const TransferEstimateDialog = ({
   loading,
   handleContinue,
 }: Props) => {
+  const lang = useLanguage();
+  const translate = translations[lang];
+  const isRtl = lang === "ar";
+
   return (
     <Dialog
       open={open}
@@ -50,7 +56,7 @@ const TransferEstimateDialog = ({
       <Box
         sx={{
           background: "linear-gradient(135deg, #1FB1F9 0%, #1697d2 100%)",
-
+          textAlign: "left",
           px: 4,
           py: 3,
 
@@ -61,20 +67,21 @@ const TransferEstimateDialog = ({
           sx={{
             fontWeight: 800,
 
-            fontSize: 30,
+            fontSize: isRtl ? { xs: 35, md: 40 } : { xs: 20, md: 30 },
 
             mb: 1,
           }}
         >
-          Estimated Transfer
+          {translate.home.estimateDialog.title}
         </Typography>
 
         <Typography
           sx={{
             opacity: 0.88,
+            fontSize: isRtl ? 20 : 16,
           }}
         >
-          Review your estimated trip details before continuing.
+          {translate.home.estimateDialog.desc}
         </Typography>
       </Box>
 
@@ -87,25 +94,25 @@ const TransferEstimateDialog = ({
         {[
           {
             icon: <LocationOnIcon color="primary" />,
-            label: "Pickup",
+            label: translate.home.estimateDialog.pickupLabel,
             value: result?.from,
           },
 
           {
             icon: <ArrowForwardIcon color="primary" />,
-            label: "Destination",
+            label: translate.home.estimateDialog.destinationLabel,
             value: result?.to,
           },
 
           {
             icon: <NearMeIcon color="primary" />,
-            label: "Distance",
+            label: translate.home.estimateDialog.distanceLabel,
             value: result?.distance,
           },
 
           {
             icon: <DirectionsCarIcon color="primary" />,
-            label: "Suggested Vehicle",
+            label: translate.home.estimateDialog.suggestedLabel,
             value: result?.car?.category,
           },
         ].map((item, index) => (
@@ -113,7 +120,7 @@ const TransferEstimateDialog = ({
             <Box
               sx={{
                 display: "flex",
-
+                flexDirection: isRtl ? "row-reverse" : "row",
                 justifyContent: "space-between",
 
                 alignItems: "center",
@@ -125,7 +132,7 @@ const TransferEstimateDialog = ({
               <Box
                 sx={{
                   display: "flex",
-
+                  flexDirection: isRtl ? "row-reverse" : "row",
                   alignItems: "center",
 
                   gap: 1.5,
@@ -153,6 +160,7 @@ const TransferEstimateDialog = ({
                 <Typography
                   sx={{
                     color: "#6b7280",
+                    fontSize: isRtl ? 20 : 16,
                   }}
                 >
                   {item.label}
@@ -189,6 +197,8 @@ const TransferEstimateDialog = ({
             border: "1px solid #dbeafe",
 
             display: "flex",
+            flexDirection: isRtl ? "row-reverse" : "row",
+            textAlign: "left",
 
             justifyContent: "space-between",
 
@@ -199,11 +209,11 @@ const TransferEstimateDialog = ({
             <Typography
               sx={{
                 color: "#6b7280",
-
+                fontSize: isRtl ? 20 : 16,
                 mb: 0.5,
               }}
             >
-              Estimated Price
+              {translate.home.estimateDialog.estimated}
             </Typography>
 
             <Typography
@@ -232,10 +242,10 @@ const TransferEstimateDialog = ({
 
               fontWeight: 700,
 
-              fontSize: 13,
+              fontSize: isRtl ? 22 : 13,
             }}
           >
-            Available
+            {translate.home.estimateDialog.available}
           </Box>
         </Box>
 
@@ -244,15 +254,14 @@ const TransferEstimateDialog = ({
           sx={{
             mt: 2,
 
-            fontSize: 13,
+            fontSize: isRtl ? 16 : 13,
 
             color: "#6b7280",
-
+            textAlign: "left",
             lineHeight: 1.8,
           }}
         >
-          Final pricing may vary slightly depending on route, traffic
-          conditions, and selected vehicle category.
+          {translate.home.estimateDialog.note}
         </Typography>
 
         {/* ACTIONS */}
@@ -279,7 +288,7 @@ const TransferEstimateDialog = ({
               fontWeight: 700,
             }}
           >
-            Cancel
+            {translate.home.estimateDialog.cancel}
           </Button>
 
           <Button
@@ -307,7 +316,7 @@ const TransferEstimateDialog = ({
                 }}
               />
             ) : (
-              "Continue Booking"
+              translate.home.estimateDialog.book
             )}
           </Button>
         </Box>
