@@ -1,13 +1,31 @@
 import { Resend } from "resend";
-import type { BookingData } from "../src/utils/bookingTypes.ts";
-import { bookingCustomerTemplate } from "../src/emails/bookingCustomerTemplate";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+const bookingCustomerTemplate = (name: string) => {
+  return `
+    <div>
+      <h1>
+        Hello ${name}
+      </h1>
+
+      <p>
+        Booking confirmed.
+      </p>
+    </div>
+  `;
+};
 export async function POST(req: Request) {
   try {
-    const body = (await req.json()) as BookingData;
+    const body = (await req.json()) as {
+      name: string;
+      email: string;
+      bookingId: string;
+      from: string;
+      to: string;
+      price: number;
+    };
 
-    const { email } = body;
+    const { email, name } = body;
 
     // CUSTOMER EMAIL
     await resend.emails.send({
@@ -17,7 +35,7 @@ export async function POST(req: Request) {
 
       subject: "Your Booking Request Has Been Received",
 
-      html: bookingCustomerTemplate(body),
+      html: bookingCustomerTemplate(name),
     });
 
     // COMPANY EMAIL
