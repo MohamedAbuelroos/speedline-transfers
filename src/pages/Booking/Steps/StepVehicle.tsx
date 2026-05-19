@@ -14,8 +14,6 @@ const StepVehicle = ({
   onNext,
   onBack,
 }: BookingStepProps) => {
-  console.log(bookingData);
-
   const isValid =
     bookingData.car &&
     (bookingData.type === "hourly" || bookingData.adults > 0);

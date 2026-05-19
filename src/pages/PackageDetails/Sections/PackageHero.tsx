@@ -1,13 +1,22 @@
 import { Box, Typography, Chip, Stack } from "@mui/material";
 import packageHeroImg from "../../../assets/packages/PackageHero.webp";
 
-import type { TravelPackage } from "../../../utils/types";
+import type { PackageTranslation, TravelPackage } from "../../../utils/types";
+import useLanguage from "../../../hooks/useLanguage";
+import { translations } from "../../../i18n";
 
 type Props = {
   data: TravelPackage;
 };
 
 const PackageHero = ({ data }: Props) => {
+  const lang = useLanguage();
+  const translate = translations[lang];
+  // const isRtl = lang === "ar";
+
+  const packageTranslation = translate.packages[
+    data.id as keyof typeof translate.packages
+  ] as PackageTranslation;
   return (
     <Box
       sx={{
@@ -26,7 +35,7 @@ const PackageHero = ({ data }: Props) => {
       <Box
         component="img"
         src={packageHeroImg}
-        alt={data.title}
+        alt={packageTranslation.title}
         loading="lazy"
         sx={{
           width: "100%",
@@ -80,7 +89,7 @@ const PackageHero = ({ data }: Props) => {
             }}
           >
             <Chip
-              label={data.category}
+              label={packageTranslation.category}
               sx={{
                 backgroundColor: "rgba(255,255,255,0.15)",
                 color: "#fff",
@@ -89,7 +98,7 @@ const PackageHero = ({ data }: Props) => {
               }}
             />
             <Chip
-              label={data.duration}
+              label={packageTranslation.duration}
               sx={{
                 backgroundColor: "#f59e0b",
                 color: "#fff",
@@ -112,7 +121,7 @@ const PackageHero = ({ data }: Props) => {
               mb: 1,
             }}
           >
-            {data.title}
+            {packageTranslation.title}
           </Typography>
 
           {/* SUBTITLE */}
@@ -128,7 +137,7 @@ const PackageHero = ({ data }: Props) => {
               mb: 3,
             }}
           >
-            {data.subtitle}
+            {packageTranslation.subtitle}
           </Typography>
 
           {/* DESCRIPTION */}
@@ -141,7 +150,7 @@ const PackageHero = ({ data }: Props) => {
               maxWidth: "650px",
             }}
           >
-            {data.overview}
+            {packageTranslation.overview}
           </Typography>
 
           {/* BUTTONS */}

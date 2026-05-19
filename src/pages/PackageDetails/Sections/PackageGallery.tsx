@@ -2,6 +2,7 @@ import { Box, Grid, Typography } from "@mui/material";
 import { useState } from "react";
 import type { TravelPackage } from "../../../utils/types";
 import FullscreenGallery from "./FullscreenGallery ";
+import useLanguage from "../../../hooks/useLanguage";
 
 type Props = {
   data: TravelPackage;
@@ -10,6 +11,8 @@ type Props = {
 const PackageGallery = ({ data }: Props) => {
   const [open, setOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const lang = useLanguage();
+
   return (
     <>
       {/* GALLERY */}
@@ -107,7 +110,11 @@ const PackageGallery = ({ data }: Props) => {
                         variant="body1"
                         sx={{ fontSize: { xs: 14, md: 18 } }}
                       >
-                        Click to view all
+                        {lang === "ru"
+                          ? "Нажмите, чтобы посмотреть все"
+                          : lang === "ar"
+                            ? "انقر لعرض الكل"
+                            : "Click to view all"}
                       </Typography>
                     </Box>
                   </Box>
