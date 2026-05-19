@@ -45,9 +45,9 @@ const Navbar = () => {
       },
 
       body: JSON.stringify({
-        customerEmail: "mohamedabuelroos31@gmail.com",
+        customerEmail: "arabea110@gmail.com",
 
-        customerName: "Mohamed",
+        customerName: "Ahmed Rabea",
       }),
     });
 
