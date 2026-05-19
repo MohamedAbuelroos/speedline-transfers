@@ -8,6 +8,7 @@ import StatsBanner from "./Sections/StatsBanner";
 import PartnersSection from "./Sections/PartnersSection";
 import Seo from "../../components/common/Seo";
 const Home = () => {
+
   return (
     <>
       <Seo

@@ -36,6 +36,26 @@ import { languages } from "../../utils/lang";
 import useDelayedNavigate from "../../hooks/useDelayedNavigate";
 
 const Navbar = () => {
+  const testEmail = async () => {
+    const response = await fetch("/api/send-email", {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify({
+        customerEmail: "mohamedabuelroos31@gmail.com",
+
+        customerName: "Mohamed",
+      }),
+    });
+
+    const data = await response.json();
+
+    console.log(data);
+  };
+
   const navigate = useDelayedNavigate();
   const location = useLocation();
   const theme = useTheme();
@@ -213,7 +233,7 @@ const Navbar = () => {
             {/* Book Button */}
             <Button
               variant="contained"
-              onClick={() => navigate("/booking")}
+              onClick={testEmail}
               sx={{
                 borderRadius: "999px",
 
