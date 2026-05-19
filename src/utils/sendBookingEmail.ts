@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import type { BookingData } from "./bookingTypes";
 
 export const sendBookingEmail = async (data: BookingData) => {
