@@ -1,32 +1,607 @@
 /// <reference types="node" />
+
 import { Resend } from "resend";
+
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const bookingCustomerTemplate = (name: string) => {
-  return `
-    <div>
-      <h1>
-        Hello ${name}
-      </h1>
+type BookingBody = {
+  bookingId: string;
 
-      <p>
-        Booking confirmed.
-      </p>
+  name: string;
+
+  email: string;
+
+  phone?: string;
+
+  from: string;
+
+  to: string;
+
+  type?: string;
+
+  date?: string;
+
+  time?: string;
+
+  returnDate?: string;
+
+  returnTime?: string;
+
+  roundTrip?: boolean;
+
+  flightNumber?: string;
+
+  notes?: string;
+
+  price: number;
+
+  adults?: number;
+
+  children?: number;
+
+  infants?: number;
+
+  car?: {
+    name?: string;
+
+    category?: string;
+
+    bags?: number;
+  };
+
+  packageData?: {
+    id?: string;
+  };
+};
+
+const formatDate = (date?: string) => {
+  if (!date) return "-";
+
+  return new Date(date).toLocaleDateString();
+};
+
+const formatTime = (time?: string) => {
+  if (!time) return "-";
+
+  return new Date(time).toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+};
+
+const getTransferType = (type?: string) => {
+  switch (type) {
+    case "airport":
+      return "Airport Transfer";
+
+    case "city":
+      return "City Transfer";
+
+    case "hourly":
+      return "Hourly Chauffeur";
+
+    case "package":
+      return "Travel Package";
+
+    default:
+      return "Transfer Service";
+  }
+};
+
+const bookingCustomerTemplate = (data: BookingBody) => {
+  const processingFee = Number((data.price * 0.03).toFixed(2));
+
+  const totalPrice = Number((data.price + processingFee).toFixed(2));
+
+  const totalPassengers =
+    (data.adults || 0) + (data.children || 0) + (data.infants || 0);
+
+  return `
+  <div
+    style="
+      background:#f5f7fb;
+      padding:40px 16px;
+      font-family:Arial,sans-serif;
+      color:#111827;
+    "
+  >
+    <div
+      style="
+        max-width:720px;
+        margin:auto;
+        background:#ffffff;
+        border-radius:24px;
+        overflow:hidden;
+        box-shadow:0 12px 40px rgba(0,0,0,0.08);
+      "
+    >
+      <!-- HEADER -->
+      <div
+        style="
+          background:
+          linear-gradient(
+            135deg,
+            #1FB1F9 0%,
+            #1697d2 100%
+          );
+
+          padding:40px 24px;
+          text-align:center;
+        "
+      >
+        <img
+          src="https://speedlinetransfers.com/logo.png"
+          alt="SpeedLine Transfers"
+          style="
+            height:60px;
+            width:auto;
+            object-fit:contain;
+            margin-bottom:16px;
+          "
+        />
+
+        <h1
+          style="
+            margin:0;
+            color:white;
+            font-size:32px;
+            font-weight:800;
+          "
+        >
+          Booking Confirmation
+        </h1>
+
+        <p
+          style="
+            margin-top:12px;
+            color:rgba(255,255,255,0.92);
+            font-size:15px;
+          "
+        >
+          Your booking request has been received successfully.
+        </p>
+      </div>
+
+      <!-- BODY -->
+      <div style="padding:36px 28px;">
+        <h2
+          style="
+            margin-top:0;
+            font-size:28px;
+          "
+        >
+          Hello ${data.name},
+        </h2>
+
+        <p
+          style="
+            color:#4b5563;
+            line-height:1.8;
+            margin-bottom:28px;
+          "
+        >
+          Thank you for choosing SpeedLine Transfers.
+          Our operations team is now reviewing your reservation.
+        </p>
+
+        <!-- BOOKING DETAILS -->
+        <div
+          style="
+            background:#f8fafc;
+            border-radius:20px;
+            padding:24px;
+            margin-bottom:24px;
+          "
+        >
+          <h3
+            style="
+              margin-top:0;
+              margin-bottom:20px;
+              font-size:22px;
+            "
+          >
+            Booking Details
+          </h3>
+
+          <table
+            style="
+              width:100%;
+              border-collapse:collapse;
+            "
+          >
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Booking ID
+              </td>
+
+              <td
+                style="
+                  padding:10px 0;
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${data.bookingId}
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Service
+              </td>
+
+              <td
+                style="
+                  padding:10px 0;
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${getTransferType(data.type)}
+              </td>
+            </tr>
+
+            ${
+              data.packageData?.id
+                ? `
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Package
+              </td>
+
+              <td
+                style="
+                  padding:10px 0;
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${data.packageData.id}
+              </td>
+            </tr>
+            `
+                : ""
+            }
+
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Route
+              </td>
+
+              <td
+                style="
+                  padding:10px 0;
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${data.from} → ${data.to}
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Date
+              </td>
+
+              <td
+                style="
+                  padding:10px 0;
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${formatDate(data.date)}
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Time
+              </td>
+
+              <td
+                style="
+                  padding:10px 0;
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${formatTime(data.time)}
+              </td>
+            </tr>
+
+            ${
+              data.flightNumber
+                ? `
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Flight Number
+              </td>
+
+              <td
+                style="
+                  padding:10px 0;
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${data.flightNumber}
+              </td>
+            </tr>
+            `
+                : ""
+            }
+
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Vehicle
+              </td>
+
+              <td
+                style="
+                  padding:10px 0;
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${data.car?.name || "-"}
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Passengers
+              </td>
+
+              <td
+                style="
+                  padding:10px 0;
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${totalPassengers}
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Luggage
+              </td>
+
+              <td
+                style="
+                  padding:10px 0;
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${data.car?.bags || 0} PCS
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Trip Type
+              </td>
+
+              <td
+                style="
+                  padding:10px 0;
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${data.roundTrip ? "Round Trip" : "One Way"}
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        ${
+          data.roundTrip
+            ? `
+        <div
+          style="
+            background:#f8fafc;
+            border-radius:20px;
+            padding:24px;
+            margin-bottom:24px;
+          "
+        >
+          <h3
+            style="
+              margin-top:0;
+              margin-bottom:18px;
+            "
+          >
+            Return Transfer
+          </h3>
+
+          <table
+            style="
+              width:100%;
+              border-collapse:collapse;
+            "
+          >
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Return Date
+              </td>
+
+              <td
+                style="
+                  padding:10px 0;
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${formatDate(data.returnDate)}
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Return Time
+              </td>
+
+              <td
+                style="
+                  padding:10px 0;
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${formatTime(data.returnTime)}
+              </td>
+            </tr>
+          </table>
+        </div>
+        `
+            : ""
+        }
+
+        ${
+          data.notes
+            ? `
+        <div
+          style="
+            background:#fff7ed;
+            border-radius:18px;
+            padding:20px;
+            margin-bottom:24px;
+          "
+        >
+          <h3
+            style="
+              margin-top:0;
+              margin-bottom:12px;
+            "
+          >
+            Additional Notes
+          </h3>
+
+          <p
+            style="
+              margin:0;
+              line-height:1.8;
+              color:#444;
+            "
+          >
+            ${data.notes}
+          </p>
+        </div>
+        `
+            : ""
+        }
+
+        <!-- PRICE -->
+        <div
+          style="
+            border-top:1px solid #e5e7eb;
+            padding-top:24px;
+          "
+        >
+          <table style="width:100%;">
+            <tr>
+              <td
+                style="
+                  padding:10px 0;
+                  color:#6b7280;
+                "
+              >
+                Transfer Price
+              </td>
+
+              <td
+                style="
+                  text-align:right;
+                  padding:10px 0;
+                "
+              >
+                SAR ${data.price}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                style="
+                  padding:10px 0;
+                  color:#6b7280;
+                "
+              >
+                Payment Processing Fee (3%)
+              </td>
+
+              <td
+                style="
+                  text-align:right;
+                  padding:10px 0;
+                "
+              >
+                SAR ${processingFee}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                style="
+                  padding-top:18px;
+                  font-size:22px;
+                  font-weight:800;
+                "
+              >
+                Total
+              </td>
+
+              <td
+                style="
+                  text-align:right;
+                  padding-top:18px;
+                  font-size:22px;
+                  font-weight:800;
+                  color:#1FB1F9;
+                "
+              >
+                SAR ${totalPrice}
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- FOOTER -->
+        <div
+          style="
+            margin-top:40px;
+            text-align:center;
+            color:#6b7280;
+            font-size:14px;
+            line-height:1.8;
+          "
+        >
+          SpeedLine Transfers
+
+          <br />
+
+          Professional Transportation Across Saudi Arabia
+
+          <br /><br />
+
+          © ${new Date().getFullYear()}
+          SpeedLine Transfers
+        </div>
+      </div>
     </div>
+  </div>
   `;
 };
+
 export async function POST(req: Request) {
   try {
-    const body = (await req.json()) as {
-      name: string;
-      email: string;
-      bookingId: string;
-      from: string;
-      to: string;
-      price: number;
-    };
+    const body = (await req.json()) as BookingBody;
 
-    const { email, name } = body;
+    const { email } = body;
 
     // CUSTOMER EMAIL
     await resend.emails.send({
@@ -36,55 +611,8 @@ export async function POST(req: Request) {
 
       subject: "Your Booking Request Has Been Received",
 
-      html: bookingCustomerTemplate(name),
+      html: bookingCustomerTemplate(body),
     });
-
-    // COMPANY EMAIL
-    // await resend.emails.send({
-    //   from: "SpeedLine Transfers <noreply@speedlinetransfers.com>",
-
-    //   to: ["mohamedabuelroos31@gmail.com"],
-
-    //   subject: "New Booking Request as company",
-
-    //   html: `
-    //     <div
-    //       style="
-    //         font-family: Arial;
-    //         padding: 20px;
-    //       "
-    //     >
-    //       <h2>
-    //         New Booking Request
-    //       </h2>
-
-    //       <p>
-    //         <strong>Name:</strong>
-    //         ${name}
-    //       </p>
-
-    //       <p>
-    //         <strong>Email:</strong>
-    //         ${email}
-    //       </p>
-
-    //       <p>
-    //         <strong>Route:</strong>
-    //         ${from} → ${to}
-    //       </p>
-
-    //       <p>
-    //         <strong>Price:</strong>
-    //         SAR ${price}
-    //       </p>
-
-    //       <p>
-    //         <strong>Booking ID:</strong>
-    //         ${bookingId}
-    //       </p>
-    //     </div>
-    //   `,
-    // });
 
     return Response.json({
       success: true,
