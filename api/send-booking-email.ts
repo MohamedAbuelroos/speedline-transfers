@@ -1,6 +1,6 @@
 import { Resend } from "resend";
-import type { BookingData } from "../src/utils/bookingTypes";
-import { bookingCustomerTemplate } from "../src/emails/bookingCustomerTemplate";
+import type { BookingData } from "../src/utils/bookingTypes.ts";
+import { bookingCustomerTemplate } from "../src/emails/bookingCustomerTemplate.ts";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
