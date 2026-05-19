@@ -13,6 +13,9 @@ import { getPrice } from "../../../utils/pricing";
 import { useRef } from "react";
 import PriceLoader from "../../../components/common/PriceLoader";
 import type { BookingData } from "../../../utils/bookingTypes";
+import useLanguage from "../../../hooks/useLanguage";
+import { translations } from "../../../i18n";
+import type { PackageTranslation } from "../../../utils/types";
 
 type SummarySectionProps = {
   data: BookingData;
@@ -23,6 +26,14 @@ type SummarySectionProps = {
 };
 
 const SummarySection = ({ data, onConfirm, steps }: SummarySectionProps) => {
+  const lang = useLanguage();
+  const translate = translations[lang];
+  // const isRtl = lang === "ar";
+
+  const packageTranslation = translate.packages[
+    data.packageData?.id as keyof typeof translate.packages
+  ] as PackageTranslation;
+
   const getValue = (val: string) => val || "Not set";
   const formatReturnTime = (dateStr: string) =>
     new Date(dateStr).toLocaleTimeString("en-US", {
@@ -122,7 +133,7 @@ const SummarySection = ({ data, onConfirm, steps }: SummarySectionProps) => {
               mb: 2,
             }}
           >
-            {data.packageData?.title} Package
+            {packageTranslation?.title} Package
           </Typography>
         )}
         {/* FROM & TO */}

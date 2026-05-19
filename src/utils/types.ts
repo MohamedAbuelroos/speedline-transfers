@@ -21,6 +21,8 @@ export interface TravelPackage {
 
   slug: string;
 
+  category?: string;
+
   startingPrice: number;
 
   coverImage: string;

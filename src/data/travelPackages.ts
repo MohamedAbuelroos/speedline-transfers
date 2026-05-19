@@ -10,7 +10,7 @@ export const travelPackages: TravelPackage[] = [
     id: "reverse-circuit",
     slug: "reverse-circuit-madinah-jeddah",
     startingPrice: 385,
-
+    category: "Airport",
     coverImage: reverseCircuit,
 
     gallery: [gmc, HajPackage, reverseCircuit, Chev],
@@ -46,7 +46,7 @@ export const travelPackages: TravelPackage[] = [
   {
     id: "spiritual-journey",
     slug: "spiritual-journey-package",
-
+    category: "Religious",
     startingPrice: 520,
 
     coverImage: HajPackage,
@@ -86,7 +86,7 @@ export const travelPackages: TravelPackage[] = [
   {
     id: "umrah-express",
     slug: "umrah-express-package",
-
+    category: "Religious",
     startingPrice: 290,
 
     coverImage: reverseCircuit,
@@ -129,6 +129,7 @@ export const travelPackages: TravelPackage[] = [
 
     startingPrice: 990,
 
+    category: "Religious",
     coverImage: reverseCircuit,
 
     gallery: [reverseCircuit],
@@ -173,6 +174,8 @@ export const travelPackages: TravelPackage[] = [
 
     gallery: [reverseCircuit],
 
+    category: "Tour",
+
     cities: ["Riyadh"],
 
     vehiclePricing: {
@@ -212,7 +215,7 @@ export const travelPackages: TravelPackage[] = [
     coverImage: reverseCircuit,
 
     gallery: [reverseCircuit],
-
+    category: "Tour",
     cities: ["AlUla"],
 
     vehiclePricing: {
