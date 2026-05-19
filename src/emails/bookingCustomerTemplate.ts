@@ -1,4 +1,4 @@
-import type { BookingData } from "../utils/bookingTypes";
+import type { BookingData } from "../utils/bookingTypes.ts";
 
 const formatDate = (date?: string) => {
   if (!date) return "-";
