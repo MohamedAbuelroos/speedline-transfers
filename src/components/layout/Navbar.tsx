@@ -18,7 +18,7 @@ import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import MiscellaneousServicesIcon from "@mui/icons-material/MiscellaneousServices";
 import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
 import InfoIcon from "@mui/icons-material/Info";
-import logo from "/logo.webp";
+import logo from "/logo.png";
 import { Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useNavigationLoader } from "../../context/NavigationLoaderContext";
@@ -36,26 +36,6 @@ import { languages } from "../../utils/lang";
 import useDelayedNavigate from "../../hooks/useDelayedNavigate";
 
 const Navbar = () => {
-  const testEmail = async () => {
-    const response = await fetch("/api/send-email", {
-      method: "POST",
-
-      headers: {
-        "Content-Type": "application/json",
-      },
-
-      body: JSON.stringify({
-        customerEmail: "arabea110@gmail.com",
-
-        customerName: "Ahmed Rabea",
-      }),
-    });
-
-    const data = await response.json();
-
-    console.log(data);
-  };
-
   const navigate = useDelayedNavigate();
   const location = useLocation();
   const theme = useTheme();
@@ -233,7 +213,7 @@ const Navbar = () => {
             {/* Book Button */}
             <Button
               variant="contained"
-              onClick={testEmail}
+              onClick={() => navigate("/booking")}
               sx={{
                 borderRadius: "999px",
 

@@ -1,6 +1,6 @@
 import { Box, CircularProgress, Typography } from "@mui/material";
 
-import logo from "/logo.webp";
+import logo from "/logo.png";
 
 const Loader = () => {
   return (
