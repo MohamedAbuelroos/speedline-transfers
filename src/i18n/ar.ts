@@ -20,13 +20,13 @@ export const ar = {
     routes: "المسارات",
     pax: "ركاب",
     bags: "حقائب",
-    bookPackage: "احجز هذه الباقة",
+    bookPackage: "احجز الباقة",
     whatsAppBtn: "تواصل عبر واتساب",
   },
 
   carCard: {
     orSimilar: "(أو ما يشابه)",
-    bookBtn: "احجز هذه السيارة",
+    bookBtn: "احجز سيارة",
   },
   footer: {},
 
@@ -214,7 +214,7 @@ export const ar = {
       overview:
         "استمتع بتجربة تنقل روحانية مميزة بين المدن المقدسة في المملكة العربية السعودية مع سائقين محترفين ومركبات فاخرة.",
 
-      category: "ديني",
+      category: "المطار",
       duration: "3 مسارات",
       highlights: [
         "استقبال وترحيب بالمطار",
@@ -361,7 +361,7 @@ export const ar = {
       inclusions: [
         {
           title: "مواصلات فاخرة",
-          
+
           description: "مركبات خاصة فاخرة تتم صيانتها وفق أعلى معايير الضيافة.",
         },
 
@@ -624,7 +624,7 @@ export const ar = {
 
       subtitle: "باقة فاخرة لاستكشاف الصحراء والتراث في العلا.",
 
-      category: "مغامرة",
+      category: "جولة",
 
       duration: "مسار واحد",
 

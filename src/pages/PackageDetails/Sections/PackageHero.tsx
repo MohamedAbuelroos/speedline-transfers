@@ -12,7 +12,6 @@ type Props = {
 const PackageHero = ({ data }: Props) => {
   const lang = useLanguage();
   const translate = translations[lang];
-  // const isRtl = lang === "ar";
 
   const packageTranslation = translate.packages[
     data.id as keyof typeof translate.packages
@@ -52,7 +51,7 @@ const PackageHero = ({ data }: Props) => {
           position: "absolute",
           inset: 0,
           background:
-            "linear-gradient(90deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.45) 45%, rgba(0,0,0,0.15) 100%)",
+            "linear-gradient(90deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.25) 45%, rgba(0,0,0,0.1) 100%)",
         }}
       />
 

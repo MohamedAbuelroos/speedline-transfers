@@ -208,7 +208,7 @@ export const en = {
       subtitle:
         "Religious transfer experience from Madinah to Jeddah via Makkah.",
 
-      category: "Religious",
+      category: "Airport",
       duration: "3 Routes",
       overview:
         "Experience a premium spiritual transfer package across the holy cities of Saudi Arabia with professional chauffeurs and luxury vehicles.",
@@ -649,7 +649,7 @@ export const en = {
 
       subtitle: "Luxury desert and heritage exploration package in AlUla.",
 
-      category: "Adventure",
+      category: "Tour",
 
       duration: "1 Route",
 

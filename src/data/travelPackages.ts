@@ -40,7 +40,7 @@ export const travelPackages: TravelPackage[] = [
       },
     ],
     featured: true,
-    // popular: true,
+    popular: true,
   },
 
   {
@@ -120,7 +120,7 @@ export const travelPackages: TravelPackage[] = [
     ],
 
     featured: false,
-    popular: true,
+    popular: false,
   },
 
   {
@@ -129,7 +129,7 @@ export const travelPackages: TravelPackage[] = [
 
     startingPrice: 990,
 
-    category: "Religious",
+    category: "VIP",
     coverImage: reverseCircuit,
 
     gallery: [reverseCircuit],
