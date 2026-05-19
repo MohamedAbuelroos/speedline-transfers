@@ -78,7 +78,7 @@ export const bookingCustomerTemplate = (data: BookingData) => {
         "
       >
         <img
-          src="https://www.speedlinetransfers.com/logo.webp"
+          src="https://www.speedlinetransfers.com/logo.png"
           alt="SpeedLine Transfers"
           style="
             height:60px;
