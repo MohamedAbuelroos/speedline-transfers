@@ -5,13 +5,21 @@ import LocationCityOutlinedIcon from "@mui/icons-material/LocationCityOutlined";
 import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFilledOutlined";
 import FlightTakeoffOutlinedIcon from "@mui/icons-material/FlightTakeoffOutlined";
 
-import type { TravelPackage } from "../../../utils/types";
+import type { PackageTranslation, TravelPackage } from "../../../utils/types";
+import useLanguage from "../../../hooks/useLanguage";
+import { translations } from "../../../i18n";
 
 type Props = {
   data: TravelPackage;
 };
 
 const PackageOverview = ({ data }: Props) => {
+  const lang = useLanguage();
+  const translate = translations[lang];
+  const packageTranslation = translate.packages[
+    data.id as keyof typeof translate.packages
+  ] as PackageTranslation;
+
   const features = [
     {
       title: "Ideal For",
@@ -39,7 +47,7 @@ const PackageOverview = ({ data }: Props) => {
 
     {
       title: "Service",
-      value: data.highlights[0],
+      value: packageTranslation.highlights[0],
       icon: <FlightTakeoffOutlinedIcon />,
       color: "rgba(245, 153, 61, 0.20)",
       iconColor: "secondary.main",
@@ -99,7 +107,7 @@ const PackageOverview = ({ data }: Props) => {
             maxWidth: "850px",
           }}
         >
-          {data.overview}
+          {packageTranslation.overview}
         </Typography>
       </Box>
 

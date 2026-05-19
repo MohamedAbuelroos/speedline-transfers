@@ -1,13 +1,22 @@
 import { Box, Typography, Button } from "@mui/material";
 import NearMeOutlinedIcon from "@mui/icons-material/NearMeOutlined";
-import type { TravelPackage } from "../../utils/types";
+import type { PackageTranslation, TravelPackage } from "../../utils/types";
 import useDelayedNavigate from "../../hooks/useDelayedNavigate";
+import useLanguage from "../../hooks/useLanguage";
+import { translations } from "../../i18n";
 type Props = {
   data: TravelPackage;
 };
 
 const PackageCard = ({ data }: Props) => {
   const navigate = useDelayedNavigate();
+  const lang = useLanguage();
+  const translate = translations[lang];
+  const isRtl = lang === "ar";
+
+  const packageTranslation = translate.packages[
+    data.id as keyof typeof translate.packages
+  ] as PackageTranslation;
 
   const handleSelect = () => {
     navigate(`/packages/${data.slug}`);
@@ -29,7 +38,7 @@ const PackageCard = ({ data }: Props) => {
           loading="lazy"
           onClick={handleSelect}
           src={data.coverImage}
-          alt={data.title}
+          alt={packageTranslation?.title}
           sx={{
             width: "100%",
             height: 200,
@@ -72,10 +81,10 @@ const PackageCard = ({ data }: Props) => {
                 px: 1.5,
                 py: 0.5,
                 borderRadius: "999px",
-                fontSize: "12px",
+                fontSize: 14,
               }}
             >
-              Popular
+              {translate.common.popular}
             </Box>
           )}
 
@@ -86,12 +95,12 @@ const PackageCard = ({ data }: Props) => {
               px: 1.5,
               py: 0.5,
               borderRadius: "999px",
-              fontSize: "12px",
+              fontSize: 14,
               fontWeight: 700,
               backdropFilter: "blur(6px)",
             }}
           >
-            {data.category}
+            {packageTranslation?.category}
           </Box>
         </Box>
       </Box>
@@ -101,27 +110,27 @@ const PackageCard = ({ data }: Props) => {
         {/* TITLE */}
         <Typography
           sx={{
-            fontSize: 24,
+            fontSize: isRtl ? 34 : 24,
             fontWeight: 800,
             lineHeight: 1.2,
             mb: 1,
             color: "#111",
           }}
         >
-          {data.title}
+          {packageTranslation?.title}
         </Typography>
 
         {/* SUBTITLE */}
         <Typography
           sx={{
             color: "text.secondary",
-            fontSize: 14,
+            fontSize: isRtl ? 18 : 14,
             lineHeight: 1.7,
             mb: 1,
             minHeight: 50,
           }}
         >
-          {data.subtitle}
+          {packageTranslation?.subtitle}
         </Typography>
 
         {/* META */}
@@ -152,7 +161,7 @@ const PackageCard = ({ data }: Props) => {
               color: "text.secondary",
             }}
           >
-            • {data.duration}
+            • {packageTranslation.duration}
           </Typography>
         </Box>
 
@@ -161,11 +170,11 @@ const PackageCard = ({ data }: Props) => {
           <Typography
             sx={{
               color: "text.secondary",
-              fontSize: 13,
+              fontSize: isRtl ? 16 : 13,
               mb: 0.5,
             }}
           >
-            Starting from
+            {translate.common.startingFrom}
           </Typography>
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <Typography
@@ -184,11 +193,11 @@ const PackageCard = ({ data }: Props) => {
             <Typography
               sx={{
                 color: "text.secondary",
-                fontSize: 13,
+                fontSize: isRtl ? 16 : 13,
                 mt: 0.5,
               }}
             >
-              / vehicle
+              / {translate.common.vehicle}
             </Typography>
           </Box>
         </Box>
@@ -218,7 +227,7 @@ const PackageCard = ({ data }: Props) => {
             },
           }}
         >
-          View Package
+          {translate.common.viewPackage}
           <NearMeOutlinedIcon sx={{ fontSize: 20 }} />
         </Button>
       </Box>

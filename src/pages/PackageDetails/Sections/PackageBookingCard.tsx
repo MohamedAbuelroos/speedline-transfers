@@ -6,15 +6,25 @@ import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
 import { cars } from "../../../data/cars";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
-import type { TravelPackage } from "../../../utils/types";
+import type { PackageTranslation, TravelPackage } from "../../../utils/types";
 import { useState } from "react";
 import useDelayedNavigate from "../../../hooks/useDelayedNavigate";
+import useLanguage from "../../../hooks/useLanguage";
+import { translations } from "../../../i18n";
 
 type Props = {
   data: TravelPackage;
 };
 
 const PackageBookingCard = ({ data }: Props) => {
+  const lang = useLanguage();
+  const translate = translations[lang];
+  // const isRtl = lang === "ar";
+
+  const packageTranslation = translate.packages[
+    data.id as keyof typeof translate.packages
+  ] as PackageTranslation;
+
   const availableVehicles = cars.filter(
     (car) => data.vehiclePricing?.[car.category],
   );
@@ -114,7 +124,7 @@ const PackageBookingCard = ({ data }: Props) => {
               mb: 1,
             }}
           >
-            Starting from
+            {translate.common.startingFrom}
           </Typography>
 
           <Typography
@@ -138,7 +148,7 @@ const PackageBookingCard = ({ data }: Props) => {
               fontWeight: 600,
             }}
           >
-            Select Vehicle
+            {translate.common.selectVehicle}
           </Typography>
 
           <TextField
@@ -185,7 +195,7 @@ const PackageBookingCard = ({ data }: Props) => {
                 }}
               />
 
-              <Typography>Duration</Typography>
+              <Typography>{translate.common.routes}</Typography>
             </Box>
 
             <Typography
@@ -193,7 +203,7 @@ const PackageBookingCard = ({ data }: Props) => {
                 fontWeight: 700,
               }}
             >
-              {data.duration}
+              {packageTranslation.duration}
             </Typography>
           </Box>
 
@@ -218,7 +228,7 @@ const PackageBookingCard = ({ data }: Props) => {
                 }}
               />
 
-              <Typography>Vehicle</Typography>
+              <Typography>{translate.common.vehicle}</Typography>
             </Box>
 
             <Typography
@@ -251,7 +261,7 @@ const PackageBookingCard = ({ data }: Props) => {
                 }}
               />
 
-              <Typography>Capacity</Typography>
+              <Typography>{translate.common.capacity}</Typography>
             </Box>
 
             <Typography
@@ -259,7 +269,8 @@ const PackageBookingCard = ({ data }: Props) => {
                 fontWeight: 700,
               }}
             >
-              {vehicle.passengers} Pax • {vehicle.bags} Bags
+              {vehicle.passengers} {translate.common.pax} • {vehicle.bags}{" "}
+              {translate.common.bags}
             </Typography>
           </Box>
         </Box>
@@ -285,8 +296,7 @@ const PackageBookingCard = ({ data }: Props) => {
               fontSize: 14,
             }}
           >
-            - Price includes all tolls, fuel, airport greeting, and hotel
-            parking fees.
+            {translate.packages.packageNote}
           </Typography>
         </Box>
 
@@ -320,7 +330,7 @@ const PackageBookingCard = ({ data }: Props) => {
               "linear-gradient(135deg, #1FB1F9 0%, #1697d2 100%)",
           }}
         >
-          Book This Package
+          {translate.common.bookPackage}
         </Button>
 
         <Button
@@ -349,7 +359,7 @@ const PackageBookingCard = ({ data }: Props) => {
             },
           }}
         >
-          Contact via WhatsApp
+          {translate.common.whatsAppBtn}
         </Button>
       </Box>
     </Box>

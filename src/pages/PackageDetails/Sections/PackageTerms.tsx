@@ -16,8 +16,10 @@ import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
 import SupportAgentOutlinedIcon from "@mui/icons-material/SupportAgentOutlined";
 
-import type { TravelPackage } from "../../../utils/types";
+import type { PackageTranslation, TravelPackage } from "../../../utils/types";
 import type { JSX } from "react";
+import useLanguage from "../../../hooks/useLanguage";
+import { translations } from "../../../i18n";
 
 type Props = {
   data: TravelPackage;
@@ -33,6 +35,12 @@ const iconMap: Record<string, JSX.Element> = {
 };
 
 const PackageTerms = ({ data }: Props) => {
+  const lang = useLanguage();
+  const translate = translations[lang];
+  const packageTranslation = translate.packages[
+    data.id as keyof typeof translate.packages
+  ] as PackageTranslation;
+
   return (
     <Box
       sx={{
@@ -98,94 +106,97 @@ const PackageTerms = ({ data }: Props) => {
 
         {/* CARDS */}
         <Grid container spacing={3}>
-          {data.inclusions.map((item) => (
-            <Grid
-              key={item.title}
-              size={{
-                xs: 12,
-                sm: 6,
-                md: 4,
-              }}
-            >
-              <Box
-                sx={{
-                  backgroundColor: "#fff",
-
-                  borderRadius: "28px",
-
-                  p: 4,
-
-                  height: "100%",
-
-                  boxShadow: "0 10px 35px rgba(0,0,0,0.04)",
-
-                  transition: "0.3s",
-
-                  "&:hover": {
-                    transform: "translateY(-5px)",
-
-                    boxShadow: "0 20px 45px rgba(0,0,0,0.08)",
-                  },
+          {packageTranslation.inclusions.map((item, index) => {
+            const icon = data.inclusions[index].icon;
+            return (
+              <Grid
+                key={item.title}
+                size={{
+                  xs: 12,
+                  sm: 6,
+                  md: 4,
                 }}
               >
-                {/* ICON */}
                 <Box
                   sx={{
-                    width: 72,
-                    height: 72,
+                    backgroundColor: "#fff",
 
-                    borderRadius: "22px",
+                    borderRadius: "28px",
 
-                    backgroundColor: "#f0f9ff",
+                    p: 4,
 
-                    color: "primary.main",
+                    height: "100%",
 
-                    display: "flex",
+                    boxShadow: "0 10px 35px rgba(0,0,0,0.04)",
 
-                    alignItems: "center",
+                    transition: "0.3s",
 
-                    justifyContent: "center",
+                    "&:hover": {
+                      transform: "translateY(-5px)",
 
-                    mb: 3,
-
-                    "& svg": {
-                      fontSize: 38,
+                      boxShadow: "0 20px 45px rgba(0,0,0,0.08)",
                     },
                   }}
                 >
-                  {iconMap[item.icon]}
+                  {/* ICON */}
+                  <Box
+                    sx={{
+                      width: 72,
+                      height: 72,
+
+                      borderRadius: "22px",
+
+                      backgroundColor: "#f0f9ff",
+
+                      color: "primary.main",
+
+                      display: "flex",
+
+                      alignItems: "center",
+
+                      justifyContent: "center",
+
+                      mb: 3,
+
+                      "& svg": {
+                        fontSize: 38,
+                      },
+                    }}
+                  >
+                    {iconMap[icon]}
+                  </Box>
+
+                  {/* TITLE */}
+                  <Typography
+                    sx={{
+                      fontSize: 22,
+
+                      fontWeight: 800,
+
+                      color: "#111827",
+
+                      mb: 2,
+                    }}
+                  >
+                    {item.title}
+                  </Typography>
+
+                  {/* DESCRIPTION */}
+                  <Typography
+                    sx={{
+                      color: "#6b7280",
+
+                      lineHeight: 1.9,
+
+                      fontSize: 15,
+                    }}
+                  >
+                    {item.description}
+                  </Typography>
                 </Box>
-
-                {/* TITLE */}
-                <Typography
-                  sx={{
-                    fontSize: 22,
-
-                    fontWeight: 800,
-
-                    color: "#111827",
-
-                    mb: 2,
-                  }}
-                >
-                  {item.title}
-                </Typography>
-
-                {/* DESCRIPTION */}
-                <Typography
-                  sx={{
-                    color: "#6b7280",
-
-                    lineHeight: 1.9,
-
-                    fontSize: 15,
-                  }}
-                >
-                  {item.description}
-                </Typography>
-              </Box>
-            </Grid>
-          ))}
+              </Grid>
+            );
+          })}
         </Grid>
       </Box>
 
@@ -250,7 +261,7 @@ const PackageTerms = ({ data }: Props) => {
             gap: 2,
           }}
         >
-          {data.terms.map((term, index) => (
+          {packageTranslation.terms.map((term, index) => (
             <Accordion
               key={index}
               disableGutters

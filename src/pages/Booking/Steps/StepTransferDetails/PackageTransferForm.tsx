@@ -3,6 +3,8 @@ import { DatePicker, TimePicker } from "@mui/x-date-pickers";
 import { travelPackages } from "../../../../data/travelPackages";
 import dayjs from "dayjs";
 import type { TransferFormWithStopsProps } from "../../../../utils/bookingTypes";
+import useLanguage from "../../../../hooks/useLanguage";
+import { translations } from "../../../../i18n";
 
 const PackageTransferForm = ({
   bookingData,
@@ -12,13 +14,25 @@ const PackageTransferForm = ({
   updateStop,
   removeStop,
 }: TransferFormWithStopsProps) => {
+  const lang = useLanguage();
+
+  const translate = translations[lang];
+
   return (
     <Grid container spacing={2}>
       {/* PACKAGE NAME */}
       <Grid size={{ xs: 12 }}>
         <Autocomplete
           options={travelPackages}
-          getOptionLabel={(option) => option.title}
+          getOptionLabel={(option) => {
+            const packageTranslation = translate.packages[
+              option.id as keyof typeof translate.packages
+            ] as {
+              title: string;
+            };
+
+            return packageTranslation.title;
+          }}
           value={
             travelPackages.find(
               (pkg) => pkg.id === bookingData.packageData?.id,

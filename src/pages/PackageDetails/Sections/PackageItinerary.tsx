@@ -4,13 +4,21 @@ import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import NearMeOutlinedIcon from "@mui/icons-material/NearMeOutlined";
 import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
 
-import type { TravelPackage } from "../../../utils/types";
+import type { PackageTranslation, TravelPackage } from "../../../utils/types";
+import { translations } from "../../../i18n";
+import useLanguage from "../../../hooks/useLanguage";
 
 type Props = {
   data: TravelPackage;
 };
 
 const PackageItinerary = ({ data }: Props) => {
+  const lang = useLanguage();
+  const translate = translations[lang];
+  const packageTranslation = translate.packages[
+    data.id as keyof typeof translate.packages
+  ] as PackageTranslation;
+
   return (
     <Box
       sx={{
@@ -93,7 +101,7 @@ const PackageItinerary = ({ data }: Props) => {
           },
         }}
       >
-        {data.itinerary.map((item, index) => (
+        {packageTranslation.itinerary.map((item, index) => (
           <Box
             key={item.day}
             sx={{
@@ -104,7 +112,7 @@ const PackageItinerary = ({ data }: Props) => {
                 md: 8,
               },
 
-              mb: index === data.itinerary.length - 1 ? 0 : 6,
+              mb: index === packageTranslation.itinerary.length - 1 ? 0 : 6,
             }}
           >
             {/* TIMELINE DOT */}

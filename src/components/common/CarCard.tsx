@@ -173,7 +173,7 @@ const CarCard = ({
               variant="caption"
               sx={{ color: "#6b7280", fontSize: isRTL ? 16 : 14 }}
             >
-              {translate.carCard.startingAt}
+              {translate.common.startingFrom}
             </Typography>
             <Typography
               variant="h5"

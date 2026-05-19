@@ -18,15 +18,10 @@ export interface PackageItinerary {
 
 export interface TravelPackage {
   id: string;
+
   slug: string;
 
-  title: string;
-  subtitle: string;
-  heroDescription?: string;
-
-  category: "Religious" | "Tour" | "VIP" | "Business" | "Adventure";
-
-  duration: string;
+  category?: string;
 
   startingPrice: number;
 
@@ -36,25 +31,44 @@ export interface TravelPackage {
 
   cities: string[];
 
+  inclusions: {
+    icon: string;
+  }[];
+
   vehiclePricing: Record<string, number>;
+
+  featured?: boolean;
+
+  popular?: boolean;
+}
+
+export interface PackageTranslation {
+  title: string;
+
+  subtitle: string;
+
+  category: string;
+
+  duration: string;
 
   overview: string;
 
   highlights: string[];
 
-  itinerary: PackageItinerary[];
+  itinerary: {
+    day: string;
+    title: string;
+    route: string;
+    activities: string[];
+  }[];
 
   inclusions: {
     title: string;
     description: string;
-    icon: string;
   }[];
 
   terms: {
     title: string;
     description: string;
   }[];
-
-  featured?: boolean;
-  popular?: boolean;
 }
