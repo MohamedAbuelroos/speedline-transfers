@@ -1,7 +1,7 @@
 import { Box, Container, Grid } from "@mui/material";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { sendCustomerEmail, sendCompanyEmail } from "../../utils/email";
+// import { sendCustomerEmail, sendCompanyEmail } from "../../utils/email";
 import HeaderSection from "./Sections/HeaderSection";
 import ProgressSection from "./Sections/ProgressSection";
 import SummarySection from "./Sections/SummarySection";
@@ -14,6 +14,7 @@ import { generateBookingId } from "../../utils/generateId";
 import SuccessSection from "./Sections/SuccessSection";
 import ScrollToTop from "../../utils/ScrollToTop";
 import type { BookingData } from "../../utils/bookingTypes";
+import { sendBookingEmail } from "../../utils/sendBookingEmail";
 
 const Booking = () => {
   const location = useLocation();
@@ -124,31 +125,60 @@ const Booking = () => {
     return base;
   });
 
+  // const handleConfirm = async (price: string | number) => {
+  //   setLoading(true);
+  //   const id = generateBookingId();
+  //   const confirmedPrice = typeof price === "string" ? Number(price) : price;
+
+  //   const fullData: BookingData = {
+  //     ...bookingData,
+  //     bookingId: id,
+  //     price: confirmedPrice as BookingData["price"],
+  //   };
+  //   await sendBookingEmail(fullData);
+
+  //   try {
+  //     // 🔥 send both emails
+  //     await sendCompanyEmail(fullData);
+  //     await sendCustomerEmail(fullData);
+  //     setBookingId(id);
+  //     setSuccess(true);
+  //   } catch (error) {
+  //     console.error("Email error:", error);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
   const handleConfirm = async (price: string | number) => {
-    setLoading(true);
-
-    const id = generateBookingId();
-    const confirmedPrice = typeof price === "string" ? Number(price) : price;
-
-    const fullData: BookingData = {
-      ...bookingData,
-      bookingId: id,
-      price: confirmedPrice as BookingData["price"],
-    };
-
     try {
-      // 🔥 send both emails
-      await sendCompanyEmail(fullData);
-      await sendCustomerEmail(fullData);
+      setLoading(true);
+
+      const id = generateBookingId();
+
+      const confirmedPrice = typeof price === "string" ? Number(price) : price;
+
+      const fullData: BookingData = {
+        ...bookingData,
+
+        bookingId: id,
+
+        price: confirmedPrice as BookingData["price"],
+      };
+
+      await sendBookingEmail(fullData);
+
       setBookingId(id);
+
       setSuccess(true);
     } catch (error) {
-      console.error("Email error:", error);
+      console.error("Booking error:", error);
+
+      alert("Failed to send booking request.");
     } finally {
       setLoading(false);
     }
   };
-
   return (
     <Box sx={{ py: 6 }}>
       <LoadingOverlay open={loading} />
