@@ -1,9 +1,10 @@
 /// <reference types="node" />
 
 import { Resend } from "resend";
-import { bookingCustomerTemplate } from "../src/emails/bookingCustomerTemplate";
 
-import type { EmailBookingData } from "../src/utils/emailTypes";
+import { bookingCustomerTemplate } from "../src/emails/bookingCustomerTemplate.ts";
+
+import type { EmailBookingData } from "../src/utils/emailTypes.ts";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 

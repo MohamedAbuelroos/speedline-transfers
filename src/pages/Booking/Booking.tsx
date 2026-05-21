@@ -14,6 +14,7 @@ import { generateBookingId } from "../../utils/generateId";
 import SuccessSection from "./Sections/SuccessSection";
 import ScrollToTop from "../../utils/ScrollToTop";
 import type { BookingData } from "../../utils/bookingTypes";
+import { Snackbar, Alert } from "@mui/material";
 import { sendBookingEmail } from "../../utils/sendBookingEmail";
 
 const Booking = () => {
@@ -21,6 +22,11 @@ const Booking = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [bookingId, setBookingId] = useState("");
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: "",
+    severity: "success",
+  });
 
   // 🔥 Prefill logic (basic for now)
   const initialState = location.state;
@@ -125,7 +131,6 @@ const Booking = () => {
     return base;
   });
 
-  // const handleConfirm = async (price: string | number) => {
   //   setLoading(true);
   //   const id = generateBookingId();
   //   const confirmedPrice = typeof price === "string" ? Number(price) : price;
@@ -145,6 +150,36 @@ const Booking = () => {
   //     setSuccess(true);
   //   } catch (error) {
   //     console.error("Email error:", error);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+  // const handleConfirm = async (price: string | number) => {
+  //   try {
+  //     setLoading(true);
+
+  //     const id = generateBookingId();
+
+  //     const confirmedPrice = typeof price === "string" ? Number(price) : price;
+
+  //     const fullData: BookingData = {
+  //       ...bookingData,
+
+  //       bookingId: id,
+
+  //       price: confirmedPrice as BookingData["price"],
+  //     };
+
+  //     await sendBookingEmail(fullData);
+
+  //     setBookingId(id);
+
+  //     setSuccess(true);
+  //   } catch (error) {
+  //     console.error("Booking error:", error);
+
+  //     alert("Failed to send booking request.");
   //   } finally {
   //     setLoading(false);
   //   }
@@ -171,10 +206,20 @@ const Booking = () => {
       setBookingId(id);
 
       setSuccess(true);
+
+      setSnackbar({
+        open: true,
+        message: "Booking request sent successfully.",
+        severity: "success",
+      });
     } catch (error) {
       console.error("Booking error:", error);
 
-      alert("Failed to send booking request.");
+      setSnackbar({
+        open: true,
+        message: "Failed to send booking request.",
+        severity: "error",
+      });
     } finally {
       setLoading(false);
     }
@@ -252,6 +297,30 @@ const Booking = () => {
           </Container>
         </>
       )}
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={4000}
+        onClose={() =>
+          setSnackbar((prev) => ({
+            ...prev,
+            open: false,
+          }))
+        }
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+      >
+        <Alert
+          severity={snackbar.severity as "success" | "error"}
+          variant="filled"
+          sx={{
+            width: "100%",
+          }}
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };
