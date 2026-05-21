@@ -225,7 +225,7 @@ const TransferEstimateDialog = ({
                 color: "#111827",
               }}
             >
-              {result?.price} SAR
+              {result?.price} USD
             </Typography>
           </Box>
 

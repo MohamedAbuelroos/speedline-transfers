@@ -188,7 +188,7 @@ const PackageCard = ({ data }: Props) => {
                 gap: 1,
               }}
             >
-              SAR {data.startingPrice}
+              USD {data.startingPrice}
             </Typography>
             <Typography
               sx={{

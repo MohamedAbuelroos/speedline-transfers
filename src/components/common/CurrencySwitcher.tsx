@@ -8,12 +8,12 @@ import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 
 import { useState } from "react";
 
-const currencies = ["SAR"];
-// const currencies = ["SAR", "USD", "EUR"];
+const currencies = ["USD"];
+// const currencies = ["USD", "USD", "EUR"];
 
 const CurrencySwitcher = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [selected, setSelected] = useState("SAR");
+  const [selected, setSelected] = useState("USD");
 
   const handleSelect = (currency: string) => {
     setSelected(currency);
