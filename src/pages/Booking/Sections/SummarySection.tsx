@@ -332,7 +332,7 @@ const SummarySection = ({ data, onConfirm, steps }: SummarySectionProps) => {
                 variant="body1"
                 sx={{ alignSelf: "flex-end", color: "primary.main", ml: 0.5 }}
               >
-                {getBookingPrice(data) !== "--" ? "SAR" : ""}
+                {getBookingPrice(data) !== "--" ? "USD" : ""}
               </Typography>
             </Box>
           )}

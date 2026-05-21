@@ -1,17 +1,22 @@
-import type { BookingData } from "../utils/bookingTypes";
+import type { EmailBookingData } from "../utils/emailTypes";
 
 const formatDate = (date?: string) => {
   if (!date) return "-";
 
-  return new Date(date).toLocaleDateString();
+  return new Date(`${date}T00:00:00`).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 };
 
 const formatTime = (time?: string) => {
   if (!time) return "-";
 
-  return new Date(time).toLocaleTimeString([], {
+  return new Date(time).toLocaleTimeString("en-US", {
     hour: "2-digit",
     minute: "2-digit",
+    hour12: true,
   });
 };
 
@@ -34,8 +39,8 @@ const getTransferType = (type?: string) => {
   }
 };
 
-export const bookingCustomerTemplate = (data: BookingData) => {
-  const basePrice = typeof data.price === "number" ? data.price : 0;
+export const bookingCustomerTemplate = (data: EmailBookingData) => {
+  const basePrice = data.roundTrip ? data.price * 2 : data.price;
 
   const processingFee = Number((basePrice * 0.03).toFixed(2));
 
@@ -78,13 +83,13 @@ export const bookingCustomerTemplate = (data: BookingData) => {
         "
       >
         <img
-          src="https://www.speedlinetransfers.com/logo.webp"
+          src="https://speedlinetransfers.com/logo.png"
           alt="SpeedLine Transfers"
           style="
             height:60px;
+            width:auto;
             object-fit:contain;
             margin-bottom:16px;
-            width:auto;
           "
         />
 
@@ -116,8 +121,7 @@ export const bookingCustomerTemplate = (data: BookingData) => {
         <h2
           style="
             margin-top:0;
-            margin-bottom:12px;
-            font-size:26px;
+            font-size:28px;
           "
         >
           Hello ${data.name},
@@ -130,14 +134,11 @@ export const bookingCustomerTemplate = (data: BookingData) => {
             margin-bottom:28px;
           "
         >
-          Thank you for choosing
-          SpeedLine Transfers.
-          Our operations team is now reviewing
-          your reservation details and will
-          contact you shortly if needed.
+          Thank you for choosing SpeedLine Transfers.
+          Our operations team is now reviewing your reservation details.
         </p>
 
-        <!-- BOOKING STATUS -->
+        <!-- STATUS -->
         <div
           style="
             background:#ecfdf5;
@@ -156,14 +157,14 @@ export const bookingCustomerTemplate = (data: BookingData) => {
           style="
             background:#f8fafc;
             border-radius:20px;
-            padding:26px;
-            margin-bottom:28px;
+            padding:24px;
+            margin-bottom:24px;
           "
         >
           <h3
             style="
               margin-top:0;
-              margin-bottom:22px;
+              margin-bottom:20px;
               font-size:22px;
             "
           >
@@ -177,13 +178,13 @@ export const bookingCustomerTemplate = (data: BookingData) => {
             "
           >
             <tr>
-              <td style="padding:12px 0;color:#6b7280;">
+              <td style="padding:10px 0;color:#6b7280;">
                 Booking ID
               </td>
 
               <td
                 style="
-                  padding:12px 0;
+                  padding:10px 0;
                   text-align:right;
                   font-weight:700;
                 "
@@ -193,13 +194,13 @@ export const bookingCustomerTemplate = (data: BookingData) => {
             </tr>
 
             <tr>
-              <td style="padding:12px 0;color:#6b7280;">
-                Service Type
+              <td style="padding:10px 0;color:#6b7280;">
+                Service
               </td>
 
               <td
                 style="
-                  padding:12px 0;
+                  padding:10px 0;
                   text-align:right;
                   font-weight:700;
                 "
@@ -209,16 +210,16 @@ export const bookingCustomerTemplate = (data: BookingData) => {
             </tr>
 
             ${
-              data.packageData
+              data.packageData?.id
                 ? `
             <tr>
-              <td style="padding:12px 0;color:#6b7280;">
+              <td style="padding:10px 0;color:#6b7280;">
                 Package
               </td>
 
               <td
                 style="
-                  padding:12px 0;
+                  padding:10px 0;
                   text-align:right;
                   font-weight:700;
                 "
@@ -231,13 +232,13 @@ export const bookingCustomerTemplate = (data: BookingData) => {
             }
 
             <tr>
-              <td style="padding:12px 0;color:#6b7280;">
+              <td style="padding:10px 0;color:#6b7280;">
                 Route
               </td>
 
               <td
                 style="
-                  padding:12px 0;
+                  padding:10px 0;
                   text-align:right;
                   font-weight:700;
                 "
@@ -246,14 +247,36 @@ export const bookingCustomerTemplate = (data: BookingData) => {
               </td>
             </tr>
 
+            ${
+              data.stops?.length
+                ? `
             <tr>
-              <td style="padding:12px 0;color:#6b7280;">
+              <td style="padding:10px 0;color:#6b7280;">
+                Stops
+              </td>
+
+              <td
+                style="
+                  padding:10px 0;
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${data.stops.join(" • ")}
+              </td>
+            </tr>
+            `
+                : ""
+            }
+
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
                 Travel Date
               </td>
 
               <td
                 style="
-                  padding:12px 0;
+                  padding:10px 0;
                   text-align:right;
                   font-weight:700;
                 "
@@ -263,13 +286,13 @@ export const bookingCustomerTemplate = (data: BookingData) => {
             </tr>
 
             <tr>
-              <td style="padding:12px 0;color:#6b7280;">
+              <td style="padding:10px 0;color:#6b7280;">
                 Pickup Time
               </td>
 
               <td
                 style="
-                  padding:12px 0;
+                  padding:10px 0;
                   text-align:right;
                   font-weight:700;
                 "
@@ -282,13 +305,13 @@ export const bookingCustomerTemplate = (data: BookingData) => {
               data.flightNumber
                 ? `
             <tr>
-              <td style="padding:12px 0;color:#6b7280;">
+              <td style="padding:10px 0;color:#6b7280;">
                 Flight Number
               </td>
 
               <td
                 style="
-                  padding:12px 0;
+                  padding:10px 0;
                   text-align:right;
                   font-weight:700;
                 "
@@ -300,14 +323,58 @@ export const bookingCustomerTemplate = (data: BookingData) => {
                 : ""
             }
 
+            ${
+              data.pickupDetails
+                ? `
             <tr>
-              <td style="padding:12px 0;color:#6b7280;">
+              <td style="padding:10px 0;color:#6b7280;">
+                Pickup Details
+              </td>
+
+              <td
+                style="
+                  padding:10px 0;
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${data.pickupDetails}
+              </td>
+            </tr>
+            `
+                : ""
+            }
+
+            ${
+              data.dropoffDetails
+                ? `
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Dropoff Details
+              </td>
+
+              <td
+                style="
+                  padding:10px 0;
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${data.dropoffDetails}
+              </td>
+            </tr>
+            `
+                : ""
+            }
+
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
                 Vehicle
               </td>
 
               <td
                 style="
-                  padding:12px 0;
+                  padding:10px 0;
                   text-align:right;
                   font-weight:700;
                 "
@@ -317,13 +384,29 @@ export const bookingCustomerTemplate = (data: BookingData) => {
             </tr>
 
             <tr>
-              <td style="padding:12px 0;color:#6b7280;">
+              <td style="padding:10px 0;color:#6b7280;">
+                Vehicle Category
+              </td>
+
+              <td
+                style="
+                  padding:10px 0;
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${data.car?.category || "-"}
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
                 Passengers
               </td>
 
               <td
                 style="
-                  padding:12px 0;
+                  padding:10px 0;
                   text-align:right;
                   font-weight:700;
                 "
@@ -333,13 +416,13 @@ export const bookingCustomerTemplate = (data: BookingData) => {
             </tr>
 
             <tr>
-              <td style="padding:12px 0;color:#6b7280;">
+              <td style="padding:10px 0;color:#6b7280;">
                 Luggage
               </td>
 
               <td
                 style="
-                  padding:12px 0;
+                  padding:10px 0;
                   text-align:right;
                   font-weight:700;
                 "
@@ -349,13 +432,13 @@ export const bookingCustomerTemplate = (data: BookingData) => {
             </tr>
 
             <tr>
-              <td style="padding:12px 0;color:#6b7280;">
+              <td style="padding:10px 0;color:#6b7280;">
                 Trip Type
               </td>
 
               <td
                 style="
-                  padding:12px 0;
+                  padding:10px 0;
                   text-align:right;
                   font-weight:700;
                 "
@@ -374,15 +457,14 @@ export const bookingCustomerTemplate = (data: BookingData) => {
           style="
             background:#f8fafc;
             border-radius:20px;
-            padding:26px;
-            margin-bottom:28px;
+            padding:24px;
+            margin-bottom:24px;
           "
         >
           <h3
             style="
               margin-top:0;
-              margin-bottom:22px;
-              font-size:22px;
+              margin-bottom:18px;
             "
           >
             Return Transfer
@@ -395,13 +477,13 @@ export const bookingCustomerTemplate = (data: BookingData) => {
             "
           >
             <tr>
-              <td style="padding:12px 0;color:#6b7280;">
+              <td style="padding:10px 0;color:#6b7280;">
                 Return Route
               </td>
 
               <td
                 style="
-                  padding:12px 0;
+                  padding:10px 0;
                   text-align:right;
                   font-weight:700;
                 "
@@ -411,13 +493,13 @@ export const bookingCustomerTemplate = (data: BookingData) => {
             </tr>
 
             <tr>
-              <td style="padding:12px 0;color:#6b7280;">
+              <td style="padding:10px 0;color:#6b7280;">
                 Return Date
               </td>
 
               <td
                 style="
-                  padding:12px 0;
+                  padding:10px 0;
                   text-align:right;
                   font-weight:700;
                 "
@@ -427,13 +509,13 @@ export const bookingCustomerTemplate = (data: BookingData) => {
             </tr>
 
             <tr>
-              <td style="padding:12px 0;color:#6b7280;">
+              <td style="padding:10px 0;color:#6b7280;">
                 Return Time
               </td>
 
               <td
                 style="
-                  padding:12px 0;
+                  padding:10px 0;
                   text-align:right;
                   font-weight:700;
                 "
@@ -455,8 +537,8 @@ export const bookingCustomerTemplate = (data: BookingData) => {
           style="
             background:#fff7ed;
             border-radius:18px;
-            padding:22px;
-            margin-bottom:28px;
+            padding:20px;
+            margin-bottom:24px;
           "
         >
           <h3
@@ -487,7 +569,6 @@ export const bookingCustomerTemplate = (data: BookingData) => {
           style="
             border-top:1px solid #e5e7eb;
             padding-top:24px;
-            margin-top:10px;
           "
         >
           <table style="width:100%;">
@@ -507,7 +588,7 @@ export const bookingCustomerTemplate = (data: BookingData) => {
                   padding:10px 0;
                 "
               >
-                SAR ${basePrice}
+                USD ${basePrice}
               </td>
             </tr>
 
@@ -527,7 +608,7 @@ export const bookingCustomerTemplate = (data: BookingData) => {
                   padding:10px 0;
                 "
               >
-                SAR ${processingFee}
+                USD ${processingFee}
               </td>
             </tr>
 
@@ -551,7 +632,7 @@ export const bookingCustomerTemplate = (data: BookingData) => {
                   color:#1FB1F9;
                 "
               >
-                SAR ${totalPrice}
+                USD ${totalPrice}
               </td>
             </tr>
           </table>
@@ -625,7 +706,7 @@ export const bookingCustomerTemplate = (data: BookingData) => {
           <br /><br />
 
           © ${new Date().getFullYear()}
-          SpeedLine Transfers.
+          SpeedLine Transfers
         </div>
       </div>
     </div>

@@ -127,7 +127,7 @@ const PackageTransferForm = ({
 
       {stops.length < 3 && (
         <Grid size={{ xs: 12 }}>
-          <Button onClick={addStop}>+ Add Stop Point (+5 SAR)</Button>
+          <Button onClick={addStop}>+ Add Stop Point </Button>
         </Grid>
       )}
     </Grid>
