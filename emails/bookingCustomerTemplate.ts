@@ -1,4 +1,4 @@
-import type { EmailBookingData } from "../utils/emailTypes";
+import type { EmailBookingData } from "../types/emailTypes";
 
 const formatDate = (date?: string) => {
   if (!date) return "-";

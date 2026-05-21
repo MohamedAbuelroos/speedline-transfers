@@ -131,60 +131,6 @@ const Booking = () => {
     return base;
   });
 
-  //   setLoading(true);
-  //   const id = generateBookingId();
-  //   const confirmedPrice = typeof price === "string" ? Number(price) : price;
-
-  //   const fullData: BookingData = {
-  //     ...bookingData,
-  //     bookingId: id,
-  //     price: confirmedPrice as BookingData["price"],
-  //   };
-  //   await sendBookingEmail(fullData);
-
-  //   try {
-  //     // 🔥 send both emails
-  //     await sendCompanyEmail(fullData);
-  //     await sendCustomerEmail(fullData);
-  //     setBookingId(id);
-  //     setSuccess(true);
-  //   } catch (error) {
-  //     console.error("Email error:", error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
-  // const handleConfirm = async (price: string | number) => {
-  //   try {
-  //     setLoading(true);
-
-  //     const id = generateBookingId();
-
-  //     const confirmedPrice = typeof price === "string" ? Number(price) : price;
-
-  //     const fullData: BookingData = {
-  //       ...bookingData,
-
-  //       bookingId: id,
-
-  //       price: confirmedPrice as BookingData["price"],
-  //     };
-
-  //     await sendBookingEmail(fullData);
-
-  //     setBookingId(id);
-
-  //     setSuccess(true);
-  //   } catch (error) {
-  //     console.error("Booking error:", error);
-
-  //     alert("Failed to send booking request.");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
   const handleConfirm = async (price: string | number) => {
     try {
       setLoading(true);
