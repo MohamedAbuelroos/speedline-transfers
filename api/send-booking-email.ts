@@ -2,9 +2,9 @@
 
 import { Resend } from "resend";
 
-import { bookingCustomerTemplate } from "../src/emails/bookingCustomerTemplate.ts";
+import { bookingCustomerTemplate } from "../emails/bookingCustomerTemplate";
 
-import type { EmailBookingData } from "../src/utils/emailTypes.ts";
+import type { EmailBookingData } from "../types/emailTypes";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 

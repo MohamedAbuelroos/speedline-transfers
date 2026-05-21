@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import type { BookingData } from "./bookingTypes";
 
 export const sendBookingEmail = async (data: BookingData) => {
@@ -12,7 +11,15 @@ export const sendBookingEmail = async (data: BookingData) => {
     body: JSON.stringify(data),
   });
 
-  const result = await response.json();
+  const text = await response.text();
+
+  let result;
+
+  try {
+    result = JSON.parse(text);
+  } catch {
+    throw new Error("Server returned invalid response");
+  }
 
   if (!response.ok) {
     throw new Error(result?.message || "Failed to send booking email");

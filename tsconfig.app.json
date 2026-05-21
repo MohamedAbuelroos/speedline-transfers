@@ -27,6 +27,8 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": [
-    "src"
+    "src",
+    "emails",
+    "types/emailTypes.ts"
   ]
 }
