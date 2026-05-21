@@ -69,7 +69,7 @@ export type EmailBookingData = {
 const formatDate = (date?: string) => {
   if (!date) return "-";
 
-  return new Date(`${date}T00:00:00`).toLocaleDateString("en-US", {
+  return new Date(date).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
