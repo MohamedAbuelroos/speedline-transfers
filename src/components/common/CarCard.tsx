@@ -185,7 +185,7 @@ const CarCard = ({
                 mt: -0.5,
               }}
             >
-              SAR {price}
+              USD {price}
             </Typography>
           </Box>
         </Box>

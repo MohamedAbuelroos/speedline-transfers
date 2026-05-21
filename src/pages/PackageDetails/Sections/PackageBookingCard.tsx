@@ -137,7 +137,7 @@ const PackageBookingCard = ({ data }: Props) => {
               color: "#111827",
             }}
           >
-            SAR {vehicle ? data.vehiclePricing?.[vehicle.category] : "--"}
+            USD {vehicle ? data.vehiclePricing?.[vehicle.category] : "--"}
           </Typography>
         </Box>
 

@@ -237,7 +237,7 @@ const StepVehicle = ({
                         bookingData.price
                       ? bookingData.packageData?.vehiclePricing?.[car.category]
                       : price}
-                  SAR
+                  USD
                 </Typography>
               </Box>
             </Box>
