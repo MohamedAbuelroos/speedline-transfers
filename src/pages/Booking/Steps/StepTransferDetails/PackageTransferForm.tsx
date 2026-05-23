@@ -70,7 +70,9 @@ const PackageTransferForm = ({
         <DatePicker
           label="Travel Date"
           value={bookingData.date ? dayjs(bookingData.date) : null}
-          onChange={(newValue) => handleChange("date", newValue?.toISOString())}
+          onChange={(newValue) => {
+            handleChange("date", newValue ? dayjs(newValue).format() : "");
+          }}
           minDate={dayjs()}
           slotProps={{ textField: { fullWidth: true } }}
         />
@@ -81,7 +83,9 @@ const PackageTransferForm = ({
         <TimePicker
           label="Pickup Time"
           value={bookingData.time ? dayjs(bookingData.time) : null}
-          onChange={(newValue) => handleChange("time", newValue?.toISOString())}
+          onChange={(newValue) => {
+            handleChange("time", newValue ? dayjs(newValue).format() : "");
+          }}
           slotProps={{ textField: { fullWidth: true } }}
         />
       </Grid>
