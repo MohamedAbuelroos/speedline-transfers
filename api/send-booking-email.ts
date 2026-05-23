@@ -1340,7 +1340,7 @@ export async function POST(req: Request) {
     await resend.emails.send({
       from: "SpeedLine Transfers <noreply@speedlinetransfers.com>",
 
-      to: ["booking@speedlinetransfers.com"],
+      to: ["mohamedabuelroos31@gmail.com"],
 
       subject: `New Booking - ${body.bookingId}`,
 
