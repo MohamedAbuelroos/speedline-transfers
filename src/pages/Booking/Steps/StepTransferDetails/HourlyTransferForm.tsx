@@ -31,9 +31,12 @@ const HourlyTransferForm = ({
         <DatePicker
           label="Date"
           value={bookingData.date ? dayjs(bookingData.date) : null}
-          onChange={(newValue) => {
-            handleChange("date", newValue ? dayjs(newValue).format() : "");
-          }}
+          onChange={(newValue) =>
+            handleChange(
+              "date",
+              newValue ? dayjs(newValue).format("YYYY-MM-DD") : "",
+            )
+          }
           minDate={dayjs()}
           slotProps={{ textField: { fullWidth: true } }}
         />
@@ -42,10 +45,15 @@ const HourlyTransferForm = ({
       <Grid size={{ xs: 12, md: 6 }}>
         <TimePicker
           label="Start Time"
-          value={bookingData.time ? dayjs(bookingData.time) : null}
-          onChange={(newValue) => {
-            handleChange("time", newValue ? dayjs(newValue).format() : "");
-          }}
+          value={
+            bookingData.time ? dayjs(`2000-01-01 ${bookingData.time}`) : null
+          }
+          onChange={(newValue) =>
+            handleChange(
+              "time",
+              newValue ? dayjs(newValue).format("HH:mm") : "",
+            )
+          }
           slotProps={{ textField: { fullWidth: true } }}
         />
       </Grid>
