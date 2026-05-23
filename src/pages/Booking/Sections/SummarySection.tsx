@@ -16,6 +16,7 @@ import type { BookingData } from "../../../utils/bookingTypes";
 import useLanguage from "../../../hooks/useLanguage";
 import { translations } from "../../../i18n";
 import type { PackageTranslation } from "../../../utils/types";
+import dayjs from "dayjs";
 
 type SummarySectionProps = {
   data: BookingData;
@@ -35,12 +36,9 @@ const SummarySection = ({ data, onConfirm, steps }: SummarySectionProps) => {
   ] as PackageTranslation;
 
   const getValue = (val: string) => val || "Not set";
-  const formatReturnTime = (dateStr: string) =>
-    new Date(dateStr).toLocaleTimeString("en-US", {
-      hour: "numeric",
-      minute: "numeric",
-      hour12: true,
-    });
+
+  const formatReturnTime = (timeStr: string) =>
+    dayjs(`2000-01-01 ${timeStr}`).format("hh:mm A");
 
   const getBookingPrice = (data: BookingData) => {
     const categoryKey = data.car?.category;

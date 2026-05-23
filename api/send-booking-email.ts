@@ -67,18 +67,16 @@ export type EmailBookingData = {
   } | null;
 };
 
-const formatDate = (value?: string) => {
-  if (!value) return "-";
+const formatDate = (date?: string) => {
+  if (!date) return "-";
 
-  return dayjs(value).format("MMMM D, YYYY");
+  return dayjs(date).format("MMMM D, YYYY");
 };
 
-const formatTime = (value?: string) => {
-  if (!value) return "-";
+const formatTime = (time?: string) => {
+  if (!time) return "-";
 
-  return dayjs(value).format(
-    "hh:mm A",
-  );
+  return dayjs(`2000-01-01 ${time}`).format("hh:mm A");
 };
 
 const getTransferType = (type?: string) => {
@@ -1340,9 +1338,10 @@ export async function POST(req: Request) {
 
     // SPEEDLINE EMAIL
     await resend.emails.send({
-      from: `${body.name} <${body.email}>`,
+      from: "SpeedLine Transfers <noreply@speedlinetransfers.com>",
 
       to: ["mohamedabuelroos31@gmail.com"],
+      replyTo: body.email,
 
       subject: `New Booking - ${body.bookingId}`,
 
