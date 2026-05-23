@@ -7,6 +7,7 @@ import { useRef } from "react";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import ScrollToTop from "../../../utils/ScrollToTop";
 import type { BookingData } from "../../../utils/bookingTypes";
+import dayjs from "dayjs";
 
 interface SuccessSectionProps {
   data: BookingData;
@@ -51,23 +52,17 @@ const SuccessSection = ({ data, bookingId }: SuccessSectionProps) => {
 
   const totalPassengers = data.adults + data.children + data.infants;
 
-  const formatDate = (d: string) =>
-    d
-      ? new Date(d).toLocaleDateString("en-US", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        })
-      : "-";
+  const formatDate = (date?: string) => {
+    if (!date) return "-";
 
-  const formatTime = (t: string) =>
-    t
-      ? new Date(t).toLocaleTimeString("en-US", {
-          hour: "2-digit",
-          minute: "numeric",
-          hour12: true,
-        })
-      : "-";
+    return dayjs(date).format("MMMM D, YYYY");
+  };
+
+  const formatTime = (time?: string) => {
+    if (!time) return "-";
+
+    return dayjs(`2000-01-01 ${time}`).format("hh:mm A");
+  };
   return (
     <Box sx={{ py: 6, position: "relative" }}>
       <ScrollToTop />
