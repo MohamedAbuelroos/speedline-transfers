@@ -149,6 +149,8 @@ const Booking = () => {
 
       await sendBookingEmail(fullData);
 
+      
+
       setBookingId(id);
 
       setSuccess(true);
