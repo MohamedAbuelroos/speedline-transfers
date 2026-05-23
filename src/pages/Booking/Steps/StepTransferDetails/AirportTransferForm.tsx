@@ -60,12 +60,9 @@ const AirportTransferForm = ({
         <DatePicker
           label="Date of Journey"
           value={bookingData.date ? dayjs(bookingData.date) : null}
-          onChange={(newValue) =>
-            handleChange(
-              "date",
-              newValue ? dayjs(newValue).format("YYYY-MM-DD") : "",
-            )
-          }
+          onChange={(newValue) => {
+            handleChange("date", newValue ? dayjs(newValue).format() : "");
+          }}
           minDate={dayjs()}
           slotProps={{ textField: { fullWidth: true } }}
         />
@@ -75,12 +72,9 @@ const AirportTransferForm = ({
         <TimePicker
           label="Pickup Time"
           value={bookingData.time ? dayjs(bookingData.time) : null}
-          onChange={(newValue) =>
-            handleChange(
-              "time",
-              newValue ? dayjs(newValue).format("HH:mm") : "",
-            )
-          }
+          onChange={(newValue) => {
+            handleChange("time", newValue ? dayjs(newValue).format() : "");
+          }}
           slotProps={{ textField: { fullWidth: true } }}
         />
       </Grid>
@@ -122,12 +116,12 @@ const AirportTransferForm = ({
                 bookingData.returnDate ? dayjs(bookingData.returnDate) : null
               }
               minDate={dayjs(bookingData.date)}
-              onChange={(newValue) =>
+              onChange={(newValue) => {
                 handleChange(
                   "returnDate",
-                  newValue ? dayjs(newValue).format("YYYY-MM-DD") : "",
-                )
-              }
+                  newValue ? dayjs(newValue).format() : "",
+                );
+              }}
               slotProps={{ textField: { fullWidth: true } }}
             />
           </Grid>
@@ -138,12 +132,12 @@ const AirportTransferForm = ({
               value={
                 bookingData.returnTime ? dayjs(bookingData.returnTime) : null
               }
-              onChange={(newValue) =>
+              onChange={(newValue) => {
                 handleChange(
                   "returnTime",
-                  newValue ? dayjs(newValue).format("HH:mm") : "",
-                )
-              }
+                  newValue ? dayjs(newValue).format() : "",
+                );
+              }}
               slotProps={{ textField: { fullWidth: true } }}
             />
           </Grid>
