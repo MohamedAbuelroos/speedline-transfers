@@ -742,7 +742,7 @@ export const bookingCustomerTemplate = (data: EmailBookingData) => {
               line-height:1.7;
             "
           >
-            • If you need assistance, simply reply to this email.
+            • If you need assistance, simply reply to booking@speedlinetransfers.com.
           </p>
         </div>
 
@@ -1340,7 +1340,7 @@ export async function POST(req: Request) {
     await resend.emails.send({
       from: "SpeedLine Transfers <noreply@speedlinetransfers.com>",
 
-      to: ["mohamedabuelroos31@gmail.com"],
+      to: ["booking@speedlinetransfers.com"],
       replyTo: body.email,
 
       subject: `New Booking - ${body.bookingId}`,
