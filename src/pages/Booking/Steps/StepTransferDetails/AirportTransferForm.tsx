@@ -60,7 +60,12 @@ const AirportTransferForm = ({
         <DatePicker
           label="Date of Journey"
           value={bookingData.date ? dayjs(bookingData.date) : null}
-          onChange={(newValue) => handleChange("date", newValue?.toISOString())}
+          onChange={(newValue) =>
+            handleChange(
+              "date",
+              newValue ? dayjs(newValue).format("YYYY-MM-DD") : "",
+            )
+          }
           minDate={dayjs()}
           slotProps={{ textField: { fullWidth: true } }}
         />
@@ -70,7 +75,12 @@ const AirportTransferForm = ({
         <TimePicker
           label="Pickup Time"
           value={bookingData.time ? dayjs(bookingData.time) : null}
-          onChange={(newValue) => handleChange("time", newValue?.toISOString())}
+          onChange={(newValue) =>
+            handleChange(
+              "time",
+              newValue ? dayjs(newValue).format("HH:mm") : "",
+            )
+          }
           slotProps={{ textField: { fullWidth: true } }}
         />
       </Grid>
@@ -113,7 +123,10 @@ const AirportTransferForm = ({
               }
               minDate={dayjs(bookingData.date)}
               onChange={(newValue) =>
-                handleChange("returnDate", newValue?.toISOString())
+                handleChange(
+                  "returnDate",
+                  newValue ? dayjs(newValue).format("YYYY-MM-DD") : "",
+                )
               }
               slotProps={{ textField: { fullWidth: true } }}
             />
@@ -126,7 +139,10 @@ const AirportTransferForm = ({
                 bookingData.returnTime ? dayjs(bookingData.returnTime) : null
               }
               onChange={(newValue) =>
-                handleChange("returnTime", newValue?.toISOString())
+                handleChange(
+                  "returnTime",
+                  newValue ? dayjs(newValue).format("HH:mm") : "",
+                )
               }
               slotProps={{ textField: { fullWidth: true } }}
             />

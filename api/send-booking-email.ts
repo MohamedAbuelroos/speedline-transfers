@@ -1,6 +1,7 @@
 /// <reference types="node" />
 
 import { Resend } from "resend";
+import dayjs from "dayjs";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -69,21 +70,13 @@ export type EmailBookingData = {
 const formatDate = (date?: string) => {
   if (!date) return "-";
 
-  return new Date(date).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  return dayjs(date).format("MMMM D, YYYY");
 };
 
 const formatTime = (time?: string) => {
   if (!time) return "-";
 
-  return new Date(time).toLocaleTimeString("en-US", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: true,
-  });
+  return dayjs(`2000-01-01 ${time}`).format("hh:mm A");
 };
 
 const getTransferType = (type?: string) => {
@@ -780,6 +773,552 @@ export const bookingCustomerTemplate = (data: EmailBookingData) => {
   `;
 };
 
+const bookingCompanyTemplate = (data: EmailBookingData) => {
+  const basePrice = data.roundTrip ? data.price * 2 : data.price;
+
+  const processingFee = Number((basePrice * 0.03).toFixed(2));
+
+  const totalPrice = Number((basePrice + processingFee).toFixed(2));
+
+  const totalPassengers =
+    (data.adults || 0) + (data.children || 0) + (data.infants || 0);
+
+  return `
+  <div
+    style="
+      font-family:Arial,sans-serif;
+      background:#f5f7fb;
+      padding:30px;
+      color:#111827;
+    "
+  >
+    <div
+      style="
+        max-width:800px;
+        margin:auto;
+        background:white;
+        border-radius:20px;
+        overflow:hidden;
+        box-shadow:0 8px 30px rgba(0,0,0,0.08);
+      "
+    >
+      <!-- HEADER -->
+      <div
+        style="
+          background:#111827;
+          color:white;
+          padding:28px;
+        "
+      >
+        <h1
+          style="
+            margin:0;
+            font-size:28px;
+          "
+        >
+          New Booking Request
+        </h1>
+
+        <p
+          style="
+            margin-top:10px;
+            color:#d1d5db;
+          "
+        >
+          A new booking has been submitted
+          through SpeedLine Transfers.
+        </p>
+      </div>
+
+      <!-- BODY -->
+      <div style="padding:28px;">
+        <!-- CUSTOMER -->
+        <div
+          style="
+            margin-bottom:30px;
+          "
+        >
+          <h2
+            style="
+              margin-top:0;
+              margin-bottom:18px;
+              font-size:22px;
+            "
+          >
+            Customer Information
+          </h2>
+
+          <table
+            style="
+              width:100%;
+              border-collapse:collapse;
+            "
+          >
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Name
+              </td>
+
+              <td
+                style="
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${data.name}
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Email
+              </td>
+
+              <td
+                style="
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${data.email}
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Phone
+              </td>
+
+              <td
+                style="
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${data.phone || "-"}
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- BOOKING -->
+        <div
+          style="
+            background:#f9fafb;
+            border-radius:18px;
+            padding:24px;
+            margin-bottom:24px;
+          "
+        >
+          <h2
+            style="
+              margin-top:0;
+              margin-bottom:20px;
+              font-size:22px;
+            "
+          >
+            Booking Details
+          </h2>
+
+          <table
+            style="
+              width:100%;
+              border-collapse:collapse;
+            "
+          >
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Booking ID
+              </td>
+
+              <td
+                style="
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${data.bookingId}
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Service Type
+              </td>
+
+              <td
+                style="
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${getTransferType(data.type)}
+              </td>
+            </tr>
+
+            ${
+              data.packageData?.id
+                ? `
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Package
+              </td>
+
+              <td
+                style="
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${data.packageData.id}
+              </td>
+            </tr>
+            `
+                : ""
+            }
+
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Route
+              </td>
+
+              <td
+                style="
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${data.from} → ${data.to}
+              </td>
+            </tr>
+
+            ${
+              data.stops?.length
+                ? `
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Stops
+              </td>
+
+              <td
+                style="
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${data.stops.join(" • ")}
+              </td>
+            </tr>
+            `
+                : ""
+            }
+
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Travel Date
+              </td>
+
+              <td
+                style="
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${formatDate(data.date)}
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Pickup Time
+              </td>
+
+              <td
+                style="
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${formatTime(data.time)}
+              </td>
+            </tr>
+
+            ${
+              data.roundTrip
+                ? `
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Return Date
+              </td>
+
+              <td
+                style="
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${formatDate(data.returnDate)}
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Return Time
+              </td>
+
+              <td
+                style="
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${formatTime(data.returnTime)}
+              </td>
+            </tr>
+            `
+                : ""
+            }
+
+            ${
+              data.flightNumber
+                ? `
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Flight Number
+              </td>
+
+              <td
+                style="
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${data.flightNumber}
+              </td>
+            </tr>
+            `
+                : ""
+            }
+
+            ${
+              data.pickupDetails
+                ? `
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Pickup Details
+              </td>
+
+              <td
+                style="
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${data.pickupDetails}
+              </td>
+            </tr>
+            `
+                : ""
+            }
+
+            ${
+              data.dropoffDetails
+                ? `
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Dropoff Details
+              </td>
+
+              <td
+                style="
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${data.dropoffDetails}
+              </td>
+            </tr>
+            `
+                : ""
+            }
+
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Vehicle
+              </td>
+
+              <td
+                style="
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${data.car?.name || "-"}
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Category
+              </td>
+
+              <td
+                style="
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${data.car?.category || "-"}
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Passengers
+              </td>
+
+              <td
+                style="
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${totalPassengers}
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Luggage
+              </td>
+
+              <td
+                style="
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${data.car?.bags || 0} PCS
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Trip Type
+              </td>
+
+              <td
+                style="
+                  text-align:right;
+                  font-weight:700;
+                "
+              >
+                ${data.roundTrip ? "Round Trip" : "One Way"}
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        ${
+          data.notes
+            ? `
+        <div
+          style="
+            background:#fff7ed;
+            border-radius:18px;
+            padding:20px;
+            margin-bottom:24px;
+          "
+        >
+          <h3
+            style="
+              margin-top:0;
+              margin-bottom:12px;
+            "
+          >
+            Customer Notes
+          </h3>
+
+          <p
+            style="
+              margin:0;
+              line-height:1.8;
+            "
+          >
+            ${data.notes}
+          </p>
+        </div>
+        `
+            : ""
+        }
+
+        <!-- PRICE -->
+        <div
+          style="
+            border-top:1px solid #e5e7eb;
+            padding-top:24px;
+          "
+        >
+          <table style="width:100%;">
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Base Price
+              </td>
+
+              <td
+                style="
+                  text-align:right;
+                "
+              >
+                USD ${basePrice}
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:10px 0;color:#6b7280;">
+                Processing Fee
+              </td>
+
+              <td
+                style="
+                  text-align:right;
+                "
+              >
+                USD ${processingFee}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                style="
+                  padding-top:16px;
+                  font-size:22px;
+                  font-weight:800;
+                "
+              >
+                Total
+              </td>
+
+              <td
+                style="
+                  text-align:right;
+                  padding-top:16px;
+                  font-size:22px;
+                  font-weight:800;
+                  color:#1FB1F9;
+                "
+              >
+                USD ${totalPrice}
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  `;
+};
+
 export async function POST(req: Request) {
   try {
     const body = (await req.json()) as EmailBookingData;
@@ -795,6 +1334,17 @@ export async function POST(req: Request) {
       subject: "Your Booking Request Has Been Received",
 
       html: bookingCustomerTemplate(body),
+    });
+
+    // SPEEDLINE EMAIL
+    await resend.emails.send({
+      from: "SpeedLine Transfers <noreply@speedlinetransfers.com>",
+
+      to: ["booking@speedlinetransfers.com"],
+
+      subject: `New Booking - ${body.bookingId}`,
+
+      html: bookingCompanyTemplate(body),
     });
 
     return Response.json({
