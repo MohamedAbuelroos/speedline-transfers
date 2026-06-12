@@ -15,6 +15,11 @@ import WaterDropOutlinedIcon from "@mui/icons-material/WaterDropOutlined";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
 import SupportAgentOutlinedIcon from "@mui/icons-material/SupportAgentOutlined";
+import HandshakeIcon from '@mui/icons-material/Handshake';
+import SyncIcon from '@mui/icons-material/Sync';
+import TerrainIcon from '@mui/icons-material/Terrain';
+import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
+import AcUnitIcon from '@mui/icons-material/AcUnit';
 
 import type { PackageTranslation, TravelPackage } from "../../../utils/types";
 import type { JSX } from "react";
@@ -32,6 +37,12 @@ const iconMap: Record<string, JSX.Element> = {
   location: <PlaceOutlinedIcon />,
   time: <AccessTimeOutlinedIcon />,
   support: <SupportAgentOutlinedIcon />,
+  handshake: <HandshakeIcon />,
+  roundtrip: <SyncIcon />,
+  terrain: <TerrainIcon />,
+  mobile: <PhoneIphoneIcon />,
+  airconditioning: <AcUnitIcon />,
+
 };
 
 const PackageTerms = ({ data }: Props) => {

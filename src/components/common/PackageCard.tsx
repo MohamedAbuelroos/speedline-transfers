@@ -109,12 +109,19 @@ const PackageCard = ({ data }: Props) => {
       <Box sx={{ p: 2 }}>
         {/* TITLE */}
         <Typography
+          onClick={handleSelect}
           sx={{
             fontSize: isRtl ? 34 : 24,
             fontWeight: 800,
             lineHeight: 1.2,
             mb: 1,
             color: "#111",
+            cursor: "pointer",
+            transition: "color 0.1s",
+
+            "&:hover": {
+              color: "#1FB1F9",
+            },
           }}
         >
           {packageTranslation?.title}
@@ -128,6 +135,11 @@ const PackageCard = ({ data }: Props) => {
             lineHeight: 1.7,
             mb: 1,
             minHeight: 50,
+
+            display: "-webkit-box",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
           }}
         >
           {packageTranslation?.subtitle}

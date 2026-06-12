@@ -16,7 +16,6 @@ const filters = [
   },
   { title: "Tour", icon: <LocationCityIcon fontSize="medium" /> },
   { title: "Religious", icon: <SwapHorizIcon fontSize="medium" /> },
-  { title: "VIP", icon: <SwapHorizIcon fontSize="medium" /> },
 ];
 
 const FilterSection = ({ active, onChange }: Props) => {

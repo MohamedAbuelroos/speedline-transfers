@@ -1,17 +1,136 @@
 import type { TravelPackage } from "../utils/types";
 
 import reverseCircuit from "../assets/packages/reverse-circuit.webp";
+import reverseCircuitTwo from "../assets/packages/reverse-circuit2.png";
 import HajPackage from "../assets/packages/HajPackage.webp";
 import gmc from "../assets/packages/GMC.webp";
 import Chev from "../assets/packages/Chev.webp";
+import jedAirport from "../assets/packages/jedAirPort.png";
+import medAirport from "../assets/packages/medAirport.webp";
+import umrahPackage from "../assets/packages/umrahpackage.png";
+import makkahZiyarat from "../assets/packages/makkahziyarat.png";
+import makkahMadinah from "../assets/packages/makkah-madinah.png";
 
 export const travelPackages: TravelPackage[] = [
   {
-    id: "reverse-circuit",
-    slug: "reverse-circuit-madinah-jeddah",
+    id: "private-umrah-transfer",
+    slug: "private-umrah-transfer-package",
     startingPrice: 385,
     category: "Airport",
-    coverImage: reverseCircuit,
+    coverImage: medAirport,
+
+    gallery: [reverseCircuit, gmc, medAirport, jedAirport],
+
+    cities: ["Jeddah", "Makkah", "Madinah"],
+
+    vehiclePricing: {
+      Sedan: 385,
+      SUV: 495,
+      Van: 699,
+      Business: 950,
+      Luxury: 1350,
+    },
+    inclusions: [
+      {
+        icon: "handshake",
+      },
+      {
+        icon: "driver",
+      },
+
+      {
+        icon: "water",
+      },
+      {
+        icon: "location",
+      },
+      {
+        icon: "support",
+      },
+    ],
+    featured: true,
+    popular: true,
+  },
+
+  {
+    id: "full-umrah-loop",
+    slug: "full-umrah-loop-package",
+    startingPrice: 480,
+    category: "Airport",
+    coverImage: umrahPackage,
+
+    gallery: [gmc, HajPackage, reverseCircuit, Chev],
+
+    cities: ["Jeddah", "Makkah", "Madinah", "Jeddah"],
+
+    vehiclePricing: {
+      Sedan: 480,
+      SUV: 620,
+      Van: 890,
+      Business: 1150,
+      Luxury: 1450,
+    },
+    inclusions: [
+      {
+        icon: "roundtrip",
+      },
+      {
+        icon: "driver",
+      },
+
+      {
+        icon: "water",
+      },
+      {
+        icon: "location",
+      },
+    ],
+    featured: true,
+    popular: true,
+  },
+
+  {
+    id: "makkah-holy-sites-ziyarat",
+    slug: "makkah-holy-sites-ziyarat-package",
+    startingPrice: 55,
+    category: "Religious",
+    coverImage: makkahZiyarat,
+
+    gallery: [gmc, HajPackage, reverseCircuit, Chev],
+
+    cities: ["Makkah", "Makkah"],
+
+    vehiclePricing: {
+      Sedan: 55,
+      SUV: 75,
+      Van: 120,
+      Business: 350,
+      Luxury: 550,
+    },
+    inclusions: [
+      {
+        icon: "terrain",
+      },
+      {
+        icon: "time",
+      },
+      {
+        icon: "mobile",
+      },
+      {
+        icon: "driver",
+      },
+    ],
+    featured: true,
+    popular: true,
+  },
+
+  {
+    id: "reverse-circuit",
+    slug: "reverse-circuit-package",
+    startingPrice: 385,
+    category: "Airport",
+    coverImage: reverseCircuitTwo,
 
     gallery: [gmc, HajPackage, reverseCircuit, Chev],
 
@@ -35,47 +154,44 @@ export const travelPackages: TravelPackage[] = [
       {
         icon: "location",
       },
-      {
-        icon: "support",
-      },
     ],
     featured: true,
-    popular: true,
+    popular: false,
   },
 
   {
-    id: "spiritual-journey",
-    slug: "spiritual-journey-package",
+    id: "madinah-makkah-roundtrip",
+    slug: "madinah-makkah-roundtrip-package",
     category: "Religious",
-    startingPrice: 520,
+    startingPrice: 560,
 
-    coverImage: HajPackage,
+    coverImage: makkahMadinah,
 
     gallery: [HajPackage],
 
-    cities: ["Jeddah", "Makkah", "Madinah"],
+    cities: ["Madinah", "Makkah", "Madinah"],
 
     vehiclePricing: {
-      Sedan: 520,
-      SUV: 650,
-      Van: 850,
-      Business: 1200,
-      Luxury: 1500,
+      Sedan: 560,
+      SUV: 750,
+      Van: 1100,
+      Business: 1350,
+      Luxury: 1600,
     },
 
     inclusions: [
       {
-        icon: "car",
+        icon: "roundtrip",
       },
 
       {
-        icon: "location",
-      },
-      {
-        icon: "support",
-      },
-      {
         icon: "driver",
+      },
+      {
+        icon: "water",
+      },
+      {
+        icon: "location",
       },
     ],
 
@@ -84,21 +200,21 @@ export const travelPackages: TravelPackage[] = [
   },
 
   {
-    id: "umrah-express",
-    slug: "umrah-express-package",
-    category: "Religious",
-    startingPrice: 290,
+    id: "jeddah-highlights-tour",
+    slug: "jeddah-highlights-tour-package",
+    category: "Tour",
+    startingPrice: 120,
 
     coverImage: reverseCircuit,
 
     gallery: [reverseCircuit],
 
-    cities: ["Jeddah", "Makkah"],
+    cities: ["Jeddah", "Jeddah"],
 
     vehiclePricing: {
-      Sedan: 290,
-      SUV: 385,
-      Van: 520,
+      Sedan: 120,
+      SUV: 160,
+      Van: 240,
       Business: 750,
       Luxury: 1200,
     },
@@ -112,48 +228,45 @@ export const travelPackages: TravelPackage[] = [
         icon: "water",
       },
       {
-        icon: "car",
+        icon: "driver",
       },
-      {
-        icon: "location",
-      },
+    
     ],
 
     featured: false,
-    popular: false,
+    popular: true,
   },
 
   {
-    id: "vip-umrah",
-    slug: "vip-umrah-experience",
+    id: "madinah-historical-sightseeing",
+    slug: "madinah-historical-sightseeing-package",
+    category: "Tour",
+    startingPrice: 65,
 
-    startingPrice: 990,
+    coverImage: HajPackage,
 
-    category: "VIP",
-    coverImage: reverseCircuit,
+    gallery: [HajPackage],
 
-    gallery: [reverseCircuit],
-
-    cities: ["Jeddah", "Makkah", "Madinah"],
+    cities: ["Madinah", "Makkah", "Madinah"],
 
     vehiclePricing: {
-      Sedan: 990,
-      SUV: 1200,
-      Van: 1500,
-      Business: 2000,
-      Luxury: 3000,
+      Sedan: 65,
+      SUV: 90,
+      Van: 140,
+      Business: 1350,
+      Luxury: 1600,
     },
 
     inclusions: [
       {
-        icon: "car",
+        icon: "time",
       },
 
       {
-        icon: "support",
+        icon: "driver",
       },
       {
-        icon: "location",
+        icon: "airconditioning",
       },
       {
         icon: "driver",
@@ -165,10 +278,84 @@ export const travelPackages: TravelPackage[] = [
   },
 
   {
-    id: "riyadh-discovery",
-    slug: "riyadh-discovery-tour",
+    id: "hajj-5day-transport",
+    slug: "hajj-5day-transport-package",
+    category: "Religious",
+    startingPrice: 1150,
 
-    startingPrice: 740,
+    coverImage: reverseCircuit,
+
+    gallery: [reverseCircuit],
+
+    cities: ["Makkah", "Jeddah"],
+
+    vehiclePricing: {
+      Sedan: 1150,
+      SUV: 1450,
+      Van: 1950,
+      Business: 2450,
+      Luxury: 3200,
+    },
+
+    inclusions: [
+      {
+        icon: "support",
+      },
+
+      {
+        icon: "driver",
+      },
+      {
+        icon: "mobile",
+      },
+    ],
+
+    featured: false,
+    popular: false,
+  },
+
+  {
+    id: "taif-mountain-day",
+    slug: "taif-mountain-day-package",
+    category: "Tour",
+    startingPrice: 165,
+
+    coverImage: reverseCircuit,
+
+    gallery: [reverseCircuit],
+
+    cities: ["Taif", "Taif"],
+
+    vehiclePricing: {
+      Sedan: 165,
+      SUV: 210,
+      Van: 310,
+      Business: 750,
+      Luxury: 1200,
+    },
+
+    inclusions: [
+      {
+        icon: "driver",
+      },
+
+      {
+        icon: "location",
+      },
+      {
+        icon: "water",
+      },
+    ],
+
+    featured: false,
+    popular: false,
+  },
+
+  {
+    id: "riyadh-discovery-tour",
+    slug: "riyadh-discovery-tour-package",
+
+    startingPrice: 125,
 
     coverImage: reverseCircuit,
 
@@ -176,12 +363,12 @@ export const travelPackages: TravelPackage[] = [
 
     category: "Tour",
 
-    cities: ["Riyadh"],
+    cities: ["Riyadh", "Riyadh"],
 
     vehiclePricing: {
-      Sedan: 740,
-      SUV: 900,
-      Van: 1200,
+      Sedan: 125,
+      SUV: 170,
+      Van: 250,
       Business: 1500,
       Luxury: 2200,
     },
@@ -197,50 +384,9 @@ export const travelPackages: TravelPackage[] = [
       {
         icon: "location",
       },
-      {
-        icon: "support",
-      },
     ],
 
     featured: false,
     popular: true,
-  },
-
-  {
-    id: "alula-heritage",
-    slug: "alula-heritage-experience",
-
-    startingPrice: 1450,
-
-    coverImage: reverseCircuit,
-
-    gallery: [reverseCircuit],
-    category: "Tour",
-    cities: ["AlUla"],
-
-    vehiclePricing: {
-      Sedan: 1450,
-      SUV: 1800,
-      Van: 2200,
-      Business: 2800,
-      Luxury: 3500,
-    },
-    inclusions: [
-      {
-        icon: "location",
-      },
-
-      {
-        icon: "car",
-      },
-      {
-        icon: "driver",
-      },
-      {
-        icon: "support",
-      },
-    ],
-
-    featured: true,
   },
 ];

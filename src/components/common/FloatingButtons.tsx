@@ -33,7 +33,7 @@ const FloatingButtons = () => {
         {/* WhatsApp */}
         <Fab
           sx={{ backgroundColor: "#25D366", color: "#fff" }}
-          href="https://wa.me/966500000000"
+          href="https://wa.me/966547417085"
           target="_blank"
         >
           <WhatsAppIcon />
@@ -42,7 +42,7 @@ const FloatingButtons = () => {
         {/* Call */}
         <Fab
           sx={{ backgroundColor: "#1FB1F9", color: "#fff" }}
-          href="tel:+966500000000"
+          href="tel:+966547417085"
         >
           <PhoneIcon />
         </Fab>

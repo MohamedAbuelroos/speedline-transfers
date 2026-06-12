@@ -133,14 +133,14 @@ const PackageHero = ({ data }: Props) => {
               fontWeight: 700,
               color: "#1FB1F9",
               fontStyle: "italic",
-              mb: 3,
+              // mb: 3,
             }}
           >
             {packageTranslation.subtitle}
           </Typography>
 
           {/* DESCRIPTION */}
-          <Typography
+          {/* <Typography
             sx={{
               color: "rgba(255,255,255,0.82)",
               lineHeight: 1.9,
@@ -150,59 +150,8 @@ const PackageHero = ({ data }: Props) => {
             }}
           >
             {packageTranslation.overview}
-          </Typography>
+          </Typography> */}
 
-          {/* BUTTONS */}
-          {/* <Stack
-            spacing={2}
-            sx={{ flexWrap: "wrap" }}
-            direction={{ xs: "column", sm: "row" }}
-          >
-            <Button
-              variant="contained"
-              sx={{
-                backgroundImage:
-                  "linear-gradient(135deg, #1FB1F9 0%, #1697d2 100%)",
-
-                px: 4,
-                py: 1.5,
-                borderRadius: "999px",
-                textTransform: "none",
-                fontWeight: 700,
-                fontSize: 16,
-
-                "&:hover": {
-                  boxShadow: "0 1px 25px rgba(31,177,249,0.35)",
-                },
-              }}
-            >
-              Book This Package
-            </Button>
-
-            <Button
-              variant="outlined"
-              sx={{
-                borderColor: "rgba(255,255,255,0.2)",
-                color: "#fff",
-
-                px: 4,
-                py: 1.5,
-                borderRadius: "999px",
-                textTransform: "none",
-                fontWeight: 600,
-                fontSize: 16,
-
-                backdropFilter: "blur(10px)",
-
-                "&:hover": {
-                  borderColor: "#fff",
-                  backgroundColor: "rgba(255,255,255,0.08)",
-                },
-              }}
-            >
-              WhatsApp Inquiry
-            </Button>
-          </Stack> */}
         </Box>
       </Box>
     </Box>

@@ -11,7 +11,7 @@ import useDelayedNavigate from "../../hooks/useDelayedNavigate";
 const socialIcons = [
   {
     icon: <WhatsAppIcon />,
-    href: "https://wa.me/966500000000",
+    href: "https://wa.me/966547417085",
     color: "#fff",
     bgColor: "#1FB1F9",
     hoverColor: "#25D366",
@@ -32,7 +32,7 @@ const socialIcons = [
   },
   {
     icon: <EmailIcon />,
-    href: "mailto:info@speedlinetransfers.com",
+    href: "mailto:contact@speedlinetransfers.com",
     color: "#fff",
     bgColor: "#1FB1F9",
     hoverColor: "#D44638",
@@ -112,8 +112,8 @@ const Footer = () => {
                 fontSize: 15,
               }}
             >
-              transfer services from Egypt to Saudi Arabia. We provide safe,
-              reliable, and comfortable rides for all your journeys.
+              Your journey, our responsibility. We provide safe,
+              reliable, and comfortable rides for all your journeys in Saudi Arabia.
             </Typography>
           </Grid>
 
@@ -325,7 +325,7 @@ const Footer = () => {
               Contact
             </Typography>
             <IconButton
-              href="tel:+966500000000"
+              href="tel:+966547417085"
               sx={{
                 display: "flex",
 
@@ -368,12 +368,12 @@ const Footer = () => {
                 variant="body2"
                 sx={{ direction: isRTL ? "rtl" : "ltr", unicodeBidi: "embed" }}
               >
-                +966 50 000 0000
+                +96654 741 7085
               </Typography>
             </IconButton>
 
             <IconButton
-              href="mailto:mohamedabuelroos31@gmail.com"
+              href="mailto:contact@speedlinetransfers.com"
               sx={{
                 display: "flex",
 
