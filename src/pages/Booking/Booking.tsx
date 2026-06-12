@@ -1,7 +1,6 @@
 import { Box, Container, Grid } from "@mui/material";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-// import { sendCustomerEmail, sendCompanyEmail } from "../../utils/email";
 import HeaderSection from "./Sections/HeaderSection";
 import ProgressSection from "./Sections/ProgressSection";
 import SummarySection from "./Sections/SummarySection";
@@ -148,8 +147,6 @@ const Booking = () => {
       };
 
       await sendBookingEmail(fullData);
-
-      
 
       setBookingId(id);
 

@@ -107,7 +107,7 @@ const CTASection = () => {
                     unicodeBidi: "embed",
                   }}
                 >
-                  +966 50 000 0000
+                  +96654 741 7085
                 </Typography>
               </Box>
             </Box>

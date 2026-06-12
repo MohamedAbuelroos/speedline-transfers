@@ -181,7 +181,7 @@ const CTASection = () => {
               <Button
                 variant="contained"
                 target="_blank"
-                href="https://wa.me/966500000000"
+                href="https://wa.me/966547417085?text=Hello,%20I%20want%20to%20book%20a%20custom%20transfer"
                 sx={{
                   borderRadius: "999px",
 
@@ -273,7 +273,7 @@ const CTASection = () => {
                     color: "rgba(255,255,255,0.72)",
                   }}
                 >
-                  +966 50 000 0000
+                  +96654 741 7085
                 </Typography>
               </Box>
             </Box>

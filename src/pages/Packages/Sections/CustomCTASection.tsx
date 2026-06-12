@@ -9,7 +9,7 @@ const CustomCTASection = () => {
       "Hello, I would like to book a custom transfer. Can you assist me?",
     );
 
-    window.open(`https://wa.me/966500000000?text=${message}`, "_blank");
+    window.open(`https://wa.me/966547417085?text=${message}`, "_blank");
   };
 
   return (
@@ -43,7 +43,7 @@ const CustomCTASection = () => {
           <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
             <Button
               variant="contained"
-              onClick={() => navigate("/booking")}
+              onClick={() => navigate("/contact")}
               sx={{
                 backgroundColor: "white",
                 borderRadius: "999px",

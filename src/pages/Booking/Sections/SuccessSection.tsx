@@ -342,7 +342,7 @@ const SuccessSection = ({ data, bookingId }: SuccessSectionProps) => {
         <Typography sx={{ fontWeight: 600 }}>Support Center</Typography>
 
         <Typography sx={{ color: "primary.main" }}>
-          (+966) 9600000000
+          (+966) 54 741 7085
         </Typography>
       </Box>
     </Box>

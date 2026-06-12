@@ -9,7 +9,7 @@ const cards = [
   {
     title: "WhatsApp",
 
-    value: "+966 50 000 0000",
+    value: "+966547417085",
 
     icon: <WhatsAppIcon />,
 
@@ -19,7 +19,7 @@ const cards = [
   {
     title: "Phone",
 
-    value: "+966 50 000 0000",
+    value: "+966547417085",
 
     icon: <PhoneIcon />,
 
