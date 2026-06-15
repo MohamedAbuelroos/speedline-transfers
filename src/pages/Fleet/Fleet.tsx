@@ -7,6 +7,7 @@ import { useState } from "react";
 import CTASection from "./Sections/CTASection";
 import useDelayedNavigate from "../../hooks/useDelayedNavigate";
 import Seo from "../../components/common/Seo";
+import RecommendedPackagesSection from "./Sections/RecommendedPackagesSection";
 
 const Fleet = () => {
   const navigate = useDelayedNavigate();
@@ -70,6 +71,7 @@ const Fleet = () => {
           </Typography>
         )}
         <CTASection />
+        <RecommendedPackagesSection />
       </Container>
     </Box>
   );

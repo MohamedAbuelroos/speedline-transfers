@@ -412,7 +412,7 @@ const Footer = () => {
                   fontSize: 36,
                 }}
               />
-              <Typography variant="body2">Contact@speedline.com</Typography>
+              <Typography variant="body2">contact@speedline.com</Typography>
             </IconButton>
 
             {/* Social */}

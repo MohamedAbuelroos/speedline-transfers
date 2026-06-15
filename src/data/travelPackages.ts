@@ -4,7 +4,6 @@ import reverseCircuit from "../assets/packages/reverse-circuit.webp";
 import reverseCircuitTwo from "../assets/packages/reverse-circuit2.png";
 import HajPackage from "../assets/packages/HajPackage.webp";
 import gmc from "../assets/packages/GMC.webp";
-import Chev from "../assets/packages/Chev.webp";
 import jedAirport from "../assets/packages/jedAirPort.png";
 import medAirport from "../assets/packages/medAirport.webp";
 import umrahPackage from "../assets/packages/umrahpackage.png";
@@ -24,11 +23,14 @@ export const travelPackages: TravelPackage[] = [
     cities: ["Jeddah", "Makkah", "Madinah"],
 
     vehiclePricing: {
-      Sedan: 385,
-      SUV: 495,
-      Van: 699,
-      Business: 950,
-      Luxury: 1350,
+      "Economy Sedan": 385,
+      "Economy MPV": 495,
+      "Economy Van": 699,
+      "Business SUV": 950,
+      "Business Sedan": 1350,
+      "Business Van": 1350,
+      "Executive Van": 1350,
+      "Economy minibus": 1350,
     },
     inclusions: [
       {
@@ -59,16 +61,19 @@ export const travelPackages: TravelPackage[] = [
     category: "Airport",
     coverImage: umrahPackage,
 
-    gallery: [gmc, HajPackage, reverseCircuit, Chev],
+    gallery: [gmc, HajPackage, reverseCircuit],
 
     cities: ["Jeddah", "Makkah", "Madinah", "Jeddah"],
 
     vehiclePricing: {
-      Sedan: 480,
-      SUV: 620,
-      Van: 890,
-      Business: 1150,
-      Luxury: 1450,
+      "Economy Sedan": 480,
+      "Economy MPV": 620,
+      "Economy Van": 890,
+      "Business SUV": 1150,
+      "Business Sedan": 1500,
+      "Business Van": 1500,
+      "Executive Van": 1500,
+      "Economy minibus": 1500,
     },
     inclusions: [
       {
@@ -96,16 +101,19 @@ export const travelPackages: TravelPackage[] = [
     category: "Religious",
     coverImage: makkahZiyarat,
 
-    gallery: [gmc, HajPackage, reverseCircuit, Chev],
+    gallery: [gmc, HajPackage, reverseCircuit],
 
     cities: ["Makkah", "Makkah"],
 
     vehiclePricing: {
-      Sedan: 55,
-      SUV: 75,
-      Van: 120,
-      Business: 350,
-      Luxury: 550,
+      "Economy Sedan": 55,
+      "Economy MPV": 75,
+      "Economy Van": 120,
+      "Business SUV": 350,
+      "Business Sedan": 350,
+      "Business Van": 350,
+      "Executive Van": 350,
+      "Economy minibus": 350,
     },
     inclusions: [
       {
@@ -132,16 +140,19 @@ export const travelPackages: TravelPackage[] = [
     category: "Airport",
     coverImage: reverseCircuitTwo,
 
-    gallery: [gmc, HajPackage, reverseCircuit, Chev],
+    gallery: [gmc, HajPackage, reverseCircuit],
 
     cities: ["Madinah", "Makkah", "Jeddah"],
 
     vehiclePricing: {
-      Sedan: 385,
-      SUV: 495,
-      Van: 699,
-      Business: 950,
-      Luxury: 1350,
+      "Economy Sedan": 385,
+      "Economy MPV": 495,
+      "Economy Van": 699,
+      "Business SUV": 950,
+      "Business Sedan": 1350,
+      "Business Van": 1350,
+      "Executive Van": 1350,
+      "Economy minibus": 1350,
     },
     inclusions: [
       {
@@ -172,11 +183,14 @@ export const travelPackages: TravelPackage[] = [
     cities: ["Madinah", "Makkah", "Madinah"],
 
     vehiclePricing: {
-      Sedan: 560,
-      SUV: 750,
-      Van: 1100,
-      Business: 1350,
-      Luxury: 1600,
+      "Economy Sedan": 560,
+      "Economy MPV": 750,
+      "Economy Van": 1100,
+      "Business SUV": 1350,
+      "Business Sedan": 1500,
+      "Business Van": 1500,
+      "Executive Van": 1500,
+      "Economy minibus": 1350,
     },
 
     inclusions: [
@@ -212,11 +226,14 @@ export const travelPackages: TravelPackage[] = [
     cities: ["Jeddah", "Jeddah"],
 
     vehiclePricing: {
-      Sedan: 120,
-      SUV: 160,
-      Van: 240,
-      Business: 750,
-      Luxury: 1200,
+      "Economy Sedan": 120,
+      "Economy MPV": 160,
+      "Economy Van": 240,
+      "Business Sedan": 750,
+      "Business SUV": 750,
+      "Business Van": 750,
+      "Executive Van": 750,
+      "Economy minibus": 1350,
     },
 
     inclusions: [
@@ -230,7 +247,6 @@ export const travelPackages: TravelPackage[] = [
       {
         icon: "driver",
       },
-    
     ],
 
     featured: false,
@@ -250,11 +266,14 @@ export const travelPackages: TravelPackage[] = [
     cities: ["Madinah", "Makkah", "Madinah"],
 
     vehiclePricing: {
-      Sedan: 65,
-      SUV: 90,
-      Van: 140,
-      Business: 1350,
-      Luxury: 1600,
+      "Economy Sedan": 65,
+      "Economy MPV": 90,
+      "Economy Van": 140,
+      "Business SUV": 1350,
+      "Business Sedan": 1350,
+      "Business Van": 1350,
+      "Executive Van": 1350,
+      "Economy minibus": 1350,
     },
 
     inclusions: [
@@ -290,11 +309,14 @@ export const travelPackages: TravelPackage[] = [
     cities: ["Makkah", "Jeddah"],
 
     vehiclePricing: {
-      Sedan: 1150,
-      SUV: 1450,
-      Van: 1950,
-      Business: 2450,
-      Luxury: 3200,
+      "Economy Sedan": 1150,
+      "Economy MPV": 1450,
+      "Economy Van": 1950,
+      "Business Sedan": 2450,
+      "Business SUV": 2450,
+      "Business Van": 2450,
+      "Executive Van": 2450,
+      "Economy minibus": 3500,
     },
 
     inclusions: [
@@ -327,11 +349,14 @@ export const travelPackages: TravelPackage[] = [
     cities: ["Taif", "Taif"],
 
     vehiclePricing: {
-      Sedan: 165,
-      SUV: 210,
-      Van: 310,
-      Business: 750,
-      Luxury: 1200,
+      "Economy Sedan": 165,
+      "Economy MPV": 210,
+      "Economy Van": 310,
+      "Business Sedan": 750,
+      "Business SUV": 750,
+      "Business Van": 750,
+      "Executive Van": 750,
+      "Economy minibus": 1350,
     },
 
     inclusions: [
@@ -366,11 +391,14 @@ export const travelPackages: TravelPackage[] = [
     cities: ["Riyadh", "Riyadh"],
 
     vehiclePricing: {
-      Sedan: 125,
-      SUV: 170,
-      Van: 250,
-      Business: 1500,
-      Luxury: 2200,
+      "Economy Sedan": 125,
+      "Economy MPV": 170,
+      "Economy Van": 250,
+      "Business Sedan": 1500,
+      "Business SUV": 1500,
+      "Business Van": 1500,
+      "Executive Van": 1500,
+      "Economy minibus": 1350,
     },
 
     inclusions: [

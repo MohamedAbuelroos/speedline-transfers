@@ -30,7 +30,7 @@ const PackageBookingCard = ({ data }: Props) => {
   );
 
   const [selectedVehicleId, setSelectedVehicleId] = useState(
-    availableVehicles[0]?.id,
+    availableVehicles[2]?.id,
   );
 
   const vehicle =
@@ -88,7 +88,7 @@ const PackageBookingCard = ({ data }: Props) => {
         />
 
         {/* VEHICLE NAME */}
-        <Typography
+        {/* <Typography
           sx={{
             position: "absolute",
             left: 20,
@@ -102,7 +102,49 @@ const PackageBookingCard = ({ data }: Props) => {
           }}
         >
           {vehicle?.name}
-        </Typography>
+          
+        </Typography> */}
+
+        {/* VEHICLE INFO BOX */}
+        <Box
+          sx={{
+            position: "absolute",
+            left: 20,
+            bottom: 10,
+            backgroundColor: "rgba(31,177,249,0.3)", // your primary blue
+            color: "#fff",
+            borderRadius: "10px",
+            px: 2.5,
+            py: 1.5,
+            boxShadow: "0 4px 12px rgba(0,0,0,0.25)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
+            backdropFilter: "blur(4px)",
+          }}
+        >
+          <Typography
+            sx={{
+              fontWeight: 800,
+              fontSize: 22,
+              lineHeight: 1.2,
+              letterSpacing: "0.5px",
+            }}
+          >
+            {vehicle?.name}
+          </Typography>
+
+          <Typography
+            sx={{
+              fontSize: 13,
+              fontWeight: 500,
+              opacity: 0.9,
+              mt: 0.3,
+            }}
+          >
+            Or similar
+          </Typography>
+        </Box>
       </Box>
 
       {/* CONTENT */}
@@ -159,7 +201,7 @@ const PackageBookingCard = ({ data }: Props) => {
           >
             {availableVehicles.map((car) => (
               <MenuItem key={car.id} value={car.id}>
-                {car.name}
+                {car.category}
               </MenuItem>
             ))}
           </TextField>
