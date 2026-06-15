@@ -29,7 +29,7 @@ const cards = [
   {
     title: "Email",
 
-    value: "contact@speedline.com",
+    value: "contact@speedlinetransfers.com",
 
     icon: <EmailIcon />,
 
