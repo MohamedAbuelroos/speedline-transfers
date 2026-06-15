@@ -94,7 +94,7 @@ const CarCard = ({
             backdropFilter: "blur(10px)",
 
             backgroundColor:
-              category === "Luxury" || category === "Business"
+              category.includes("Business") || category.includes("Executive")
                 ? "rgba(245,158,11,0.92)"
                 : "rgba(31,177,249,0.92)",
 
