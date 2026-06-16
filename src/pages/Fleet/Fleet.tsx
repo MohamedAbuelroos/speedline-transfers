@@ -71,6 +71,7 @@ const Fleet = () => {
           </Typography>
         )}
         <CTASection />
+        <Divider  />
         <RecommendedPackagesSection />
       </Container>
     </Box>
