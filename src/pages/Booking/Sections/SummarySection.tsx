@@ -66,6 +66,7 @@ const SummarySection = ({ data, onConfirm, steps }: SummarySectionProps) => {
 
   const confirmRef = useRef<HTMLButtonElement | null>(null);
   const summaryRef = useRef<HTMLButtonElement | null>(null);
+  const quoteRef = useRef<HTMLButtonElement | null>(null);
 
   const totalPassengers = data.adults + data.children + data.infants;
   const isEmailValid =
@@ -81,6 +82,29 @@ const SummarySection = ({ data, onConfirm, steps }: SummarySectionProps) => {
     data.name &&
     data.phone;
 
+  const handleCustomQuote = () => {
+    // Build WhatsApp message with selected data
+    const message = `Hello, I would like a custom quotation for:
+- From: ${data.from} (${data.fromCity})
+- To: ${data.to} (${data.toCity})
+- Passengers: ${totalPassengers}
+- Car: ${data.car?.category || "Not selected"}
+- Date: ${data.date ? new Date(data.date).toLocaleDateString() : "TBD"}
+- Time: ${data.time ? formatReturnTime(data.time) : "TBD"}`;
+
+    // Encode message for URL
+    const encodedMessage = encodeURIComponent(message);
+
+    // Replace with your business WhatsApp number
+    const whatsappNumber = "966547417085";
+
+    // Open WhatsApp chat
+    window.open(
+      `https://wa.me/${whatsappNumber}?text=${encodedMessage}`,
+      "_blank",
+    );
+  };
+
   return (
     <Box
       sx={{
@@ -94,28 +118,33 @@ const SummarySection = ({ data, onConfirm, steps }: SummarySectionProps) => {
     >
       {/* IMAGE */}
 
-      <Box
-        component="img"
-        src={paymentimg}
-        loading="lazy"
-        sx={{
-          width: "100%",
-          height: 140,
-          objectFit: "cover",
-          position: "relative",
-        }}
-      />
-      <Box
-        sx={{
-          position: "absolute",
-          width: "100%",
-          height: "21%",
-          zIndex: 5,
-          top: 0,
-          background:
-            "linear-gradient(to top, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.33) 40%, rgba(255,255,255,0) 100%)",
-        }}
-      />
+      <Box sx={{ position: "relative", width: "100%", height: 140 }}>
+        <Box
+          component="img"
+          src={paymentimg}
+          loading="lazy"
+          sx={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+          }}
+        />
+
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            width: "100%",
+            height: "80%",
+            zIndex: 5,
+            pointerEvents: "none",
+            background:
+              "linear-gradient(to top, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.33) 40%, rgba(255,255,255,0) 100%)",
+          }}
+        />
+      </Box>
+
       <Box sx={{ p: 3, pt: 2 }}>
         <Typography sx={{ fontWeight: 700, mb: 1 }}>Trip Summary</Typography>
 
@@ -135,7 +164,15 @@ const SummarySection = ({ data, onConfirm, steps }: SummarySectionProps) => {
           </Typography>
         )}
         {/* FROM & TO */}
-        <Box sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: `${!data.from ? "row" : "column"}`,
+            justifyContent: "space-between",
+            mb: 2,
+            gap: 2,
+          }}
+        >
           <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
             <Box
               sx={{
@@ -160,7 +197,11 @@ const SummarySection = ({ data, onConfirm, steps }: SummarySectionProps) => {
               <Typography variant="caption">
                 {data.type !== "package" ? "FROM" : "Starting From"}
               </Typography>
-              <Typography style={{ fontWeight: 500 }}>
+              <Typography
+                sx={{
+                  fontWeight: 500,
+                }}
+              >
                 {getValue(data.from)}
               </Typography>
             </Box>
@@ -192,7 +233,11 @@ const SummarySection = ({ data, onConfirm, steps }: SummarySectionProps) => {
                 <Typography variant="caption">
                   {data.type !== "package" ? "TO" : "Ends At"}
                 </Typography>
-                <Typography sx={{ fontWeight: 500 }}>
+                <Typography
+                  sx={{
+                    fontWeight: 500,
+                  }}
+                >
                   {getValue(data.to)}
                 </Typography>
               </Box>
@@ -323,8 +368,10 @@ const SummarySection = ({ data, onConfirm, steps }: SummarySectionProps) => {
                 {data?.roundTrip
                   ? typeof bookingPrice === "number"
                     ? bookingPrice * 2
-                    : "--"
-                  : bookingPrice}
+                    : "Special Pricing Available Upon Request"
+                  : typeof bookingPrice === "number"
+                    ? bookingPrice
+                    : "Custom Quote Required"}
               </Typography>
               <Typography
                 variant="body1"
@@ -342,21 +389,39 @@ const SummarySection = ({ data, onConfirm, steps }: SummarySectionProps) => {
         </Box>
 
         {/* BUTTONS */}
-        <Button
-          fullWidth
-          id="confirm-btn"
-          ref={confirmRef}
-          variant="contained"
-          disabled={!isComplete || !isEmailValid}
-          onClick={() => onConfirm(getBookingPrice(data))}
-          sx={{
-            backgroundColor: "#1FB1F9",
-            borderRadius: "999px",
-            mb: 1,
-          }}
-        >
-          Confirm Booking
-        </Button>
+        {bookingPrice !== "--" ? (
+          <Button
+            fullWidth
+            id="confirm-btn"
+            ref={confirmRef}
+            variant="contained"
+            disabled={!isComplete || !isEmailValid || steps < 3}
+            onClick={() => onConfirm(getBookingPrice(data))}
+            sx={{
+              backgroundColor: "#1FB1F9",
+              borderRadius: "999px",
+              mb: 1,
+            }}
+          >
+            Confirm Booking
+          </Button>
+        ) : (
+          <Button
+            fullWidth
+            id="quote-btn"
+            variant="contained"
+            ref={quoteRef}
+            disabled={!isComplete || !isEmailValid || steps < 3}
+            onClick={handleCustomQuote}
+            sx={{
+              backgroundColor: "#1FB1F9",
+              borderRadius: "999px",
+              mb: 1,
+            }}
+          >
+            Request Quote
+          </Button>
+        )}
       </Box>
     </Box>
   );

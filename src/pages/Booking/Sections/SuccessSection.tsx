@@ -107,7 +107,7 @@ const SuccessSection = ({ data, bookingId }: SuccessSectionProps) => {
           </Link>
         </Typography>
       </Box>
-      {/* 📄 VOUCHER */}
+      {/*  VOUCHER */}
       <Box
         ref={voucherRef}
         sx={{

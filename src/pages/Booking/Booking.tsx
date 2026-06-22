@@ -18,6 +18,8 @@ import { sendBookingEmail } from "../../utils/sendBookingEmail";
 
 const Booking = () => {
   const location = useLocation();
+  const initialState = location.state;
+
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [bookingId, setBookingId] = useState("");
@@ -26,9 +28,6 @@ const Booking = () => {
     message: "",
     severity: "success",
   });
-
-  // 🔥 Prefill logic (basic for now)
-  const initialState = location.state;
 
   // const totalPassengers =
   //   bookingData.adults + bookingData.children + bookingData.infants;
@@ -115,9 +114,11 @@ const Booking = () => {
     }
 
     if (initialState?.type === "home") {
+      const isAirportTransfer = initialState.data.fromCity.includes("airport");
+
       return {
         ...base,
-        type: "city",
+        type: isAirportTransfer ? "airport" : "city",
         from: initialState.data.from,
         to: initialState.data.to,
         fromCity: initialState.data.fromCity,

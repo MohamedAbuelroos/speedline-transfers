@@ -148,11 +148,14 @@ export const en = {
 
       available: "Available",
 
+      unavailable: "Unavailable",
+
       note: "Final pricing may vary slightly depending on route, traffic conditions, and selected vehicle category.",
 
       cancel: "Cancel",
 
       book: "Continue Booking",
+      requestQuote: "Request Custom Quote",
     },
     fleetSection: {
       badge: "Premium Vehicle Collection",

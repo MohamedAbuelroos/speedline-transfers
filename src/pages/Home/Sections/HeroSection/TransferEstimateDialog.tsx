@@ -25,6 +25,7 @@ type Props = {
   loading: boolean;
 
   handleContinue: () => void;
+  handleCustomQuote: () => void;
 };
 
 const TransferEstimateDialog = ({
@@ -33,6 +34,7 @@ const TransferEstimateDialog = ({
   result,
   loading,
   handleContinue,
+  handleCustomQuote,
 }: Props) => {
   const lang = useLanguage();
   const translate = translations[lang];
@@ -187,66 +189,90 @@ const TransferEstimateDialog = ({
         <Box
           sx={{
             mt: 4,
-
             p: 3,
-
             borderRadius: "22px",
-
             background: "linear-gradient(135deg, #f0f9ff 0%, #ffffff 100%)",
-
             border: "1px solid #dbeafe",
-
             display: "flex",
             flexDirection: isRtl ? "row-reverse" : "row",
             textAlign: "left",
-
             justifyContent: "space-between",
-
             alignItems: "center",
           }}
         >
-          <Box>
-            <Typography
-              sx={{
-                color: "#6b7280",
-                fontSize: isRtl ? 20 : 16,
-                mb: 0.5,
-              }}
-            >
-              {translate.home.estimateDialog.estimated}
-            </Typography>
+          {result?.price ? (
+            <>
+              {/* Price + Estimated */}
+              <Box>
+                <Typography
+                  sx={{
+                    color: "#6b7280",
+                    fontSize: isRtl ? 20 : 16,
+                    mb: 0.5,
+                  }}
+                >
+                  {translate.home.estimateDialog.estimated}
+                </Typography>
+                <Typography
+                  variant="h3"
+                  sx={{
+                    fontWeight: 800,
+                  }}
+                >
+                  USD {result.price}
+                </Typography>
+              </Box>
 
-            <Typography
-              sx={{
-                fontSize: 32,
+              {/* Availability */}
+              <Box
+                sx={{
+                  px: 2,
+                  py: 1,
+                  borderRadius: "999px",
+                  backgroundColor: "#dcfce7",
+                  color: "#15803d",
+                  fontWeight: 700,
+                  fontSize: isRtl ? 22 : 13,
+                }}
+              >
+                {translate.home.estimateDialog.available}
+              </Box>
+            </>
+          ) : (
+            <>
+              {/* Route Not Found */}
+              <Box>
+                <Typography
+                  variant="h5"
+                  sx={{ color: "warning.main", fontWeight: 700 }}
+                >
+                  Route Not Found
+                </Typography>
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  sx={{ mt: 1 }}
+                >
+                  Contact us for a custom quotation.
+                </Typography>
+              </Box>
 
-                fontWeight: 900,
-
-                color: "#111827",
-              }}
-            >
-              {result?.price} USD
-            </Typography>
-          </Box>
-
-          <Box
-            sx={{
-              px: 2,
-              py: 1,
-
-              borderRadius: "999px",
-
-              backgroundColor: "#dcfce7",
-
-              color: "#15803d",
-
-              fontWeight: 700,
-
-              fontSize: isRtl ? 22 : 13,
-            }}
-          >
-            {translate.home.estimateDialog.available}
-          </Box>
+              {/* Not Available */}
+              <Box
+                sx={{
+                  px: 2,
+                  py: 1,
+                  borderRadius: "999px",
+                  backgroundColor: "#fee2e2",
+                  color: "#b91c1c",
+                  fontWeight: 700,
+                  fontSize: isRtl ? 22 : 13,
+                }}
+              >
+                {translate.home.estimateDialog.unavailable}
+              </Box>
+            </>
+          )}
         </Box>
 
         {/* NOTE */}
@@ -295,28 +321,21 @@ const TransferEstimateDialog = ({
             fullWidth
             variant="contained"
             disabled={loading}
-            onClick={handleContinue}
+            onClick={result?.price ? handleContinue : handleCustomQuote}
             sx={{
               borderRadius: "14px",
-
               height: 52,
-
               textTransform: "none",
-
               fontWeight: 700,
-
               background: "linear-gradient(135deg, #1FB1F9 0%, #1697d2 100%)",
             }}
           >
             {loading ? (
-              <CircularProgress
-                size={22}
-                sx={{
-                  color: "#fff",
-                }}
-              />
-            ) : (
+              <CircularProgress size={22} sx={{ color: "#fff" }} />
+            ) : result?.price ? (
               translate.home.estimateDialog.book
+            ) : (
+              translate.home.estimateDialog.requestQuote
             )}
           </Button>
         </Box>

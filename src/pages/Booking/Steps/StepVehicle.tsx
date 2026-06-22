@@ -1,4 +1,4 @@
-import { Box, Typography, TextField, Button } from "@mui/material";
+import { Box, Typography, TextField, Button, Chip } from "@mui/material";
 import { cars } from "../../../data/cars";
 import { getPrice } from "../../../utils/pricing";
 import useLanguage from "../../../hooks/useLanguage";
@@ -28,11 +28,11 @@ const StepVehicle = ({
   const handlePassengersChange = (total: number) => {
     if (bookingData?.car) return;
 
-    let suggestedType = "Sedan";
+    let suggestedType = "Economy Sedan";
 
-    if (total <= 3) suggestedType = "Sedan";
-    else if (total <= 6) suggestedType = "SUV";
-    else suggestedType = "Van";
+    if (total <= 3) suggestedType = "Economy Sedan";
+    else if (total <= 6) suggestedType = "Economy SUV";
+    else suggestedType = "Economy Van";
 
     const suggestedCar = cars.find((car) => car.category === suggestedType);
 
@@ -168,6 +168,12 @@ const StepVehicle = ({
             car.category,
           );
 
+          const displayPrice =
+            bookingData.type === "hourly"
+              ? pricebyhour(car)
+              : bookingData.type === "package"
+                ? bookingData.packageData?.vehiclePricing?.[car.category]
+                : price;
           return (
             <Box
               key={car.id}
@@ -224,21 +230,25 @@ const StepVehicle = ({
 
               {/* PRICE */}
               <Box sx={{ textAlign: "right" }}>
-                <Typography
-                  sx={{
-                    color: "#1FB1F9",
-                    fontWeight: 600,
-                  }}
-                >
-                  {bookingData.type === "hourly"
-                    ? pricebyhour(car)
-                    : (bookingData.type === "city" ||
-                          bookingData.type === "package") &&
-                        bookingData.price
-                      ? bookingData.packageData?.vehiclePricing?.[car.category]
-                      : price}
-                  USD
-                </Typography>
+                {displayPrice ? (
+                  <Typography
+                    sx={{
+                      color: "#1FB1F9",
+                      fontWeight: 600,
+                    }}
+                  >
+                    USD {displayPrice}
+                  </Typography>
+                ) : (
+                  <Chip
+                    label="Custom Quote"
+                    size="small"
+                    color="warning"
+                    sx={{
+                      fontWeight: 600,
+                    }}
+                  />
+                )}
               </Box>
             </Box>
           );

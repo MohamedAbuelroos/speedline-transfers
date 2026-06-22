@@ -86,7 +86,7 @@ export const cars = [
   {
     id: "toyota coaster",
     name: "Toyota Coaster",
-    category: "Economy minibus",
+    category: "Economy Minibus",
     image: coaster,
     passengers: 20,
     bags: 20,
