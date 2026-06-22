@@ -72,7 +72,7 @@ const ContactCardsSection = () => {
             >
               <Box
                 sx={{
-                  p: 4,
+                  py: 4,
 
                   borderRadius: "30px",
 
