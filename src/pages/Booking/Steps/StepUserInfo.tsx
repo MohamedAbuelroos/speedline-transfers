@@ -83,15 +83,23 @@ const StepUserInfo = ({
           disabled={!isValid}
           onClick={() => {
             setTimeout(() => {
-              const btn = document.getElementById("confirm-btn");
-              btn?.scrollIntoView({ behavior: "smooth", block: "center" });
+              // Decide which button to scroll to
+              const targetBtn =
+                document.getElementById("confirm-btn") ||
+                document.getElementById("quote-btn");
 
-              btn?.classList.remove("pulse");
-              void btn?.offsetWidth;
-              btn?.classList.add("pulse");
+              targetBtn?.scrollIntoView({
+                behavior: "smooth",
+                block: "center",
+              });
+
+              // Pulse animation
+              targetBtn?.classList.remove("pulse");
+              void targetBtn?.offsetWidth; // force reflow
+              targetBtn?.classList.add("pulse");
 
               setTimeout(() => {
-                btn?.classList.remove("pulse");
+                targetBtn?.classList.remove("pulse");
               }, 2000);
             }, 200);
           }}

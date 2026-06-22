@@ -9,6 +9,7 @@ import { cars } from "../../../data/cars";
 import type { Car } from "../../../utils/types";
 import TransferEstimateDialog from "./HeroSection/TransferEstimateDialog";
 import useDelayedNavigate from "../../../hooks/useDelayedNavigate";
+import { getDistance } from "../../../utils/getDistance";
 
 const HeroSection = () => {
   const navigate = useDelayedNavigate();
@@ -20,7 +21,7 @@ const HeroSection = () => {
     from: string;
     to: string;
     car: Car | null;
-    price: number;
+    price: number | null;
     distance: string;
   } | null>(null);
 
@@ -48,11 +49,13 @@ const HeroSection = () => {
     let category: string;
 
     if (form.passengers <= 3) {
-      category = "Sedan";
+      category = "Economy Sedan";
     } else if (form.passengers <= 6) {
-      category = "SUV";
+      category = "Economy MPV";
+    } else if (form.passengers <= 12) {
+      category = "Economy Van";
     } else {
-      category = "Van";
+      category = "Economy Minibus";
     }
 
     return cars.find((car) => car.category === category) || null;
@@ -63,8 +66,9 @@ const HeroSection = () => {
     if (
       !form.fromCity ||
       !form.toCity ||
-      form.passengers > 20 ||
-      form.passengers < 1
+      form.passengers > 24 ||
+      form.passengers < 1 ||
+      form.from === form.to
     ) {
       setSnackbar({
         open: true,
@@ -80,12 +84,10 @@ const HeroSection = () => {
     const price = getPrice(
       form.fromCity,
       form.toCity,
-      car?.category || "Sedan",
+      car?.category || "Economy Sedan",
     );
 
-    // simple fake distance (optional realistic touch)
-    const distance =
-      form.fromCity === form.toCity ? "10 - 25 km" : "400 - 900 km";
+    const distance = getDistance(form.fromCity, form.toCity);
 
     const delay = Math.random() * 1000 + 1000;
     setTimeout(() => {
@@ -122,6 +124,35 @@ const HeroSection = () => {
           },
         },
       });
+
+      setLoading(false);
+    }, delay);
+  };
+
+  //handleCustomQuote
+  const handleCustomQuote = () => {
+    setLoading(true);
+
+    const delay = Math.random() * 1000 + 900;
+
+    setTimeout(() => {
+      // Build WhatsApp message with selected data
+      const message = `Hello, I would like a custom quotation for:
+- From: ${form.from} (${form.fromCity})
+- To: ${form.to} (${form.toCity})
+- Passengers: ${form.passengers}
+- Car: ${result?.car?.category || "Not selected"}`;
+
+      // Encode message for URL
+      const encodedMessage = encodeURIComponent(message);
+
+      const whatsappNumber = "966547417085";
+
+      // Open WhatsApp chat
+      window.open(
+        `https://wa.me/${whatsappNumber}?text=${encodedMessage}`,
+        "_blank",
+      );
 
       setLoading(false);
     }, delay);
@@ -227,6 +258,7 @@ const HeroSection = () => {
           result={result}
           loading={loading}
           handleContinue={handleContinue}
+          handleCustomQuote={handleCustomQuote}
         />
       </Box>
 

@@ -1,32 +1,31 @@
-export const cities = [
+export type LocationItem = {
+  label: string;
+
+  cityId: string;
+};
+
+export type CityGroup = {
+  id: string;
+
+  name: string;
+
+  locations: string[];
+};
+
+export const cities: CityGroup[] = [
   {
-    id: "makkah",
-    name: "Makkah",
-    locations: [
-      "(JED) Jeddah",
-      "Masjid Al Haram",
-      "Aziziyah",
-      "Al Naseem",
-      "Makkah Al Mukarramah",
-    ],
+    id: "ruh-airport",
+
+    name: "RUH Airport",
+
+    locations: ["(RUH) Airport", "King Khalid International Airport"],
   },
+
   {
-    id: "madinah",
-    name: "Madinah",
-    locations: ["Madinah Airport", "Masjid Nabawi", "Quba"],
-  },
-  {
-    id: "riyadh",
-    name: "Riyadh",
-    locations: [
-      "(RUH) Airport",
-      "Riyadh International Airport",
-      "King Khalid international Airport",
-    ],
-  },
-  {
-    id: "riyadh-city",
-    name: "Riyadh City",
+    id: "riyadh-center",
+
+    name: "Riyadh City Center",
+
     locations: [
       "Olaya District",
       "Al Sulimaniyah",
@@ -36,26 +35,32 @@ export const cities = [
       "Al Faisaliah Tower Area",
       "Kingdom Centre Area",
       "Downtown Riyadh",
+      "Al Khalidiyah",
     ],
   },
+
   {
     id: "riyadh-north",
-    name: "Riyadh North",
+
+    name: "North Riyadh",
+
     locations: [
       "Al Narjis District",
       "Al Yasmin District",
       "Al Sahafa District",
       "Al Aqiq District",
-      "King Abdullah Financial",
-      "District (KAFD)",
+      "King Abdullah Financial District (KAFD)",
       "Riyadh Front",
       "Granada Area",
       "Business Gate",
     ],
   },
+
   {
-    id: "riyadh-diriyah",
+    id: "diriyah",
+
     name: "Diriyah",
+
     locations: [
       "Diriyah (At-Turaif District)",
       "Al Bujairi Terrace",
@@ -64,18 +69,107 @@ export const cities = [
       "Al Ammariyah",
     ],
   },
+
   {
-    id: "jeddah",
-    name: "Jeddah",
+    id: "jed-airport",
+
+    name: "JED Airport",
+
+    locations: ["(JED) Airport", "King Abdulaziz International Airport"],
+  },
+
+  {
+    id: "jeddah-city",
+
+    name: "Jeddah City",
+
     locations: [
-      "(JED) Airport",
-      "Jeddah International Airport",
-      "King Abdulaziz International Airport",
+      "Al Hamra District",
+      "Al Rawdah",
+      "Al Zahra",
+      "Al Salamah",
+      "Al Andalus",
+      "Al Shati (Corniche Area)",
+      "Jeddah Corniche",
+      "Red Sea Mall Area",
+      "King Abdulaziz Road",
+    ],
+  },
+
+  {
+    id: "makkah-hotels",
+
+    name: "Makkah Hotels",
+
+    locations: [
+      "Masjid Al Haram",
+      "Ajyad",
+      "Misfalah",
+      "Aziziyah",
+      "Al Naseem",
+      "Al Shawqiyah",
+      "Jabal Omar",
+      "Clock Tower",
+      "Kudai Area",
+    ],
+  },
+
+  {
+    id: "makkah-railway",
+
+    name: "Makkah Railway Station",
+
+    locations: ["Makkah Railway Station", "Haramain Train Station Makkah"],
+  },
+
+  {
+    id: "med-airport",
+
+    name: "MED Airport",
+
+    locations: ["Prince Mohammad Bin Abdulaziz Airport", "Madinah Airport"],
+  },
+
+  {
+    id: "madinah-hotels",
+
+    name: "Madinah Hotels",
+
+    locations: [
+      "Masjid Nabawi",
+      "Quba Area",
+      "Al Aridh",
+      "Al Iskan",
+      "King Fahd District",
+      "Airport Road Area",
+      "Al Salam District",
+    ],
+  },
+
+  {
+    id: "madinah-railway",
+
+    name: "Madinah Railway Station",
+
+    locations: ["Madinah Railway Station", "Haramain Train Station Madinah"],
+  },
+
+  {
+    id: "kaec",
+
+    name: "KAEC",
+
+    locations: [
+      "Bay La Sun Area",
+      "Al Murooj District",
+      "Industrial Valley",
+      "KAEC Beach Area",
+      "Royal Greens Golf & Country Club",
     ],
   },
 ];
 
-export const allLocations = Object.values(cities).flatMap((city) =>
+export const allLocations = cities.flatMap((city) =>
   city.locations.map((loc) => ({
     label: loc,
     cityId: city.id,

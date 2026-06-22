@@ -30,7 +30,7 @@ export const travelPackages: TravelPackage[] = [
       "Business Sedan": 1350,
       "Business Van": 1350,
       "Executive Van": 1350,
-      "Economy minibus": 1350,
+      "Economy Minibus": 1350,
     },
     inclusions: [
       {
@@ -73,7 +73,7 @@ export const travelPackages: TravelPackage[] = [
       "Business Sedan": 1500,
       "Business Van": 1500,
       "Executive Van": 1500,
-      "Economy minibus": 1500,
+      "Economy Minibus": 1500,
     },
     inclusions: [
       {
@@ -113,7 +113,7 @@ export const travelPackages: TravelPackage[] = [
       "Business Sedan": 350,
       "Business Van": 350,
       "Executive Van": 350,
-      "Economy minibus": 350,
+      "Economy Minibus": 350,
     },
     inclusions: [
       {
@@ -152,7 +152,7 @@ export const travelPackages: TravelPackage[] = [
       "Business Sedan": 1350,
       "Business Van": 1350,
       "Executive Van": 1350,
-      "Economy minibus": 1350,
+      "Economy Minibus": 1350,
     },
     inclusions: [
       {
@@ -190,7 +190,7 @@ export const travelPackages: TravelPackage[] = [
       "Business Sedan": 1500,
       "Business Van": 1500,
       "Executive Van": 1500,
-      "Economy minibus": 1350,
+      "Economy Minibus": 1350,
     },
 
     inclusions: [
@@ -233,7 +233,7 @@ export const travelPackages: TravelPackage[] = [
       "Business SUV": 750,
       "Business Van": 750,
       "Executive Van": 750,
-      "Economy minibus": 1350,
+      "Economy Minibus": 1350,
     },
 
     inclusions: [
@@ -273,7 +273,7 @@ export const travelPackages: TravelPackage[] = [
       "Business Sedan": 1350,
       "Business Van": 1350,
       "Executive Van": 1350,
-      "Economy minibus": 1350,
+      "Economy Minibus": 1350,
     },
 
     inclusions: [
@@ -316,7 +316,7 @@ export const travelPackages: TravelPackage[] = [
       "Business SUV": 2450,
       "Business Van": 2450,
       "Executive Van": 2450,
-      "Economy minibus": 3500,
+      "Economy Minibus": 3500,
     },
 
     inclusions: [
@@ -356,7 +356,7 @@ export const travelPackages: TravelPackage[] = [
       "Business SUV": 750,
       "Business Van": 750,
       "Executive Van": 750,
-      "Economy minibus": 1350,
+      "Economy Minibus": 1350,
     },
 
     inclusions: [
@@ -398,7 +398,7 @@ export const travelPackages: TravelPackage[] = [
       "Business SUV": 1500,
       "Business Van": 1500,
       "Executive Van": 1500,
-      "Economy minibus": 1350,
+      "Economy Minibus": 1350,
     },
 
     inclusions: [
