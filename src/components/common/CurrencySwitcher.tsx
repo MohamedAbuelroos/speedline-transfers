@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import CheckIcon from "@mui/icons-material/Check";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 import { useState } from "react";
 import { useCurrency } from "../../context/CurrencyContext";
@@ -49,16 +50,41 @@ const CurrencySwitcher = () => {
       <Button
         onClick={() => setOpen(true)}
         sx={{
-          color: "#000",
+          color: "#374151",
+
           textTransform: "none",
+
           display: "flex",
+
           gap: 1,
+
+          px: 2,
+          py: 1,
+
+          borderRadius: "999px",
+
           fontWeight: 600,
+
+          backgroundColor: "rgba(31,177,249,0.06)",
+
+          transition: "0.3s ease",
+
+          "&:hover": {
+            backgroundColor: "rgba(31,177,249,0.12)",
+
+            color: "#F5993D",
+          },
         }}
       >
-        <CurrencyExchangeIcon fontSize="small" />
+        <CurrencyExchangeIcon
+          fontSize="small"
+          sx={{
+            color: "#F59E0B",
+          }}
+        />
 
         {currency}
+        <KeyboardArrowDownIcon fontSize="small" />
       </Button>
 
       <Dialog
@@ -89,11 +115,11 @@ const CurrencySwitcher = () => {
 
                   backgroundColor:
                     currency === item.code
-                      ? "rgba(31,177,249,0.08)"
+                      ? "rgba(245,153,61,0.08)"
                       : "transparent",
 
                   "&:hover": {
-                    backgroundColor: "rgba(31,177,249,0.08)",
+                    backgroundColor: "rgba(245,153,61,0.08)",
                   },
                 }}
               >
@@ -110,6 +136,7 @@ const CurrencySwitcher = () => {
                         <Typography
                           sx={{
                             fontWeight: 600,
+                            
                           }}
                         >
                           {item.code}

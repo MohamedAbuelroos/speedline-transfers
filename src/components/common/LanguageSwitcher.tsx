@@ -53,7 +53,12 @@ const LanguageSwitcher = () => {
           },
         }}
       >
-        <LanguageIcon fontSize="small" />
+        <LanguageIcon
+          fontSize="small"
+          sx={{
+            color: "#1FB1F9",
+          }}
+        />
 
         {language.toUpperCase()}
 

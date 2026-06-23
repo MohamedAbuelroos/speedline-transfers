@@ -164,7 +164,7 @@ const SuccessSection = ({ data, bookingId }: SuccessSectionProps) => {
         </Typography>
 
         <Typography sx={{ color: "#22c55e", mb: 1 }}>
-          Includes {data.type === "airport" ? "60" : "30"} minutes of free
+          Includes {data.type === "airport" ? "60" : "20"} minutes of free
           waiting time
         </Typography>
 
@@ -303,7 +303,7 @@ const SuccessSection = ({ data, bookingId }: SuccessSectionProps) => {
             <Typography sx={{ fontWeight: 600, mb: 2 }}>Please note</Typography>
 
             <Typography sx={{ mb: 1 }}>
-              📡 Waiting time depends on flight arrival.
+              📡 60 min wait on arrival, 20 min on departure or city transfers.
             </Typography>
 
             <Typography sx={{ mb: 1 }}>
