@@ -100,11 +100,9 @@ const getTransferType = (type?: string) => {
 };
 
 export const bookingCustomerTemplate = (data: EmailBookingData) => {
-  const basePrice = data.roundTrip ? data.price * 2 : data.price;
+  const processingFee = Number((data.price * 0.03).toFixed(2));
 
-  const processingFee = Number((basePrice * 0.03).toFixed(2));
-
-  const totalPrice = Number((basePrice + processingFee).toFixed(2));
+  const totalPrice = Number((data.price + processingFee).toFixed(2));
 
   const totalPassengers =
     (data.adults || 0) + (data.children || 0) + (data.infants || 0);
