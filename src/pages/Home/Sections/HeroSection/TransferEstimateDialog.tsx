@@ -14,6 +14,7 @@ import NearMeIcon from "@mui/icons-material/NearMe";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import useLanguage from "../../../../hooks/useLanguage";
 import { translations } from "../../../../i18n";
+import { useCurrencyFormatter } from "../../../../hooks/useCurrencyFormatter";
 
 type Props = {
   open: boolean;
@@ -39,7 +40,7 @@ const TransferEstimateDialog = ({
   const lang = useLanguage();
   const translate = translations[lang];
   const isRtl = lang === "ar";
-
+  const formatCurrency = useCurrencyFormatter();
   return (
     <Dialog
       open={open}
@@ -219,7 +220,7 @@ const TransferEstimateDialog = ({
                     fontWeight: 800,
                   }}
                 >
-                  USD {result.price}
+                  {formatCurrency(result.price)}
                 </Typography>
               </Box>
 

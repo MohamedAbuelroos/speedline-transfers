@@ -128,7 +128,7 @@ const StepTransferDetails = ({
 
         <Button
           variant="contained"
-          disabled={!isValid || bookingData.from === bookingData.to}
+          disabled={!isValid}
           onClick={onNext}
           sx={{
             backgroundColor: "#1FB1F9",

@@ -16,6 +16,7 @@ export type EmailBookingData = {
 
   phone?: string;
 
+  currency: string;
   from: string;
 
   to: string;
@@ -647,7 +648,7 @@ export const bookingCustomerTemplate = (data: EmailBookingData) => {
                   padding:10px 0;
                 "
               >
-                USD ${basePrice}
+                ${data.currency} ${data.price}
               </td>
             </tr>
 
@@ -667,7 +668,7 @@ export const bookingCustomerTemplate = (data: EmailBookingData) => {
                   padding:10px 0;
                 "
               >
-                USD ${processingFee}
+                ${data.currency} ${processingFee}
               </td>
             </tr>
 
@@ -691,7 +692,7 @@ export const bookingCustomerTemplate = (data: EmailBookingData) => {
                   color:#1FB1F9;
                 "
               >
-                USD ${totalPrice}
+                ${data.currency} ${totalPrice}
               </td>
             </tr>
           </table>
@@ -774,11 +775,9 @@ export const bookingCustomerTemplate = (data: EmailBookingData) => {
 };
 
 const bookingCompanyTemplate = (data: EmailBookingData) => {
-  const basePrice = data.roundTrip ? data.price * 2 : data.price;
+  const processingFee = Number((data.price * 0.03).toFixed(2));
 
-  const processingFee = Number((basePrice * 0.03).toFixed(2));
-
-  const totalPrice = Number((basePrice + processingFee).toFixed(2));
+  const totalPrice = Number((data.price + processingFee).toFixed(2));
 
   const totalPassengers =
     (data.adults || 0) + (data.children || 0) + (data.infants || 0);
@@ -1270,7 +1269,7 @@ const bookingCompanyTemplate = (data: EmailBookingData) => {
                   text-align:right;
                 "
               >
-                USD ${basePrice}
+                ${data.currency} ${data.price}
               </td>
             </tr>
 
@@ -1284,7 +1283,7 @@ const bookingCompanyTemplate = (data: EmailBookingData) => {
                   text-align:right;
                 "
               >
-                USD ${processingFee}
+                ${data.currency} ${processingFee}
               </td>
             </tr>
 
@@ -1308,7 +1307,7 @@ const bookingCompanyTemplate = (data: EmailBookingData) => {
                   color:#1FB1F9;
                 "
               >
-                USD ${totalPrice}
+                ${data.currency} ${totalPrice}
               </td>
             </tr>
           </table>

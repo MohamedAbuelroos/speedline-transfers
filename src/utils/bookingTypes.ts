@@ -39,7 +39,7 @@ export type BookingData = {
   car: Car | null;
 
   price: number | Record<string, number> | null;
-
+  currency?: string;
   name: string;
   phone: string;
   email: string;

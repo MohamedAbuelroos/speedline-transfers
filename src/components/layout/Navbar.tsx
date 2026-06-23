@@ -34,6 +34,7 @@ import useLanguage from "../../hooks/useLanguage";
 import { translations } from "../../i18n";
 import { languages } from "../../utils/lang";
 import useDelayedNavigate from "../../hooks/useDelayedNavigate";
+import { useCurrency } from "../../context/CurrencyContext";
 
 const Navbar = () => {
   const navigate = useDelayedNavigate();
@@ -42,6 +43,7 @@ const Navbar = () => {
   const lang = useLanguage();
   const translate = translations[lang];
   const isRTL = lang === "ar";
+  const { currency, setCurrency } = useCurrency();
 
   const { startLoading } = useNavigationLoader();
 
@@ -341,43 +343,61 @@ const Navbar = () => {
                     : lang === "ar"
                       ? "اللغات"
                       : "Язык"}
+                  ({lang.toUpperCase()})
                 </Typography>
               </AccordionSummary>
 
               <AccordionDetails sx={{ p: 0 }}>
                 <List>
-                  {languages.map((lang) => (
-                    <ListItem
-                      key={lang.code}
-                      onClick={() => {
-                        const selectedLang = lang.code;
+                  {languages.map((lang) => {
+                    const selected = localStorage.getItem("lang") === lang.code;
 
-                        localStorage.setItem("lang", selectedLang);
-                        window.dispatchEvent(new Event("languageChange"));
-
-                        setDrawerOpen(false);
-                      }}
-                      sx={{
-                        pl: 2,
-                        color:
-                          localStorage.getItem("lang") === lang.code
-                            ? "primary.main"
-                            : "#000",
-                        fontWeight:
-                          localStorage.getItem("lang") === lang.code
-                            ? "bold"
-                            : "normal",
-                      }}
-                    >
-                      <ListItemText primary={lang.label} />
-                    </ListItem>
-                  ))}
+                    return (
+                      <ListItem
+                        key={lang.code}
+                        onClick={() => {
+                          const selectedLang = lang.code;
+                          localStorage.setItem("lang", selectedLang);
+                          window.dispatchEvent(new Event("languageChange"));
+                          setDrawerOpen(false);
+                        }}
+                        sx={{
+                          cursor: "pointer",
+                          pl: 2,
+                          backgroundColor: selected
+                            ? "rgba(31,177,249,0.12)"
+                            : "transparent",
+                          borderLeft: selected
+                            ? "4px solid #1FB1F9"
+                            : "4px solid transparent",
+                          transition: "0.2s ease",
+                          "&:hover": {
+                            backgroundColor: "rgba(31,177,249,0.08)",
+                          },
+                        }}
+                      >
+                        <ListItemText
+                          primary={
+                            <Typography
+                              component="span"
+                              sx={{
+                                fontWeight: selected ? 700 : 500,
+                                color: selected ? "#1FB1F9" : "inherit",
+                              }}
+                            >
+                              {lang.label}
+                            </Typography>
+                          }
+                        />
+                      </ListItem>
+                    );
+                  })}
                 </List>
               </AccordionDetails>
             </Accordion>
 
             {/* Currency Accordion */}
-            <Accordion elevation={0} disableGutters disabled>
+            <Accordion elevation={0} disableGutters>
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography
                   sx={{
@@ -391,7 +411,7 @@ const Navbar = () => {
                     fontSize="small"
                     sx={{ marginInlineEnd: 1 }}
                   />
-                  Currency
+                  Currency ({currency})
                 </Typography>
               </AccordionSummary>
 
@@ -400,10 +420,44 @@ const Navbar = () => {
                   {["SAR", "USD", "EUR"].map((cur) => (
                     <ListItem
                       key={cur}
-                      onClick={() => setDrawerOpen(false)}
-                      sx={{ pl: 2 }}
+                      onClick={() => {
+                        setCurrency(cur as "SAR" | "USD" | "EUR");
+                        setDrawerOpen(false);
+                      }}
+                      sx={{
+                        cursor: "pointer",
+                        pl: 2,
+
+                        backgroundColor:
+                          currency === cur
+                            ? "rgba(31,177,249,0.12)"
+                            : "transparent",
+
+                        borderLeft:
+                          currency === cur
+                            ? "4px solid #1FB1F9"
+                            : "4px solid transparent",
+
+                        transition: "0.2s ease",
+
+                        "&:hover": {
+                          backgroundColor: "rgba(31,177,249,0.08)",
+                        },
+                      }}
                     >
-                      <ListItemText primary={cur} />
+                      <ListItemText
+                        primary={
+                          <Typography
+                            component="span"
+                            sx={{
+                              fontWeight: currency === cur ? 700 : 500,
+                              color: currency === cur ? "#1FB1F9" : "inherit",
+                            }}
+                          >
+                            {cur}
+                          </Typography>
+                        }
+                      />
                     </ListItem>
                   ))}
                 </List>

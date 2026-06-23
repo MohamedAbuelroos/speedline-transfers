@@ -17,6 +17,7 @@ import useLanguage from "../../../hooks/useLanguage";
 import { translations } from "../../../i18n";
 import type { PackageTranslation } from "../../../utils/types";
 import dayjs from "dayjs";
+import { useCurrencyFormatter } from "../../../hooks/useCurrencyFormatter";
 
 type SummarySectionProps = {
   data: BookingData;
@@ -29,7 +30,7 @@ type SummarySectionProps = {
 const SummarySection = ({ data, onConfirm, steps }: SummarySectionProps) => {
   const lang = useLanguage();
   const translate = translations[lang];
-  // const isRtl = lang === "ar";
+  const formatCurrency = useCurrencyFormatter();
 
   const packageTranslation = translate.packages[
     data.packageData?.id as keyof typeof translate.packages
@@ -40,29 +41,66 @@ const SummarySection = ({ data, onConfirm, steps }: SummarySectionProps) => {
   const formatReturnTime = (timeStr: string) =>
     dayjs(`2000-01-01 ${timeStr}`).format("hh:mm A");
 
+  // const getBookingPrice = (data: BookingData) => {
+  //   const categoryKey = data.car?.category;
+
+  //   if (!categoryKey) return "--";
+
+  //   if (data.type === "hourly") {
+  //     return data.car?.hourRate && data.hours
+  //       ? formatCurrency(data.car.hourRate * data.hours)
+  //       : "--";
+  //   }
+
+  //   if (data.type === "city" && data.price && typeof data.price === "object") {
+  //     return formatCurrency(data.price?.[categoryKey]) ?? "--";
+  //   }
+
+  //   if (data.type === "package" && data.packageData) {
+  //     return (
+  //       formatCurrency(data.packageData?.vehiclePricing?.[categoryKey]) ?? "--"
+  //     );
+  //   }
+
+  //   return getPrice(data.fromCity, data.toCity, categoryKey) ?? "--";
+  // };
+
   const getBookingPrice = (data: BookingData) => {
     const categoryKey = data.car?.category;
 
-    if (!categoryKey) return "--";
+    if (!categoryKey) return null;
+
+    let price: number | null;
 
     if (data.type === "hourly") {
-      return data.car?.hourRate && data.hours
-        ? data.car.hourRate * data.hours
-        : "--";
+      price =
+        data.car?.hourRate && data.hours
+          ? data.car.hourRate * data.hours
+          : null;
+    } else if (
+      data.type === "city" &&
+      data.price &&
+      typeof data.price === "object"
+    ) {
+      price = data.price?.[categoryKey];
+    } else if (data.type === "package" && data.packageData) {
+      price = data.packageData?.vehiclePricing?.[categoryKey];
+    } else {
+      price = getPrice(data.fromCity, data.toCity, categoryKey);
     }
 
-    if (data.type === "city" && data.price && typeof data.price === "object") {
-      return data.price?.[categoryKey] ?? "--";
+    if (!price) return null;
+
+    if (data.roundTrip) {
+      price *= 2;
     }
 
-    if (data.type === "package") {
-      return data.packageData?.vehiclePricing?.[categoryKey] ?? "--";
-    }
-
-    return getPrice(data.fromCity, data.toCity, categoryKey) ?? "--";
+    return price;
   };
 
   const bookingPrice = getBookingPrice(data);
+  const formattedPrice =
+    bookingPrice !== null ? formatCurrency(bookingPrice) : "--";
 
   const confirmRef = useRef<HTMLButtonElement | null>(null);
   const summaryRef = useRef<HTMLButtonElement | null>(null);
@@ -365,19 +403,9 @@ const SummarySection = ({ data, onConfirm, steps }: SummarySectionProps) => {
               }}
             >
               <Typography variant="h4" sx={{ fontWeight: 700 }}>
-                {data?.roundTrip
-                  ? typeof bookingPrice === "number"
-                    ? bookingPrice * 2
-                    : "Special Pricing Available Upon Request"
-                  : typeof bookingPrice === "number"
-                    ? bookingPrice
-                    : "Custom Quote Required"}
-              </Typography>
-              <Typography
-                variant="body1"
-                sx={{ alignSelf: "flex-end", color: "primary.main", ml: 0.5 }}
-              >
-                {getBookingPrice(data) !== "--" ? "USD" : ""}
+                {formattedPrice === "--"
+                  ? "Special Pricing Available Upon Request"
+                  : formattedPrice}
               </Typography>
             </Box>
           )}
@@ -389,14 +417,14 @@ const SummarySection = ({ data, onConfirm, steps }: SummarySectionProps) => {
         </Box>
 
         {/* BUTTONS */}
-        {bookingPrice !== "--" ? (
+        {formattedPrice !== "--" ? (
           <Button
             fullWidth
             id="confirm-btn"
             ref={confirmRef}
             variant="contained"
             disabled={!isComplete || !isEmailValid || steps < 3}
-            onClick={() => onConfirm(getBookingPrice(data))}
+            onClick={() => onConfirm(bookingPrice ?? 0)}
             sx={{
               backgroundColor: "#1FB1F9",
               borderRadius: "999px",
