@@ -23,7 +23,32 @@ export const en = {
     bookPackage: "Book This Package",
     whatsAppBtn: "Contact Via WhatsApp",
   },
-  footer: {},
+  footer: {
+    description:
+      "Your journey, our responsibility. We provide safe, reliable, and comfortable rides for all your journeys in Saudi Arabia.",
+
+    company: "Company",
+
+    support: "Support",
+
+    contact: "Contact",
+
+    about: "About",
+
+    fleet: "Fleet",
+
+    services: "Services",
+
+    packages: "Packages",
+
+    booking: "Booking",
+
+    faq: "FAQ",
+
+    contactUs: "Contact Us",
+
+    copyright: "All rights reserved.",
+  },
 
   carCard: {
     orSimilar: "(Or similar)",
@@ -177,9 +202,57 @@ export const en = {
 
       btn: "Explore All Packages",
     },
-    stats: {},
 
-    cta: {},
+    featuresSection: {
+      title: "Excellence in Every Mile",
+
+      safety: {
+        title: "Safety First",
+        desc: "Our drivers undergo rigorous background checks and safety training.",
+      },
+
+      punctuality: {
+        title: "Punctuality",
+        desc: "We value your time. Guaranteed early arrival and reliable scheduling for every booking.",
+      },
+
+      fleet: {
+        title: "Modern Fleet",
+        desc: "Travel in clean, comfortable, and professionally maintained vehicles across Saudi Arabia.",
+      },
+
+      pricing: {
+        title: "Fixed Pricing",
+        desc: "No hidden fees. Prices shown are approximate and confirmed before your journey begins.",
+      },
+    },
+
+    partnersSection: {
+      title: "Trusted By Leading Partners",
+
+      subtitle:
+        "We proudly collaborate with hotels, travel agencies, tourism companies, and corporate partners across Saudi Arabia.",
+    },
+
+    cta: {
+      title1: "Travel Saudi Arabia",
+
+      title2: "With Comfort & Confidence",
+
+      subtitle:
+        "Join thousands of travelers who trust SpeedLine Transfers for transportation across Saudi Arabia.",
+
+      primaryBtn: "Book Your Transfer",
+
+      secondaryBtn: "Contact Us",
+
+      feature1: "Instant Confirmation",
+
+      feature2: "Secure Booking",
+
+      feature3: "24/7 Support",
+    },
+    stats: {},
   },
 
   about: {

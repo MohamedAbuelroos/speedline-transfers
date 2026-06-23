@@ -22,7 +22,7 @@ const RouteChangeHandler = () => {
               setLoading(false);
             }
           },
-          Math.random() * 500 + 400,
+          Math.random() * 200 + 100,
         );
       }
     });

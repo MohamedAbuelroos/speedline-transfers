@@ -7,6 +7,7 @@ import logo from "/logo.png";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import useLanguage from "../../hooks/useLanguage";
 import useDelayedNavigate from "../../hooks/useDelayedNavigate";
+import { translations } from "../../i18n";
 
 const socialIcons = [
   {
@@ -40,6 +41,7 @@ const socialIcons = [
 ];
 const Footer = () => {
   const lang = useLanguage();
+  const translate = translations[lang];
   const isRTL = lang === "ar";
   const navigate = useDelayedNavigate();
   return (
@@ -109,11 +111,10 @@ const Footer = () => {
                 color: "rgba(255,255,255,0.68)",
                 lineHeight: 1.9,
                 maxWidth: 380,
-                fontSize: 15,
+                fontSize: isRTL ? 18 : 15,
               }}
             >
-              Your journey, our responsibility. We provide safe,
-              reliable, and comfortable rides for all your journeys in Saudi Arabia.
+              {translate.footer.description}
             </Typography>
           </Grid>
 
@@ -122,12 +123,12 @@ const Footer = () => {
             <Typography
               sx={{
                 fontWeight: 700,
-                fontSize: 18,
+                fontSize: isRTL ? 22 : 20,
                 mb: 2.5,
                 color: "#fff",
               }}
             >
-              Company
+              {translate.footer.company}
             </Typography>
 
             <Typography
@@ -138,6 +139,8 @@ const Footer = () => {
                 textDecoration: "none",
                 mb: 1.5,
 
+                fontSize: isRTL ? 18 : 16,
+
                 cursor: "pointer",
 
                 transition: "0.3s ease",
@@ -151,7 +154,7 @@ const Footer = () => {
                 },
               }}
             >
-              About
+              {translate.footer.about}
             </Typography>
             <Typography
               variant="body2"
@@ -160,6 +163,7 @@ const Footer = () => {
                 color: "rgba(255,255,255,0.68)",
                 textDecoration: "none",
                 mb: 1.5,
+                fontSize: isRTL ? 18 : 16,
 
                 cursor: "pointer",
 
@@ -174,7 +178,7 @@ const Footer = () => {
                 },
               }}
             >
-              Fleet
+              {translate.footer.fleet}
             </Typography>
             <Typography
               variant="body2"
@@ -183,7 +187,7 @@ const Footer = () => {
                 color: "rgba(255,255,255,0.68)",
                 textDecoration: "none",
                 mb: 1.5,
-
+                fontSize: isRTL ? 18 : 16,
                 cursor: "pointer",
 
                 transition: "0.3s ease",
@@ -197,7 +201,7 @@ const Footer = () => {
                 },
               }}
             >
-              Services
+              {translate.footer.services}
             </Typography>
             <Typography
               variant="body2"
@@ -206,7 +210,7 @@ const Footer = () => {
                 color: "rgba(255,255,255,0.68)",
                 textDecoration: "none",
                 mb: 1.5,
-
+                fontSize: isRTL ? 18 : 16,
                 cursor: "pointer",
 
                 transition: "0.3s ease",
@@ -220,7 +224,7 @@ const Footer = () => {
                 },
               }}
             >
-              Packages
+              {translate.footer.packages}
             </Typography>
           </Grid>
 
@@ -230,14 +234,14 @@ const Footer = () => {
               sx={{
                 fontWeight: 700,
 
-                fontSize: 18,
+                fontSize: isRTL ? 22 : 20,
 
                 mb: 2.5,
 
                 color: "#fff",
               }}
             >
-              Support
+              {translate.footer.support}
             </Typography>
 
             <Typography
@@ -248,7 +252,7 @@ const Footer = () => {
                 textDecoration: "none",
 
                 mb: 1.5,
-
+                fontSize: isRTL ? 18 : 16,
                 cursor: "pointer",
 
                 transition: "0.3s ease",
@@ -262,7 +266,7 @@ const Footer = () => {
                 },
               }}
             >
-              Booking
+              {translate.footer.booking}
             </Typography>
             <Typography
               variant="body2"
@@ -275,7 +279,7 @@ const Footer = () => {
                 cursor: "pointer",
 
                 transition: "0.3s ease",
-
+                fontSize: isRTL ? 18 : 16,
                 width: "fit-content",
 
                 "&:hover": {
@@ -285,7 +289,7 @@ const Footer = () => {
                 },
               }}
             >
-              FAQ
+              {translate.footer.faq}
             </Typography>
             <Typography
               variant="body2"
@@ -294,7 +298,7 @@ const Footer = () => {
                 color: "rgba(255,255,255,0.68)",
                 textDecoration: "none",
                 mb: 1.5,
-
+                fontSize: isRTL ? 18 : 16,
                 cursor: "pointer",
 
                 transition: "0.3s ease",
@@ -308,7 +312,7 @@ const Footer = () => {
                 },
               }}
             >
-              Contact Us
+              {translate.footer.contactUs}
             </Typography>
           </Grid>
 
@@ -317,12 +321,12 @@ const Footer = () => {
             <Typography
               sx={{
                 fontWeight: 700,
-                fontSize: 18,
+                fontSize: isRTL ? 22 : 20,
                 mb: 2.5,
                 color: "#fff",
               }}
             >
-              Contact
+              {translate.footer.contact}
             </Typography>
             <IconButton
               href="tel:+966547417085"
@@ -412,7 +416,9 @@ const Footer = () => {
                   fontSize: 36,
                 }}
               />
-              <Typography variant="body2">contact@speedlinetransfers.com</Typography>
+              <Typography variant="body2">
+                contact@speedlinetransfers.com
+              </Typography>
             </IconButton>
 
             {/* Social */}
@@ -466,8 +472,8 @@ const Footer = () => {
               fontSize: 14,
             }}
           >
-            © {new Date().getFullYear()} SpeedLine Transfers. All rights
-            reserved.
+            © {new Date().getFullYear()} SpeedLine Transfers.{" "}
+            {translate.footer.copyright}
           </Typography>
         </Box>
       </Container>

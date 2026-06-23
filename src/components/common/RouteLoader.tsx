@@ -1,10 +1,13 @@
 import { Box, CircularProgress, Fade, Typography } from "@mui/material";
+import useLanguage from "../../hooks/useLanguage";
 
 type Props = {
   loading: boolean;
 };
 
 const RouteLoader = ({ loading }: Props) => {
+  const lang = useLanguage();
+  const isRtl = lang === "ar";
   return (
     <Fade in={loading}>
       <Box
@@ -53,7 +56,7 @@ const RouteLoader = ({ loading }: Props) => {
             color: "#111827",
           }}
         >
-          Loading...
+          {isRtl ? "جاري الانتقال..." : "Loading..."}
         </Typography>
       </Box>
     </Fade>

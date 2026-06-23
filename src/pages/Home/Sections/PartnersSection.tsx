@@ -7,8 +7,13 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 
 import { partners } from "../../../data/partners";
+import useLanguage from "../../../hooks/useLanguage";
+import { translations } from "../../../i18n";
 
 const PartnersSection = () => {
+  const lang = useLanguage();
+  const translate = translations[lang];
+  const isRtl = lang === "ar";
   return (
     <Box
       sx={{
@@ -44,12 +49,12 @@ const PartnersSection = () => {
               mb: 1,
 
               fontSize: {
-                xs: 26,
-                md: 34,
+                xs: isRtl ? 36 : 26,
+                md: isRtl ? 44 : 34,
               },
             }}
           >
-            Trusted By Leading Partners
+            {translate.home.partnersSection.title}
           </Typography>
 
           <Typography
@@ -61,10 +66,10 @@ const PartnersSection = () => {
               mx: "auto",
 
               lineHeight: 1.9,
+              fontSize: isRtl ? 20 : 16,
             }}
           >
-            We proudly collaborate with hotels, travel agencies, tourism
-            companies, and corporate partners across Saudi Arabia.
+            {translate.home.partnersSection.subtitle}
           </Typography>
         </Box>
 

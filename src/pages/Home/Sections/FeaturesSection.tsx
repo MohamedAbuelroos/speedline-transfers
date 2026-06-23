@@ -3,38 +3,48 @@ import SecurityIcon from "@mui/icons-material/Security";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import PaidIcon from "@mui/icons-material/Paid";
-
-const features = [
-  {
-    icon: <SecurityIcon sx={{ color: "#1FB1F9", fontSize: 32 }} />,
-    title: "Safety First",
-    desc: "Our drivers undergo rigorous background checks and safety training.",
-  },
-  {
-    icon: <AccessTimeIcon sx={{ color: "#1FB1F9", fontSize: 32 }} />,
-    title: "Punctuality",
-    desc: "We value your time. Guaranteed 15-minute early arrival for all bookings.",
-  },
-  {
-    icon: <DirectionsCarIcon sx={{ color: "#1FB1F9", fontSize: 32 }} />,
-    title: "Modern Fleet",
-    desc: "Ride in the latest models, all equipped with high-speed Wi-Fi.",
-  },
-  {
-    icon: <PaidIcon sx={{ color: "#1FB1F9", fontSize: 32 }} />,
-    title: "Fixed Pricing",
-    desc: "No hidden fees. Prices shown are approximate — final fare is confirmed within booking.",
-  },
-];
+import useLanguage from "../../../hooks/useLanguage";
+import { translations } from "../../../i18n";
 
 const FeaturesSection = () => {
+  const lang = useLanguage();
+  const translate = translations[lang];
+  const isRtl = lang === "ar";
+
+  const features = [
+    {
+      icon: <SecurityIcon sx={{ color: "#1FB1F9", fontSize: 32 }} />,
+      title: translate.home.featuresSection.safety.title,
+      desc: translate.home.featuresSection.safety.desc,
+    },
+    {
+      icon: <AccessTimeIcon sx={{ color: "#1FB1F9", fontSize: 32 }} />,
+      title: translate.home.featuresSection.punctuality.title,
+      desc: translate.home.featuresSection.punctuality.desc,
+    },
+    {
+      icon: <DirectionsCarIcon sx={{ color: "#1FB1F9", fontSize: 32 }} />,
+      title: translate.home.featuresSection.fleet.title,
+      desc: translate.home.featuresSection.fleet.desc,
+    },
+    {
+      icon: <PaidIcon sx={{ color: "#1FB1F9", fontSize: 32 }} />,
+      title: translate.home.featuresSection.pricing.title,
+      desc: translate.home.featuresSection.pricing.desc,
+    },
+  ];
   return (
-    <Box sx={{ py: 8,backgroundColor: "#f3f7fb" }}>
+    <Box sx={{ py: 8, backgroundColor: "#f3f7fb" }}>
       <Container maxWidth="lg">
         {/* Header */}
         <Box sx={{ textAlign: "center", mb: 6 }}>
-          <Typography variant="h4" sx={{ fontWeight: 700 }}>
-            Excellence in Every Mile
+          <Typography
+            sx={{
+              fontWeight: 700,
+              fontSize: isRtl ? 44 : 34,
+            }}
+          >
+            {translate.home.featuresSection.title}
           </Typography>
         </Box>
 
@@ -63,12 +73,19 @@ const FeaturesSection = () => {
                 </Box>
 
                 {/* Title */}
-                <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
+                <Typography
+                  variant="h6"
+                  sx={{ fontWeight: 600, mb: 1, fontSize: isRtl ? 24 : 20 }}
+                >
                   {item.title}
                 </Typography>
 
                 {/* Description */}
-                <Typography variant="body2" color="text.secondary">
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  sx={{ fontSize: isRtl ? 16 : 13 }}
+                >
                   {item.desc}
                 </Typography>
               </Box>
