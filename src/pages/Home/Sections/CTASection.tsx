@@ -2,9 +2,14 @@ import { Box, Button, Container, Typography } from "@mui/material";
 
 import CheckCircleOutlineRoundedIcon from "@mui/icons-material/CheckCircleOutlineRounded";
 import useDelayedNavigate from "../../../hooks/useDelayedNavigate";
+import useLanguage from "../../../hooks/useLanguage";
+import { translations } from "../../../i18n";
 
 const CTASection = () => {
   const navigate = useDelayedNavigate();
+  const lang = useLanguage();
+  const translate = translations[lang];
+  const isRtl = lang === "ar";
   return (
     <Box
       sx={{
@@ -102,7 +107,7 @@ const CTASection = () => {
                 },
               }}
             >
-              Travel Saudi Arabia
+              {translate.home.cta.title1}
               <br />
               <Box
                 component="span"
@@ -110,7 +115,7 @@ const CTASection = () => {
                   color: "#1FB1F9",
                 }}
               >
-                With Comfort & Confidence
+                {translate.home.cta.title2}
               </Box>
             </Typography>
 
@@ -127,14 +132,13 @@ const CTASection = () => {
 
                 fontSize: {
                   xs: 15,
-                  md: 17,
+                  md: 18,
                 },
 
                 mb: 5,
               }}
             >
-              Join thousands of travelers who trust SpeedLine Transfers for
-              transportation across Saudi Arabia.
+              {translate.home.cta.subtitle}
             </Typography>
 
             {/* BUTTONS */}
@@ -182,7 +186,7 @@ const CTASection = () => {
                   },
                 }}
               >
-                Book Your Transfer
+                {translate.home.cta.primaryBtn}
               </Button>
 
               {/* SECONDARY */}
@@ -212,7 +216,7 @@ const CTASection = () => {
                   },
                 }}
               >
-                Contact Us
+                {translate.home.cta.secondaryBtn}
               </Button>
             </Box>
 
@@ -231,38 +235,40 @@ const CTASection = () => {
                 },
               }}
             >
-              {["Instant Confirmation", "Secure Booking", "24/7 Support"].map(
-                (item, index) => (
-                  <Box
-                    key={index}
+              {[
+                translate.home.cta.feature1,
+                translate.home.cta.feature2,
+                translate.home.cta.feature3,
+              ].map((item, index) => (
+                <Box
+                  key={index}
+                  sx={{
+                    display: "flex",
+
+                    alignItems: "center",
+
+                    gap: 1,
+                  }}
+                >
+                  <CheckCircleOutlineRoundedIcon
                     sx={{
-                      display: "flex",
+                      color: "#1FB1F9",
 
-                      alignItems: "center",
+                      fontSize: isRtl ? 20 : 18,
+                    }}
+                  />
 
-                      gap: 1,
+                  <Typography
+                    sx={{
+                      color: "rgba(255,255,255,0.72)",
+
+                      fontSize: isRtl ? 18 : 14,
                     }}
                   >
-                    <CheckCircleOutlineRoundedIcon
-                      sx={{
-                        color: "#1FB1F9",
-
-                        fontSize: 18,
-                      }}
-                    />
-
-                    <Typography
-                      sx={{
-                        color: "rgba(255,255,255,0.72)",
-
-                        fontSize: 14,
-                      }}
-                    >
-                      {item}
-                    </Typography>
-                  </Box>
-                ),
-              )}
+                    {item}
+                  </Typography>
+                </Box>
+              ))}
             </Box>
           </Box>
         </Box>
