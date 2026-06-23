@@ -11,6 +11,7 @@ import { useState } from "react";
 import useDelayedNavigate from "../../../hooks/useDelayedNavigate";
 import useLanguage from "../../../hooks/useLanguage";
 import { translations } from "../../../i18n";
+import { useCurrencyFormatter } from "../../../hooks/useCurrencyFormatter";
 
 type Props = {
   data: TravelPackage;
@@ -19,7 +20,7 @@ type Props = {
 const PackageBookingCard = ({ data }: Props) => {
   const lang = useLanguage();
   const translate = translations[lang];
-  // const isRtl = lang === "ar";
+  const formatCurrency = useCurrencyFormatter();
 
   const packageTranslation = translate.packages[
     data.id as keyof typeof translate.packages
@@ -179,7 +180,9 @@ const PackageBookingCard = ({ data }: Props) => {
               color: "#111827",
             }}
           >
-            USD {vehicle ? data.vehiclePricing?.[vehicle.category] : "--"}
+            {vehicle
+              ? formatCurrency(data.vehiclePricing?.[vehicle.category])
+              : "--"}
           </Typography>
         </Box>
 

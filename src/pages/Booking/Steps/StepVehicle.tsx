@@ -7,6 +7,7 @@ import type {
   BookingStepProps,
 } from "../../../utils/bookingTypes";
 import type { Car } from "../../../utils/types";
+import { useCurrencyFormatter } from "../../../hooks/useCurrencyFormatter";
 
 const StepVehicle = ({
   bookingData,
@@ -20,6 +21,7 @@ const StepVehicle = ({
 
   const lang = useLanguage();
   const isRTL = lang === "ar";
+  const formatCurrency = useCurrencyFormatter();
 
   const pricebyhour = (car: Car) => {
     return car.hourRate * (bookingData?.hours ?? 0);
@@ -237,7 +239,7 @@ const StepVehicle = ({
                       fontWeight: 600,
                     }}
                   >
-                    USD {displayPrice}
+                    {formatCurrency(displayPrice)}
                   </Typography>
                 ) : (
                   <Chip

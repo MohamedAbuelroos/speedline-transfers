@@ -18,10 +18,11 @@ import { translations } from "../../../i18n";
 import type { PackageTranslation } from "../../../utils/types";
 
 import { travelPackages } from "../../../data/travelPackages";
+import { useCurrencyFormatter } from "../../../hooks/useCurrencyFormatter";
 
 export default function RecommendedPackagesSection() {
   const lang = useLanguage();
-
+  const formatCurrency = useCurrencyFormatter();
   const translate = translations[lang];
 
   const recommendedPackages = travelPackages
@@ -209,7 +210,7 @@ export default function RecommendedPackagesSection() {
                           lineHeight: 1.1,
                         }}
                       >
-                        USD {pkg.startingPrice}
+                        {formatCurrency(pkg.startingPrice)}
                       </Typography>
                     </Box>
                   </CardContent>

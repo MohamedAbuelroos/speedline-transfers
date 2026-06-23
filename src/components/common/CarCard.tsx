@@ -6,6 +6,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useLocation } from "react-router-dom";
 import useLanguage from "../../hooks/useLanguage";
 import { translations } from "../../i18n";
+import { useCurrencyFormatter } from "../../hooks/useCurrencyFormatter";
 
 type CarCardProps = {
   id: string;
@@ -31,6 +32,7 @@ const CarCard = ({
   const lang = useLanguage();
   const translate = translations[lang];
   const isRTL = lang === "ar";
+  const formatCurrency = useCurrencyFormatter();
 
   return (
     <Box
@@ -185,7 +187,7 @@ const CarCard = ({
                 mt: -0.5,
               }}
             >
-              USD {price}
+              {formatCurrency(price)}
             </Typography>
           </Box>
         </Box>

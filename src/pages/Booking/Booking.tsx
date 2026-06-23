@@ -15,11 +15,13 @@ import ScrollToTop from "../../utils/ScrollToTop";
 import type { BookingData } from "../../utils/bookingTypes";
 import { Snackbar, Alert } from "@mui/material";
 import { sendBookingEmail } from "../../utils/sendBookingEmail";
+import { useCurrency } from "../../context/CurrencyContext";
+import { convertPrice } from "../../utils/currency";
 
 const Booking = () => {
   const location = useLocation();
   const initialState = location.state;
-
+  const currency = useCurrency();
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [bookingId, setBookingId] = useState("");
@@ -55,7 +57,7 @@ const Booking = () => {
       time: "",
 
       price: 0,
-
+      currency: "",
       returnDate: "",
       returnTime: "",
 
@@ -131,20 +133,21 @@ const Booking = () => {
     return base;
   });
 
-  const handleConfirm = async (price: string | number) => {
+  const handleConfirm = async (price: string | number | null) => {
     try {
       setLoading(true);
 
       const id = generateBookingId();
 
-      const confirmedPrice = typeof price === "string" ? Number(price) : price;
+      const confirmedPrice = convertPrice(Number(price), currency.currency);
 
       const fullData: BookingData = {
         ...bookingData,
 
         bookingId: id,
 
-        price: confirmedPrice as BookingData["price"],
+        price: confirmedPrice,
+        currency: currency.currency,
       };
 
       await sendBookingEmail(fullData);

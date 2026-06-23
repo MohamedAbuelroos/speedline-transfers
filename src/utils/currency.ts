@@ -12,7 +12,7 @@ export const currencySymbols = {
 
 export const convertPrice = (
   price: number,
-  currency: keyof typeof currencyRates,
+  currency: "USD" | "SAR" | "EUR",
 ) => {
   return Math.round(price * currencyRates[currency]);
 };
