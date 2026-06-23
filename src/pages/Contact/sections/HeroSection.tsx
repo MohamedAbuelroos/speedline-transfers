@@ -1,8 +1,13 @@
 import { Box, Container, Typography } from "@mui/material";
 
 import heroImage from "../../../assets/images/ContactHero.webp";
+import useLanguage from "../../../hooks/useLanguage";
+import { translations } from "../../../i18n";
 
 const HeroSection = () => {
+  const lang = useLanguage();
+  const translate = translations[lang];
+  const isRtl = lang === "ar";
   return (
     <Box
       sx={{
@@ -70,12 +75,12 @@ const HeroSection = () => {
             mb: 3,
 
             fontSize: {
-              xs: 40,
-              md: 64,
+              xs: isRtl ? 50 : 40,
+              md: isRtl ? 74 : 64,
             },
           }}
         >
-          Let’s Plan Your Next Journey
+          {translate.contact.hero.title}
         </Typography>
 
         <Typography
@@ -85,8 +90,8 @@ const HeroSection = () => {
             lineHeight: 1.9,
 
             fontSize: {
-              xs: 16,
-              md: 18,
+              xs: isRtl ? 18 : 16,
+              md: isRtl ? 20 : 18,
             },
 
             maxWidth: 760,
@@ -94,8 +99,7 @@ const HeroSection = () => {
             mx: "auto",
           }}
         >
-          Our team is ready to assist you with bookings, inquiries, and
-          personalized transportation solutions across Saudi Arabia.
+          {translate.contact.hero.subtitle}
         </Typography>
       </Container>
     </Box>

@@ -272,9 +272,73 @@ export const en = {
   },
 
   contact: {
-    hero: {},
+    hero: {
+      title: "Let's Plan Your Next Journey",
 
-    form: {},
+      subtitle:
+        "Our team is ready to assist you with bookings, inquiries, and personalized transportation solutions across Saudi Arabia.",
+    },
+
+    form: {
+      title: "Send Us a Message",
+
+      subtitle:
+        "Have questions about our services or need a custom transportation solution? Our team is here to help you anytime.",
+
+      name: "Full Name",
+
+      phone: "Phone Number",
+
+      email: "Email Address",
+
+      service: "Service Type",
+
+      message: "Message",
+
+      send: "Send Message",
+
+      sending: "Sending...",
+
+      success: "Message sent successfully.",
+
+      error: "Failed to send message.",
+
+      validations: {
+        nameRequired: "Name is required",
+
+        phoneRequired: "Phone number is required",
+
+        phoneInvalid: "Invalid phone number",
+
+        emailRequired: "Email is required",
+
+        emailInvalid: "Invalid email address",
+
+        serviceRequired: "Please select a service",
+
+        messageRequired: "Message is required",
+      },
+
+      services: {
+        airport: "Airport Transfer",
+
+        city: "City Transfer",
+
+        hourly: "Hourly Chauffeur",
+
+        vip: "VIP Service",
+
+        corporate: "Corporate Travel",
+
+        events: "Event Transportation",
+      },
+    },
+    coverage: {
+      title: "Serving Cities Across Saudi Arabia",
+
+      subtitle:
+        "From Riyadh and Jeddah to Makkah, Madinah, and beyond — we provide professional transportation services wherever your journey takes you.",
+    },
   },
 
   packages: {

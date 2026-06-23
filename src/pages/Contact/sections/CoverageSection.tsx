@@ -1,10 +1,12 @@
-import {
-  Box,
-  Container,
-  Typography,
-} from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
+import useLanguage from "../../../hooks/useLanguage";
+import { translations } from "../../../i18n";
 
 const CoverageSection = () => {
+  const lang = useLanguage();
+  const translate = translations[lang];
+  const isRtl = lang === "ar";
+
   return (
     <Box
       sx={{
@@ -13,8 +15,7 @@ const CoverageSection = () => {
           md: 10,
         },
 
-        background:
-          "linear-gradient(135deg, #1FB1F9 0%, #1697d2 100%)",
+        background: "linear-gradient(135deg, #1FB1F9 0%, #1697d2 100%)",
 
         color: "#fff",
 
@@ -32,11 +33,11 @@ const CoverageSection = () => {
 
             fontSize: {
               xs: 34,
-              md: 52,
+              md: isRtl ? 62 : 52,
             },
           }}
         >
-          Serving Cities Across Saudi Arabia
+          {translate.contact.coverage.title}
         </Typography>
 
         <Typography
@@ -47,14 +48,11 @@ const CoverageSection = () => {
 
             fontSize: {
               xs: 15,
-              md: 17,
+              md: isRtl ? 20 : 17,
             },
           }}
         >
-          From Riyadh and Jeddah to Makkah,
-          Madinah, and beyond — we provide
-          professional transportation services
-          wherever your journey takes you.
+          {translate.contact.coverage.subtitle}
         </Typography>
       </Container>
     </Box>
