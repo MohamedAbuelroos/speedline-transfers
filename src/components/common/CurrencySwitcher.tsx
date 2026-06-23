@@ -1,63 +1,153 @@
 import {
   Button,
-  Menu,
-  MenuItem,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  List,
+  ListItemButton,
+  ListItemText,
+  Box,
+  Typography,
 } from "@mui/material";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
+import CheckIcon from "@mui/icons-material/Check";
 
 import { useState } from "react";
+import { useCurrency } from "../../context/CurrencyContext";
 
-const currencies = ["USD"];
-// const currencies = ["USD", "USD", "EUR"];
+const currencies = [
+  {
+    code: "USD",
+    label: "US Dollar",
+    symbol: "$",
+  },
+  {
+    code: "SAR",
+    label: "Saudi Riyal",
+    symbol: "﷼",
+  },
+  {
+    code: "EUR",
+    label: "Euro",
+    symbol: "€",
+  },
+] as const;
 
 const CurrencySwitcher = () => {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [selected, setSelected] = useState("USD");
+  const [open, setOpen] = useState(false);
 
-  const handleSelect = (currency: string) => {
-    setSelected(currency);
+  const { currency, setCurrency } = useCurrency();
 
-    // 🔥 later:
-    // store in context or global state
+  const handleSelect = (selectedCurrency: "USD" | "SAR" | "EUR") => {
+    setCurrency(selectedCurrency);
 
-    setAnchorEl(null);
+    setOpen(false);
   };
 
   return (
     <>
       <Button
-        onClick={(e) => setAnchorEl(e.currentTarget)}
-        disabled
+        onClick={() => setOpen(true)}
         sx={{
           color: "#000",
           textTransform: "none",
           display: "flex",
           gap: 1,
+          fontWeight: 600,
         }}
       >
         <CurrencyExchangeIcon fontSize="small" />
-        {selected}
-        <KeyboardArrowDownIcon fontSize="small" />
+
+        {currency}
       </Button>
 
-      <Menu
-        anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={() => setAnchorEl(null)}
+      <Dialog
+        open={open}
+        onClose={() => setOpen(false)}
+        maxWidth="xs"
+        fullWidth
       >
-        {currencies.map((cur) => (
-          <MenuItem
-            key={cur}
-            onClick={() => handleSelect(cur)}
-            sx={{
-              color: selected === cur ? "primary.main" : "#000",
-            }}
-          >
-            {cur}
-          </MenuItem>
-        ))}
-      </Menu>
+        <DialogTitle
+          sx={{
+            fontWeight: 800,
+            fontSize: 28,
+            textAlign: "center",
+          }}
+        >
+          Select Currency
+        </DialogTitle>
+
+        <DialogContent>
+          <List>
+            {currencies.map((item) => (
+              <ListItemButton
+                key={item.code}
+                onClick={() => handleSelect(item.code)}
+                sx={{
+                  borderRadius: 2,
+                  mb: 1,
+
+                  backgroundColor:
+                    currency === item.code
+                      ? "rgba(31,177,249,0.08)"
+                      : "transparent",
+
+                  "&:hover": {
+                    backgroundColor: "rgba(31,177,249,0.08)",
+                  },
+                }}
+              >
+                <ListItemText
+                  primary={
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Box>
+                        <Typography
+                          sx={{
+                            fontWeight: 600,
+                          }}
+                        >
+                          {item.code}
+                        </Typography>
+
+                        <Typography variant="body2" color="text.secondary">
+                          {item.label}
+                        </Typography>
+                      </Box>
+
+                      <Box
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 1,
+                        }}
+                      >
+                        <Typography
+                          sx={{
+                            fontWeight: 700,
+                            color: "#1FB1F9",
+                          }}
+                        >
+                          {item.symbol}
+                        </Typography>
+
+                        {currency === item.code && (
+                          <CheckIcon color="primary" />
+                        )}
+                      </Box>
+                    </Box>
+                  }
+                />
+              </ListItemButton>
+            ))}
+          </List>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };

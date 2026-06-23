@@ -4,11 +4,13 @@ import type { PackageTranslation, TravelPackage } from "../../utils/types";
 import useDelayedNavigate from "../../hooks/useDelayedNavigate";
 import useLanguage from "../../hooks/useLanguage";
 import { translations } from "../../i18n";
+import { useCurrencyFormatter } from "../../hooks/useCurrencyFormatter";
 type Props = {
   data: TravelPackage;
 };
 
 const PackageCard = ({ data }: Props) => {
+  const formatCurrency = useCurrencyFormatter();
   const navigate = useDelayedNavigate();
   const lang = useLanguage();
   const translate = translations[lang];
@@ -200,7 +202,7 @@ const PackageCard = ({ data }: Props) => {
                 gap: 1,
               }}
             >
-              USD {data.startingPrice}
+              {formatCurrency(data.startingPrice)}
             </Typography>
             <Typography
               sx={{

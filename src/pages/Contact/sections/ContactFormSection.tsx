@@ -11,8 +11,14 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { sendContactEmail } from "../../../utils/sendContactEmail";
+import useLanguage from "../../../hooks/useLanguage";
+import { translations } from "../../../i18n";
 
 const ContactFormSection = () => {
+  const lang = useLanguage();
+  const translate = translations[lang];
+  const isRtl = lang === "ar";
+
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -44,27 +50,27 @@ const ContactFormSection = () => {
     };
 
     if (!formData.name.trim()) {
-      newErrors.name = "Name is required";
+      newErrors.name = translate.contact.form.validations.nameRequired;
     }
 
     if (!formData.phone.trim()) {
-      newErrors.phone = "Phone number is required";
+      newErrors.phone = translate.contact.form.validations.phoneRequired;
     } else if (!phoneRegex.test(formData.phone)) {
-      newErrors.phone = "Invalid phone number";
+      newErrors.phone = translate.contact.form.validations.phoneInvalid;
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
+      newErrors.email = translate.contact.form.validations.emailRequired;
     } else if (!emailRegex.test(formData.email)) {
-      newErrors.email = "Invalid email address";
+      newErrors.email = translate.contact.form.validations.emailInvalid;
     }
 
     if (!formData.service) {
-      newErrors.service = "Please select a service";
+      newErrors.service = translate.contact.form.validations.serviceRequired;
     }
 
     if (!formData.message.trim()) {
-      newErrors.message = "Message is required";
+      newErrors.message = translate.contact.form.validations.messageRequired;
     }
 
     setErrors(newErrors);
@@ -82,7 +88,7 @@ const ContactFormSection = () => {
 
       setSnackbar({
         open: true,
-        message: "Message sent successfully.",
+        message: translate.contact.form.success,
         severity: "success",
       });
 
@@ -98,7 +104,7 @@ const ContactFormSection = () => {
 
       setSnackbar({
         open: true,
-        message: "Failed to send message.",
+        message: translate.contact.form.error,
         severity: "error",
       });
     } finally {
@@ -146,12 +152,12 @@ const ContactFormSection = () => {
                 mb: 3,
 
                 fontSize: {
-                  xs: 36,
-                  md: 52,
+                  xs: isRtl ? 46 : 36,
+                  md: isRtl ? 62 : 52,
                 },
               }}
             >
-              Send Us a Message
+              {translate.contact.form.title}
             </Typography>
 
             <Typography
@@ -159,10 +165,11 @@ const ContactFormSection = () => {
                 color: "#6b7280",
 
                 lineHeight: 1.9,
+
+                fontSize: isRtl ? 20 : 18,
               }}
             >
-              Have questions about our services or need a custom transportation
-              solution? Our team is here to help you anytime.
+              {translate.contact.form.subtitle}
             </Typography>
           </Grid>
 
@@ -188,7 +195,7 @@ const ContactFormSection = () => {
                 <Grid size={{ xs: 12, md: 6 }}>
                   <TextField
                     fullWidth
-                    label="Full Name"
+                    label={translate.contact.form.name}
                     value={formData.name}
                     onChange={(e) =>
                       setFormData((prev) => ({
@@ -204,7 +211,7 @@ const ContactFormSection = () => {
                 <Grid size={{ xs: 12, md: 6 }}>
                   <TextField
                     fullWidth
-                    label="Phone Number"
+                    label={translate.contact.form.phone}
                     value={formData.phone}
                     onChange={(e) =>
                       setFormData((prev) => ({
@@ -220,7 +227,7 @@ const ContactFormSection = () => {
                 <Grid size={{ xs: 12 }}>
                   <TextField
                     fullWidth
-                    label="Email Address"
+                    label={translate.contact.form.email}
                     value={formData.email}
                     onChange={(e) =>
                       setFormData((prev) => ({
@@ -237,7 +244,7 @@ const ContactFormSection = () => {
                   <TextField
                     select
                     fullWidth
-                    label="Service Type"
+                    label={translate.contact.form.service}
                     value={formData.service}
                     onChange={(e) =>
                       setFormData((prev) => ({
@@ -248,15 +255,29 @@ const ContactFormSection = () => {
                     error={!!errors.service}
                     helperText={errors.service}
                   >
-                    <MenuItem value="airport">Airport Transfer</MenuItem>
+                    <MenuItem value="airport">
+                      {translate.contact.form.services.airport}
+                    </MenuItem>
 
-                    <MenuItem value="city">City Transfer</MenuItem>
+                    <MenuItem value="city">
+                      {translate.contact.form.services.city}
+                    </MenuItem>
 
-                    <MenuItem value="hourly">Hourly Chauffeur</MenuItem>
+                    <MenuItem value="hourly">
+                      {translate.contact.form.services.hourly}
+                    </MenuItem>
 
-                    <MenuItem value="vip">VIP Service</MenuItem>
-                    <MenuItem value="corporate">Corporate Travel</MenuItem>
-                    <MenuItem value="events">Event Transportation</MenuItem>
+                    <MenuItem value="vip">
+                      {translate.contact.form.services.vip}
+                    </MenuItem>
+
+                    <MenuItem value="corporate">
+                      {translate.contact.form.services.corporate}
+                    </MenuItem>
+
+                    <MenuItem value="events">
+                      {translate.contact.form.services.events}
+                    </MenuItem>
                   </TextField>
                 </Grid>
 
@@ -265,7 +286,7 @@ const ContactFormSection = () => {
                     fullWidth
                     multiline
                     rows={5}
-                    label="Message"
+                    label={translate.contact.form.message}
                     value={formData.message}
                     onChange={(e) =>
                       setFormData((prev) => ({
@@ -301,7 +322,9 @@ const ContactFormSection = () => {
                       boxShadow: "0 15px 35px rgba(31,177,249,0.22)",
                     }}
                   >
-                    {loading ? "Sending..." : "Send Message"}
+                    {loading
+                      ? translate.contact.form.sending
+                      : translate.contact.form.send}
                   </Button>
                 </Grid>
               </Grid>

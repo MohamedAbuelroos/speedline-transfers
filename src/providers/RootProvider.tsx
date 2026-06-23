@@ -12,6 +12,7 @@ import useLanguage from "../hooks/useLanguage";
 
 import App from "../App";
 import { NavigationLoaderProvider } from "../context/NavigationLoaderContext";
+import { CurrencyProvider } from "../context/CurrencyContext";
 
 const ltrCache = createCache({
   key: "mui",
@@ -37,7 +38,9 @@ const RootProvider = () => {
           <div dir={direction}>
             <NavigationLoaderProvider>
               <HelmetProvider>
-                <App />
+                <CurrencyProvider>
+                  <App />
+                </CurrencyProvider>
               </HelmetProvider>
             </NavigationLoaderProvider>
           </div>
