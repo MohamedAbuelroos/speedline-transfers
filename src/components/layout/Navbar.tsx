@@ -359,7 +359,6 @@ const Navbar = () => {
                           const selectedLang = lang.code;
                           localStorage.setItem("lang", selectedLang);
                           window.dispatchEvent(new Event("languageChange"));
-                          setDrawerOpen(false);
                         }}
                         sx={{
                           cursor: "pointer",
@@ -422,7 +421,6 @@ const Navbar = () => {
                       key={cur}
                       onClick={() => {
                         setCurrency(cur as "SAR" | "USD" | "EUR");
-                        setDrawerOpen(false);
                       }}
                       sx={{
                         cursor: "pointer",
