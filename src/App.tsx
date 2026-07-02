@@ -10,6 +10,7 @@ import RouteChangeHandler from "./components/common/RouteChangeHandler";
 import RouteLoader from "./components/common/RouteLoader";
 
 import { useNavigationLoader } from "./context/NavigationLoaderContext";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 function App() {
   const { loading } = useNavigationLoader();
@@ -23,6 +24,7 @@ function App() {
       <BottomNav />
       <Footer />
       <FloatingButtons />
+      <SpeedInsights />
     </BrowserRouter>
   );
 }
